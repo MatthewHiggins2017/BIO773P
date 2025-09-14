@@ -1,0 +1,793 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../pt-0/">
+      
+      
+        <link rel="next" href="../pt-2/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Practical 1 - BIO773P</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-regular-expressions-in-r" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BIO773P" class="md-header__button md-logo" aria-label="BIO773P" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BIO773P
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Practical 1
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../pt-0/" class="md-tabs__link">
+          
+  
+  
+  Practicals
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BIO773P" class="md-nav__button md-logo" aria-label="BIO773P" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BIO773P
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Programming in R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Practicals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Practicals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Practical 1
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 1
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#regular-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regular Expressions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Regular Expressions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-find-and-replace" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic find and replace
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic find and replace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-how-could-you-use-regular-expressions-to-find-the-only-element-in-the-vector-names_ids_fixed-that-contains-a-lowercase-q-what-is-the-position-of-this-element-in-the-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1. How could you use regular expressions to find the only element in the vector names_ids_fixed that contains a lowercase "q"? What is the position of this element in the vector?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-you-want-to-import-the-names_ids_fixed-data-into-excel-but-are-having-problems-due-to-the-spaces-between-the-words-a-common-problem-how-could-you-use-gsub-to-replace-each-space-with-an-underscore-_-_" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2. You want to import the names_ids_fixed data into excel, but are having problems due to the spaces between the words (a common problem). How could you use gsub() to replace each space with an underscore _ _?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-fuzzy-searching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using "fuzzy" searching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using &#34;fuzzy&#34; searching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q3-what-does-the-pattern-x-mean-in-a-regular-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3. What does the pattern "..x.." mean in a regular expression?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-what-does-the-pattern-e-mean-in-a-regular-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4. What does the pattern "e+" mean in a regular expression?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5a-how-many-reptile-names-in-names-contain-a-lowercase-o-or-an-uppercase-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5a. How many reptile names in names contain a lowercase "o" or an uppercase "E"?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5b-how-many-reptile-names-in-names-contain-us-or-li" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5b. How many reptile names in names contain "us" or "li"?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q6-add-three-additional-columns-to-the-reptiles-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q6. Add three additional columns to the reptiles table:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="introduction-to-regular-expressions-in-r">Introduction to Regular Expressions in R</h1>
+<h2 id="regular-expressions">Regular Expressions</h2>
+<p>Regular expressions are used to search for a specific pattern in a string. To understand them, we will take an example in which the actual names in our data file are incorrect, or inconsistent. Run the following line of code to import the a table into a data frame:</p>
+<div class="highlight"><pre><span></span><code><span class="n">reptiles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://wurmlab.com/teaching/programming_in_r/reptiles.txt&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>This data frame details the genus and species names of 16 endangered reptiles, along with the dates at which they were listed as endangered. You can load just the names into a separate variable by running the code</p>
+<div class="highlight"><pre><span></span><code><span class="n">names_ids</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">row.names</span><span class="p">(</span><span class="n">reptiles</span><span class="p">)</span>
+</code></pre></div>
+<p>Have a close look at these names. Notice that each reptile has a unique identification number next to its name (don't look these numbers up - they don't mean anything)! Also, we can see that some names were recorded incorrectly - the genus names for the <em>Liopholis</em> group are in lowercase, while we all know that genus names should be capitalized! All in all, this data appears quite "messy" and needs cleaning up.</p>
+<p><strong>Regular expressions</strong> are ideal for fixing this. "Regex" are at the center of a suite of tools that allow us to search for, locate, and replace characters or words within a data set. The really powerful thing about regular expressions is that we can do a "fuzzy" search, meaning the pattern we are searching for has some flexibility built into it.</p>
+<h3 id="basic-find-and-replace">Basic find and replace</h3>
+<p>First of all we will search through the vector <code>names_ids</code> to find a list of the elements that contain the word "liopholis". The function that allows us to do this is <code>grep()</code>, which has two main arguments; <code>pattern</code> and <code>x</code>. The pattern is the actual word, or part of a word, that we are looking for. The argument `x`` describes the variable that we are searching through. In our case we want to evaluate the following code:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Search through names_ids for the word &quot;liopholis&quot;, and output_positions</span>
+<span class="nf">grep</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;liopholis&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names_ids</span><span class="p">)</span>
+</code></pre></div>
+<p>The output of this code is a list of numbers. Each of these numbers describes the position of an element in the vector <code>names_ids</code> that matches the pattern - in this case the 12th and 13th elements. Make sure you fully understand where these numbers came from!</p>
+<p>Sometimes it may be more useful to obtain the actual names within which the pattern was found, rather than a list of positions. We can do this by making use of the additional argument <code>value = TRUE</code> (see the help file for the <code>grep()</code> function for a complete list of possible arguments). The new code reads:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Search through names_ids for the word &quot;liopholis&quot;, and output_names</span>
+<span class="nf">grep</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;liopholis&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names_ids</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+<p>Now we find that the output contains the actual elements of the vector that match the pattern, rather than just a list of positions. These names correspond exactly with the positions found in the previous example.</p>
+<p>Finally, we may want to find and replace the pattern. This can be done using the function <code>gsub()</code>. The function <code>gsub()</code> takes arguments <code>pattern</code> and <code>x</code>, just like the function <code>grep()</code>, but it also has an additional argument <code>replacement</code>. The argument <code>replacement</code> describes the new word, or words, that we want to insert in place of pattern. For example, in the <code>reptiles</code> the word "liopholis" is a genus name, and so should be capitalized. Thus, we want to replace the word "liopholis" with "Liopholis", as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Search through names_ids for the word &quot;liopholis&quot; and replace with the word &quot;Liopholis&quot;.</span>
+<span class="n">names_ids_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;liopholis&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Liopholis&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names_ids</span><span class="p">)</span>
+</code></pre></div>
+<p>The output of this function is a new vector in which the desired replacement has been carried out. Notice that the code above stores this new vector in the variable <code>names_ids_fixed</code>.</p>
+<p>Experiment with <code>grep()</code> and <code>gsub()</code> until you are confident at using them. Then answer the following questions:</p>
+<h4 id="q1-how-could-you-use-regular-expressions-to-find-the-only-element-in-the-vector-names_ids_fixed-that-contains-a-lowercase-q-what-is-the-position-of-this-element-in-the-vector">Q1. How could you use regular expressions to find the only element in the vector <code>names_ids_fixed</code> that contains a lowercase "q"? What is the position of this element in the vector?</h4>
+<h4 id="q2-you-want-to-import-the-names_ids_fixed-data-into-excel-but-are-having-problems-due-to-the-spaces-between-the-words-a-common-problem-how-could-you-use-gsub-to-replace-each-space-with-an-underscore-_-_">Q2. You want to import the <code>names_ids_fixed</code> data into excel, but are having problems due to the spaces between the words (a common problem). How could you use <code>gsub()</code> to replace each space with an underscore <code>_</code> <code>_</code>?</h4>
+<h3 id="using-fuzzy-searching">Using "fuzzy" searching</h3>
+<p>One of the most powerful features of regular expressions is the ability to perform "fuzzy" searching. Simply put, by using special characters we can introduce some flexibility into the pattern that we are searching for.</p>
+<p>A slightly reduced list of special characters and their meanings is given below.</p>
+<table>
+<thead>
+<tr>
+<th>Special Character</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>Any character</td>
+</tr>
+<tr>
+<td>?</td>
+<td>The preceding item is optional and will be matched at most once.</td>
+</tr>
+<tr>
+<td>*</td>
+<td>The preceding item will be matched zero or more times.</td>
+</tr>
+<tr>
+<td>+</td>
+<td>The preceding item will be matched one or more times.</td>
+</tr>
+</tbody>
+</table>
+<p>Additional special characters can be found:</p>
+<ul>
+<li>by Googling (e.g. "Regexp cheat sheet for R")</li>
+<li>by typing: ?regex in R</li>
+</ul>
+<p>These special characters can be used on their own, or in combination with one another. To help you out with understanding these symbols, here are a few examples:</p>
+<ul>
+<li>The pattern <code>.r</code> means any character, followed by the letter "r" (e.g. "er", "or", "tr", "3r").</li>
+<li>The pattern <code>...r</code> means any character, followed by any character, followed by any character, followed by the letter "r" (e.g. "beer", "deer", "zekr").</li>
+<li>The pattern <code>l*at</code> means zero or more copies of the letter "l", followed by the letters "at" (e.g. "at", "lat", "llllllllllat").</li>
+<li>The pattern <code>s.+s</code> means the letter "s", followed by one or more copies of any character, followed by the letter "s" (e.g. "sas", "sts", "sauces", "serendipities", but NOT "ss").</li>
+<li>The pattern <code>.* .*</code> means zero or more copies of any character, followed by a space, followed by zero or more copies of any character (any combination of two words, e.g. "test word").</li>
+</ul>
+<p>Some of these examples might seem very confusing at first, but if you learn what each special character means on its own and then go through the pattern one at a time you should find that it makes sense.</p>
+<p>As an example of how fuzzy searching can be useful, we will now use these special characters to remove the ID tags from the reptile names. Notice that the ID numbers are of different lengths, but they are always separated with a colon from the part that we are interested in. Therefore, we can remove these characters by searching for zero or more copies of any character, followed by a colon, and replacing this pattern with an empty string. The single line of code that achieves this is as follows:</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;.*:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names_ids_fixed</span><span class="p">)</span>
+</code></pre></div>
+Have a look inside the variable <code>names</code>. We have successfully isolated the genus and species names away from the pesky ID tags, even though the exact format of the tags may vary between different entries. Tricks like this can save us a great deal of time - especially when our data set is thousands of lines long. In fact, we have only skimmed the surface of what regular expressions can do - I encourage anyone who is interested to take a deeper look.</p>
+<h4 id="q3-what-does-the-pattern-x-mean-in-a-regular-expression">Q3. What does the pattern "..x.." mean in a regular expression?</h4>
+<h4 id="q4-what-does-the-pattern-e-mean-in-a-regular-expression">Q4. What does the pattern "e+" mean in a regular expression?</h4>
+<h4 id="q5a-how-many-reptile-names-in-names-contain-a-lowercase-o-or-an-uppercase-e">Q5a. How many reptile names in <code>names</code> contain a lowercase "o" or an uppercase "E"?</h4>
+<p>Hint - you should be able to identify the words containing these patterns using a single <code>grep</code> command. We have learnt how to search for a choice of two or more characters in class.</p>
+<h4 id="q5b-how-many-reptile-names-in-names-contain-us-or-li">Q5b. How many reptile names in <code>names</code> contain "us" or "li"?</h4>
+<p>Hint - As before, use a single <code>grep</code> command to identify the words with these patterns.</p>
+<h4 id="q6-add-three-additional-columns-to-the-reptiles-table">Q6. Add three additional columns to the <code>reptiles</code> table:</h4>
+<ul>
+<li>one containing only the identifier numbers (e.g. 1423 without the “ID”)</li>
+<li>one column containing only the genus (e.g. "Bellatorias")</li>
+<li>one containing only the species (excluding the genus name and the subspecies name, e.g. we want to read "tympanum")</li>
+</ul>
+<p>Hint - try to decompose this task, the solution is not a “one-liner”. Make use of the functions you have just learnt and focus on extracting the numbers, genus, and species, rather than the “add new columns” bit.</p>
+<h1 id="extra-section">Extra section!</h1>
+<h2 id="data-input-from-files">Data input from files</h2>
+<p>Open source data plays an increasingly important role recently, so it is vital to know how to input the data with various formats into your program. Choosing the right way of importing data will save you time and boost your efficiency when cleaning the data. To test your abilities, download  <a href="https://genomics.senescence.info/longevity/longevity_genes.zip">longevity_genes/longevity.csv</a> and <a href="https://genomics.senescence.info/diet/TableS2.xls">TableS2.xls</a> and try loading them into R.</p>
+<div class="highlight"><pre><span></span><code><span class="n">longevity_genes_data</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;input location/longevity.csv&quot;</span><span class="p">)</span>
+<span class="n">longevity_genes_data</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="nf">file.choose</span><span class="p">())</span><span class="w">                    </span><span class="c1"># to choose the file</span>
+<span class="c1"># try to figure out how to import Excel spreadsheets into R,</span>
+<span class="c1"># which is an excessively discussed topic online.</span>
+<span class="c1"># One way of doing it, is saving your Excel spreadsheet (TableS2.xls)</span>
+<span class="c1"># as a tab delimited text file and loading it into R</span>
+<span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;input location/file name.txt&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="data-output-into-various-formats">Data output into various formats</h2>
+<p>Most of the time, as either a data recorder or a data analyst, knowing the best way to output data is important. Outputting data as a CSV file is recommended as it's compatible with both Excel and R.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># write a new subsetted data frame (create this using your previous skills) into a CSV file</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">your_subsetted_data_frame</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;output_location/file_name.csv&quot;</span><span class="p">)</span>
+<span class="c1"># create three variables, a, b, and c of any class and save them into a .RData file (What is this? When could it be useful?)</span>
+<span class="nf">save</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;output_location/file_name.RData&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="hacker-q7-download-this-text-file-and-figure-out-how-to-capture-the-first-letter-of-the-genus-and-transform-it-to-make-it-uppercase-do-this-in-a-generic-manner-that-would-work-on-a-table-of-thousands-of-species">Hacker Q7.  Download <a href="http://wurmlab.com/teaching/programming_in_r/reptiles_lower.txt">this text file</a> and figure out how to “capture” the first letter of the genus, and transform it to make it uppercase. Do this in a generic manner (that would work on a table of thousands of species).</h4>
+<p>Hint - look into the help page of “gsub”, especially the explanation for the “replacement” parameter, as well as the examples at the bottom of the help page.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.tooltips", "navigation.instant", "navigation.tabs", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
