@@ -1,0 +1,40 @@
+site_name: BIO773P
+
+theme:
+  name: material
+  language: en
+  features:
+    - content.tooltips
+    - navigation.instant
+    - navigation.tabs
+    - toc.integrate
+    - content.tabs.link
+
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - abbr
+  - pymdownx.keys
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true 
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: 
+    - index.md
+  - Practicals:
+    - Practical 0: practicals/pt-0.md
+    - Practical 1: practicals/pt-1.md
+    - Practical 2: practicals/pt-2.md
+    - Practical 3: practicals/pt-3.md
