@@ -303,7 +303,7 @@ Loops are particularly useful to reformat data sets. By looping through all of t
 The data set that we will use in this example is typical of the sort of data that you might be faced with in the future. Load the data by running the following line of code:
 
 ```r
-helianthus_data <- as.matrix(read.table("https://github.com/MatthewHiggins2017/BIO773P/blob/main/docs/data/HelianthusData_num.txt",
+helianthus_data <- as.matrix(read.table("https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/HelianthusData_num.txt",
                                          header = TRUE))
 ```
 
@@ -402,7 +402,7 @@ tail(long_data)
 
 #### Bonus Q15-A. Write a function that converts a short DNA sequence of 15 bases (e.g. "ACCTGTCATCATCCC") to RNA and splits the string into codon triplets. You will need to:
 
-  * load the data into R: `dna_string <- scan("https://github.com/MatthewHiggins2017/BIO773P/blob/main/docs/data/sequence.txt", what = character())`
+  * load the data into R: `dna_string <- scan("https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/sequence.txt", what = character())`
   * replace T with U  (thymine with uracil to convert DNA to RNA)
   * use `substring()` to split the sequence into triplets and `seq()` within `substring()`
   * return the RNA triplets string
