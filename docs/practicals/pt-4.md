@@ -75,10 +75,10 @@ TCGATTAA
 Run the following line of code to import the `butterfly_sample` and the `butterfly_reference` data frames:
 
 ```R
-butterfly_sam_url <- "UPDATE ME/butterfly_sample.csv"
+butterfly_sam_url <- "https://github.com/MatthewHiggins2017/BIO773P/blob/main/docs/data/butterfly_sample.csv"
 butterfly_sample  <- read.csv(file = butterfly_sam_url, header = TRUE)
 
-butterfly_ref_url   <- "UPDATE ME/butterfly_reference.csv"
+butterfly_ref_url   <- "https://github.com/MatthewHiggins2017/BIO773P/blob/main/docs/data/butterfly_reference.csv"
 butterfly_reference <- read.csv(file = butterfly_ref_url, header = TRUE)
 ```
 
@@ -101,7 +101,7 @@ This question is an extension of the question Q5. Again, we will analyse a data 
 #### Q8 Write a script that adds a new column in the data frame that contains the correct Latin species name for each record in the data frame imported below.
 
 ```R
-butterfly_sam_bonus_url <- "UPDATE ME/ butterfly_sample_bonus.csv"
+butterfly_sam_bonus_url <- "https://github.com/MatthewHiggins2017/BIO773P/blob/main/docs/data/butterfly_sample_bonus.csv"
 butterfly_sample_bonus  <- read.csv(file = butterfly_sam_bonus_url, header = TRUE)
 ```
 

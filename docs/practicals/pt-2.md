@@ -5,7 +5,7 @@
 Regular expressions are used to search for a specific pattern in a string. To understand them, we will take an example in which the actual names in our data file are incorrect, or inconsistent. Run the following line of code to import the a table into a data frame:
 
 ```R
-reptiles <- read.table(file = "UPDATE ME / reptiles.txt")
+reptiles <- read.table(file = "https://github.com/MatthewHiggins2017/BIO773P/blob/main/docs/data/reptiles.txt")
 ```
 
 This data frame details the genus and species names of 16 endangered reptiles, along with the dates at which they were listed as endangered. You can load just the names into a separate variable by running the code
@@ -133,5 +133,5 @@ write.csv(your_subsetted_data_frame, file = "output_location/file_name.csv")
 save(a, b, c, file = "output_location/file_name.RData")
 ```
 
-#### Hacker Q7.  Download [this text file](UPDATE ME/reptiles_lower.txt) and figure out how to “capture” the first letter of the genus, and transform it to make it uppercase. Do this in a generic manner (that would work on a table of thousands of species).
+#### Hacker Q7.  Download [this text file](https://github.com/MatthewHiggins2017/BIO773P/blob/main/docs/data/reptiles_lower.txt) and figure out how to “capture” the first letter of the genus, and transform it to make it uppercase. Do this in a generic manner (that would work on a table of thousands of species).
 Hint - look into the help page of “gsub”, especially the explanation for the “replacement” parameter, as well as the examples at the bottom of the help page.
