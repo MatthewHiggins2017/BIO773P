@@ -12,6 +12,8 @@
         <link rel="prev" href="../pt-2/">
       
       
+        <link rel="next" href="../pt-4/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
@@ -62,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#computing-in-r-practical-3" class="md-skip">
+        <a href="#practical-3-introduction-to-functions-and-loops-in-r" class="md-skip">
           Skip to content
         </a>
       
@@ -193,7 +195,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../pt-0/" class="md-tabs__link">
+        <a href="../pt-1/" class="md-tabs__link">
           
   
   
@@ -364,29 +366,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../pt-0/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Practical 0
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../pt-1/" class="md-nav__link">
         
   
@@ -483,91 +462,355 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
+  <a href="#functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction
+      Functions
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-modify-the-code-above-to-make-it-into-a-function-called-time_converter-this-function-should-take-a-single-number-as-an-argument-the-number-of-seconds-we-want-to-convert-this-function-should-also-include-the-three-lines-of-code-that-convert-number_of_seconds-into-hours-minutes-and-seconds-the-line-of-code-that-merges-these-three-variables-into-one-vector-and-a-line-returning-this-vector-as-the-output-of-the-function-once-you-created-the-function-and-loaded-it-into-r-use-relevant-examples-for-testing-0-3600-another-remember-to-indent-any-code-inside-the-curly-brackets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1. Modify the code above to make it into a function called time_converter. This function should take a single number as an argument (the number of seconds we want to convert). This function should also include the three lines of code that convert number_of_seconds into hours, minutes, and seconds, the line of code that merges these three variables into one vector, and a line returning this vector as the output of the function. Once you created the function and loaded it into R, use relevant examples for testing (0, 3600, another). Remember to indent any code inside the curly brackets.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-write-your-own-function-for-converting-distances-between-different-units-your-function-should-take-the-distance-in-kilometres-as-input-and-return-the-distance-in-miles-as-output-1-kilometre-is-06213712-miles-note-floor-wont-be-needed-in-the-calculations-here-remember-to-clearly-commentannotate-your-code-and-make-appropriate-use-of-whitespace-including-indentation-and-newlines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2. Write your own function for converting distances between different units. Your function should take the distance in kilometres as input and return the distance in miles as output (1 kilometre is 0.6213712 miles). Note: floor won't be needed in the calculations here. Remember to clearly comment/annotate your code and make appropriate use of whitespace including indentation and newlines.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-complex-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      More complex functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="More complex functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q3-make-a-function-that-takes-hours-minutes-and-seconds-as-inputs-and-outputs-the-total-number-of-seconds-make-sure-it-has-three-arguments-and-a-descriptive-name-test-the-function-with-a-range-of-times-for-which-you-know-the-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3. Make a function that takes hours, minutes and seconds as inputs, and outputs the total number of seconds. Make sure it has three arguments and a descriptive name. Test the function with a range of times for which you know the answer.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-make-the-hours-and-minutes-arguments-be-defined-as-0-by-default-in-your-function-run-the-function-without-supplying-these-two-arguments-then-run-it-again-with-using-a-range-of-hours-and-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4. Make the hours and minutes arguments be defined as 0 by default in your function. Run the function without supplying these two arguments, then run it again with using a range of hours and minutes.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5a-create-this-function-test-it-with-a-control-values-for-which-you-know-the-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5A. Create this function. Test it with a control (values for which you know the answer).
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5b-use-the-function-to-measure-the-speed-of-the-bees-with-the-following-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5B. Use the function to measure the speed of the bees with the following measurements:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5c-can-you-think-of-parameter-values-that-would-make-your-function-not-work-properly-what-happens-if-you-try-running-the-function-with-these-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5C. Can you think of parameter values that would make your function not work properly? What happens if you try running the function with these values?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions-with-other-types-of-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions with other types of input
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions with other types of input">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q6-write-a-function-that-takes-a-vector-of-words-as-input-and-outputs-the-number-of-characters-in-the-longest-word-hint-you-are-going-to-need-to-find-out-how-r-counts-the-number-of-characters-in-words-and-how-it-finds-the-maximum-value-in-a-vector-use-an-internet-search-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q6. Write a function that takes a vector of words as input and outputs the number of characters in the longest word. Hint: you are going to need to find out how R counts the number of characters in words and how it finds the maximum value in a vector - use an internet search engine!
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#recap-questions" class="md-nav__link">
+  <a href="#loops" class="md-nav__link">
     <span class="md-ellipsis">
-      Recap questions
+      Loops
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Recap questions">
+    <nav class="md-nav" aria-label="Loops">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#intro-q1-what-would-be-the-outcome-of-the-code-answer-repx-c42-24-times-42-and-what-would-then-be-the-outcome-of-the-code-meananswer" class="md-nav__link">
+  <a href="#slightly-more-complex-loops" class="md-nav__link">
     <span class="md-ellipsis">
-      Intro Q1. What would be the outcome of the code answer &lt;- rep(x = c(42, 24), times = 42)? And what would then be the outcome of the code mean(answer)?
+      Slightly more complex loops
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#intro-q2-use-the-preloaded-r-data-set-indometh-check-indometh-to-understand-more-about-the-dataset-subset-this-data-to-return-only-those-rows-for-which-the-concentration-is-strictly-between-1-and-2-what-is-the-average-mean-concentration-for-this-subset" class="md-nav__link">
+  <a href="#storing-loop-results" class="md-nav__link">
     <span class="md-ellipsis">
-      Intro Q2. Use the preloaded R data set 'Indometh' (check ?Indometh to understand more about the dataset). Subset this data to return only those rows for which the concentration is strictly between 1 and 2. What is the average (mean) concentration for this subset?
+      Storing loop results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Storing loop results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pen-and-paper-q7-consider-the-following-table-which-lists-the-genus-and-species-name-for-a-number-of-ant-species-present-in-great-britain-the-loop-counts-the-number-of-entries-where-the-genus-name-begins-with-given-letters-describe-in-your-own-words-what-the-loop-is-doing-at-each-iteration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pen and paper Q7. Consider the following table, which lists the genus and species name for a number of ant species present in Great Britain. The loop counts the number of entries where the genus name begins with given letters. Describe in your own words what the loop is doing at each iteration.
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#intro-q3-using-regular-expressions-how-would-you-extract-all-the-words-except-antelope-in-the-vector-ccameleopard-eop4a-kiloparsec-antelope-in-r-there-are-a-few-ways-of-getting-a-result-find-three-ways-to-answer-this-question" class="md-nav__link">
+  <a href="#q8-write-a-loop-that-iterates-over-the-colours-red-green-blue-yellow-orange-purple-pink-and-prints-out-the-position-ie-the-position-of-the-colour-in-the-vector-and-the-colour-itself-this-should-be-done-in-human-readable-format-ie-the-colour-red-is-in-position-1-in-the-vector-the-colour-blue-is-in-position-2-in-the-vector-and-so-on-make-sure-to-indent-the-code-appropriately-between-the-curly-brackets" class="md-nav__link">
     <span class="md-ellipsis">
-      Intro Q3. Using regular expressions, how would you extract all the words except antelope in the vector c("cameleopard", "eop4a", "kiloparsec", "antelope")? In R, there are a few ways of getting a result. Find three ways to answer this question.
+      Q8. Write a loop that iterates over the colours red, green, blue, yellow, orange, purple, pink and prints out the position (i.e. the position of the colour in the vector) and the colour itself. This should be done in human-readable format (i.e. "the colour red is in position 1 in the vector", "the colour blue is in position 2 in the vector", and so on). Make sure to indent the code appropriately between the curly brackets.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using loops
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using loops">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q9-use-a-for-loop-to-calculate-how-much-money-there-is-in-the-account-after-20-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q9. Use a for loop to calculate how much money there is in the account after 20 years.
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#intro-q4-write-a-loop-that-iterates-over-the-numbers-16-to-49-and-prints-out-the-square-root-of-the-number-each-time-through-you-may-have-to-search-around-for-the-square-root-function-yes-for-this-exercise-we-absolutely-want-you-to-write-a-loop-to-do-this-even-though-there-are-other-ways-of-getting-r-to-provide-the-same-result" class="md-nav__link">
+  <a href="#q10-make-a-plot-of-the-amount-of-money-in-the-account-per-year-hint-if-you-have-not-done-so-yet-you-will-have-to-create-a-vector-to-store-each-years-amount" class="md-nav__link">
     <span class="md-ellipsis">
-      Intro Q4. Write a loop that iterates over the numbers 16 to 49 and prints out the square root of the number each time through (you may have to search around for the square root function). Yes, for this exercise we absolutely want you to write a loop to do this, even though there are other ways of getting R to provide the same result.
+      Q10. Make a plot of the amount of money in the account per year. Hint: if you have not done so yet, you will have to create a vector to store each year's amount.
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#intro-q5-make-the-loop-from-intro-q4-store-the-results-to-a-separate-vector-called-my_square_roots-instead-of-just-printing-the-results-whats-the-value-of-the-3rd-iteration-what-is-the-sum-of-the-square-roots-of-the-numbers-16-to-49" class="md-nav__link">
+  <a href="#q11-write-a-loop-that-calculates-the-population-size-depending-on-the-reproduction-rate-over-a-period-of-20-years-store-the-population-value-for-each-iteration-of-the-loop-in-a-separate-vector" class="md-nav__link">
     <span class="md-ellipsis">
-      Intro Q5. Make the loop from Intro Q4 store the results to a separate vector called my_square_roots instead of just printing the results. What's the value of the 3rd iteration? What is the sum of the square roots of the numbers 16 to 49?
+      Q11. Write a loop that calculates the population size depending on the reproduction rate over a period of 20 years. Store the population value for each iteration of the loop in a separate vector.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nested Loops
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nested Loops">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q12-a-create-a-nested-loop-the-outer-loop-should-iterate-over-the-words-angry-lazy-and-happy-the-inner-loop-should-iterate-over-the-words-birds-dogs-and-horses-the-code-inside-the-inner-loop-should-print-out-a-vector-containing-the-values-of-both-loops-for-example-angry-and-birds-in-the-first-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q12-A. Create a nested loop. The outer loop should iterate over the words "Angry", "Lazy", and "Happy". The inner loop should iterate over the words "birds", "dogs", and "horses". The code inside the inner loop should print out a vector containing the values of both loops (for example "Angry" and "birds" in the first instance).
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#intro-q6-write-a-loop-that-iterates-over-all-even-numbers-between-30-and-90-at-each-iteration-run-your-function-to-convert-each-of-these-even-numbers-from-kilometres-into-miles-you-created-this-function-in-q2-from-practical2-the-loop-should-store-the-results-in-a-separate-vector" class="md-nav__link">
+  <a href="#q12-b-look-again-at-the-code-you-wrote-in-q12-a-did-you-sufficiently-indent-your-code-like-in-the-example-of-a-nested-loop-above-so-that-it-is-easy-to-see-which-lines-of-code-are-executed-at-which-point-of-the-different-loops-if-not-do-it-now-and-continue-doing-it-for-the-next-questions-as-well" class="md-nav__link">
     <span class="md-ellipsis">
-      Intro Q6. Write a loop that iterates over all even numbers between 30 and 90. At each iteration, run your function to convert each of these even numbers from kilometres into miles (you created this function in Q2 from practical2. The loop should store the results in a separate vector.
+      Q12-B. Look again at the code you wrote in Q12-A. Did you sufficiently indent your code (like in the example of a nested loop above), so that it is easy to see which lines of code are executed at which point of the different loops? If not, DO IT NOW! And continue doing it for the next questions as well.
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#intro-q7-numbers-in-fibonaccis-sequence-are-characterised-by-the-fact-that-every-number-after-the-first-two-is-the-sum-of-the-two-preceding-ones-eg-1-1-2-3-5-this-seemingly-simple-sequence-can-be-used-to-explain-different-biological-patterns-ranging-from-the-arrangement-of-leaves-on-a-stem-or-the-flowering-of-an-artichoke-to-the-patterns-of-inheritance-of-x-chromosomes-write-a-for-loop-that-calculates-the-first-20-numbers-in-a-fibonacci-sequence-starting-from-1" class="md-nav__link">
+  <a href="#q13-write-a-third-degree-nested-loop-ie-a-loop-within-a-loop-within-a-loop-be-careful-not-to-loop-over-too-many-values-or-you-will-crash-r" class="md-nav__link">
     <span class="md-ellipsis">
-      Intro Q7. Numbers in Fibonacci's sequence are characterised by the fact that every number after the first two is the sum of the two preceding ones (e.g., 1, 1, 2, 3, 5,...). This seemingly simple sequence can be used to explain different biological patterns ranging from the arrangement of leaves on a stem or the flowering of an artichoke to the patterns of inheritance of X chromosomes. Write a for loop that calculates the first 20 numbers in a Fibonacci sequence starting from 1.
+      Q13. Write a third-degree nested loop (i.e. a loop within a loop within a loop). Be careful not to loop over too many values or you will crash R!
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-loops-to-reformat-a-data-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using loops to reformat a data set
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using loops to reformat a data set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q14-a-create-an-empty-matrix-called-long_data-this-matrix-must-have-3-columns-and-30-rows-the-number-30-comes-from-the-fact-that-we-have-five-strains-at-six-time-points-each-name-the-columns-cstrain-time-count" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q14-A. Create an empty matrix, called long_data. This matrix must have 3 columns and 30 rows (the number 30 comes from the fact that we have five strains at six time points each). Name the columns c("strain", "time", "count").
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#intro-q8-create-a-function-that-can-run-this-loop-to-generate-a-fibonacci-sequence-of-any-size-starting-from-any-given-number-ie-it-does-not-have-to-start-with-1-so-for-example-a-sequence-of-length-x-from-number-y-where-x-and-y-are-inputs-to-the-function" class="md-nav__link">
+  <a href="#q14-b-change-the-for-loop-above-to-include-a-variable-my_position-this-variable-should-be-defined-as-being-0-before-the-loop-starts-at-every-iteration-of-the-inner-loop-you-should-add-1-to-it-what-are-the-values-of-my_rows-and-my_col-when-my_position-is-3-add-a-line-to-check-the-positions-each-time-through" class="md-nav__link">
     <span class="md-ellipsis">
-      Intro Q8. Create a function that can run this loop to generate a Fibonacci sequence of any size, starting from any given number (i.e. it does not have to start with 1). So for example, a sequence of length x from number y, where x and y are inputs to the function.
+      Q14-B. Change the for loop above to include a variable my_position. This variable should be defined as being 0 before the loop starts. At every iteration of the inner loop, you should add 1 to it. What are the values of my_rows and my_col when my_position is 3? Add a line to check the positions each time through.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q14-c-bring-all-of-this-together-to-finish-the-for-loop-and-run-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q14-C. Bring all of this together to finish the for loop, and run it!
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q14-d-what-can-you-do-to-reduce-the-risks-of-things-going-wrong-if-there-is-a-chance-you-may-want-to-rerun-this-loop-on-a-similar-but-slightly-different-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q14-D. What can you do to reduce the risks of things going wrong if there is a chance you may want to rerun this loop on a similar but slightly different dataset?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hacker-section-working-with-dna-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hacker section: Working with DNA data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hacker section: Working with DNA data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bonus-q15-a-write-a-function-that-converts-a-short-dna-sequence-of-15-bases-eg-acctgtcatcatccc-to-rna-and-splits-the-string-into-codon-triplets-you-will-need-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bonus Q15-A. Write a function that converts a short DNA sequence of 15 bases (e.g. "ACCTGTCATCATCCC") to RNA and splits the string into codon triplets. You will need to:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bonus-q15-b-once-you-have-created-the-function-see-if-you-can-modify-it-to-work-for-a-sequence-with-any-number-of-characters-tip-you-can-use-nchar-to-create-a-variable-such-as-num_characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bonus Q15-B. Once you have created the function, see if you can modify it to work for a sequence with any number of characters. Tip: you can use nchar() to create a variable such as num_characters.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bonus-q16-write-a-function-to-obtain-the-reverse-complement-of-a-dna-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bonus Q16. Write a function to obtain the reverse-complement of a DNA sequence.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mastermind-q17-translate-your-triplet-string-from-q15-into-amino-acids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mastermind Q17. Translate your triplet string from Q15 into amino acids.
     </span>
   </a>
   
@@ -579,128 +822,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#palindromic-sequences" class="md-nav__link">
+  <a href="#bringing-it-all-together" class="md-nav__link">
     <span class="md-ellipsis">
-      Palindromic Sequences
+      Bringing it all together
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Palindromic Sequences">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#q1-write-a-function-that-assesses-whether-a-given-word-or-phrase-is-a-palindrome" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q1. Write a function that assesses whether a given word or phrase is a palindrome.
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q2-palindromes-in-molecular-biology-work-a-little-differently-in-that-the-sequence-is-the-same-if-read-from-5-to-3-on-one-strand-or-from-5-to-3-on-the-complementary-strand-for-example-given-the-sequence-acctaggt-its-complement-would-be" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q2. Palindromes in molecular biology work a little differently, in that the sequence is the same if read from 5’ to 3’ on one strand or from 5’ to 3’ on the complementary strand. For example, given the sequence ACCTAGGT, its complement would be:
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#both-acctaggt-and-its-complementary-sequence-tggatcca-are-identical-if-read-from-5-to-3-that-is-acctaggt-is-a-palindromic-sequence-write-a-function-that-assesses-whether-a-dna-sequence-is-a-palindrome-you-will-need-to-convert-it-to-its-reverse-complement-and-then-compare-this-to-the-original-sequence-again-there-are-commands-which-may-help-you-in-the-working-with-dna-data-section-from-the-last-session" class="md-nav__link">
-    <span class="md-ellipsis">
-      Both ACCTAGGT and its complementary sequence TGGATCCA are identical if read from 5’ to 3’, that is, ACCTAGGT is a palindromic sequence. Write a function that assesses whether a DNA sequence is a palindrome. You will need to convert it to its reverse complement and then compare this to the original sequence. Again, there are commands which may help you in the ‘Working with DNA data’ section from the last session.
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#open-reading-frames" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open Reading Frames
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Open Reading Frames">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#q3-write-a-function-which-uses-regular-expressions-to-detect-if-a-given-sequence-contains-an-open-reading-frame-test-it-on-the-following-sequences" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q3. Write a function which uses regular expressions to detect if a given sequence contains an open reading frame. Test it on the following sequences:
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hacker-q4a-instead-of-having-the-function-return-whether-your-sequence-contains-an-open-reading-frame-have-the-function-return-a-string-containing-the-open-reading-frame-if-there-is-one-and-null-if-there-is-not-you-will-need-to-look-up-if-statements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Hacker Q4a. Instead of having the function return whether your sequence contains an open reading frame, have the function return a string containing the open reading frame if there is one and NULL if there is not (you will need to look up "if statements").
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hacker-q4b-this-time-check-both-the-forward-and-reverse-strand-for-open-reading-frames-return-forward_only-if-there-is-an-open-reading-frame-only-on-the-forward-strand-reverse_only-if-only-on-the-reverse-both-if-in-both-or-none-if-in-neither" class="md-nav__link">
-    <span class="md-ellipsis">
-      Hacker Q4b. This time, check both the forward and reverse strand for open reading frames. Return "forward_only" if there is an open reading frame only on the forward strand, "reverse_only" if only on the reverse, "both" if in both or "none" if in neither.
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#species-names" class="md-nav__link">
-    <span class="md-ellipsis">
-      Species names
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Species names">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#q5-write-a-function-that-adds-a-new-column-in-the-data-frame-that-contains-the-correct-latin-species-name-for-each-record-in-the-butterfly_sample" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q5 Write a function that adds a new column in the data frame that contains the correct Latin species name for each record in the butterfly_sample.
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q6-from-the-data-above-which-location-has-the-greatest-number-of-different-species" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q6. From the data above, which location has the greatest number of different species?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q7-which-genus-has-been-caught-the-greatest-number-of-times" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q7. Which genus has been caught the greatest number of times?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -708,6 +834,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 4
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -736,76 +885,389 @@
 
 
 
-<h1 id="computing-in-r-practical-3">Computing in R - Practical 3</h1>
-<h2 id="introduction">Introduction</h2>
-<p>This session will be a recap of what we saw in <a href="../practical1">practical 1</a> and <a href="../practical2">practical 2</a>. You can also use this session to revisit the parts of the last practicals that are still not entirely clear.
-<strong>REMEMBER</strong> The important thing is that you understand what you are doing. It is better to understand well a few exercises than finishing all exercises without entirely knowing what is going on.</p>
-<h2 id="recap-questions">Recap questions</h2>
-<p>To get back into gear in terms of thinking about programming, we’ll start with a quick recap exercise of the recent material:</p>
-<h4 id="intro-q1-what-would-be-the-outcome-of-the-code-answer-repx-c42-24-times-42-and-what-would-then-be-the-outcome-of-the-code-meananswer">Intro Q1. What would be the outcome of the code <code>answer &lt;- rep(x = c(42, 24), times = 42)</code>? And what would then be the outcome of the code <code>mean(answer)</code>?</h4>
-<h4 id="intro-q2-use-the-preloaded-r-data-set-indometh-check-indometh-to-understand-more-about-the-dataset-subset-this-data-to-return-only-those-rows-for-which-the-concentration-is-strictly-between-1-and-2-what-is-the-average-mean-concentration-for-this-subset">Intro Q2. Use the preloaded R data set 'Indometh' (check <code>?Indometh</code> to understand more about the dataset). Subset this data to return only those rows for which the concentration is strictly between 1 and 2. What is the average (mean) concentration for this subset?</h4>
-<h4 id="intro-q3-using-regular-expressions-how-would-you-extract-all-the-words-except-antelope-in-the-vector-ccameleopard-eop4a-kiloparsec-antelope-in-r-there-are-a-few-ways-of-getting-a-result-find-three-ways-to-answer-this-question">Intro Q3. Using regular expressions, how would you extract all the words except <code>antelope</code> in the vector <code>c("cameleopard", "eop4a", "kiloparsec", "antelope")</code>? In R, there are a few ways of getting a result. Find three ways to answer this question.</h4>
-<h4 id="intro-q4-write-a-loop-that-iterates-over-the-numbers-16-to-49-and-prints-out-the-square-root-of-the-number-each-time-through-you-may-have-to-search-around-for-the-square-root-function-yes-for-this-exercise-we-absolutely-want-you-to-write-a-loop-to-do-this-even-though-there-are-other-ways-of-getting-r-to-provide-the-same-result">Intro Q4. Write a loop that iterates over the numbers 16 to 49 and prints out the square root of the number each time through (you may have to search around for the square root function). Yes, for this exercise we <em>absolutely</em> want you to write a loop to do this, even though there are other ways of getting R to provide the same result.</h4>
-<h4 id="intro-q5-make-the-loop-from-intro-q4-store-the-results-to-a-separate-vector-called-my_square_roots-instead-of-just-printing-the-results-whats-the-value-of-the-3rd-iteration-what-is-the-sum-of-the-square-roots-of-the-numbers-16-to-49">Intro Q5. Make the loop from Intro Q4 store the results to a separate vector called <code>my_square_roots</code> instead of just printing the results. What's the value of the 3rd iteration? What is the sum of the square roots of the numbers 16 to 49?</h4>
-<h4 id="intro-q6-write-a-loop-that-iterates-over-all-even-numbers-between-30-and-90-at-each-iteration-run-your-function-to-convert-each-of-these-even-numbers-from-kilometres-into-miles-you-created-this-function-in-q2-from-practical2-the-loop-should-store-the-results-in-a-separate-vector">Intro Q6. Write a loop that iterates over all even numbers between 30 and 90. At each iteration, run your function to convert each of these even numbers from kilometres into miles (you created this function in Q2 from <a href="../practical2">practical2</a>. The loop should store the results in a separate vector.</h4>
-<h4 id="intro-q7-numbers-in-fibonaccis-sequence-are-characterised-by-the-fact-that-every-number-after-the-first-two-is-the-sum-of-the-two-preceding-ones-eg-1-1-2-3-5-this-seemingly-simple-sequence-can-be-used-to-explain-different-biological-patterns-ranging-from-the-arrangement-of-leaves-on-a-stem-or-the-flowering-of-an-artichoke-to-the-patterns-of-inheritance-of-x-chromosomes-write-a-for-loop-that-calculates-the-first-20-numbers-in-a-fibonacci-sequence-starting-from-1">Intro Q7. Numbers in Fibonacci's sequence are characterised by the fact that every number after the first two is the sum of the two preceding ones (e.g., 1, 1, 2, 3, 5,...). This seemingly simple sequence can be used to explain different biological patterns ranging from the arrangement of leaves on a stem or the flowering of an artichoke to the patterns of inheritance of X chromosomes. Write a <code>for</code> loop that calculates the first 20 numbers in a Fibonacci sequence starting from 1.</h4>
-<p><em>Hint - we cannot use positions equal or lower than 0 in a vector. Start with a vector containing the 2 first numbers of the sequence (1 and 1 in this case) and run through a loop starting in position 3 of your sequence to calculate the rest</em></p>
-<h4 id="intro-q8-create-a-function-that-can-run-this-loop-to-generate-a-fibonacci-sequence-of-any-size-starting-from-any-given-number-ie-it-does-not-have-to-start-with-1-so-for-example-a-sequence-of-length-x-from-number-y-where-x-and-y-are-inputs-to-the-function">Intro Q8. Create a function that can run this loop to generate a Fibonacci sequence of any size, starting from any given number (i.e. it does not have to start with 1). So for example, a sequence of length <code>x</code> from number <code>y</code>, where <code>x</code> and <code>y</code> are inputs to the function.</h4>
-<p><em>Hint - The starting number <code>y</code> will be the first two positions of your resulting vector</em></p>
-<h2 id="palindromic-sequences">Palindromic Sequences</h2>
-<p>Palindromes are arrangements of words or letters which read the same way whether you read them backwards or forwards, such as the phrase <em>never odd or even</em> (if you remove the spaces). In molecular biology, many restriction enzyme sites are palindromic,</p>
-<h4 id="q1-write-a-function-that-assesses-whether-a-given-word-or-phrase-is-a-palindrome">Q1. Write a function that assesses whether a given word or phrase is a palindrome.</h4>
-<p>Before starting to code, think about the steps that you would need to go through in order to judge if something is a mirror palindrome.
- * Write these steps as comments in an R script window (or a piece of paper) , then think about how you can tell the computer to execute those steps.
- * Only start writing the code when you have a plan of what you want to do.
- * Write your code as a one-off first - without considering that you'll do a function.
- * Only once you're happy with how things work, sandwich your code into a function format.
- * Use easy test cases where you know the answer in order to check that your function works.</p>
-<p>The bottom section of the R help sheets normally have examples of how a command can be used. Sometimes one of these examples will be a way to solve the problem that you are currently working on. The <code>strsplit</code> helpsheet is particularly interesting in relation to this question.</p>
-<h4 id="q2-palindromes-in-molecular-biology-work-a-little-differently-in-that-the-sequence-is-the-same-if-read-from-5-to-3-on-one-strand-or-from-5-to-3-on-the-complementary-strand-for-example-given-the-sequence-acctaggt-its-complement-would-be">Q2. Palindromes in molecular biology work a little differently, in that the sequence is the same if read from 5’ to 3’ on one strand or from 5’ to 3’ on the complementary strand. For example, given the sequence ACCTAGGT, its complement would be:</h4>
-<div class="highlight"><pre><span></span><code>5’ ACCTAGGT 3’
-   ||||||||
-3’ TGGATCCA 5’
-</code></pre></div>
-<h4 id="both-acctaggt-and-its-complementary-sequence-tggatcca-are-identical-if-read-from-5-to-3-that-is-acctaggt-is-a-palindromic-sequence-write-a-function-that-assesses-whether-a-dna-sequence-is-a-palindrome-you-will-need-to-convert-it-to-its-reverse-complement-and-then-compare-this-to-the-original-sequence-again-there-are-commands-which-may-help-you-in-the-working-with-dna-data-section-from-the-last-session">Both ACCTAGGT and its complementary sequence TGGATCCA are identical if read from 5’ to 3’, that is, ACCTAGGT is a palindromic sequence. Write a function that assesses whether a DNA sequence is a palindrome. You will need to convert it to its reverse complement and then compare this to the original sequence. Again, there are commands which may help you in the ‘Working with DNA data’ section from the <a href="../practical2">last session</a>.</h4>
-<h2 id="open-reading-frames">Open Reading Frames</h2>
-<p>Protein-coding regions in the genome can be predicted by detecting open reading frames. An open reading frame normally begins with the start codon ‘ATG’ and ends at one of three possible stop codons, ‘TGA’, ‘TAA’ and ‘TAG’. The sequence in between these two points is arranged in 3-base codons.</p>
-<h4 id="q3-write-a-function-which-uses-regular-expressions-to-detect-if-a-given-sequence-contains-an-open-reading-frame-test-it-on-the-following-sequences">Q3. Write a function which uses regular expressions to detect if a given sequence contains an open reading frame. Test it on the following sequences:</h4>
-<p><em>Hint - an open reading frame should always start with the start codon 'ATG' and end with one of the stop codons. Additionally, the length of the entire sequence should be a multiple of 3. If any of these features are not met, the sequence is not a functional open reading frame.</em></p>
-<div class="highlight"><pre><span></span><code>ATGGATTTTTAG
-ATGGATTTTCTAG
-CTAATGGATTTTTGAAT
-atgctaaactaa
-TCGATTAA
-</code></pre></div>
-<h4 id="hacker-q4a-instead-of-having-the-function-return-whether-your-sequence-contains-an-open-reading-frame-have-the-function-return-a-string-containing-the-open-reading-frame-if-there-is-one-and-null-if-there-is-not-you-will-need-to-look-up-if-statements">Hacker Q4a. Instead of having the function return whether your sequence contains an open reading frame, have the function return a string containing the open reading frame if there is one and NULL if there is not (you will need to look up "if statements").</h4>
-<h4 id="hacker-q4b-this-time-check-both-the-forward-and-reverse-strand-for-open-reading-frames-return-forward_only-if-there-is-an-open-reading-frame-only-on-the-forward-strand-reverse_only-if-only-on-the-reverse-both-if-in-both-or-none-if-in-neither">Hacker Q4b. This time, check both the forward and reverse strand for open reading frames. Return <code>"forward_only"</code> if there is an open reading frame only on the forward strand, <code>"reverse_only"</code> if only on the reverse, <code>"both"</code> if in both or "none" if in neither.</h4>
-<h2 id="species-names">Species names</h2>
-<p>Run the following line of code to import the <code>butterfly_sample</code> and the <code>butterfly_reference</code> data frames:</p>
-<div class="highlight"><pre><span></span><code><span class="n">butterfly_sam_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;http://wurmlab.github.io/SBC361-programming-in-R/public/butterfly_sample.csv&quot;</span>
-<span class="n">butterfly_sample</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_sam_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<h1 id="practical-3-introduction-to-functions-and-loops-in-r"><strong>Practical 3 - Introduction to functions and loops in R</strong></h1>
+<p>Building on your existing skills, we will now move on to consider advanced ways of controlling program flow. Specifically, we will explore <strong>functions</strong> and <strong>loops</strong>, two important features of R that are also present in most other programming languages. We will also be doing a few exercises with DNA/RNA strings. As always, you will want to refer frequently to the R help files (through <code>?</code>) and your own notes when exploring these new concepts.</p>
+<h2 id="functions">Functions</h2>
+<p>Functions are pieces of code that take input information (in the form of "arguments"), do something with it, and give back an output. They allow you to run an analysis multiple times without having to rewrite it from scratch every time you need to run it. A function looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">function_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="n">butterfly_ref_url</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;http://wurmlab.github.io/SBC361-programming-in-R/public/butterfly_reference.csv&quot;</span>
-<span class="n">butterfly_reference</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_ref_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="w">  </span><span class="c1">### the &quot;body&quot; of the function</span>
+
+<span class="w">  </span><span class="c1"># code that performs some calculation on the input</span>
+<span class="w">  </span><span class="c1"># possibly other lines of code that perform calculations</span>
+
+<span class="w">  </span><span class="c1"># returning an output vector:</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>The <code>butterfly_reference</code> data frame contains the species name and the common name of a number of butterflies.</p>
-<p>The <code>butterfly_sample</code> data frame contains information on butterflies caught in sweep netting surveys in two locations under different pesticide treatments (locations A and B). This data was collected by multiple people, who have recorded the common names of the species that they encountered (without using a standard letter case). In order to be able to compare the diversity between the two different sites, you will need to standardise the names.</p>
-<h4 id="q5-write-a-function-that-adds-a-new-column-in-the-data-frame-that-contains-the-correct-latin-species-name-for-each-record-in-the-butterfly_sample">Q5 Write a function that adds a new column in the data frame that contains the correct Latin species name for each record in the <code>butterfly_sample</code>.</h4>
-<p>TIP: There are several ways to do this. Remember that R is case sensitive, so you will need to account for case differences in your function. <code>grep</code> and <code>gsub</code> both allow you to set an <code>ignore.case = TRUE</code> option. Alternately, you could use the R commands <code>toupper()</code> and <code>tolower()</code>. Use the help pages to see how these work, which you can access by typing a question mark before the command - <code>?toupper</code>.</p>
-<h4 id="q6-from-the-data-above-which-location-has-the-greatest-number-of-different-species">Q6. From the data above, which location has the greatest number of different species?</h4>
-<h4 id="q7-which-genus-has-been-caught-the-greatest-number-of-times">Q7. Which genus has been caught the greatest number of times?</h4>
-<h1 id="bonus-hacker-question">Bonus hacker question</h1>
-<p>This question is an extension of the question Q5. Again, we will analyse a data frame containing the species of butterflies observed in two locations (A and B). This time, however, some of the people who did the sampling recorded the common name of the species, while others recorded the latin name (all with inconsistent letter case).</p>
-<h4 id="q8-write-a-script-that-adds-a-new-column-in-the-data-frame-that-contains-the-correct-latin-species-name-for-each-record-in-the-data-frame-imported-below">Q8 Write a script that adds a new column in the data frame that contains the correct Latin species name for each record in the data frame imported below.</h4>
-<div class="highlight"><pre><span></span><code><span class="n">butterfly_sam_bonus_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;http://wurmlab.github.io/SBC361-programming-in-R/public/butterfly_sample_bonus.csv&quot;</span>
-<span class="n">butterfly_sample_bonus</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_sam_bonus_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<p>You can choose whatever name you want instead of <code>function_name</code> (try a meaningful name). After the <code>&lt;-</code>, the word <code>function</code> within brackets lets R know that you are writing a new function. Here, <code>input</code> is the name of the only argument that the calculations in the <code>body</code> of the function are based on (your function <em>can</em> have multiple arguments). Between the curly brackets <code>{}</code> is the main code of your function, where the calculation(s) happen. Almost everything that occurs between the curly brackets stays within the curly brackets. The only thing that comes outside the curly brackets is what you put into the <code>return()</code> on the last line. If you have no <code>return()</code>, your function may compute something but nobody will ever know about it! Note that the <code>return</code> command can only handle a single argument.</p>
+<p>To take a self-explanatory example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">)</span>
+<span class="nf">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </code></pre></div>
-<p>One of the difficulties of this exercise is that you will have to perform a different process depending on whether the sample already has its Latin name or not. You may find that using <code>if</code> statements may be helpful (which you will have to look up). Alternatively, you may want to subset the data into the two groups (where the transformation is either from Latin to Latin or common to Latin), and do the transformation independently on each.</p>
-<p>This question is not easy! But it is typical of the sort of thing researchers do from day to day and a very good test of all the things you have learned this year!</p>
-<h2 id="play-time-you-can-safely-ignore-this-if-you-are-in-3rd-year">Play time (you can safely ignore this if you are in 3rd year)</h2>
-<h4 id="q9-write-a-script-for-a-rock-scissors-paper-game-to-play-against-the-computer-you-will-need-to-write-it-as-a-function-eg-rock_scissors_paperyour_play">Q9 Write a script for a <a href="https://en.wikipedia.org/wiki/Rock%E2%80%93paper%E2%80%93scissors">Rock-Scissors-Paper game</a> to play against the computer. You will need to write it as a function (e.g. <code>rock_scissors_paper(your_play)</code>).</h4>
-<p>NOTE: You will need to use if else statements in R. Have a look online to see how they work.</p>
-<h4 id="q10-write-a-script-for-a-functional-conways-game-of-life-this-is-a-type-of-cellular-automata-model-where-very-simple-initial-rules-can-generate-highly-complex-patterns-to-modelsimulate-life-you-will-need-to-integrate-conways-rules-into-r">Q10 Write a script for a functional <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Rules">Conway's Game of Life</a>. This is a type of cellular automata model where very simple initial rules can generate highly complex patterns. To model/simulate life, you will need to integrate Conway's rules into R.</h4>
+<p>You just used the <code>mean</code> function, one of many functions that our predecessors built into R. The point of this function is that you can calculate the mean of any vector without explicitly writing the formula for the mean each time. The interesting thing about R is that it is possible to create your own functions. This is how R functions work:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## Define function named &#39;my_own_mean&#39;</span>
+
+<span class="n">my_own_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">## Calculate mean</span>
+<span class="w">  </span><span class="c1"># Sum all numbers in the vector</span>
+<span class="w">  </span><span class="n">sum_of_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Obtain the number of values in the vector</span>
+<span class="w">  </span><span class="n">number_of_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Get the mean</span>
+<span class="w">  </span><span class="n">mean_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sum_of_values</span><span class="o">/</span><span class="n">number_of_values</span>
+
+<span class="w">  </span><span class="c1">## Output the mean</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">mean_value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">## Now run the function with some data:</span>
+<span class="nf">my_own_mean</span><span class="p">(</span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">40</span><span class="p">))</span>
+
+<span class="nf">my_own_mean</span><span class="p">(</span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">))</span>
+</code></pre></div>
+<p>We created a function that computes the sum and number of all values in a given vector (<code>numbers</code>) and then divides them to obtain the mean. We split the calculation in three steps, just to show that you can have many lines of code in the body of a function. The only input this function receives is a vector of numbers (<code>numbers</code>) and all the calculations are based on this. In the end we return the result of the third calculation (<code>mean_value</code>). Does <code>number_of_values</code> exist in the normal R console? No! Because this variable was only created within the curly brackets. Remember? What happens between the curly brackets stays in the curly brackets.</p>
+<p>Nothing much happens after loading the function <code>my_own_mean</code> into R (you always have to evaluate the entire code of the function from <code>function_name</code> to the closing curly brackets <code>}</code> if you made changes to the code). The magic happens when you <em>call</em> the function. We did this by typing <code>my_own_mean(numbers = 1:50)</code> (of course you can use other vectors instead as well). The vector with numbers from 1 to 50 will be used as <code>numbers</code> in the function.</p>
+<p>Now take a look at the following lines of code. This code is designed to take a number in seconds and convert it into hours, minutes, and remaining seconds (<code>floor()</code> is R's built-in function for rounding down to the closest whole number):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Input raw number of seconds</span>
+<span class="n">number_of_seconds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">19955</span>
+
+<span class="c1"># Convert number_of_seconds into hours, minutes, and seconds</span>
+<span class="n">hours</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">number_of_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="p">))</span>
+<span class="n">minutes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">((</span><span class="n">number_of_seconds</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">hours</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="p">)</span>
+<span class="n">seconds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">number_of_seconds</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">((</span><span class="n">hours</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">minutes</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span>
+
+<span class="c1"># Create a single vector containing all three quantities</span>
+<span class="n">outputs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="n">seconds</span><span class="p">)</span>
+
+<span class="c1"># Output the solution to the console</span>
+<span class="n">outputs</span>
+</code></pre></div>
+<h4 id="q1-modify-the-code-above-to-make-it-into-a-function-called-time_converter-this-function-should-take-a-single-number-as-an-argument-the-number-of-seconds-we-want-to-convert-this-function-should-also-include-the-three-lines-of-code-that-convert-number_of_seconds-into-hours-minutes-and-seconds-the-line-of-code-that-merges-these-three-variables-into-one-vector-and-a-line-returning-this-vector-as-the-output-of-the-function-once-you-created-the-function-and-loaded-it-into-r-use-relevant-examples-for-testing-0-3600-another-remember-to-indent-any-code-inside-the-curly-brackets">Q1. Modify the code above to make it into a function called <code>time_converter</code>. This function should take a single number as an argument (the number of seconds we want to convert). This function should also include the three lines of code that convert <code>number_of_seconds</code> into <code>hours</code>, <code>minutes</code>, and <code>seconds</code>, the line of code that merges these three variables into one vector, and a line returning this vector as the output of the function. Once you created the function and loaded it into R, use relevant examples for testing (0, 3600, another). Remember to indent any code inside the curly brackets.</h4>
+<h4 id="q2-write-your-own-function-for-converting-distances-between-different-units-your-function-should-take-the-distance-in-kilometres-as-input-and-return-the-distance-in-miles-as-output-1-kilometre-is-06213712-miles-note-floor-wont-be-needed-in-the-calculations-here-remember-to-clearly-commentannotate-your-code-and-make-appropriate-use-of-whitespace-including-indentation-and-newlines">Q2. Write your own function for converting distances between different units. Your function should take the distance in kilometres as input and return the distance in miles as output (<a href="https://en.wikipedia.org/wiki/Mile">1 kilometre is 0.6213712 miles</a>). Note: <code>floor</code> won't be needed in the calculations here. Remember to clearly comment/annotate your code and make appropriate use of whitespace including indentation and newlines.</h4>
+<h3 id="more-complex-functions">More complex functions</h3>
+<p>Functions can be very useful when you have to do the same calculation many times. We will now consider a hypothetical experiment in which we are measuring the flight speed of bees through flight tunnels.</p>
+<p>We would like to measure the flight speed of the bees in meters per second. Annoyingly, the timer we used gave readings with the format <code>hours:minutes:seconds</code>, rather than just the total number of seconds.</p>
+<p>Fortunately, functions in R can take more than one argument:</p>
+<div class="highlight"><pre><span></span><code><span class="n">my_function</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="w"> </span><span class="n">input2</span><span class="p">,</span><span class="w"> </span><span class="kc">...</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># code including input1, input2, ...</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="n">something</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="q3-make-a-function-that-takes-hours-minutes-and-seconds-as-inputs-and-outputs-the-total-number-of-seconds-make-sure-it-has-three-arguments-and-a-descriptive-name-test-the-function-with-a-range-of-times-for-which-you-know-the-answer">Q3. Make a function that takes <code>hours</code>, <code>minutes</code> and <code>seconds</code> as inputs, and outputs the total number of seconds. Make sure it has three arguments and a descriptive name. Test the function with a range of times for which you know the answer.</h4>
+<p>In our experiment, most bees flew through the test tunnel in under an hour. It is time consuming to include the argument <code>hours = 0</code> every time that we call the function.</p>
+<p>A neat thing about functions is that we can set default values for any argument, using the syntax:</p>
+<div class="highlight"><pre><span></span><code><span class="n">my_function</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="w"> </span><span class="kc">...</span><span class="p">,</span><span class="w"> </span><span class="n">input15</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">default</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># code including input1, input2, ..., input15</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">something</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The default argument(s) is generally placed at the end of the argument list.</p>
+<h4 id="q4-make-the-hours-and-minutes-arguments-be-defined-as-0-by-default-in-your-function-run-the-function-without-supplying-these-two-arguments-then-run-it-again-with-using-a-range-of-hours-and-minutes">Q4. Make the <code>hours</code> and <code>minutes</code> arguments be defined as 0 by default in your function. Run the function without supplying these two arguments, then run it again with using a range of <code>hours</code> and <code>minutes</code>.</h4>
+<p>Finally, we would like to create a function to measure the flight speed of the bees in meters per second. This function should:</p>
+<ul>
+<li>Take the tunnel length (in meters), hours, minutes and seconds as arguments</li>
+<li>Use your previous function to convert hours, minutes and seconds to seconds</li>
+<li>Calculate the speed of the bees in meters per second</li>
+<li>Return the speed of the bees</li>
+</ul>
+<h4 id="q5a-create-this-function-test-it-with-a-control-values-for-which-you-know-the-answer">Q5A. Create this function. Test it with a control (values for which you know the answer).</h4>
+<h4 id="q5b-use-the-function-to-measure-the-speed-of-the-bees-with-the-following-measurements">Q5B. Use the function to measure the speed of the bees with the following measurements:</h4>
+<table>
+<thead>
+<tr>
+<th>Distance (m)</th>
+<th>Time (hours:minutes:seconds)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>00:00:08</td>
+</tr>
+<tr>
+<td>10</td>
+<td>00:00:40</td>
+</tr>
+<tr>
+<td>300</td>
+<td>00:05:00</td>
+</tr>
+<tr>
+<td>800</td>
+<td>01:06:40</td>
+</tr>
+</tbody>
+</table>
+<h4 id="q5c-can-you-think-of-parameter-values-that-would-make-your-function-not-work-properly-what-happens-if-you-try-running-the-function-with-these-values">Q5C. Can you think of parameter values that would make your function not work properly? What happens if you try running the function with these values?</h4>
+<h3 id="functions-with-other-types-of-input">Functions with other types of input</h3>
+<p>Note that functions do not have to take single numbers as input. They can take vectors, matrices, data frames, or any other type of object, and they can also take character and logical data as well as numerical. For example, the <code>mean</code> function we used earlier took the vector <code>x &lt;- c(2, 3, 4, 5)</code> as input, which is a single vector with four numbers.</p>
+<h4 id="q6-write-a-function-that-takes-a-vector-of-words-as-input-and-outputs-the-number-of-characters-in-the-longest-word-hint-you-are-going-to-need-to-find-out-how-r-counts-the-number-of-characters-in-words-and-how-it-finds-the-maximum-value-in-a-vector-use-an-internet-search-engine">Q6. Write a function that takes a vector of words as input and outputs the number of characters in the longest word. Hint: you are going to need to find out how R counts the number of characters in words and how it finds the maximum value in a vector - use an internet search engine!</h4>
+<h2 id="loops">Loops</h2>
+<p>Imagine that you need to run the function <code>time_converter</code> on different numbers. You could type <code>time_converter</code> many different times, each time with a different number. But now imagine you had to type that thousands of times. Not fun.</p>
+<p>Fortunately, computers were built to perform same tasks over and over again many times. They do this using a construct called a <em>loop</em>. Although there are several types of loops, we are going to learn about the 'for loop'. It works this way:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## For loop example</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">seconds</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="m">2000</span><span class="p">,</span><span class="w"> </span><span class="m">3000</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">time_in_hours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">time_converter</span><span class="p">(</span><span class="n">number_of_seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seconds</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">time_in_hours</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The variable <code>seconds</code> only exists within the loop. The loop will run 3 times. The first time, <code>seconds</code> will take the first value from the vector <code>(1000, 2000, 3000)</code>, i.e., <code>1000</code>. R will run through the loop, computing <code>time_in_hours</code> and printing it. When R starts running through the loop the second time, <code>seconds</code> will have the value <code>2000</code>, and the previously calculated <code>time_in_hours</code> will have been forgotten.  R will run through the loop, computing <code>time_in_hours</code> and printing it. The third time, same thing again, but <code>seconds</code> will start with the value <code>3000</code>.</p>
+<h3 id="slightly-more-complex-loops">Slightly more complex loops</h3>
+<p>There are some interesting ways in which we can stretch our understanding of loops. First of all, it is important to recognise that the values that we are iterating over can be anything that goes in a vector. The vector can be defined outside the loop definition line:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## Character based loop values</span>
+<span class="n">greetings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Hey&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Aloha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Howdy&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="s">&quot;Yooooo!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Wassup&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;What&#39;s shakin?&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="s">&quot;yello!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Greetings&quot;</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;Dude, wake up!&quot;</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">word</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">greetings</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; - said the giggling frog&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">## Sequential loop values</span>
+<span class="n">my_favourite_numbers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">42</span><span class="p">,</span><span class="w"> </span><span class="m">3.14</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">69</span><span class="p">,</span><span class="w"> </span><span class="m">6.626e-34</span><span class="p">,</span><span class="w"> </span><span class="m">1024</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">2.718281828</span><span class="p">,</span><span class="w"> </span><span class="m">666</span><span class="p">,</span><span class="w"> </span><span class="m">1.61803398</span><span class="p">,</span><span class="w"> </span><span class="m">99</span><span class="p">)</span>
+
+<span class="c1"># set the cumulative sum at zero before the loop starts</span>
+<span class="n">cumulative_sum</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">my_favourite_numbers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># print the sentence</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;is my favourite number&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">))</span>
+
+<span class="w">  </span><span class="c1"># add favourite numbers, sequentially</span>
+<span class="w">  </span><span class="n">cumulative_sum</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cumulative_sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span>
+
+<span class="w">  </span><span class="c1"># print the cumulative sum</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;The sum of my favourite numbers is:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cumulative_sum</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">## Looping through the positions of each element of the vector (the index, or position)</span>
+<span class="n">foods</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;tempeh&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beyond&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beans&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tofu&quot;</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">foods</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">current_food</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">foods</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+<span class="w">  </span><span class="nf">message</span><span class="p">(</span><span class="s">&quot;At position &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; we have &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current_food</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="storing-loop-results">Storing loop results</h3>
+<p>You will often want to do more than just print the loop results. For example, you may want to keep them in a separate variable. Check the following example. What does <code>phrases</code> look like after the 4th iteration?</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## Vector to loop through</span>
+<span class="n">practical_attributes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;great&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;deeply distressing&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;very long&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amazeballs!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;informative&quot;</span><span class="p">)</span>
+
+<span class="c1">## Empty vector to store the loop results in</span>
+<span class="n">phrases</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">()</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">practical_attribute</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">practical_attributes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">phrase</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;This practical is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">practical_attribute</span><span class="p">)</span>
+<span class="w"> </span><span class="c1"># Add the loop result to end of the vector of results</span>
+<span class="w"> </span><span class="n">phrases</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">append</span><span class="p">(</span><span class="n">phrases</span><span class="p">,</span><span class="w"> </span><span class="n">phrase</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A different way of approaching a for loop is to loop through the positions of a vector, rather than the vector itself. In the following code, we also create a vector for the result with the same length as the vector that we are looping through. We then use the position to 'populate' it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## Vector to loop through</span>
+<span class="n">practical_attributes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;great&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;deeply distressing&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;very long&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amazeballs!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;informative&quot;</span><span class="p">)</span>
+
+<span class="c1">## Vector with empty elements (as long as practical_attributes)</span>
+<span class="n">phrases</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">practical_attributes</span><span class="p">))</span>
+
+<span class="c1">## Loop through the position rather than the vector</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">practical_attributes</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">## Create phrase, getting attribute from practical_attributes[i]</span>
+<span class="w">  </span><span class="n">phrase</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;This practical is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">practical_attributes</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
+
+<span class="w">  </span><span class="c1">## Add phrase to the right position of the results vector</span>
+<span class="w">  </span><span class="n">phrases</span><span class="p">[</span><span class="n">position</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">phrase</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>It is important to understand these two approaches with loops: looping through items vs. looping through positions. In some contexts it is easier to use the first approach; in other contexts the second is easier. Once you are comfortable with loops, have a go at the following tasks:</p>
+<h4 id="pen-and-paper-q7-consider-the-following-table-which-lists-the-genus-and-species-name-for-a-number-of-ant-species-present-in-great-britain-the-loop-counts-the-number-of-entries-where-the-genus-name-begins-with-given-letters-describe-in-your-own-words-what-the-loop-is-doing-at-each-iteration">Pen and paper Q7. Consider the following table, which lists the genus and species name for a number of ant species present in Great Britain. The loop counts the number of entries where the genus name begins with given letters. Describe in your own words what the loop is doing at each iteration.</h4>
+<p><img alt="ant table" src="../../img/ant_table.png" title="ant_table" /></p>
+<div class="highlight"><pre><span></span><code>letters &lt;- c(&quot;L&quot;, &quot;T&quot;, &quot;A&quot;, &quot;F&quot;)
+
+for (letter in letters){
+ begins_with &lt;- paste(&quot;^&quot;, letter, sep = &quot;&quot;)
+ matches &lt;- grep(pattern = begins_with, x = ant_table$genus)
+ print(paste(length(matches), &quot;begin with&quot;, letter))
+}
+</code></pre></div>
+<h4 id="q8-write-a-loop-that-iterates-over-the-colours-red-green-blue-yellow-orange-purple-pink-and-prints-out-the-position-ie-the-position-of-the-colour-in-the-vector-and-the-colour-itself-this-should-be-done-in-human-readable-format-ie-the-colour-red-is-in-position-1-in-the-vector-the-colour-blue-is-in-position-2-in-the-vector-and-so-on-make-sure-to-indent-the-code-appropriately-between-the-curly-brackets">Q8. Write a loop that iterates over the colours red, green, blue, yellow, orange, purple, pink and prints out the position (i.e. the position of the colour in the vector) and the colour itself. This should be done in human-readable format (i.e. "the colour red is in position 1 in the vector", "the colour blue is in position 2 in the vector", and so on). Make sure to indent the code appropriately between the curly brackets.</h4>
+<h3 id="using-loops">Using loops</h3>
+<p>For the following exercice, imagine that instead of buying a coffee, you deposit the £2.50 you would have spent into a savings account. The account has an annual interest rate of 5%, which is deposited into the account. You do not take any money out of the account for 20 years.</p>
+<h4 id="q9-use-a-for-loop-to-calculate-how-much-money-there-is-in-the-account-after-20-years">Q9. Use a <code>for</code> loop to calculate how much money there is in the account after 20 years.</h4>
+<h4 id="q10-make-a-plot-of-the-amount-of-money-in-the-account-per-year-hint-if-you-have-not-done-so-yet-you-will-have-to-create-a-vector-to-store-each-years-amount">Q10. Make a plot of the amount of money in the account per year. Hint: if you have not done so yet, you will have to create a vector to store each year's amount.</h4>
+<p>In the following exercise, we will simulate the size of a population given a reproduction rate that changes every year.</p>
+<h4 id="q11-write-a-loop-that-calculates-the-population-size-depending-on-the-reproduction-rate-over-a-period-of-20-years-store-the-population-value-for-each-iteration-of-the-loop-in-a-separate-vector">Q11. Write a loop that calculates the population size depending on the reproduction rate over a period of 20 years. Store the population value for each iteration of the loop in a separate vector.</h4>
+<ul>
+<li>Use a starting population size of 1000.</li>
+<li>Every year,</li>
+<li>obtain a random reproduction rate (e.g., <code>reproduction_rate &lt;- rnorm(n = 1, mean = 1, sd = 0.4)</code>.</li>
+<li>Update the population size value accordingly.</li>
+<li>Print a summary of what happened.</li>
+<li>Store each year's population in an external vector.</li>
+<li>Once you have all the population sizes, plot them.</li>
+</ul>
+<h3 id="nested-loops">Nested Loops</h3>
+<p>Another important way of extending loops is to consider nested loops - in other words, loops within other loops! Have a look at the following code:</p>
+<div class="highlight"><pre><span></span><code><span class="n">coffee</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;latte&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cappuccino&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;flat white&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cortado&quot;</span><span class="p">)</span>
+<span class="n">cafes</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Infusion&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ground&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Sugar Cube&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Foxcroft &amp; Ginger&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Sweet&quot;</span><span class="p">)</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">drink</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">coffees</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;I&#39;d like a&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">drink</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;... Where can I go?&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">the_place</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">cafes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;You can go to&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">the_place</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;to have a&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">drink</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Here we have one loop (with position <code>the_place</code>) nested within another loop (with position <code>drink</code>). We have also defined the values that <code>the_place</code> and <code>drink</code> can take. With a pen and paper, determine what is the 1st line printed, and then what is the 10th line printed? Evaluate this code and try to make sense of the output. Fiddle around with the different elements of this code until you are comfortable with nested loops. Warning - loops require your computer to perform many operations, and as such it is quite easy to crash R using loops. A simple block of code evaluated 100,000 times amounts to quite a big job. If you want to force R to exit a loop part way through, simply press 'Esc' (or control-C). Nested loops are particularly hazardous!</p>
+<h4 id="q12-a-create-a-nested-loop-the-outer-loop-should-iterate-over-the-words-angry-lazy-and-happy-the-inner-loop-should-iterate-over-the-words-birds-dogs-and-horses-the-code-inside-the-inner-loop-should-print-out-a-vector-containing-the-values-of-both-loops-for-example-angry-and-birds-in-the-first-instance">Q12-A. Create a nested loop. The outer loop should iterate over the words "Angry", "Lazy", and "Happy". The inner loop should iterate over the words "birds", "dogs", and "horses". The code inside the inner loop should print out a vector containing the values of both loops (for example "Angry" and "birds" in the first instance).</h4>
+<h4 id="q12-b-look-again-at-the-code-you-wrote-in-q12-a-did-you-sufficiently-indent-your-code-like-in-the-example-of-a-nested-loop-above-so-that-it-is-easy-to-see-which-lines-of-code-are-executed-at-which-point-of-the-different-loops-if-not-do-it-now-and-continue-doing-it-for-the-next-questions-as-well">Q12-B. Look again at the code you wrote in Q12-A. Did you sufficiently indent your code (like in the example of a nested loop above), so that it is easy to see which lines of code are executed at which point of the different loops? If not, DO IT NOW! And continue doing it for the next questions as well.</h4>
+<h4 id="q13-write-a-third-degree-nested-loop-ie-a-loop-within-a-loop-within-a-loop-be-careful-not-to-loop-over-too-many-values-or-you-will-crash-r">Q13. Write a third-degree nested loop (i.e. a loop within a loop within a loop). Be careful not to loop over too many values or you will crash R!</h4>
+<p>(if you're short of ideas, you could for example add <code>practical_attributes</code> qualifiers to Q12...)</p>
+<h3 id="using-loops-to-reformat-a-data-set">Using loops to reformat a data set</h3>
+<p>Loops are particularly useful to reformat data sets. By looping through all of the fields of a particular data set and at each iteration saving the relevant entry into a new data structure, it is possible to convert from one data format into another.</p>
+<p>The data set that we will use in this example is typical of the sort of data that you might be faced with in the future. Load the data by running the following line of code:</p>
+<div class="highlight"><pre><span></span><code><span class="n">helianthus_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;UPDATE_ME/HelianthusData_num.txt&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
+</code></pre></div>
+<p>Each row in this data set represents a different strain of <em>Helianthus annuus</em> (sunflowers), grown under controlled conditions. The first column tells us the Strain (these are numbered from 1 to 5). The remaining columns describe the number of plants found in the study area at six different points in time. For example, looking at the first row, we can see that strain 1 started out with 12 plants in the first time point and ended up with 57 plants in the last time point.</p>
+<p>We want to get this data into a new format - sometimes called long format - in which we have a matrix of three columns; the first column describes the strain, the second column describes the time point, and the third column describes the number of plants observed. It turns out that researchers often need to do this! For example, plotting using <code>ggplot</code> (and many analysis packages) requires long format. The first few lines of this new data structure should look like this:</p>
+<table>
+<thead>
+<tr>
+<th>strain</th>
+<th>time</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>12</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>33</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>71</td>
+</tr>
+<tr>
+<td>1</td>
+<td>3</td>
+<td>61</td>
+</tr>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>73</td>
+</tr>
+<tr>
+<td>1</td>
+<td>5</td>
+<td>57</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>27</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<p>We can make the transition from the wide format of <code>helianthus_data</code> to the long format described above using a nested loop. But first, let us create an empty matrix, which we will eventually fill with our new values.</p>
+<h4 id="q14-a-create-an-empty-matrix-called-long_data-this-matrix-must-have-3-columns-and-30-rows-the-number-30-comes-from-the-fact-that-we-have-five-strains-at-six-time-points-each-name-the-columns-cstrain-time-count">Q14-A. Create an empty matrix, called <code>long_data</code>. This matrix must have 3 columns and 30 rows (the number 30 comes from the fact that we have five strains at six time points each). Name the columns <code>c("strain", "time", "count")</code>.</h4>
+<p>With this empty matrix created, we can move on to the next part of the problem - populating it with values. We want to look at each of the elements of helianthus_data one after the other, using a nested loop. The basic structure of this nested loop is as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Loop through all rows of helianthus_data</span>
+<span class="nf">nrow</span><span class="p">(</span><span class="n">helianthus_data</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">my_rows</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Loop through all columns of helianthus_data except the first</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">my_col</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1"># This is where the main code goes (populating long_data with values).</span>
+
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Here we are using loops to go through each of the rows of the matrix <code>helianthus_data</code>, and for each row we are going through columns 2 to 7 (as these are the columns that contain relevant data). At any point in the two loops, the value that we are focusing on is given by <code>helianthus_data[my_rows, my_col]</code>.</p>
+<p>Hopefully you can already see that these are the exact values that we want to drop into the third column of our matrix <code>long_data</code>. However, we are presented with a problem - how do we drop these values one after the other into the right place in the matrix <code>long_data</code>? We cannot use the index <code>my_rows</code> to help us, as this only goes through values 1 to 5. Similarly, we cannot use the index <code>my_col</code>, as this only goes through values 2 to 7. What we really need is a new index that goes all the way from 1 to 30, irrespectively of the row or column that we are focusing on.</p>
+<h4 id="q14-b-change-the-for-loop-above-to-include-a-variable-my_position-this-variable-should-be-defined-as-being-0-before-the-loop-starts-at-every-iteration-of-the-inner-loop-you-should-add-1-to-it-what-are-the-values-of-my_rows-and-my_col-when-my_position-is-3-add-a-line-to-check-the-positions-each-time-through">Q14-B. Change the for loop above to include a variable <code>my_position</code>. This variable should be defined as being 0 before the loop starts. At every iteration of the inner loop, you should add 1 to it. What are the values of <code>my_rows</code> and <code>my_col</code> when <code>my_position</code> is 3? Add a line to check the positions each time through.</h4>
+<p>It should look something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># my_position defined as 0 before the loop starts</span>
+<span class="n">my_position</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+
+<span class="c1"># Loop through all rows</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">my_row</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Loop through all columns except the first</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">my_col</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">## Change my_position here:</span>
+<span class="w">    </span><span class="c1"># make my_position equal to my_position plus one</span>
+
+<span class="w">    </span><span class="c1"># Print all the indices here to check that you are doing the right thing</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now that we have three indices - one going through the rows of <code>helianthus_data</code>, one going through the columns of <code>helianthus_data</code>, and one simply going from 1 to 30 - we have all the ingredients we need to populate the matrix <code>long_data</code>. The code we need at each iteration of the loop is the following:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get Count</span>
+<span class="n">long_data</span><span class="p">[</span><span class="n">my_position</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">helianthus_data</span><span class="p">[</span><span class="n">my_row</span><span class="p">,</span><span class="w"> </span><span class="n">my_col</span><span class="p">]</span>
+</code></pre></div>
+<p>This is fairly straightforward. We also want to drop the time point in the second column of <code>long_data</code>. Although we do not have a vector describing each of the time points, in fact the timings are very simply given by 'my_col minus two'. For example, if we are looking at the fourth column then we are looking at the second time point. Therefore, we need the following line of code to extract the timings:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get Time</span>
+<span class="n">long_data</span><span class="p">[</span><span class="n">my_position</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">my_col</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+<p>Finally, we want to drop the strain type into the first column of <code>long_data</code>. The strain type is given by the first element in every row, meaning it is given by <code>helianthus_data[my_rows, 1]</code>. Therefore, we need the following line of code to extract the strain types:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get Strain</span>
+<span class="n">long_data</span><span class="p">[</span><span class="n">my_position</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">helianthus_data</span><span class="p">[</span><span class="n">my_rows</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
+</code></pre></div>
+<h4 id="q14-c-bring-all-of-this-together-to-finish-the-for-loop-and-run-it">Q14-C. Bring all of this together to finish the for loop, and run it!</h4>
+<p>To check what you've done, you can print the start and end of long_data:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">long_data</span><span class="p">)</span>
+<span class="nf">tail</span><span class="p">(</span><span class="n">long_data</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="q14-d-what-can-you-do-to-reduce-the-risks-of-things-going-wrong-if-there-is-a-chance-you-may-want-to-rerun-this-loop-on-a-similar-but-slightly-different-dataset">Q14-D. What can you do to reduce the risks of things going wrong if there is a chance you may want to rerun this loop on a similar but slightly different dataset?</h4>
+<h2 id="hacker-section-working-with-dna-data">Hacker section: Working with DNA data</h2>
+<h4 id="bonus-q15-a-write-a-function-that-converts-a-short-dna-sequence-of-15-bases-eg-acctgtcatcatccc-to-rna-and-splits-the-string-into-codon-triplets-you-will-need-to">Bonus Q15-A. Write a function that converts a short DNA sequence of 15 bases (e.g. "ACCTGTCATCATCCC") to RNA and splits the string into codon triplets. You will need to:</h4>
+<ul>
+<li>load the data into R: <code>dna_string &lt;- scan("UPDATE ME/ sequence.txt", what = character())</code></li>
+<li>replace T with U  (thymine with uracil to convert DNA to RNA)</li>
+<li>use <code>substring()</code> to split the sequence into triplets and <code>seq()</code> within <code>substring()</code></li>
+<li>return the RNA triplets string</li>
+</ul>
+<p>Note <code>substring()</code> takes a 'first' and 'last' argument. The 'first' would be a sequence indicating where the beginnings of your triplets are. The 'last' argument would be a sequence indicating where the ends of your triplets are.  In <code>seq()</code> you will also indicate you want triplets.</p>
+<p>As an example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dna_string</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;AAATTT&quot;</span><span class="p">)</span>
+<span class="nf">substring</span><span class="p">(</span><span class="n">dna_string</span><span class="p">,</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">))</span>
+</code></pre></div>
+<h4 id="bonus-q15-b-once-you-have-created-the-function-see-if-you-can-modify-it-to-work-for-a-sequence-with-any-number-of-characters-tip-you-can-use-nchar-to-create-a-variable-such-as-num_characters">Bonus Q15-B. Once you have created the function, see if you can modify it to work for a sequence with any number of characters. Tip: you can use <code>nchar()</code> to create a variable such as <code>num_characters</code>.</h4>
+<h4 id="bonus-q16-write-a-function-to-obtain-the-reverse-complement-of-a-dna-sequence">Bonus Q16. Write a function to obtain the reverse-complement of a DNA sequence.</h4>
+<p>You can use this sequence (copy and paste it into R): <code>"ATTACGACGCGATTCCCGGTTAATCGAATTCCCA"</code>. As an example, the reverse-complement of ATGC is GCAT.</p>
+<p>The tricky part here is reversing a single string of characters. Search around for <code>strsplit</code>.  You will need to:</p>
+<ul>
+<li>replace bases with their complement (you can use <code>gsub</code>, judiciously replacing uppercase characters with lowercase characters (or vice-versa)).</li>
+<li>split the string of DNA bases into separate characters with <code>strsplit</code>. Unfortunately, <code>strsplit</code> confusingly returns a list, so you will need to use <code>unlist()</code> to obtain a string again.</li>
+<li>reverse the sequence.</li>
+<li>remove the spaces to get your single string of DNA bases (look into the help files for the <code>paste()</code> function).</li>
+<li>return the reverse-complement sequence.</li>
+</ul>
+<h4 id="mastermind-q17-translate-your-triplet-string-from-q15-into-amino-acids">Mastermind Q17. Translate your triplet string from Q15 into amino acids.</h4>
+<p>Note: depending on your method, you may not need to convert it to RNA first.  You can use a codon-to-amino-acid table and code the translation yourself. Your solution could include a function calling a function. Alternatively, you could search around and load a specific package for the manipulation of biological sequences.</p>
+<h2 id="bringing-it-all-together">Bringing it all together</h2>
+<p>Well done for making it this far! Now try to bring all of your knowledge together. Have another look over your previous notes and make sure these ideas are still fresh in your mind. Have a go at writing your own scripts, preferably combining a number of different concepts (for example, you could try making a function that acts on a matrix and then using this function within a loop). Another good idea would be to come up with a problem that you want to solve (either for fun or for other coursework) and then write a function that solves it.</p>
+<p>Many of the ideas presented in this and the last session are designed to challenge you. Do not expect to understand them from a single read through the material. Rather, you will have to play around with many different examples and applications before the penny drops completely. On the plus side, structures such as loops and functions are common to almost all programming languages, and so once you understand these concepts the world of programming is your oyster!</p>
 
 
 
