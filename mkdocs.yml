@@ -34,7 +34,7 @@ nav:
   - Home: 
     - index.md
   - Practicals:
-    - Practical 0: practicals/pt-0.md
     - Practical 1: practicals/pt-1.md
     - Practical 2: practicals/pt-2.md
     - Practical 3: practicals/pt-3.md
+    - Practical 4: practicals/pt-4.md
