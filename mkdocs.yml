@@ -33,6 +33,7 @@ extra_css:
 nav:
   - Home: 
     - index.md
+    - Getting Started: RStudioCloud.md
   - Practicals:
     - Practical 1: practicals/pt-1.md
     - Practical 2: practicals/pt-2.md
