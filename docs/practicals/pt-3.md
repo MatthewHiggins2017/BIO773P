@@ -256,7 +256,7 @@ For the following exercice, imagine that instead of buying a coffee, you deposit
 
 #### Q9. Use a `for` loop to calculate how much money there is in the account after 20 years.
 
-#### Q10. Make a plot of the amount of money in the account per year. Hint: if you have not done so yet, you will have to create a vector to store each year's amount.
+#### Q10. Create a plot showing the amount of money in the account for each year. Hint: If you have not already done so, you will need to create a vector to store the account balance for each year. You can use the base R function `plot()`, or, if you are feeling adventurous, install the "ggplot2" package and use that! See [https://ggplot2.tidyverse.org/articles/ggplot2.html](https://ggplot2.tidyverse.org/articles/ggplot2.html) for more information.
 
 In the following exercise, we will simulate the size of a population given a reproduction rate that changes every year.
 
