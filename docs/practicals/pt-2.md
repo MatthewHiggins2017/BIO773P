@@ -51,7 +51,7 @@ Experiment with `grep()` and `gsub()` until you are confident at using them. The
 
 #### Q1. How could you use regular expressions to find the only element in the vector `names_ids_fixed` that contains a lowercase "q"? What is the position of this element in the vector?
 
-#### Q2. You want to import the `names_ids_fixed` data into excel, but are having problems due to the spaces between the words (a common problem). How could you use `gsub()` to replace each space with an underscore `_` `_`?
+#### Q2. You want to import the `names_ids_fixed` data into excel, but are having problems due to the spaces between the words (a common problem). How could you use `gsub()` to replace each space with an underscore `_`?
 
 ### Using "fuzzy" searching
 
