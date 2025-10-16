@@ -700,6 +700,112 @@ CTAATGGATTTTTGAAT    -&gt; NOT a valid ORF
 atgctaaactaa         -&gt; Valid ORF
 TCGATTAA             -&gt; NOT a valid ORF
 </code></pre></div></p>
+<hr />
+<h2 id="q7-palindromic-sequences">Q7: Palindromic Sequences</h2>
+<p><strong>Question:</strong> Write a function that assesses whether a given word or phrase is a palindrome. Palindromes are arrangements of words or letters which read the same way whether you read them backwards or forwards, such as the phrase "never odd or even" (if you remove the spaces). In molecular biology, many restriction enzyme sites are palindromic.</p>
+<p><strong>Hint:</strong> Before starting to code, think about the steps needed to judge if something is a mirror palindrome. Write these steps as comments first, then implement them. Use easy test cases where you know the answer.</p>
+<p><strong>Answer:</strong></p>
+<h3 id="step-1-planning-as-comments">Step 1: Planning (as comments)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Steps to check if a sequence is a palindrome:</span>
+<span class="c1"># 1. Convert the input to uppercase (for consistency)</span>
+<span class="c1"># 2. Remove spaces and special characters (for phrase palindromes)</span>
+<span class="c1"># 3. Split the string into individual characters</span>
+<span class="c1"># 4. Reverse the order of characters</span>
+<span class="c1"># 5. Compare the original with the reversed version</span>
+<span class="c1"># 6. Return TRUE if they match, FALSE otherwise</span>
+</code></pre></div>
+<h3 id="step-2-one-off-code-testing-the-logic">Step 2: One-off code (testing the logic)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test with a simple case</span>
+<span class="n">test_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;GAATTC&quot;</span><span class="w">  </span><span class="c1"># EcoRI restriction site - palindromic</span>
+
+<span class="c1"># Convert to uppercase</span>
+<span class="n">test_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">test_word</span><span class="p">)</span>
+
+<span class="c1"># Remove spaces (not needed for this case, but good practice)</span>
+<span class="n">test_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">test_word</span><span class="p">)</span>
+
+<span class="c1"># Split into individual characters</span>
+<span class="n">chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">test_word</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="n">chars</span>
+<span class="c1"># Result: &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;C&quot;</span>
+
+<span class="c1"># Reverse the characters</span>
+<span class="n">reversed_chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rev</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+<span class="n">reversed_chars</span>
+<span class="c1"># Result: &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;G&quot;</span>
+
+<span class="c1"># Join back into a string</span>
+<span class="n">reversed_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">reversed_chars</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="n">reversed_word</span>
+<span class="c1"># Result: &quot;CTTAAG&quot;</span>
+
+<span class="c1"># Compare</span>
+<span class="n">test_word</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reversed_word</span>
+<span class="c1"># Result: FALSE (GAATTC is not the same as CTTAAG)</span>
+
+<span class="c1"># Let&#39;s test with a true palindrome</span>
+<span class="n">test_word2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;GAATTC&quot;</span>
+<span class="c1"># Actually, for DNA palindrome, we need reverse complement!</span>
+<span class="c1"># But for simple text palindrome, let&#39;s use:</span>
+<span class="n">test_word2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;racecar&quot;</span>
+<span class="n">test_word2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">test_word2</span><span class="p">)</span>
+<span class="n">chars2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">test_word2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="n">reversed2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">rev</span><span class="p">(</span><span class="n">chars2</span><span class="p">),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="n">test_word2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reversed2</span>
+<span class="c1"># Result: TRUE</span>
+</code></pre></div>
+<h3 id="step-3-create-the-final-function">Step 3: Create the final Function</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Function to check if a word or phrase is a palindrome</span>
+<span class="n">is_palindrome</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Convert to uppercase for case-insensitive comparison</span>
+<span class="w">  </span><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Remove spaces and non-alphanumeric characters</span>
+<span class="w">  </span><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;[^A-Z0-9]&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Split into individual characters</span>
+<span class="w">  </span><span class="n">chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+
+<span class="w">  </span><span class="c1"># Reverse the characters</span>
+<span class="w">  </span><span class="n">reversed_chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rev</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Join back into a string</span>
+<span class="w">  </span><span class="n">reversed_text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">reversed_chars</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Compare original with reversed</span>
+<span class="w">  </span><span class="n">is_same</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reversed_text</span><span class="p">)</span>
+
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">is_same</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Test the function</span>
+<span class="n">test_cases</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+<span class="w">  </span><span class="s">&quot;racecar&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;hello&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;A man a plan a canal Panama&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;never odd or even&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;GAATTC&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;palindrome&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;madam&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;step on no pets&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Test each case</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">test_cases</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">is_palindrome</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IS a palindrome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NOT a palindrome&quot;</span><span class="p">)))</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Output:</strong>
+<div class="highlight"><pre><span></span><code>[1] &quot;racecar -&gt; IS a palindrome&quot;
+[1] &quot;hello -&gt; NOT a palindrome&quot;
+[1] &quot;A man a plan a canal Panama -&gt; IS a palindrome&quot;
+[1] &quot;never odd or even -&gt; IS a palindrome&quot;
+[1] &quot;GAATTC -&gt; NOT a palindrome&quot;
+[1] &quot;palindrome -&gt; NOT a palindrome&quot;
+[1] &quot;madam -&gt; IS a palindrome&quot;
+[1] &quot;step on no pets -&gt; IS a palindrome&quot;
+</code></pre></div></p>
 
 
 
