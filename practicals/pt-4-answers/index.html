@@ -592,25 +592,11 @@
 <p><strong>Question:</strong> Make the loop from Intro Q4 store the results to a separate vector called <code>my_square_roots</code> instead of just printing the results. What's the value of the 3rd iteration? What is the sum of the square roots of the numbers 16 to 49?</p>
 <p><strong>Answer:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Initialize an empty vector</span>
-<span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">()</span>
+<span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">()</span>
 
 <span class="c1"># Loop through numbers 16 to 49 and store square roots</span>
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">my_square_roots</span><span class="p">,</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-<span class="p">}</span>
-
-<span class="c1"># Alternative (more efficient) approach - pre-allocate vector</span>
-<span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">))</span>
-<span class="n">counter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
-<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">my_square_roots</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="w">  </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
-<span class="p">}</span>
-
-<span class="c1"># Even better approach - pre-allocate with direct indexing</span>
-<span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="m">34</span><span class="p">)</span><span class="w">  </span><span class="c1"># 34 numbers from 16 to 49</span>
-<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">my_square_roots</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">15</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">append</span><span class="p">(</span><span class="n">my_square_roots</span><span class="p">,</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Answers to specific questions:</strong></p>
@@ -625,9 +611,8 @@ The 3rd iteration corresponds to the square root of 18, which is approximately <
 <li>
 <p><strong>Sum of all square roots:</strong>
 <div class="highlight"><pre><span></span><code><span class="nf">sum</span><span class="p">(</span><span class="n">my_square_roots</span><span class="p">)</span>
-<span class="c1"># Result: 192.613</span>
-</code></pre></div>
-The sum of the square roots of numbers 16 to 49 is approximately <strong>192.6133</strong> (or more precisely, 192.6132662).</p>
+<span class="c1"># Result: 191.4955</span>
+</code></pre></div></p>
 </li>
 </ol>
 <p><strong>Verification:</strong>
