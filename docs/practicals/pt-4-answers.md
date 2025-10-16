@@ -43,23 +43,9 @@ subset_data <- Indometh[Indometh$conc > 1 & Indometh$conc < 2, ]
 # Calculate the mean concentration
 mean_concentration <- mean(subset_data$conc)
 mean_concentration
-# Result: 1.426667 (approximately)
+# Result: 1.355
 ```
 
-The average concentration for rows where concentration is strictly between 1 and 2 is approximately **1.427** (or more precisely, 1.426667).
-
-Alternative approaches:
-```r
-# Using subset() function
-subset_data <- subset(Indometh, conc > 1 & conc < 2)
-mean(subset_data$conc)
-
-# Using dplyr (if available)
-library(dplyr)
-Indometh %>% 
-  filter(conc > 1 & conc < 2) %>% 
-  summarise(mean_conc = mean(conc))
-```
 
 ---
 
@@ -161,26 +147,13 @@ for (i in 16:49) {
 
 ```r
 # Initialize an empty vector
-my_square_roots <- numeric()
+my_square_roots <- c()
 
 # Loop through numbers 16 to 49 and store square roots
 for (i in 16:49) {
-  my_square_roots <- c(my_square_roots, sqrt(i))
+  my_square_roots <- append(my_square_roots, sqrt(i))
 }
 
-# Alternative (more efficient) approach - pre-allocate vector
-my_square_roots <- numeric(length(16:49))
-counter <- 1
-for (i in 16:49) {
-  my_square_roots[counter] <- sqrt(i)
-  counter <- counter + 1
-}
-
-# Even better approach - pre-allocate with direct indexing
-my_square_roots <- numeric(34)  # 34 numbers from 16 to 49
-for (i in 16:49) {
-  my_square_roots[i - 15] <- sqrt(i)
-}
 ```
 
 **Answers to specific questions:**
@@ -195,9 +168,8 @@ The 3rd iteration corresponds to the square root of 18, which is approximately *
 2. **Sum of all square roots:**
 ```r
 sum(my_square_roots)
-# Result: 192.613
+# Result: 191.4955
 ```
-The sum of the square roots of numbers 16 to 49 is approximately **192.6133** (or more precisely, 192.6132662).
 
 **Verification:**
 ```r
@@ -392,5 +364,31 @@ for (test in test_cases) {
 [1] "step on no pets -> IS a palindrome"
 ```
 
+## Q8: Species names
+
+```r
+
+butterfly_sam_url <- "https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_sample.csv"
+butterfly_sample  <- read.csv(file = butterfly_sam_url, header = TRUE)
+
+butterfly_ref_url   <- "https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_reference.csv"
+butterfly_reference <- read.csv(file = butterfly_ref_url, header = TRUE)
+
+# Update both names to uppercase() and replace any space with hyphen 
+butterfly_sample$Species <- toupper(butterfly_sample$Species)
+butterfly_sample$Species <- gsub(" ", "-", butterfly_sample$Species)
 
 
+butterfly_reference$Common.name <- toupper(butterfly_reference$Common.name)
+butterfly_reference$Common.name <- gsub(" ", "-", butterfly_reference$Common.name)
+
+# Perform a dataframe merge to add the latin name to the sample column 
+butterfly_sample <- merge(
+  butterfly_sample,
+  butterfly_reference[, c("Common.name", "Latin.name")],
+  by.x = "Species",
+  by.y = "Common.name",
+  all.x = TRUE
+)
+
+```
