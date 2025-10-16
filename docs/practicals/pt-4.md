@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This session will be a recap of what we saw in [practical 1](../practical1) and [practical 2](../practical2). You can also use this session to revisit the parts of the last practicals that are still not entirely clear.
+This session will be a recap of what we saw in practicals 1, 2 and 3. You can also use this session to revisit the parts of the last practicals that are still not entirely clear.
 **REMEMBER** The important thing is that you understand what you are doing. It is better to understand well a few exercises than finishing all exercises without entirely knowing what is going on.
 
 ## Recap questions
