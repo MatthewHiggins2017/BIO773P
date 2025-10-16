@@ -515,9 +515,8 @@
 <span class="c1"># Calculate the mean concentration</span>
 <span class="n">mean_concentration</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">subset_data</span><span class="o">$</span><span class="n">conc</span><span class="p">)</span>
 <span class="n">mean_concentration</span>
-<span class="c1"># Result: 1.426667 (approximately)</span>
+<span class="c1"># Result: 1.355</span>
 </code></pre></div>
-<p>The average concentration for rows where concentration is strictly between 1 and 2 is approximately <strong>1.427</strong> (or more precisely, 1.426667).</p>
 <p>Alternative approaches:
 <div class="highlight"><pre><span></span><code><span class="c1"># Using subset() function</span>
 <span class="n">subset_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">Indometh</span><span class="p">,</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
