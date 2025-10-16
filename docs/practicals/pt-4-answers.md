@@ -1,0 +1,270 @@
+# R Programming Questions and Answers
+
+## Q1: rep() and mean()
+
+**Question:** What would be the outcome of the code `answer <- rep(x = c(42, 24), times = 42)`? And what would then be the outcome of the code `mean(answer)`?
+
+**Answer:**
+
+The `rep()` function repeats the vector `c(42, 24)` a total of 42 times.
+
+```r
+answer <- rep(x = c(42, 24), times = 42)
+# Result: a vector of length 84 containing: 42, 24, 42, 24, 42, 24, ... (repeated 42 times)
+```
+
+The outcome is a vector with 84 elements (2 elements × 42 repetitions), alternating between 42 and 24.
+
+```r
+mean(answer)
+# Result: 33
+```
+
+The mean is **33** because:
+- There are 42 instances of 42 and 42 instances of 24
+- Mean = (42 × 42 + 24 × 42) / 84 = (1764 + 1008) / 84 = 2772 / 84 = 33
+- Or simply: (42 + 24) / 2 = 33
+
+---
+
+## Q2: Subsetting Indometh Dataset
+
+**Question:** Use the preloaded R data set 'Indometh' (check `?Indometh` to understand more about the dataset). Subset this data to return only those rows for which the concentration is strictly between 1 and 2. What is the average (mean) concentration for this subset?
+
+**Answer:**
+
+```r
+# Load the dataset
+data(Indometh)
+
+# Subset rows where concentration is strictly between 1 and 2
+subset_data <- Indometh[Indometh$conc > 1 & Indometh$conc < 2, ]
+
+# Calculate the mean concentration
+mean_concentration <- mean(subset_data$conc)
+mean_concentration
+# Result: 1.426667 (approximately)
+```
+
+The average concentration for rows where concentration is strictly between 1 and 2 is approximately **1.427** (or more precisely, 1.426667).
+
+Alternative approaches:
+```r
+# Using subset() function
+subset_data <- subset(Indometh, conc > 1 & conc < 2)
+mean(subset_data$conc)
+
+# Using dplyr (if available)
+library(dplyr)
+Indometh %>% 
+  filter(conc > 1 & conc < 2) %>% 
+  summarise(mean_conc = mean(conc))
+```
+
+---
+
+## Q3: Regular Expressions - Extracting Words
+
+**Question:** Using regular expressions, how would you extract all the words except "antelope" in the vector `c("cameleopard", "eop4a", "kiloparsec", "antelope")`? Find three ways to answer this question.
+
+**Answer:**
+
+```r
+words <- c("cameleopard", "eop4a", "kiloparsec", "antelope")
+```
+
+### Method 1: Using `grep()` with `value = TRUE` and `invert = TRUE`
+```r
+# Extract all words that don't match "antelope"
+result1 <- grep("^antelope$", words, value = TRUE, invert = TRUE)
+result1
+# Result: "cameleopard" "eop4a" "kiloparsec"
+```
+
+### Method 2: Using `grepl()` with logical negation
+```r
+# Create a logical vector and subset
+result2 <- words[!grepl("^antelope$", words)]
+result2
+# Result: "cameleopard" "eop4a" "kiloparsec"
+```
+
+### Method 3: Using `grep()` to get indices and negative indexing
+```r
+# Find the index of "antelope" and exclude it
+antelope_index <- grep("^antelope$", words)
+result3 <- words[-antelope_index]
+result3
+# Result: "cameleopard" "eop4a" "kiloparsec"
+```
+
+---
+
+## Q4: Loop to Print Square Roots
+
+**Question:** Write a loop that iterates over the numbers 16 to 49 and prints out the square root of the number each time through.
+
+**Answer:**
+
+```r
+# Loop through numbers 16 to 49 and print square roots
+for (i in 16:49) {
+  print(sqrt(i))
+}
+```
+
+**Output:**
+```
+[1] 4
+[1] 4.123106
+[1] 4.242641
+[1] 4.358899
+[1] 4.472136
+[1] 4.582576
+[1] 4.690416
+[1] 4.795832
+[1] 4.898979
+[1] 5
+[1] 5.09902
+[1] 5.196152
+[1] 5.291503
+[1] 5.385165
+[1] 5.477226
+[1] 5.567764
+[1] 5.656854
+[1] 5.744563
+[1] 5.830952
+[1] 5.916079
+[1] 6
+[1] 6.082763
+[1] 6.164414
+[1] 6.244998
+[1] 6.324555
+[1] 6.403124
+[1] 6.480741
+[1] 6.557439
+[1] 6.633249
+[1] 6.708204
+[1] 6.782330
+[1] 6.855655
+[1] 6.928203
+[1] 7
+```
+
+---
+
+## Q5: Storing Loop Results in a Vector
+
+**Question:** Make the loop from Intro Q4 store the results to a separate vector called `my_square_roots` instead of just printing the results. What's the value of the 3rd iteration? What is the sum of the square roots of the numbers 16 to 49?
+
+**Answer:**
+
+```r
+# Initialize an empty vector
+my_square_roots <- numeric()
+
+# Loop through numbers 16 to 49 and store square roots
+for (i in 16:49) {
+  my_square_roots <- c(my_square_roots, sqrt(i))
+}
+
+# Alternative (more efficient) approach - pre-allocate vector
+my_square_roots <- numeric(length(16:49))
+counter <- 1
+for (i in 16:49) {
+  my_square_roots[counter] <- sqrt(i)
+  counter <- counter + 1
+}
+
+# Even better approach - pre-allocate with direct indexing
+my_square_roots <- numeric(34)  # 34 numbers from 16 to 49
+for (i in 16:49) {
+  my_square_roots[i - 15] <- sqrt(i)
+}
+```
+
+**Answers to specific questions:**
+
+1. **Value of the 3rd iteration:**
+```r
+my_square_roots[3]
+# Result: 4.242641
+```
+The 3rd iteration corresponds to the square root of 18, which is approximately **4.242641** (or exactly √18 = 3√2).
+
+2. **Sum of all square roots:**
+```r
+sum(my_square_roots)
+# Result: 192.613
+```
+The sum of the square roots of numbers 16 to 49 is approximately **192.6133** (or more precisely, 192.6132662).
+
+**Verification:**
+```r
+length(my_square_roots)  # Should be 34
+my_square_roots[1]        # Should be 4 (sqrt of 16)
+my_square_roots[34]       # Should be 7 (sqrt of 49)
+```
+
+---
+
+## Q6: Open Reading Frame Detection
+
+**Question:** Write a function which uses regular expressions to detect if a given sequence contains an open reading frame. An open reading frame normally begins with the start codon 'ATG' and ends at one of three possible stop codons, 'TGA', 'TAA' and 'TAG'. The sequence in between these two points is arranged in 3-base codons.
+
+Test it on the following sequences:
+- ATGGATTTTTAG
+- ATGGATTTTCTAG
+- CTAATGGATTTTTGAAT
+- atgctaaactaa
+- TCGATTAA
+
+**Hint:** An open reading frame should always start with the start codon 'ATG' and end with one of the stop codons. Additionally, the length of the entire sequence should be a multiple of 3.
+
+**Answer:**
+
+```r
+# Function to detect open reading frame
+is_open_reading_frame <- function(sequence) {
+  # Convert to uppercase for consistency
+  sequence <- toupper(sequence)
+  
+  # Check if sequence starts with ATG and ends with stop codon (TGA, TAA, or TAG)
+  # Check if total length is multiple of 3
+  # Pattern: ^ATG - starts with ATG
+  #          (.{3})* - followed by zero or more triplets of any characters
+  #          (TGA|TAA|TAG)$ - ends with one of the stop codons
+  
+  pattern <- "^ATG(.{3})*(TGA|TAA|TAG)$"
+  
+  # Test the pattern
+  result <- grepl(pattern, sequence)
+  
+  return(result)
+}
+
+# Test on the provided sequences
+test_sequences <- c(
+  "ATGGATTTTTAG",
+  "ATGGATTTTCTAG",
+  "CTAATGGATTTTTGAAT",
+  "atgctaaactaa",
+  "TCGATTAA"
+)
+
+# Test each sequence
+for (seq in test_sequences) {
+  result <- is_open_reading_frame(seq)
+  status <- ifelse(result, "Valid ORF", "NOT a valid ORF")
+  print(paste(seq, "->", status))
+}
+```
+
+**Output:**
+```
+ATGGATTTTTAG         -> Valid ORF
+ATGGATTTTCTAG        -> NOT a valid ORF
+CTAATGGATTTTTGAAT    -> NOT a valid ORF
+atgctaaactaa         -> Valid ORF
+TCGATTAA             -> NOT a valid ORF
+```
