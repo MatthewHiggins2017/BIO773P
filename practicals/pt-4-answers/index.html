@@ -804,18 +804,18 @@ TCGATTAA             -&gt; NOT a valid ORF
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="q9-location-with-greatest-number-of-species">Q9: Location with greatest number of species</h2>
-<div class="highlight"><pre><span></span><code># Loop over each location
-for (location_code in c(&quot;A&quot;,&quot;B&quot;)) {
+<div class="highlight"><pre><span></span><code><span class="c1"># Loop over each location</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">location_code</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="s">&quot;B&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 
-  # Subset the dataframe 
-  sub &lt;- subset(butterfly_sample, butterfly_sample$Location==location_code)
+<span class="w">  </span><span class="c1"># Subset the dataframe </span>
+<span class="w">  </span><span class="n">sub</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">butterfly_sample</span><span class="p">,</span><span class="w"> </span><span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Location</span><span class="o">==</span><span class="n">location_code</span><span class="p">)</span>
 
-  # Determine the number of unique species per location
-  number_of_unique &lt;- length(unique(sub$Latin.name))
+<span class="w">  </span><span class="c1"># Determine the number of unique species per location</span>
+<span class="w">  </span><span class="n">number_of_unique</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">sub</span><span class="o">$</span><span class="n">Latin.name</span><span class="p">))</span>
 
-  print(paste(&quot;Location:&quot;,location_code,&quot;Unique Species:&quot;,number_of_unique))
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Location:&quot;</span><span class="p">,</span><span class="n">location_code</span><span class="p">,</span><span class="s">&quot;Unique Species:&quot;</span><span class="p">,</span><span class="n">number_of_unique</span><span class="p">))</span>
 
-}
+<span class="p">}</span>
 </code></pre></div>
 
 
