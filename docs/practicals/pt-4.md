@@ -71,7 +71,7 @@ The `butterfly_reference` data frame contains the species name and the common na
 
 The `butterfly_sample` data frame contains information on butterflies caught in sweep netting surveys in two locations under different pesticide treatments (locations A and B). This data was collected by multiple people, who have recorded the common names of the species that they encountered (without using a standard letter case). In order to be able to compare the diversity between the two different sites, you will need to standardise the names.
 
-#### Q8 Write a function that adds a new column in the data frame that contains the correct Latin species name for each record in the `butterfly_sample`.
+#### Q8 Add a new column in the data frame that contains the correct Latin species name for each record in the `butterfly_sample`.
 
 TIP: There are several ways to do this. Remember that R is case sensitive, so you will need to account for case differences in your function. `grep` and `gsub` both allow you to set an `ignore.case = TRUE` option. Alternately, you could use the R commands `toupper()` and `tolower()`. Use the help pages to see how these work, which you can access by typing a question mark before the command - `?toupper`.
 

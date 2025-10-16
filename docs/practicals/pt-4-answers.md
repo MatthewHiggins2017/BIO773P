@@ -396,7 +396,7 @@ butterfly_sample <- merge(
 
 ## Q9: Location with greatest number of species
 
-```
+```r
 
 # Loop over each location
 for (location_code in c("A","B")) {
