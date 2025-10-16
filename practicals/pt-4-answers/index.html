@@ -517,17 +517,6 @@
 <span class="n">mean_concentration</span>
 <span class="c1"># Result: 1.355</span>
 </code></pre></div>
-<p>Alternative approaches:
-<div class="highlight"><pre><span></span><code><span class="c1"># Using subset() function</span>
-<span class="n">subset_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">Indometh</span><span class="p">,</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-<span class="nf">mean</span><span class="p">(</span><span class="n">subset_data</span><span class="o">$</span><span class="n">conc</span><span class="p">)</span>
-
-<span class="c1"># Using dplyr (if available)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-<span class="n">Indometh</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">conc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="n">mean_conc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">conc</span><span class="p">))</span>
-</code></pre></div></p>
 <hr />
 <h2 id="q3-regular-expressions-extracting-words">Q3: Regular Expressions - Extracting Words</h2>
 <p><strong>Question:</strong> Using regular expressions, how would you extract all the words except "antelope" in the vector <code>c("cameleopard", "eop4a", "kiloparsec", "antelope")</code>? Find three ways to answer this question.</p>
