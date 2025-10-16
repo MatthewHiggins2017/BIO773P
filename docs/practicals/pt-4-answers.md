@@ -268,3 +268,129 @@ CTAATGGATTTTTGAAT    -> NOT a valid ORF
 atgctaaactaa         -> Valid ORF
 TCGATTAA             -> NOT a valid ORF
 ```
+
+
+---
+
+## Q7: Palindromic Sequences
+
+**Question:** Write a function that assesses whether a given word or phrase is a palindrome. Palindromes are arrangements of words or letters which read the same way whether you read them backwards or forwards, such as the phrase "never odd or even" (if you remove the spaces). In molecular biology, many restriction enzyme sites are palindromic.
+
+**Hint:** Before starting to code, think about the steps needed to judge if something is a mirror palindrome. Write these steps as comments first, then implement them. Use easy test cases where you know the answer.
+
+**Answer:**
+
+### Step 1: Planning (as comments)
+
+```r
+# Steps to check if a sequence is a palindrome:
+# 1. Convert the input to uppercase (for consistency)
+# 2. Remove spaces and special characters (for phrase palindromes)
+# 3. Split the string into individual characters
+# 4. Reverse the order of characters
+# 5. Compare the original with the reversed version
+# 6. Return TRUE if they match, FALSE otherwise
+```
+
+### Step 2: One-off code (testing the logic)
+
+```r
+# Test with a simple case
+test_word <- "GAATTC"  # EcoRI restriction site - palindromic
+
+# Convert to uppercase
+test_word <- toupper(test_word)
+
+# Remove spaces (not needed for this case, but good practice)
+test_word <- gsub(" ", "", test_word)
+
+# Split into individual characters
+chars <- strsplit(test_word, "")[[1]]
+chars
+# Result: "G" "A" "A" "T" "T" "C"
+
+# Reverse the characters
+reversed_chars <- rev(chars)
+reversed_chars
+# Result: "C" "T" "T" "A" "A" "G"
+
+# Join back into a string
+reversed_word <- paste(reversed_chars, collapse = "")
+reversed_word
+# Result: "CTTAAG"
+
+# Compare
+test_word == reversed_word
+# Result: FALSE (GAATTC is not the same as CTTAAG)
+
+# Let's test with a true palindrome
+test_word2 <- "GAATTC"
+# Actually, for DNA palindrome, we need reverse complement!
+# But for simple text palindrome, let's use:
+test_word2 <- "racecar"
+test_word2 <- toupper(test_word2)
+chars2 <- strsplit(test_word2, "")[[1]]
+reversed2 <- paste(rev(chars2), collapse = "")
+test_word2 == reversed2
+# Result: TRUE
+```
+
+### Step 3: Create the final Function
+
+```r
+# Function to check if a word or phrase is a palindrome
+is_palindrome <- function(text) {
+  # Convert to uppercase for case-insensitive comparison
+  text <- toupper(text)
+  
+  # Remove spaces and non-alphanumeric characters
+  text <- gsub("[^A-Z0-9]", "", text)
+  
+  # Split into individual characters
+  chars <- strsplit(text, "")[[1]]
+  
+  # Reverse the characters
+  reversed_chars <- rev(chars)
+  
+  # Join back into a string
+  reversed_text <- paste(reversed_chars, collapse = "")
+  
+  # Compare original with reversed
+  is_same <- (text == reversed_text)
+  
+  return(is_same)
+}
+
+# Test the function
+test_cases <- c(
+  "racecar",
+  "hello",
+  "A man a plan a canal Panama",
+  "never odd or even",
+  "GAATTC",
+  "palindrome",
+  "madam",
+  "step on no pets"
+)
+
+# Test each case
+for (test in test_cases) {
+  result <- is_palindrome(test)
+  print(paste(test, "->", ifelse(result, "IS a palindrome", "NOT a palindrome")))
+}
+```
+
+**Output:**
+```
+[1] "racecar -> IS a palindrome"
+[1] "hello -> NOT a palindrome"
+[1] "A man a plan a canal Panama -> IS a palindrome"
+[1] "never odd or even -> IS a palindrome"
+[1] "GAATTC -> NOT a palindrome"
+[1] "palindrome -> NOT a palindrome"
+[1] "madam -> IS a palindrome"
+[1] "step on no pets -> IS a palindrome"
+```
+
+
+
