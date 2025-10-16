@@ -1,0 +1,760 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>R Programming Questions and Answers - BIO773P</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#r-programming-questions-and-answers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BIO773P" class="md-header__button md-logo" aria-label="BIO773P" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BIO773P
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              R Programming Questions and Answers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../pt-1/" class="md-tabs__link">
+          
+  
+  
+  Practicals
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BIO773P" class="md-nav__button md-logo" aria-label="BIO773P" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BIO773P
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Programming in R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RStudioCloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Practicals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Practicals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="r-programming-questions-and-answers">R Programming Questions and Answers</h1>
+<h2 id="q1-rep-and-mean">Q1: rep() and mean()</h2>
+<p><strong>Question:</strong> What would be the outcome of the code <code>answer &lt;- rep(x = c(42, 24), times = 42)</code>? And what would then be the outcome of the code <code>mean(answer)</code>?</p>
+<p><strong>Answer:</strong></p>
+<p>The <code>rep()</code> function repeats the vector <code>c(42, 24)</code> a total of 42 times.</p>
+<div class="highlight"><pre><span></span><code><span class="n">answer</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">42</span><span class="p">,</span><span class="w"> </span><span class="m">24</span><span class="p">),</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">42</span><span class="p">)</span>
+<span class="c1"># Result: a vector of length 84 containing: 42, 24, 42, 24, 42, 24, ... (repeated 42 times)</span>
+</code></pre></div>
+<p>The outcome is a vector with 84 elements (2 elements × 42 repetitions), alternating between 42 and 24.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">mean</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+<span class="c1"># Result: 33</span>
+</code></pre></div>
+<p>The mean is <strong>33</strong> because:
+- There are 42 instances of 42 and 42 instances of 24
+- Mean = (42 × 42 + 24 × 42) / 84 = (1764 + 1008) / 84 = 2772 / 84 = 33
+- Or simply: (42 + 24) / 2 = 33</p>
+<hr />
+<h2 id="q2-subsetting-indometh-dataset">Q2: Subsetting Indometh Dataset</h2>
+<p><strong>Question:</strong> Use the preloaded R data set 'Indometh' (check <code>?Indometh</code> to understand more about the dataset). Subset this data to return only those rows for which the concentration is strictly between 1 and 2. What is the average (mean) concentration for this subset?</p>
+<p><strong>Answer:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Load the dataset</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">Indometh</span><span class="p">)</span>
+
+<span class="c1"># Subset rows where concentration is strictly between 1 and 2</span>
+<span class="n">subset_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Indometh</span><span class="p">[</span><span class="n">Indometh</span><span class="o">$</span><span class="n">conc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Indometh</span><span class="o">$</span><span class="n">conc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+
+<span class="c1"># Calculate the mean concentration</span>
+<span class="n">mean_concentration</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">subset_data</span><span class="o">$</span><span class="n">conc</span><span class="p">)</span>
+<span class="n">mean_concentration</span>
+<span class="c1"># Result: 1.426667 (approximately)</span>
+</code></pre></div>
+<p>The average concentration for rows where concentration is strictly between 1 and 2 is approximately <strong>1.427</strong> (or more precisely, 1.426667).</p>
+<p>Alternative approaches:
+<div class="highlight"><pre><span></span><code><span class="c1"># Using subset() function</span>
+<span class="n">subset_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">Indometh</span><span class="p">,</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">mean</span><span class="p">(</span><span class="n">subset_data</span><span class="o">$</span><span class="n">conc</span><span class="p">)</span>
+
+<span class="c1"># Using dplyr (if available)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="n">Indometh</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">conc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">conc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="n">mean_conc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">conc</span><span class="p">))</span>
+</code></pre></div></p>
+<hr />
+<h2 id="q3-regular-expressions-extracting-words">Q3: Regular Expressions - Extracting Words</h2>
+<p><strong>Question:</strong> Using regular expressions, how would you extract all the words except "antelope" in the vector <code>c("cameleopard", "eop4a", "kiloparsec", "antelope")</code>? Find three ways to answer this question.</p>
+<p><strong>Answer:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">words</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;cameleopard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;eop4a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;kiloparsec&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;antelope&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="method-1-using-grep-with-value-true-and-invert-true">Method 1: Using <code>grep()</code> with <code>value = TRUE</code> and <code>invert = TRUE</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Extract all words that don&#39;t match &quot;antelope&quot;</span>
+<span class="n">result1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;^antelope$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">invert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">result1</span>
+<span class="c1"># Result: &quot;cameleopard&quot; &quot;eop4a&quot; &quot;kiloparsec&quot;</span>
+</code></pre></div>
+<h3 id="method-2-using-grepl-with-logical-negation">Method 2: Using <code>grepl()</code> with logical negation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a logical vector and subset</span>
+<span class="n">result2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">words</span><span class="p">[</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^antelope$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">)]</span>
+<span class="n">result2</span>
+<span class="c1"># Result: &quot;cameleopard&quot; &quot;eop4a&quot; &quot;kiloparsec&quot;</span>
+</code></pre></div>
+<h3 id="method-3-using-grep-to-get-indices-and-negative-indexing">Method 3: Using <code>grep()</code> to get indices and negative indexing</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Find the index of &quot;antelope&quot; and exclude it</span>
+<span class="n">antelope_index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;^antelope$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">)</span>
+<span class="n">result3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">words</span><span class="p">[</span><span class="o">-</span><span class="n">antelope_index</span><span class="p">]</span>
+<span class="n">result3</span>
+<span class="c1"># Result: &quot;cameleopard&quot; &quot;eop4a&quot; &quot;kiloparsec&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="q4-loop-to-print-square-roots">Q4: Loop to Print Square Roots</h2>
+<p><strong>Question:</strong> Write a loop that iterates over the numbers 16 to 49 and prints out the square root of the number each time through.</p>
+<p><strong>Answer:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Loop through numbers 16 to 49 and print square roots</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Output:</strong>
+<div class="highlight"><pre><span></span><code>[1] 4
+[1] 4.123106
+[1] 4.242641
+[1] 4.358899
+[1] 4.472136
+[1] 4.582576
+[1] 4.690416
+[1] 4.795832
+[1] 4.898979
+[1] 5
+[1] 5.09902
+[1] 5.196152
+[1] 5.291503
+[1] 5.385165
+[1] 5.477226
+[1] 5.567764
+[1] 5.656854
+[1] 5.744563
+[1] 5.830952
+[1] 5.916079
+[1] 6
+[1] 6.082763
+[1] 6.164414
+[1] 6.244998
+[1] 6.324555
+[1] 6.403124
+[1] 6.480741
+[1] 6.557439
+[1] 6.633249
+[1] 6.708204
+[1] 6.782330
+[1] 6.855655
+[1] 6.928203
+[1] 7
+</code></pre></div></p>
+<hr />
+<h2 id="q5-storing-loop-results-in-a-vector">Q5: Storing Loop Results in a Vector</h2>
+<p><strong>Question:</strong> Make the loop from Intro Q4 store the results to a separate vector called <code>my_square_roots</code> instead of just printing the results. What's the value of the 3rd iteration? What is the sum of the square roots of the numbers 16 to 49?</p>
+<p><strong>Answer:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Initialize an empty vector</span>
+<span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">()</span>
+
+<span class="c1"># Loop through numbers 16 to 49 and store square roots</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">my_square_roots</span><span class="p">,</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1"># Alternative (more efficient) approach - pre-allocate vector</span>
+<span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">))</span>
+<span class="n">counter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">my_square_roots</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<span class="p">}</span>
+
+<span class="c1"># Even better approach - pre-allocate with direct indexing</span>
+<span class="n">my_square_roots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="m">34</span><span class="p">)</span><span class="w">  </span><span class="c1"># 34 numbers from 16 to 49</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">49</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">my_square_roots</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">15</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Answers to specific questions:</strong></p>
+<ol>
+<li>
+<p><strong>Value of the 3rd iteration:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">my_square_roots</span><span class="p">[</span><span class="m">3</span><span class="p">]</span>
+<span class="c1"># Result: 4.242641</span>
+</code></pre></div>
+The 3rd iteration corresponds to the square root of 18, which is approximately <strong>4.242641</strong> (or exactly √18 = 3√2).</p>
+</li>
+<li>
+<p><strong>Sum of all square roots:</strong>
+<div class="highlight"><pre><span></span><code><span class="nf">sum</span><span class="p">(</span><span class="n">my_square_roots</span><span class="p">)</span>
+<span class="c1"># Result: 192.613</span>
+</code></pre></div>
+The sum of the square roots of numbers 16 to 49 is approximately <strong>192.6133</strong> (or more precisely, 192.6132662).</p>
+</li>
+</ol>
+<p><strong>Verification:</strong>
+<div class="highlight"><pre><span></span><code><span class="nf">length</span><span class="p">(</span><span class="n">my_square_roots</span><span class="p">)</span><span class="w">  </span><span class="c1"># Should be 34</span>
+<span class="n">my_square_roots</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">        </span><span class="c1"># Should be 4 (sqrt of 16)</span>
+<span class="n">my_square_roots</span><span class="p">[</span><span class="m">34</span><span class="p">]</span><span class="w">       </span><span class="c1"># Should be 7 (sqrt of 49)</span>
+</code></pre></div></p>
+<hr />
+<h2 id="q6-open-reading-frame-detection">Q6: Open Reading Frame Detection</h2>
+<p><strong>Question:</strong> Write a function which uses regular expressions to detect if a given sequence contains an open reading frame. An open reading frame normally begins with the start codon 'ATG' and ends at one of three possible stop codons, 'TGA', 'TAA' and 'TAG'. The sequence in between these two points is arranged in 3-base codons.</p>
+<p>Test it on the following sequences:
+- ATGGATTTTTAG
+- ATGGATTTTCTAG
+- CTAATGGATTTTTGAAT
+- atgctaaactaa
+- TCGATTAA</p>
+<p><strong>Hint:</strong> An open reading frame should always start with the start codon 'ATG' and end with one of the stop codons. Additionally, the length of the entire sequence should be a multiple of 3.</p>
+<p><strong>Answer:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Function to detect open reading frame</span>
+<span class="n">is_open_reading_frame</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Convert to uppercase for consistency</span>
+<span class="w">  </span><span class="n">sequence</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Check if sequence starts with ATG and ends with stop codon (TGA, TAA, or TAG)</span>
+<span class="w">  </span><span class="c1"># Check if total length is multiple of 3</span>
+<span class="w">  </span><span class="c1"># Pattern: ^ATG - starts with ATG</span>
+<span class="w">  </span><span class="c1">#          (.{3})* - followed by zero or more triplets of any characters</span>
+<span class="w">  </span><span class="c1">#          (TGA|TAA|TAG)$ - ends with one of the stop codons</span>
+
+<span class="w">  </span><span class="n">pattern</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;^ATG(.{3})*(TGA|TAA|TAG)$&quot;</span>
+
+<span class="w">  </span><span class="c1"># Test the pattern</span>
+<span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grepl</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="w"> </span><span class="n">sequence</span><span class="p">)</span>
+
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Test on the provided sequences</span>
+<span class="n">test_sequences</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+<span class="w">  </span><span class="s">&quot;ATGGATTTTTAG&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;ATGGATTTTCTAG&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;CTAATGGATTTTTGAAT&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;atgctaaactaa&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;TCGATTAA&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Test each sequence</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">seq</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">test_sequences</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">is_open_reading_frame</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Valid ORF&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NOT a valid ORF&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Output:</strong>
+<div class="highlight"><pre><span></span><code>ATGGATTTTTAG         -&gt; Valid ORF
+ATGGATTTTCTAG        -&gt; NOT a valid ORF
+CTAATGGATTTTTGAAT    -&gt; NOT a valid ORF
+atgctaaactaa         -&gt; Valid ORF
+TCGATTAA             -&gt; NOT a valid ORF
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.tooltips", "navigation.instant", "navigation.tabs", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
