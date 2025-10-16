@@ -779,6 +779,30 @@ TCGATTAA             -&gt; NOT a valid ORF
 [1] &quot;madam -&gt; IS a palindrome&quot;
 [1] &quot;step on no pets -&gt; IS a palindrome&quot;
 </code></pre></div></p>
+<h2 id="q8-species-names">Q8: Species names</h2>
+<div class="highlight"><pre><span></span><code><span class="n">butterfly_sam_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_sample.csv&quot;</span>
+<span class="n">butterfly_sample</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_sam_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="n">butterfly_ref_url</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_reference.csv&quot;</span>
+<span class="n">butterfly_reference</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_ref_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1"># Update both names to uppercase() and replace any space with hyphen </span>
+<span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="p">)</span>
+<span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="p">)</span>
+
+
+<span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="p">)</span>
+<span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="p">)</span>
+
+<span class="c1"># Perform a dataframe merge to add the latin name to the sample column </span>
+<span class="n">butterfly_sample</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span>
+<span class="w">  </span><span class="n">butterfly_sample</span><span class="p">,</span>
+<span class="w">  </span><span class="n">butterfly_reference</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Common.name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Latin.name&quot;</span><span class="p">)],</span>
+<span class="w">  </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Species&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Common.name&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">all.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span>
+<span class="p">)</span>
+</code></pre></div>
 
 
 
