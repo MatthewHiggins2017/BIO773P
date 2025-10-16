@@ -392,3 +392,23 @@ butterfly_sample <- merge(
 )
 
 ```
+
+
+## Q9: Location with greatest number of species
+
+```
+
+# Loop over each location
+for (location_code in c("A","B")) {
+  
+  # Subset the dataframe 
+  sub <- subset(butterfly_sample, butterfly_sample$Location==location_code)
+  
+  # Determine the number of unique species per location
+  number_of_unique <- length(unique(sub$Latin.name))
+  
+  print(paste("Location:",location_code,"Unique Species:",number_of_unique))
+  
+}
+
+```
