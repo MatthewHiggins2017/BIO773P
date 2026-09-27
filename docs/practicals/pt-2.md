@@ -1,137 +1,440 @@
-# **Practical 2 - Introduction to Regular Expressions in R**
+# **Practical 2 - Accessing and Manipulating Composite Data**
 
-## Regular Expressions
+---
 
-Regular expressions are used to search for a specific pattern in a string. To understand them, we will take an example in which the actual names in our data file are incorrect, or inconsistent. Run the following line of code to import the a table into a data frame:
+## Introduction
 
-```R
-reptiles <- read.table(file = "https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/reptiles.txt")
-```
+In Practical 1, we worked with atomic vectors, which store one-dimensional sequences of elements of the same data type. However, real scientific datasets and complex computational models require **composite data structures** capable of organizing multi-dimensional, multi-variable, or heterogeneous information:
 
-This data frame details the genus and species names of 16 endangered reptiles, along with the dates at which they were listed as endangered. You can load just the names into a separate variable by running the code
+1. **Matrices:** Two-dimensional grids of values of a single atomic type (e.g., spatial grids, transition tables).
+2. **Lists:** Ordered, flexible collections where each element can be an entirely different type, length, or structure (e.g., packaging diverse outputs or survey records).
+3. **Data Frames:** The standard tabular structure for statistical analysis in R, where rows represent observations and columns represent different variables (which can be of different types).
 
-```R
-names_ids <- row.names(reptiles)
-```
+In this practical, you will learn to construct, inspect, subset, modify, and aggregate each of these composite structures. Mastering these techniques is directly required for Challenge 1 (nested list processing) and Challenge 2 (data frame simulation and filtering).
 
-Have a close look at these names. Notice that each reptile has a unique identification number next to its name (don't look these numbers up - they don't mean anything)! Also, we can see that some names were recorded incorrectly - the genus names for the *Liopholis* group are in lowercase, while we all know that genus names should be capitalized! All in all, this data appears quite "messy" and needs cleaning up.
+---
 
-**Regular expressions** are ideal for fixing this. "Regex" are at the center of a suite of tools that allow us to search for, locate, and replace characters or words within a data set. The really powerful thing about regular expressions is that we can do a "fuzzy" search, meaning the pattern we are searching for has some flexibility built into it.
+## Matrices: Two-Dimensional Grids
 
-### Basic find and replace
+A **matrix** is a two-dimensional rectangular array organized into rows and columns. Like an atomic vector, every cell in a matrix must contain the exact same data class (numeric, character, or logical).
 
-First of all we will search through the vector `names_ids` to find a list of the elements that contain the word "liopholis". The function that allows us to do this is `grep()`, which has two main arguments; `pattern` and `x`. The pattern is the actual word, or part of a word, that we are looking for. The argument `x`` describes the variable that we are searching through. In our case we want to evaluate the following code:
+### Creating Matrices
 
-```R
-# Search through names_ids for the word "liopholis", and output_positions
-grep(pattern = "liopholis", x = names_ids)
-```
-
-The output of this code is a list of numbers. Each of these numbers describes the position of an element in the vector `names_ids` that matches the pattern - in this case the 12th and 13th elements. Make sure you fully understand where these numbers came from!
-
-Sometimes it may be more useful to obtain the actual names within which the pattern was found, rather than a list of positions. We can do this by making use of the additional argument `value = TRUE` (see the help file for the `grep()` function for a complete list of possible arguments). The new code reads:
+Matrices can be constructed using `matrix()`, or by binding vectors together using `rbind()` (row bind) and `cbind()` (column bind):
 
 ```R
-# Search through names_ids for the word "liopholis", and output_names
-grep(pattern = "liopholis", x = names_ids, value = TRUE)
+# Creating a matrix from a sequence:
+# By default, R fills matrices column-by-column:
+mat1 <- matrix(data = 1:12, nrow = 4, ncol = 3)
+mat1
+#      [,1] [,2] [,3]
+# [1,]    1    5    9
+# [2,]    2    6   10
+# [3,]    3    7   11
+# [4,]    4    8   12
+
+# Fill row-by-row instead:
+mat2 <- matrix(data = 1:12, nrow = 4, ncol = 3, byrow = TRUE)
+mat2
+#      [,1] [,2] [,3]
+# [1,]    1    2    3
+# [2,]    4    5    6
+# [3,]    7    8    9
+# [4,]   10   11   12
 ```
 
-Now we find that the output contains the actual elements of the vector that match the pattern, rather than just a list of positions. These names correspond exactly with the positions found in the previous example.
+We can also bind vectors of equal length:
+```R
+site_a <- c(2.1, 4.5, 3.2)
+site_b <- c(1.8, 4.1, 3.9)
 
-Finally, we may want to find and replace the pattern. This can be done using the function `gsub()`. The function `gsub()` takes arguments `pattern` and `x`, just like the function `grep()`, but it also has an additional argument `replacement`. The argument `replacement` describes the new word, or words, that we want to insert in place of pattern. For example, in the `reptiles` the word "liopholis" is a genus name, and so should be capitalized. Thus, we want to replace the word "liopholis" with "Liopholis", as follows:
+# Bind as rows:
+row_bound <- rbind(site_a, site_b)  # 2 rows, 3 columns
+
+# Bind as columns:
+col_bound <- cbind(site_a, site_b)  # 3 rows, 2 columns
+```
+
+### Inspecting Matrix Dimensions and Naming
+
+To check the dimensions of a matrix:
+* `dim(m)`: Returns a vector `c(nrow, ncol)`.
+* `nrow(m)`: Number of rows.
+* `ncol(m)`: Number of columns.
+
+You can assign and query names for rows and columns:
+```R
+colnames(col_bound) <- c("Transect_1", "Transect_2")
+rownames(col_bound) <- c("Depth_1m", "Depth_2m", "Depth_3m")
+col_bound
+```
+
+### Matrix Subsetting and Slicing
+
+Subsetting a matrix requires two indices inside square brackets: `[row, column]`. Remember the mnemonic: **R**ow first, **C**olumn second (**RC**).
+
+* `mat[r, c]`: Element at row `r`, column `c`.
+* `mat[r, ]`: **Entire row `r`** (leaving column blank extracts all columns).
+* `mat[, c]`: **Entire column `c`** (leaving row blank extracts all rows).
+* `mat[c(1, 3), c(2, 3)]`: Sub-grid spanning rows 1 & 3 and columns 2 & 3.
 
 ```R
-# Search through names_ids for the word "liopholis" and replace with the word "Liopholis".
-names_ids_fixed <- gsub(pattern = "liopholis", replacement = "Liopholis", x = names_ids)
+# Using mat1 from above:
+mat1[2, 3]        # 10
+mat1[1:2, ]       # First two rows across all columns
+mat1[, 2]         # Entire second column: 5 6 7 8
 ```
 
-The output of this function is a new vector in which the desired replacement has been carried out. Notice that the code above stores this new vector in the variable `names_ids_fixed`.
+> **Note on Dimension Dropping:** When you extract a single row or single column (e.g., `mat1[, 2]`), R automatically drops the matrix dimensions and returns a simple 1D vector. If you wish to preserve the matrix structure, add the argument `drop = FALSE`:
+> ```R
+> mat1[, 2, drop = FALSE]  # Returns a 4x1 matrix
+> ```
 
-Experiment with `grep()` and `gsub()` until you are confident at using them. Then answer the following questions:
+### Matrix Arithmetic and Margins
 
-#### Q1. How could you use regular expressions to find the only element in the vector `names_ids_fixed` that contains a lowercase "q"? What is the position of this element in the vector?
+Mathematical operations on matrices occur element-by-element:
+```R
+mat1 * 10
+mat1 + mat2
+```
 
-#### Q2. You want to import the `names_ids_fixed` data into excel, but are having problems due to the spaces between the words (a common problem). How could you use `gsub()` to replace each space with an underscore `_`?
-
-### Using "fuzzy" searching
-
-One of the most powerful features of regular expressions is the ability to perform "fuzzy" searching. Simply put, by using special characters we can introduce some flexibility into the pattern that we are searching for.
-
-A slightly reduced list of special characters and their meanings is given below.
-
-|Special Character | Meaning  |
-|------------------|----------|
-|.                 | Any character |
-|?                 | The preceding item is optional and will be matched at most once. |
-|*                 | The preceding item will be matched zero or more times. |
-|+                 | The preceding item will be matched one or more times. |
-
-Additional special characters can be found:
-
-* by Googling (e.g. "Regexp cheat sheet for R")
-* by typing: ?regex in R
-
-These special characters can be used on their own, or in combination with one another. To help you out with understanding these symbols, here are a few examples:
-
-* The pattern `.r` means any character, followed by the letter "r" (e.g. "er", "or", "tr", "3r").
-* The pattern `...r` means any character, followed by any character, followed by any character, followed by the letter "r" (e.g. "beer", "deer", "zekr").
-* The pattern `l*at` means zero or more copies of the letter "l", followed by the letters "at" (e.g. "at", "lat", "llllllllllat").
-* The pattern `s.+s` means the letter "s", followed by one or more copies of any character, followed by the letter "s" (e.g. "sas", "sts", "sauces", "serendipities", but NOT "ss").
-* The pattern `.* .*` means zero or more copies of any character, followed by a space, followed by zero or more copies of any character (any combination of two words, e.g. "test word").
-
-Some of these examples might seem very confusing at first, but if you learn what each special character means on its own and then go through the pattern one at a time you should find that it makes sense.
-
-As an example of how fuzzy searching can be useful, we will now use these special characters to remove the ID tags from the reptile names. Notice that the ID numbers are of different lengths, but they are always separated with a colon from the part that we are interested in. Therefore, we can remove these characters by searching for zero or more copies of any character, followed by a colon, and replacing this pattern with an empty string. The single line of code that achieves this is as follows:
+To summarize rows or columns, use R's fast built-in margin functions:
+* `rowSums(m)`, `colSums(m)`: Sum totals across rows or columns.
+* `rowMeans(m)`, `colMeans(m)`: Averages across rows or columns.
 
 ```R
-names <- gsub(pattern = ".*:", replacement = "", x = names_ids_fixed)
+colMeans(mat1)  # 2.5 6.5 10.5
 ```
-Have a look inside the variable `names`. We have successfully isolated the genus and species names away from the pesky ID tags, even though the exact format of the tags may vary between different entries. Tricks like this can save us a great deal of time - especially when our data set is thousands of lines long. In fact, we have only skimmed the surface of what regular expressions can do - I encourage anyone who is interested to take a deeper look.
 
-#### Q3. What does the pattern "..x.." mean in a regular expression?
+#### Q1. Consider the matrix:
+```R
+grid <- matrix(data = seq(2, 36, by = 2), nrow = 6, ncol = 3)
+```
+Without running the code first:
+1. How many total elements are in `grid`?
+2. What value is located at `grid[3, 2]`?
+3. Write an expression to replace all values in `grid` that are greater than 20 with `20`.
 
-#### Q4. What does the pattern "e+" mean in a regular expression?
+---
 
-#### Q5a. How many reptile names in `names` contain a lowercase "o" or an uppercase "E"?
+## Lists: Heterogeneous and Hierarchical Data
 
-Hint - you should be able to identify the words containing these patterns using a single `grep` command. We have learnt how to search for a choice of two or more characters in class.
+An atomic vector and a matrix are restricted to holding elements of one class. A **list**, however, is a generic vector that can contain elements of **any class, any length, and any structure** — including vectors of different lengths, matrices, data frames, or even other nested lists.
 
-#### Q5b. How many reptile names in `names` contain "us" or "li"?
+Lists are widely used in R to bundle related parameters, package complex simulation results, or return grouped records.
 
-Hint - As before, use a single `grep` command to identify the words with these patterns.
+### Creating Lists
 
-#### Q6. Add three additional columns to the `reptiles` table:
-* one containing only the identifier numbers (e.g. 1423 without the “ID”)
-* one column containing only the genus (e.g. "Bellatorias")
-* one containing only the species (excluding the genus name and the subspecies name, e.g. we want to read "tympanum")
-
-Hint - try to decompose this task, the solution is not a “one-liner”. Make use of the functions you have just learnt and focus on extracting the numbers, genus, and species, rather than the “add new columns” bit.
-
-
-# Extra section!
-
-## Data input from files
-Open source data plays an increasingly important role recently, so it is vital to know how to input the data with various formats into your program. Choosing the right way of importing data will save you time and boost your efficiency when cleaning the data. To test your abilities, download  [longevity_genes/longevity.csv](https://genomics.senescence.info/longevity/longevity_genes.zip) and [TableS2.xls](https://genomics.senescence.info/diet/TableS2.xls) and try loading them into R.
+Lists are constructed with the `list()` function. It is strongly recommended to give every element a descriptive name:
 
 ```R
-longevity_genes_data  <- read.csv("input location/longevity.csv")
-longevity_genes_data  <- read.csv(file.choose())                    # to choose the file
-# try to figure out how to import Excel spreadsheets into R,
-# which is an excessively discussed topic online.
-# One way of doing it, is saving your Excel spreadsheet (TableS2.xls)
-# as a tab delimited text file and loading it into R
-read.delim("input location/file name.txt")
+survey_site <- list(
+  town_name       = "Norwich",
+  sample_date     = "2026-05-14",
+  quadrat_counts  = c(12, 18, 14, 22),
+  certified_clean = TRUE,
+  soil_ph_readings = c(5.2, 5.4, 5.1)
+)
 ```
 
-## Data output into various formats
-Most of the time, as either a data recorder or a data analyst, knowing the best way to output data is important. Outputting data as a CSV file is recommended as it's compatible with both Excel and R.
+In the Environment tab of RStudio, click the blue expand arrow next to `survey_site` to inspect its hierarchical structure.
+
+### Accessing List Elements: `[` vs `[[` vs `$`
+
+Understanding the distinction between single brackets `[` and double brackets `[[` is critical when working with lists:
+
+* **Single Brackets `[ ]` (Sub-listing):**
+  Extracts a *slice* of the list. **It always returns a list**, even if you ask for only one element:
+  ```R
+  sub <- survey_site["town_name"]
+  class(sub)  # "list"
+  ```
+  *Analogy:* Imagine a list as a train with cargo wagons. `survey_site[1]` uncouples the 1st wagon and hands you a shorter train consisting of that single wagon.
+
+* **Double Brackets `[[ ]]` (Element Extraction):**
+  Extracts the *actual object stored inside* the designated position or name:
+  ```R
+  name_val <- survey_site[["town_name"]]
+  class(name_val)  # "character"
+  ```
+  *Analogy:* `survey_site[[1]]` opens up the 1st wagon, unpacks the cargo inside, and hands you the cargo directly.
+
+* **Dollar Sign `$` (Named Extraction):**
+  Shorthand for `[[ "name" ]]`:
+  ```R
+  survey_site$quadrat_counts  # Returns the numeric vector c(12, 18, 14, 22)
+  ```
 
 ```R
-# write a new subsetted data frame (create this using your previous skills) into a CSV file
-write.csv(your_subsetted_data_frame, file = "output_location/file_name.csv")
-# create three variables, a, b, and c of any class and save them into a .RData file (What is this? When could it be useful?)
-save(a, b, c, file = "output_location/file_name.RData")
+# You can immediately apply vector operations to extracted elements:
+mean(survey_site$quadrat_counts)  # 16.5
 ```
 
-#### Hacker Q7.  Download [this text file](https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/reptiles_lower.txt) and figure out how to “capture” the first letter of the genus, and transform it to make it uppercase. Do this in a generic manner (that would work on a table of thousands of species).
-Hint - look into the help page of “gsub”, especially the explanation for the “replacement” parameter, as well as the examples at the bottom of the help page.
+### Modifying and Adding List Elements
+
+You can modify existing elements or add brand new elements by assigning directly to a new name:
+
+```R
+# Modify existing element:
+survey_site$certified_clean <- FALSE
+
+# Add a new element:
+survey_site$surveyor <- "Dr. Smith"
+
+# Remove an element by assigning NULL:
+survey_site$sample_date <- NULL
+```
+
+### Nested Lists
+
+Because list elements can be anything, you can nest lists inside lists. This is precisely how multi-town market reports or hierarchical biological models are represented:
+
+```R
+market_report <- list(
+  Norwich = list(honey = 12.5, pumpkins = 45, organic = TRUE,  expenses = 120.5),
+  Diss    = list(honey = 4.0,  pumpkins = 18, organic = FALSE, expenses = 45.0),
+  Holt    = list(honey = 8.2,  pumpkins = 30, organic = TRUE,  expenses = 82.3)
+)
+
+# Extract information for a specific town:
+market_report[["Norwich"]]$honey        # 12.5
+market_report$Holt$organic              # TRUE
+```
+
+#### Q2. Given `market_report` above:
+1. Write an expression to retrieve the number of pumpkins bought in `Diss`.
+2. Add a new town named `"Aylsham"` to `market_report` containing 10.0 kg of honey, 25 pumpkins, organic certification `TRUE`, and expenses of £70.0.
+3. Calculate the total honey purchased across all organic towns in `market_report` (Norwich, Holt, Aylsham).
+
+---
+
+## Data Frames: The Workhorse of Data Analysis
+
+A **data frame** is a two-dimensional table designed specifically for data analysis. Formally, a data frame is a named list of vectors of **identical length**, where:
+* Each **column** represents a variable (and must be of a single atomic class).
+* Each **row** represents an observation (and can span multiple classes across columns).
+
+Unlike a matrix (which forces all cells into one type), a data frame can freely hold numeric columns, character columns, and logical columns side by side.
+
+### Creating Data Frames
+
+Construct data frames using `data.frame()`:
+
+```R
+survey_df <- data.frame(
+  plot_id    = 1:6,
+  soil_ph    = c(4.8, 6.2, 5.1, 7.4, 4.9, 5.3),
+  tree_count = c(18,  10,  16,   7,  22,  15),
+  vegetation = c("Pine", "Oak", "Pine", "Oak", "Pine", "Pine"),
+  is_wetland = c(TRUE, FALSE, FALSE, FALSE, TRUE, FALSE),
+  stringsAsFactors = FALSE
+)
+
+survey_df
+```
+
+Inspect the structure and dimensions of your data frame:
+```R
+dim(survey_df)      # 6 rows, 5 columns
+nrow(survey_df)     # 6
+ncol(survey_df)     # 5
+names(survey_df)    # Column names
+str(survey_df)      # Structure overview
+head(survey_df, 3)  # First 3 rows
+```
+
+### Accessing Columns and Cells
+
+Columns can be extracted as vectors using `$`, `[[ ]]`, or `[, "column_name"]`:
+
+```R
+# Extract a column as a vector:
+survey_df$soil_ph
+survey_df[["soil_ph"]]
+survey_df[, "soil_ph"]
+
+# Extract a specific cell: row 3, column 'soil_ph':
+survey_df[3, "soil_ph"]  # 5.1
+```
+
+### Adding and Computing New Columns
+
+You can add new variables directly or compute them from existing columns. This is a foundational step in simulation modelling:
+
+```R
+# In Challenge 2, biomass is calculated as:
+# tree_count * (2.0 + 0.5 * soil_ph)
+
+survey_df$biomass <- survey_df$tree_count * (2.0 + 0.5 * survey_df$soil_ph)
+
+# View updated data frame with new biomass column:
+survey_df
+```
+
+---
+
+## Subsetting and Filtering Data Frames
+
+Data analysis routinely requires filtering data frames to isolate observations meeting precise environmental or experimental criteria.
+
+### 1. Filtering with Row Logical Indexing
+
+The standard and most robust method to filter a data frame is passing a logical condition into the **row index position**: `df[condition, ]`.
+
+```R
+# Find plots where soil pH is strictly less than 5.5:
+acidic_plots <- survey_df[survey_df$soil_ph < 5.5, ]
+acidic_plots
+
+# Combine multiple conditions:
+# Soil pH < 5.5 AND tree count >= 15:
+specialist_df <- survey_df[survey_df$soil_ph < 5.5 & survey_df$tree_count >= 15, ]
+specialist_df
+```
+
+> **Crucial Syntax Reminder:** Do not forget the comma inside the brackets! 
+> * `survey_df[condition, ]` filters **rows** and keeps all columns.
+> * `survey_df[condition]` would attempt to subset columns by name or index and cause errors.
+
+### 2. Filtering with `subset()`
+
+R also provides the convenient helper function `subset()`, which evaluates column names without repeatedly typing `survey_df$`:
+
+```R
+specialist_sub <- subset(survey_df, soil_ph < 5.5 & tree_count >= 15)
+```
+
+While `subset()` is clean for interactive exploration, standard bracket indexing `df[condition, ]` is preferred inside scripted functions and simulation packages because of predictable evaluation rules.
+
+---
+
+## Aggregation and Handling Boundary Cases
+
+Once a data frame is filtered, we often compute summary statistics on specific columns.
+
+```R
+# Calculate the mean biomass of the specialist plots:
+mean_spec_biomass <- mean(specialist_df$biomass)
+mean_spec_biomass
+```
+
+### Boundary Case: Zero Qualifying Rows
+
+In simulations with stochastic conditions, it is entirely possible that **no observations qualify** under the filtering criteria. Your code must handle this gracefully without crashing:
+
+```R
+# Suppose we search for extreme plots that do not exist in our data:
+extreme_df <- survey_df[survey_df$soil_ph < 3.5 & survey_df$tree_count > 50, ]
+
+nrow(extreme_df)  # Returns 0
+```
+
+If you attempt to compute the mean of an empty numeric vector:
+```R
+mean(extreme_df$biomass)  # Returns NaN (Not a Number)
+```
+
+In Challenge 2, if no quadrats meet the specialist criteria, your function must return `NA` as a single scalar. You can verify whether a filtered data frame has observations by checking `nrow(df) > 0`:
+
+```R
+result <- if (nrow(extreme_df) > 0) mean(extreme_df$biomass) else NA
+result  # Returns NA
+```
+*(We will formalize `if`-`else` syntax in Practical 3, but note how `nrow()` enables boundary detection).*
+
+---
+
+## Missing Data in Data Frames
+
+Tabular datasets often contain missing values (`NA`). 
+
+```R
+messy_survey <- data.frame(
+  plot_id = 1:4,
+  ph      = c(5.1, NA, 6.4, 4.9),
+  trees   = c(12, 15, NA, 20)
+)
+```
+
+* `is.na(messy_survey)`: Returns a logical matrix indicating missing cells across the table.
+* `complete.cases(messy_survey)`: Returns a logical vector of length `nrow`, which is `TRUE` only for rows that have **no missing values in any column**.
+* `na.omit(messy_survey)`: Returns a clean data frame with all rows containing any `NA` stripped out.
+
+```R
+complete.cases(messy_survey)  # TRUE FALSE FALSE  TRUE
+
+clean_survey <- messy_survey[complete.cases(messy_survey), ]
+clean_survey
+#   plot_id  ph trees
+# 1       1 5.1    12
+# 4       4 4.9    20
+```
+
+#### Q3. In `survey_df` from Section 4, write code to:
+1. Filter the data frame to select all plots where `vegetation == "Pine"` and `biomass > 60`.
+2. Extract the `soil_ph` values of these qualifying plots as a plain numeric vector.
+3. Compute the median pH of these qualifying plots.
+
+---
+
+## Comprehensive Review Exercises
+
+These exercises combine matrices, lists, and data frames into workflows mirroring your upcoming challenges.
+
+### Exercise 1: Building a Structured Market Database (Challenge 1 Prep)
+
+Imagine you receive five parallel vectors describing purchases from regional agricultural markets:
+```R
+towns       <- c("Norwich", "Diss", "Aylsham", "Holt")
+honey_kg    <- c(25.0, 10.5, 18.0, 4.2)
+pumpkins    <- c(80, 35, 60, 15)
+all_organic <- c(TRUE, FALSE, TRUE, FALSE)
+expenses    <- c(240.0, 95.0, 175.5, 42.0)
+```
+
+1. Convert these parallel vectors into a single data frame named `market_df` with appropriate column names.
+2. In Challenge 1, each honey-roasted pumpkin meal requires:
+   * $0.022\text{ kg}$ ($22\text{ g}$) of honey.
+   * Exactly $1$ pumpkin.
+   
+   For each market in `market_df`, calculate how many complete meals could potentially be made from its honey alone (`floor(honey_kg / 0.022)`), and from its pumpkins alone. The meal capacity of that market is the smaller of these two numbers (hint: use `pmin()`, which computes parallel element-wise minimums across vectors). Add this as a column named `meal_capacity`.
+3. Construct a named list `market_list` containing 4 elements, where the names of the list elements are the town names (`Norwich`, `Diss`, etc.). Each element must itself be a list containing the purchase details (`honey`, `pumpkins`, `organic`, `expenses`, `meal_capacity`) for that town.
+4. Verify that typing `market_list[["Norwich"]]$meal_capacity` returns the correct number of meals.
+
+### Exercise 2: Simulated Survey Biomass Pipeline (Challenge 2 Prep)
+
+Simulate a survey dataset of 15 forest quadrats using deterministic vectors:
+```R
+# Pre-defined survey measurements:
+soil_ph_vals <- c(4.2, 5.8, 5.1, 7.2, 4.8, 6.9, 5.3, 4.5, 7.8, 5.4, 6.1, 4.9, 5.2, 6.7, 5.0)
+tree_counts  <- c(16,  12,  18,   8,  20,   5,  14,  22,   7,  19,  11,  15,  13,   9,  17)
+```
+
+1. Construct a data frame named `survey_df` containing two columns: `"soil_ph"` and `"tree_count"`.
+2. Add a column named `"biomass"` using the formula:
+   $$\text{biomass} = \text{tree\_count} \times (2.0 + 0.5 \times \text{soil\_ph})$$
+3. Subset `survey_df` into a new data frame named `specialist_df` containing only quadrats that meet both specialist acid-tolerant thresholds simultaneously:
+   * `soil_ph < 5.5`
+   * `tree_count >= 15`
+4. Calculate the arithmetic mean of the `"biomass"` column across all specialist plots in `specialist_df` and store it in a single scalar variable named `specialist_mean_biomass`.
+5. Write an expression that checks if `nrow(specialist_df) > 0`, and prints the scalar `specialist_mean_biomass`.
+
+### Exercise 3: Disturbance Matrix Transformation (Challenge 3 Prep)
+
+Consider an environmental impact matrix where rows represent 5 distinct ponds and columns represent 4 observation time points:
+```R
+impact_matrix <- matrix(
+  data = c(0.12, 0.45, 0.78, 0.22, 0.90,
+           0.15, 0.50, 0.82, 0.20, 0.95,
+           0.10, 0.40, 0.75, 0.25, 0.88,
+           0.30, 0.65, 0.92, 0.35, 0.99),
+  nrow = 5, ncol = 4
+)
+rownames(impact_matrix) <- paste0("Pond_", 1:5)
+colnames(impact_matrix) <- paste0("Time_", 1:4)
+```
+
+1. Calculate the mean impact score for each pond across all 4 time points using `rowMeans()`.
+2. Identify which ponds have an overall mean impact score strictly greater than `0.60`.
+3. Create a copy of `impact_matrix` named `disturbed_matrix`. In this new matrix, set all individual impact values that exceed `0.80` to `NA` (representing localized population collapse).
+4. Count how many total missing values (`NA`) exist in `disturbed_matrix` using `is.na()` and `sum()`.
