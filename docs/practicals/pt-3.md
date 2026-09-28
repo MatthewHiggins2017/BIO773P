@@ -1,440 +1,703 @@
-# **Practical 3 - Introduction to functions and loops in R**
+# **Practical 3 - Functions, Flow Control, and Defensive Programming**
 
-Building on your existing skills, we will now move on to consider advanced ways of controlling program flow. Specifically, we will explore **functions** and **loops**, two important features of R that are also present in most other programming languages. We will also be doing a few exercises with DNA/RNA strings. As always, you will want to refer frequently to the R help files (through `?`) and your own notes when exploring these new concepts.
+## Introduction
 
-## Functions
+In Practicals 1 and 2, you learned how to manipulate atomic vectors
+and composite structures (matrices, lists, and data frames) using
+vectorized expressions. In this practical, we shift from executing
+one-off commands to constructing **reusable code**.
 
-Functions are pieces of code that take input information (in the form of "arguments"), do something with it, and give back an output. They allow you to run an analysis multiple times without having to rewrite it from scratch every time you need to run it. A function looks like this:
+Modern scientific workflows require code that is modular, transparent,
+and robust against unexpected inputs. You will learn to:
 
-```r
-function_name <- function(input) {
+1. **Encapsulate logic into custom functions** with formal arguments, default parameters, and controlled return values.
+2. **Implement defensive programming** by validating input types, checking dimensions, and halting execution with informative error messages (`stop()`).
+3. **Control execution flow** using scalar conditional branching (`if` / `else if` / `else`).
+4. **Automate repetitive computations** using pre-allocated loops (`for` / `while`), including iteration skips (`next`) and loop termination (`break`).
+5. **Chain functions together** to build multi-stage analytical pipelines.
 
-  ### the "body" of the function
+We will focus on breaking down multi-step scientific problems into
+clear, verifiable programmatic statements. We will continue to work
+with deterministic data—stochastic simulations and pseudo-random
+numbers will be introduced in Practical 4.
 
-  # code that performs some calculation on the input
-  # possibly other lines of code that perform calculations
+---
 
-  # returning an output vector:
-  return(output)
+## The Anatomy of an R Function
+
+A function is an encapsulated, named block of code that accepts inputs
+(arguments), executes a set of instructions, and returns an output
+object.
+
+Functions provide four decisive advantages in scientific programming:
+
+* **Elimination of Duplication:** You write and debug a mathematical calculation once, rather than copying and pasting lines across your script.
+* **Isolation (Scope):** Variables created inside a function exist only during its execution. They do not pollute or overwrite variables in your global workspace.
+* **Testability:** You can systematically test a function against edge
+  cases and boundary conditions to ensure its computational
+  correctness.
+* **Encapsulation:** Once you (or somebody else) has written a working
+  R function, you (or others) only need to understand intuitively _what_
+  it does rather than considering the details of _how_ it is (best) done.
+
+### Basic Syntax and Return Values
+
+Functions are created using the `function` keyword and assigned to a variable name using `<-`:
+
+```R
+# Define a function to calculate acoustic sound velocity in seawater (Mackenzie, 1981):
+calc_sound_speed <- function(temp_c, salinity_psu, depth_m) {
+  speed <- 1448.96 + 4.591 * temp_c - 0.05304 * (temp_c^2) + 
+           1.340 * (salinity_psu - 35.0) + 0.0163 * depth_m
+  return(speed)
 }
 ```
 
-You can choose whatever name you want instead of `function_name` (try a meaningful name). After the `<-`, the word `function` within brackets lets R know that you are writing a new function. Here, `input` is the name of the only argument that the calculations in the `body` of the function are based on (your function *can* have multiple arguments). Between the curly brackets `{}` is the main code of your function, where the calculation(s) happen. Almost everything that occurs between the curly brackets stays within the curly brackets. The only thing that comes outside the curly brackets is what you put into the `return()` on the last line. If you have no `return()`, your function may compute something but nobody will ever know about it! Note that the `return` command can only handle a single argument.
+To execute (call) the function, pass the arguments by position or by name:
 
-To take a self-explanatory example:
+```R
+# By position:
+calc_sound_speed(12.5, 34.2, 250.0)
 
-```r
-x <- c(2, 3, 4, 5)
-mean(x)
+# By name (preferred for clarity and order independence):
+calc_sound_speed(depth_m = 250.0, temp_c = 12.5, salinity_psu = 34.2)
 ```
 
-You just used the `mean` function, one of many functions that our predecessors built into R. The point of this function is that you can calculate the mean of any vector without explicitly writing the formula for the mean each time. The interesting thing about R is that it is possible to create your own functions. This is how R functions work:
+> **Rules of Return:**
 
-```r
-## Define function named 'my_own_mean'
+> 1. In R, `return(value)` explicitly terminates the function and passes `value` back to the caller.
+> 2. If `return()` is omitted, R automatically returns the **last evaluated expression** in the function body. However, in scientific programming, writing explicit `return()` statements makes your exit points unambiguous.
+> 3. A function can return only **one single object**. If you need to return multiple pieces of information (e.g., a numeric summary, a filtered data frame, and a status flag), package them into a named `list`.
 
-my_own_mean <- function(numbers) {
-  ## Calculate mean
-  # Sum all numbers in the vector
-  sum_of_values <- sum(numbers)
+### Default Arguments
 
-  # Obtain the number of values in the vector
-  number_of_values <- length(numbers)
+You can provide fallback default values for arguments in the function header:
 
-  # Get the mean
-  mean_value <- sum_of_values/number_of_values
-
-  ## Output the mean
-  return(mean_value)
+```R
+calc_hydrostatic_pressure <- function(depth_m, gravity = 9.80665, water_density = 1025.0) {
+  # pressure in kiloPascals (kPa)
+  pressure_kpa <- (water_density * gravity * depth_m) / 1000.0
+  return(pressure_kpa)
 }
 
-## Now run the function with some data:
-my_own_mean(numbers = c(10, 20, 30, 40))
+# Uses defaults for gravity and water density:
+calc_hydrostatic_pressure(depth_m = 100.0)
 
-my_own_mean(numbers = seq(from = 1, to = 50))
-
+# Overrides water density for freshwater lake:
+calc_hydrostatic_pressure(depth_m = 100.0, water_density = 1000.0)
 ```
 
-We created a function that computes the sum and number of all values in a given vector (`numbers`) and then divides them to obtain the mean. We split the calculation in three steps, just to show that you can have many lines of code in the body of a function. The only input this function receives is a vector of numbers (`numbers`) and all the calculations are based on this. In the end we return the result of the third calculation (`mean_value`). Does `number_of_values` exist in the normal R console? No! Because this variable was only created within the curly brackets. Remember? What happens between the curly brackets stays in the curly brackets.
+### Variable Scoping: Local vs Global
 
-Nothing much happens after loading the function `my_own_mean` into R (you always have to evaluate the entire code of the function from `function_name` to the closing curly brackets `}` if you made changes to the code). The magic happens when you *call* the function. We did this by typing `my_own_mean(numbers = 1:50)` (of course you can use other vectors instead as well). The vector with numbers from 1 to 50 will be used as `numbers` in the function.
+Consider this scenario:
 
-Now take a look at the following lines of code. This code is designed to take a number in seconds and convert it into hours, minutes, and remaining seconds (`floor()` is R's built-in function for rounding down to the closest whole number):
+```R
+calibration_offset <- 1.5
 
-```r
-# Input raw number of seconds
-number_of_seconds <- 19955
-
-# Convert number_of_seconds into hours, minutes, and seconds
-hours   <- floor(number_of_seconds / (60 * 60))
-minutes <- floor((number_of_seconds - hours * (60 * 60)) / 60)
-seconds <- number_of_seconds - ((hours * 60) + minutes) * 60
-
-# Create a single vector containing all three quantities
-outputs <- c(hours, minutes, seconds)
-
-# Output the solution to the console
-outputs
-```
-
-#### Q1. Modify the code above to make it into a function called `time_converter`. This function should take a single number as an argument (the number of seconds we want to convert). This function should also include the three lines of code that convert `number_of_seconds` into `hours`, `minutes`, and `seconds`, the line of code that merges these three variables into one vector, and a line returning this vector as the output of the function. Once you created the function and loaded it into R, use relevant examples for testing (0, 3600, another). Remember to indent any code inside the curly brackets.
-
-#### Q2. Write your own function for converting distances between different units. Your function should take the distance in kilometres as input and return the distance in miles as output ([1 kilometre is 0.6213712 miles](https://en.wikipedia.org/wiki/Mile)). Note: `floor` won't be needed in the calculations here. Remember to clearly comment/annotate your code and make appropriate use of whitespace including indentation and newlines.
-
-### More complex functions
-
-Functions can be very useful when you have to do the same calculation many times. We will now consider a hypothetical experiment in which we are measuring the flight speed of bees through flight tunnels.
-
-We would like to measure the flight speed of the bees in meters per second. Annoyingly, the timer we used gave readings with the format `hours:minutes:seconds`, rather than just the total number of seconds.
-
-Fortunately, functions in R can take more than one argument:
-
-```r
-
-my_function <- function(input1, input2, ...) {
-    # code including input1, input2, ...
-    return(something)
+adjust_reading <- function(reading) {
+  adjusted <- reading + calibration_offset
+  return(adjusted)
 }
 
+adjust_reading(10.0)  # Returns 11.5
 ```
 
-#### Q3. Make a function that takes `hours`, `minutes` and `seconds` as inputs, and outputs the total number of seconds. Make sure it has three arguments and a descriptive name. Test the function with a range of times for which you know the answer.
+The function was able to find `calibration_offset` in the global environment even though it was not passed as an argument. **This is dangerous practice.** If `calibration_offset` is renamed, modified, or cleared from memory later in your session, your function will break or return incorrect numbers without warning.
 
-In our experiment, most bees flew through the test tunnel in under an hour. It is time consuming to include the argument `hours = 0` every time that we call the function.
+**Golden Rule of Modularity:** A function should be a self-contained "black box". It should rely **only** on arguments explicitly passed into it and variables defined locally within its body.
 
-A neat thing about functions is that we can set default values for any argument, using the syntax:
-
-```r
-my_function <- function(input1, ..., input15 = default) {
-  # code including input1, input2, ..., input15
-  return(something)
+#### Q1. Consider the function:
+```R
+estimate_heat_content <- function(temp_c, water_mass_kg, specific_heat = 4184) {
+  joules <- water_mass_kg * specific_heat * temp_c
+  return(joules)
 }
 ```
+1. What value is returned by `estimate_heat_content(20.0, 50.0)`?
+2. If you evaluate `joules` in your console after running this function, what happens? Why?
 
-The default argument(s) is generally placed at the end of the argument list.
+---
 
-#### Q4. Make the `hours` and `minutes` arguments be defined as 0 by default in your function. Run the function without supplying these two arguments, then run it again with using a range of `hours` and `minutes`.
+## Defensive Programming and Input Validation
 
-Finally, we would like to create a function to measure the flight speed of the bees in meters per second. This function should:
+When writing scripts for your own use, you might know what inputs are expected. However, in production pipelines, shared repositories, and automated assessment systems, functions frequently receive incorrect, incomplete, or corrupted inputs.
 
-* Take the tunnel length (in meters), hours, minutes and seconds as arguments
-* Use your previous function to convert hours, minutes and seconds to seconds
-* Calculate the speed of the bees in meters per second
-* Return the speed of the bees
+**Defensive programming** means designing your function to inspect its arguments before performing calculations, verifying that all preconditions hold, and immediately halting with an informative error if an inconsistency is detected.
 
-#### Q5A. Create this function. Test it with a control (values for which you know the answer).
+### Halting Execution with `stop()`
 
-#### Q5B. Use the function to measure the speed of the bees with the following measurements:
+The `stop()` function interrupts execution immediately, aborts any ongoing calculations, and prints an error message to the console:
 
-Distance (m) | Time (hours:minutes:seconds)
----------|------
-1 |00:00:08
-10 |00:00:40
-300 |00:05:00
-800 |01:06:40
-
-#### Q5C. Can you think of parameter values that would make your function not work properly? What happens if you try running the function with these values?
-
-### Functions with other types of input
-
-Note that functions do not have to take single numbers as input. They can take vectors, matrices, data frames, or any other type of object, and they can also take character and logical data as well as numerical. For example, the `mean` function we used earlier took the vector `x <- c(2, 3, 4, 5)` as input, which is a single vector with four numbers.
-
-#### Q6. Write a function that takes a vector of words as input and outputs the number of characters in the longest word. Hint: you are going to need to find out how R counts the number of characters in words and how it finds the maximum value in a vector - use an internet search engine!
-
-## Loops
-Imagine that you need to run the function `time_converter` on different numbers. You could type `time_converter` many different times, each time with a different number. But now imagine you had to type that thousands of times. Not fun.
-
-Fortunately, computers were built to perform same tasks over and over again many times. They do this using a construct called a *loop*. Although there are several types of loops, we are going to learn about the 'for loop'. It works this way:
-
-```r
-## For loop example
-for (seconds in c(1000, 2000, 3000)) {
-  time_in_hours <- time_converter(number_of_seconds = seconds)
-  print(time_in_hours)
-}
-```
-
-The variable `seconds` only exists within the loop. The loop will run 3 times. The first time, `seconds` will take the first value from the vector `(1000, 2000, 3000)`, i.e., `1000`. R will run through the loop, computing `time_in_hours` and printing it. When R starts running through the loop the second time, `seconds` will have the value `2000`, and the previously calculated `time_in_hours` will have been forgotten.  R will run through the loop, computing `time_in_hours` and printing it. The third time, same thing again, but `seconds` will start with the value `3000`.
-
-### Slightly more complex loops
-There are some interesting ways in which we can stretch our understanding of loops. First of all, it is important to recognise that the values that we are iterating over can be anything that goes in a vector. The vector can be defined outside the loop definition line:
-
-```r
-## Character based loop values
-greetings <- c("Hey", "Hi", "Hello", "Aloha", "Howdy",
-               "Yooooo!", "Wassup", "What's shakin?",
-               "yello!", "Greetings",  "Dude, wake up!")
-for (word in greetings) {
-  print(paste(word, " - said the giggling frog", sep = " "))
-}
-
-## Sequential loop values
-my_favourite_numbers <- c(42, 3.14, 7, 69, 6.626e-34, 1024, 4, 2.718281828, 666, 1.61803398, 99)
-
-# set the cumulative sum at zero before the loop starts
-cumulative_sum <- 0
-
-for (value in my_favourite_numbers) {
-  # print the sentence
-  print(paste(value, "is my favourite number", sep = " "))
-
-  # add favourite numbers, sequentially
-  cumulative_sum <- cumulative_sum + value
-
-  # print the cumulative sum
-  print(paste("The sum of my favourite numbers is:", cumulative_sum, sep = " "))
-}
-
-## Looping through the positions of each element of the vector (the index, or position)
-foods <- c("tempeh", "beyond", "beans", "tofu")
-for (position in seq_len(length(foods))) {
-  current_food <- foods[position]
-  message("At position ", position, " we have ", current_food)
-}
-
-```
-
-### Storing loop results
-
-You will often want to do more than just print the loop results. For example, you may want to keep them in a separate variable. Check the following example. What does `phrases` look like after the 4th iteration?
-
-```r
-## Vector to loop through
-practical_attributes <- c("great", "deeply distressing", "very long", "amazeballs!", "informative")
-
-## Empty vector to store the loop results in
-phrases <- c()
-
-for (practical_attribute in practical_attributes) {
- phrase <- paste("This practical is", practical_attribute)
- # Add the loop result to end of the vector of results
- phrases <- append(phrases, phrase)
-}
-```
-
-A different way of approaching a for loop is to loop through the positions of a vector, rather than the vector itself. In the following code, we also create a vector for the result with the same length as the vector that we are looping through. We then use the position to 'populate' it:
-
-```r
-## Vector to loop through
-practical_attributes <- c("great", "deeply distressing", "very long", "amazeballs!", "informative")
-
-## Vector with empty elements (as long as practical_attributes)
-phrases <- rep("", times = length(practical_attributes))
-
-## Loop through the position rather than the vector
-for (position in 1:length(practical_attributes)) {
-
-  ## Create phrase, getting attribute from practical_attributes[i]
-  phrase <- paste("This practical is", practical_attributes[position])
-
-  ## Add phrase to the right position of the results vector
-  phrases[position] <- phrase
-}
-```
-
-It is important to understand these two approaches with loops: looping through items vs. looping through positions. In some contexts it is easier to use the first approach; in other contexts the second is easier. Once you are comfortable with loops, have a go at the following tasks:
-
-#### Pen and paper Q7. Consider the following table, which lists the genus and species name for a number of ant species present in Great Britain. The loop counts the number of entries where the genus name begins with given letters. Describe in your own words what the loop is doing at each iteration.
-
-![ant table](../img/ant_table.png "ant_table")
-
-```
-letters <- c("L", "T", "A", "F")
-
-for (letter in letters){
- begins_with <- paste("^", letter, sep = "")
- matches <- grep(pattern = begins_with, x = ant_table$genus)
- print(paste(length(matches), "begin with", letter))
-}
-```
-
-#### Q8. Write a loop that iterates over the colours red, green, blue, yellow, orange, purple, pink and prints out the position (i.e. the position of the colour in the vector) and the colour itself. This should be done in human-readable format (i.e. "the colour red is in position 1 in the vector", "the colour blue is in position 2 in the vector", and so on). Make sure to indent the code appropriately between the curly brackets.
-
-### Using loops
-
-For the following exercice, imagine that instead of buying a coffee, you deposit the £2.50 you would have spent into a savings account. The account has an annual interest rate of 5%, which is deposited into the account. You do not take any money out of the account for 20 years.
-
-#### Q9. Use a `for` loop to calculate how much money there is in the account after 20 years.
-
-#### Q10. Create a plot showing the amount of money in the account for each year. Hint: If you have not already done so, you will need to create a vector to store the account balance for each year. You can use the base R function `plot()`, or, if you are feeling adventurous, install the "ggplot2" package and use that! See [https://ggplot2.tidyverse.org/articles/ggplot2.html](https://ggplot2.tidyverse.org/articles/ggplot2.html) for more information.
-
-In the following exercise, we will simulate the size of a population given a reproduction rate that changes every year.
-
-#### Q11. Write a loop that calculates the population size depending on the reproduction rate over a period of 20 years. Store the population value for each iteration of the loop in a separate vector.
-
-* Use a starting population size of 1000.
-* Every year,
-   * obtain a random reproduction rate (e.g., `reproduction_rate <- rnorm(n = 1, mean = 1, sd = 0.4)`.
-   * Update the population size value accordingly.
-   * Print a summary of what happened.
-   * Store each year's population in an external vector.
-* Once you have all the population sizes, plot them.
-
-### Nested Loops
-
-Another important way of extending loops is to consider nested loops - in other words, loops within other loops! Have a look at the following code:
-
-```r
-coffee <- c("latte", "cappuccino", "flat white", "cortado")
-cafes   <- c("Infusion", "Ground", "Sugar Cube", "Foxcroft & Ginger", "Sweet")
-
-for (drink in coffees) {
-  print(paste("I'd like a", drink, "... Where can I go?"))
-  for (the_place in cafes) {
-    print(paste("You can go to", the_place, "to have a", drink))
+```R
+validate_temperature <- function(temp_c) {
+  if (temp_c < -273.15) {
+    stop("Input temperature cannot be below absolute zero (-273.15 C).")
   }
+  return(temp_c + 273.15)
 }
+
+validate_temperature(-300.0)
+# Error in validate_temperature(-300): Input temperature cannot be below absolute zero (-273.15 C).
 ```
 
-Here we have one loop (with position `the_place`) nested within another loop (with position `drink`). We have also defined the values that `the_place` and `drink` can take. With a pen and paper, determine what is the 1st line printed, and then what is the 10th line printed? Evaluate this code and try to make sense of the output. Fiddle around with the different elements of this code until you are comfortable with nested loops. Warning - loops require your computer to perform many operations, and as such it is quite easy to crash R using loops. A simple block of code evaluated 100,000 times amounts to quite a big job. If you want to force R to exit a loop part way through, simply press 'Esc' (or control-C). Nested loops are particularly hazardous!
+### Essential Validation Checks
 
-#### Q12-A. Create a nested loop. The outer loop should iterate over the words "Angry", "Lazy", and "Happy". The inner loop should iterate over the words "birds", "dogs", and "horses". The code inside the inner loop should print out a vector containing the values of both loops (for example "Angry" and "birds" in the first instance).
+Every robust scientific function should validate its inputs against four structural criteria:
 
-#### Q12-B. Look again at the code you wrote in Q12-A. Did you sufficiently indent your code (like in the example of a nested loop above), so that it is easy to see which lines of code are executed at which point of the different loops? If not, DO IT NOW! And continue doing it for the next questions as well.
+1. **Dimensionality / Length:** Is the input a single scalar, or a vector of expected length?
+   ```R
+   if (length(x) != 1) {
+     stop("Argument 'x' must be a scalar (vector of length 1).")
+   }
+   ```
+2. **Data Type / Class:** Does the input conform to the required atomic class?
+   ```R
+   if (!is.numeric(x)) {
+     stop("Argument 'x' must be numeric.")
+   }
+   ```
+3. **Missingness:** Does the input contain forbidden `NA` or `NaN` values?
+   ```R
+   if (is.na(x)) {
+     stop("Argument 'x' cannot be NA.")
+   }
+   ```
+4. **Physical / Logical Bounds:** Do the values fall within valid operational limits?
+   ```R
+   if (x <= 0) {
+     stop("Argument 'x' must be strictly positive.")
+   }
+   ```
 
-#### Q13. Write a third-degree nested loop (i.e. a loop within a loop within a loop). Be careful not to loop over too many values or you will crash R!
+### Combining Validation Checks
 
-(if you're short of ideas, you could for example add `practical_attributes` qualifiers to Q12...)
+Let us build a validated function that computes dissolved oxygen saturation concentration:
 
-### Using loops to reformat a data set
-
-Loops are particularly useful to reformat data sets. By looping through all of the fields of a particular data set and at each iteration saving the relevant entry into a new data structure, it is possible to convert from one data format into another.
-
-The data set that we will use in this example is typical of the sort of data that you might be faced with in the future. Load the data by running the following line of code:
-
-```r
-helianthus_data <- as.matrix(read.table("https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/HelianthusData_num.txt",
-                                         header = TRUE))
-```
-
-Each row in this data set represents a different strain of *Helianthus annuus* (sunflowers), grown under controlled conditions. The first column tells us the Strain (these are numbered from 1 to 5). The remaining columns describe the number of plants found in the study area at six different points in time. For example, looking at the first row, we can see that strain 1 started out with 12 plants in the first time point and ended up with 57 plants in the last time point.
-
-We want to get this data into a new format - sometimes called long format - in which we have a matrix of three columns; the first column describes the strain, the second column describes the time point, and the third column describes the number of plants observed. It turns out that researchers often need to do this! For example, plotting using `ggplot` (and many analysis packages) requires long format. The first few lines of this new data structure should look like this:
-
-strain | time | count
--------|------|------
-1 |0 |12
-1 |1 |33
-1 |2 |71
-1 |3 |61
-1 |4 |73
-1 |5 |57
-2 |0 |10
-2 |1 |27
-...|...|...
-
-We can make the transition from the wide format of `helianthus_data` to the long format described above using a nested loop. But first, let us create an empty matrix, which we will eventually fill with our new values.
-
-#### Q14-A. Create an empty matrix, called `long_data`. This matrix must have 3 columns and 30 rows (the number 30 comes from the fact that we have five strains at six time points each). Name the columns `c("strain", "time", "count")`.
-
-With this empty matrix created, we can move on to the next part of the problem - populating it with values. We want to look at each of the elements of helianthus_data one after the other, using a nested loop. The basic structure of this nested loop is as follows:
-
-```r
-# Loop through all rows of helianthus_data
-nrow(helianthus_data)
-for (my_rows in 1:5) {
-  # Loop through all columns of helianthus_data except the first
-  for (my_col in 2:7) {
-
-    # This is where the main code goes (populating long_data with values).
-
+```R
+calc_do_saturation <- function(temp_c, salinity_psu = 35.0) {
+  # 1. Check types
+  if (!is.numeric(temp_c) || !is.numeric(salinity_psu)) {
+    stop("All arguments must be numeric.")
   }
-}
-```
-
-Here we are using loops to go through each of the rows of the matrix `helianthus_data`, and for each row we are going through columns 2 to 7 (as these are the columns that contain relevant data). At any point in the two loops, the value that we are focusing on is given by `helianthus_data[my_rows, my_col]`.
-
-Hopefully you can already see that these are the exact values that we want to drop into the third column of our matrix `long_data`. However, we are presented with a problem - how do we drop these values one after the other into the right place in the matrix `long_data`? We cannot use the index `my_rows` to help us, as this only goes through values 1 to 5. Similarly, we cannot use the index `my_col`, as this only goes through values 2 to 7. What we really need is a new index that goes all the way from 1 to 30, irrespectively of the row or column that we are focusing on.
-
-#### Q14-B. Change the for loop above to include a variable `my_position`. This variable should be defined as being 0 before the loop starts. At every iteration of the inner loop, you should add 1 to it. What are the values of `my_rows` and `my_col` when `my_position` is 3? Add a line to check the positions each time through.
-
-It should look something like this:
-
-```r
-# my_position defined as 0 before the loop starts
-my_position <- 0
-
-# Loop through all rows
-for (my_row in 1:5) {
-  # Loop through all columns except the first
-  for (my_col in 2:7) {
-
-    ## Change my_position here:
-    # make my_position equal to my_position plus one
-
-    # Print all the indices here to check that you are doing the right thing
+  
+  # 2. Check scalar lengths
+  if (length(temp_c) != 1 || length(salinity_psu) != 1) {
+    stop("Inputs must be single scalar values.")
   }
+  
+  # 3. Check for NA
+  if (is.na(temp_c) || is.na(salinity_psu)) {
+    stop("Inputs cannot be NA.")
+  }
+  
+  # 4. Check domain bounds
+  if (temp_c < -2.0 || temp_c > 45.0) {
+    stop("Temperature out of realistic environmental range (-2.0 C to 45.0 C).")
+  }
+  if (salinity_psu < 0.0 || salinity_psu > 50.0) {
+    stop("Salinity must be between 0.0 and 50.0 PSU.")
+  }
+  
+  # Calculation proceeds safely:
+  sat_conc <- 14.6 - 0.4 * temp_c + 0.008 * (temp_c^2) - 0.05 * salinity_psu
+  return(sat_conc)
 }
 ```
 
-Now that we have three indices - one going through the rows of `helianthus_data`, one going through the columns of `helianthus_data`, and one simply going from 1 to 30 - we have all the ingredients we need to populate the matrix `long_data`. The code we need at each iteration of the loop is the following:
+> **Note on `||` vs `|` in Conditions:** When testing conditions inside an `if` statement, R provides double operators `&&` (short-circuit AND) and `||` (short-circuit OR). Unlike `&` and `|` (which evaluate across entire vectors element-by-element), `&&` and `||` evaluate **only the first element** and stop evaluating further tests as soon as the outcome is decided. Use `&&` and `||` inside scalar `if` statements.
 
-```r
-# Get Count
-long_data[my_position, 3] <- helianthus_data[my_row, my_col]
+#### Q2. Inspect the following function:
+```R
+calc_dilution_factor <- function(stock_conc, target_conc) {
+  if (target_conc >= stock_conc) {
+    stop("Target concentration must be strictly less than stock concentration.")
+  }
+  return(stock_conc / target_conc)
+}
+```
+What happens if someone evaluates `calc_dilution_factor(stock_conc = "100", target_conc = 10)`? What additional defensive check is required to prevent this silent failure?
+
+---
+
+## Flow Control: Conditional Branching
+
+Conditional branching allows your code to make decisions, executing different blocks of instructions depending on whether a given condition evaluates to `TRUE` or `FALSE`.
+
+### Syntax of `if`, `else if`, and `else`
+
+```R
+classify_water_layer <- function(depth_m) {
+  if (depth_m < 0) {
+    stop("Depth cannot be negative.")
+  }
+  
+  if (depth_m <= 200.0) {
+    zone <- "Epipelagic"
+  } else if (depth_m <= 1000.0) {
+    zone <- "Mesopelagic"
+  } else if (depth_m <= 4000.0) {
+    zone <- "Bathypelagic"
+  } else {
+    zone <- "Abyssopelagic"
+  }
+  
+  return(zone)
+}
 ```
 
-This is fairly straightforward. We also want to drop the time point in the second column of `long_data`. Although we do not have a vector describing each of the time points, in fact the timings are very simply given by 'my_col minus two'. For example, if we are looking at the fourth column then we are looking at the second time point. Therefore, we need the following line of code to extract the timings:
+Execution runs sequentially:
+1. R evaluates the condition in the initial `if`. If `TRUE`, it executes that code block and skips the rest of the chain.
+2. If `FALSE`, it moves to the first `else if`. It tests each subsequent condition until one evaluates to `TRUE`.
+3. If none of the conditions evaluate to `TRUE`, the fallback `else` block executes.
 
-```r
-# Get Time
-long_data[my_position, 2] <- my_col - 2
+### Resolving Missing States in Comparisons
+
+A frequent challenge in environmental modeling occurs when an observation might be an established numeric value **or** missing (`NA`).
+
+Because comparing an unknown value to a number yields `NA` (e.g., `NA > 5` evaluates to `NA`), passing `NA` into a standard `if` statement will trigger an error: `Error in if (x > 5) : missing value where TRUE/FALSE needed`.
+
+You must explicitly test for missingness using `is.na()` **before** performing numeric comparisons:
+
+```R
+# Model the establishment of a colonising species arriving at a survey site:
+resolve_site_occupancy <- function(colonist_density, resident_density) {
+  # Scenario A: The habitat patch is completely unoccupied
+  if (is.na(resident_density)) {
+    final_density <- colonist_density
+  # Scenario B: The habitat patch is already occupied
+  } else if (colonist_density > resident_density) {
+    final_density <- colonist_density  # Colonist outcompetes resident
+  } else {
+    final_density <- resident_density  # Resident resists invasion
+  }
+  
+  return(final_density)
+}
+
+resolve_site_occupancy(colonist_density = 15.2, resident_density = NA)    # 15.2
+resolve_site_occupancy(colonist_density = 12.0, resident_density = 18.5) # 18.5
+resolve_site_occupancy(colonist_density = 22.4, resident_density = 18.5) # 22.4
 ```
 
-Finally, we want to drop the strain type into the first column of `long_data`. The strain type is given by the first element in every row, meaning it is given by `helianthus_data[my_rows, 1]`. Therefore, we need the following line of code to extract the strain types:
+#### Q3. Write a function named `clamp_reading` that takes three arguments: `val`, `lower`, and `upper`.
+1. The function should verify that `lower < upper`. If not, halt with `stop()`.
+2. If `val` is strictly below `lower`, return `lower`.
+3. If `val` is strictly above `upper`, return `upper`.
+4. Otherwise, return `val`.
 
-```r
-# Get Strain
-long_data[my_position, 1] <- helianthus_data[my_rows, 1]
+---
+
+## Flow Control: Iteration with Loops
+
+While R favors vectorized operations for simple mathematical
+transformations, **iterative algorithms**, **step-by-step
+simulations**, and **complex data manipulation** require explicit control loops.
+
+### The `for` Loop
+
+A `for` loop executes a block of code once for each element in a sequence:
+
+```R
+station_depths <- c(15.0, 45.0, 120.0, 310.0)
+
+for (d in station_depths) {
+  cat("Processing station at depth:", d, "meters\n")
+}
 ```
 
-#### Q14-C. Bring all of this together to finish the for loop, and run it!
-To check what you've done, you can print the start and end of long_data:
+### Index-Based Loops and the Gold Standard: Pre-Allocation
 
-```r
-head(long_data)
-tail(long_data)
+In scientific programming, you routinely use loops to populate a vector or table with calculated outputs.
+
+#### The Anti-Pattern: Dynamic Growth (Do NOT Do This)
+```R
+# INEFFICIENT AND SLOW:
+results <- c()  # Empty vector
+for (i in 1:1000) {
+  results <- c(results, i * 2)  # Re-allocates memory on every iteration!
+}
+```
+Every time you call `c(results, ...)`, R has to allocate a completely new chunk of memory in your computer's RAM, copy the entire existing vector into it, append the new value, and delete the old chunk. For large loops, this causes catastrophic slowdowns.
+
+#### The Correct Pattern: Vector Pre-Allocation
+Always allocate the complete destination vector with its known final length **before** entering the loop, and populate values directly by index:
+
+```R
+n_steps <- 5
+# Pre-allocate numeric vector of length 5 filled with NA:
+simulated_profile <- rep(NA, n_steps)
+# Alternatively: vector(mode = "numeric", length = n_steps)
+
+for (i in seq_len(n_steps)) {
+  simulated_profile[i] <- 10.0 + 2.5 * (i^1.5)
+}
+
+simulated_profile
 ```
 
-#### Q14-D. What can you do to reduce the risks of things going wrong if there is a chance you may want to rerun this loop on a similar but slightly different dataset?
+> **Safe Indexing with `seq_len()` and `seq_along()`:** Never write `for (i in 1:length(vec))`. If `vec` happens to be empty (length 0), R evaluates `1:0`, creating a sequence `c(1, 0)` that runs two buggy iterations!
+> Instead, always use:
 
-## Hacker section: Working with DNA data
+> * `seq_len(n)`: Generates `1:n`, or an empty sequence if `n == 0`.
+> * `seq_along(vec)`: Generates indices matching the exact elements of `vec`, handling empty vectors safely.
 
-#### Bonus Q15-A. Write a function that converts a short DNA sequence of 15 bases (e.g. "ACCTGTCATCATCCC") to RNA and splits the string into codon triplets. You will need to:
+### Controlling Loop Execution: `next` and `break`
 
-  * load the data into R: `dna_string <- scan("https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/sequence.txt", what = character())`
-  * replace T with U  (thymine with uracil to convert DNA to RNA)
-  * use `substring()` to split the sequence into triplets and `seq()` within `substring()`
-  * return the RNA triplets string
+* `next`: Immediately skips the remainder of the current loop iteration and advances to the next step.
+* `break`: Immediately terminates the entire loop, jumping out to the code following the loop block.
 
-Note `substring()` takes a 'first' and 'last' argument. The 'first' would be a sequence indicating where the beginnings of your triplets are. The 'last' argument would be a sequence indicating where the ends of your triplets are.  In `seq()` you will also indicate you want triplets.
+```R
+measured_temperatures <- c(14.2, -999.0, 16.8, 15.5, -999.0, 18.2)
+calibrated_temps <- vector(mode = "numeric", length = length(measured_temperatures))
 
-As an example:
+for (i in seq_along(measured_temperatures)) {
+  current_reading <- measured_temperatures[i]
+  
+  # Skip corrupted sensor codes (-999.0):
+  if (current_reading == -999.0) {
+    calibrated_temps[i] <- NA
+    next
+  }
+  
+  # Process valid readings:
+  calibrated_temps[i] <- current_reading * 1.02 + 0.1
+}
 
-```r
-dna_string <- c("AAATTT")
-substring(dna_string, seq(from = 1, to = 4, by = 3), seq(from = 3, to = 6, by = 3))
+calibrated_temps
+# 14.584     NA 17.236 15.910     NA 18.664
 ```
 
-#### Bonus Q15-B. Once you have created the function, see if you can modify it to work for a sequence with any number of characters. Tip: you can use `nchar()` to create a variable such as `num_characters`.
+#### Q4. Write a `for` loop that iterates over the integers from 1 to 20. 
+Using `next`, configure the loop so that it prints only the numbers that are **multiples of 3** (hint: use the modulo operator `%%`, where `i %% 3 == 0` identifies multiples of 3).
 
-#### Bonus Q16. Write a function to obtain the reverse-complement of a DNA sequence.
+---
 
-You can use this sequence (copy and paste it into R): `"ATTACGACGCGATTCCCGGTTAATCGAATTCCCA"`. As an example, the reverse-complement of ATGC is GCAT.
+## Practical Review Exercises
 
-The tricky part here is reversing a single string of characters. Search around for `strsplit`.  You will need to:
+Work through these multi-step exercises in your R script. Focus on translating ecological descriptions into clear, defensive functions and structured iterative code.
 
-* replace bases with their complement (you can use `gsub`, judiciously replacing uppercase characters with lowercase characters (or vice-versa)).
-* split the string of DNA bases into separate characters with `strsplit`. Unfortunately, `strsplit` confusingly returns a list, so you will need to use `unlist()` to obtain a string again.
-* reverse the sequence.
-* remove the spaces to get your single string of DNA bases (look into the help files for the `paste()` function).
-* return the reverse-complement sequence.
+---
 
-#### Mastermind Q17. Translate your triplet string from Q15 into amino acids.
-Note: depending on your method, you may not need to convert it to RNA first.  You can use a codon-to-amino-acid table and code the translation yourself. Your solution could include a function calling a function. Alternatively, you could search around and load a specific package for the manipulation of biological sequences.
+### Exercise 1: Multi-Site Invasiveness & Reserve Threat Scoring Pipeline
 
-## Bringing it all together
+Conservation managers evaluate habitat patches for invasive weed colonization risk. The vulnerability of a patch depends on canopy openness, visitor footfall, and distance to the nearest road corridor.
 
-Well done for making it this far! Now try to bring all of your knowledge together. Have another look over your previous notes and make sure these ideas are still fresh in your mind. Have a go at writing your own scripts, preferably combining a number of different concepts (for example, you could try making a function that acts on a matrix and then using this function within a loop). Another good idea would be to come up with a problem that you want to solve (either for fun or for other coursework) and then write a function that solves it.
+You are provided with records from 6 protected nature reserves:
 
-Many of the ideas presented in this and the last session are designed to challenge you. Do not expect to understand them from a single read through the material. Rather, you will have to play around with many different examples and applications before the penny drops completely. On the plus side, structures such as loops and functions are common to almost all programming languages, and so once you understand these concepts the world of programming is your oyster!
+```R
+reserve_names   <- c("Glen_Caladh", "Coed_Cariad", "Cairn_Moss", "Firth_Fen", "Dune_Reach", "Alder_Meadow")
+canopy_cover    <- c(0.85, 0.40, 0.15, 0.90, 0.25, 0.60)     # Fractional canopy cover (0 to 1)
+visitor_density <- c(12.5, 45.0, 8.0, 3.5, 62.0, 28.0)       # Visitors per hectare per day
+road_dist_km    <- c(4.2, 0.8, 12.0, 6.5, 0.3, 1.9)          # Distance to nearest road
+is_peatland     <- c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE)  # Peat soils have unique acidity
+```
+
+#### Part A: Patch Vulnerability Index Function
+
+Write a function named `calculate_patch_vulnerability` that calculates a threat index (V) for a single site:
+
+```R
+calculate_patch_vulnerability <- function(canopy, visitors, road_dist, peatland)
+```
+
+The ecological scoring rules are:
+
+1. **Precondition Checks:**
+    * Verify all inputs are single values of the correct class (numeric for the first three, logical for `peatland`).
+    * Verify that `0 <= canopy <= 1`.
+    * Verify that `visitors >= 0` and `road_dist >= 0`.
+2. **Base Risk Calculation:**
+    * Open canopies receive more light, accelerating invasive plant germination:
+      `light_score = 1.0 - canopy`
+    * Roads act as seed dispersal corridors; closer roads increase vulnerability:
+      `corridor_risk = 1.0/(1.0 + road_dist)`
+    * Base vulnerability combines light and road proximity weighted by
+      human traffic:
+	  ```
+	  V = (0.6 * light_score + 0.4 * corridor_risk) * (1.0 + 0.05 * visitors)
+	  ```
+3. **Soil Modifier:**
+    * If `peatland == TRUE`, the acidic soil suppresses most generalist plant invaders. Apply a 40% reduction (`V_final = 0.60 * V`).
+    * Otherwise, `V_final = V`.
+4. Return `V_final`.
+
+#### Part B: Reserve Registry and Batch Threat Evaluation
+
+Write a function named `audit_reserve_network` that processes all candidate reserves:
+
+```R
+audit_reserve_network <- function(names, canopy, visitors, road_dist, peatland, threat_threshold = 0.75)
+```
+
+1. **Defensive Check:**
+    * Ensure that all five input vectors have the exact same length. If not, halt with `stop("All parallel input vectors must be of identical length.")`.
+2. **Iterative Evaluation:**
+    * Pre-allocate a numeric vector `vulnerability_scores` of length equal to `length(names)`.
+    * Pre-allocate a character vector `action_plan` of the same length.
+    * Using a `for` loop over `seq_along(names)`:
+        * Call `calculate_patch_vulnerability()` for the i-th site.
+        * Store the result in `vulnerability_scores[i]`.
+        * Using conditional branching (`if` / `else`):
+            * If `vulnerability_scores[i] >= threat_threshold`, assign `"Urgent Weed Eradication"` to `action_plan[i]`.
+            * If `vulnerability_scores[i] >= 0.40`, assign `"Routine Monitoring"` to `action_plan[i]`.
+            * Otherwise, assign `"Low Priority"` to `action_plan[i]`.
+3. **Assemble Summary Data Frame:**
+    * Construct and return a data frame with columns:
+        * `"reserve"`
+        * `"vulnerability"`
+        * `"action"`
+        * `"high_risk"` (a logical column where `vulnerability >= threat_threshold`)
+
+Run the audit on the 6 protected reserves:
+
+```R
+reserve_audit <- audit_reserve_network(
+  names            = reserve_names,
+  canopy           = canopy_cover,
+  visitors         = visitor_density,
+  road_dist        = road_dist_km,
+  peatland         = is_peatland,
+  threat_threshold = 0.75
+)
+
+reserve_audit
+```
+
+Examine the output data frame. How did the peatland soil modifier affect the vulnerability score of `Cairn_Moss` relative to `Dune_Reach`?
+
+---
+
+### Exercise 2: The Discrete-Time Logistic Map & Non-Linear Population Regimes
+
+A classic foundation of theoretical population biology is Robert May's (1976) analysis of the discrete-time logistic difference equation:
+```
+x_(t+1) = r x_t (1 - x_t)
+```
+
+Here, x_t represents the population density scaled between 0.0 and 1.0 (as a fraction of carrying capacity), and r is the intrinsic reproductive rate (0 < r <= 4.0). 
+
+#### Part A: The Logistic Step Function
+
+Write a function named `logistic_step` that computes a single step:
+
+```R
+logistic_step <- function(x, r)
+```
+
+1. **Validation:**
+    * Verify that both `x` and `r` are single numeric scalars.
+    * Verify that 0.0 <= x <= 1.0. If violated, halt with `stop("x must be in [0, 1].")`.
+    * Verify that r > 0.0 and r <= 4.0. If violated, halt with `stop("r must be in (0, 4].")`.
+2. Compute and return the value of x_(t+1), that is, `r*x*(1 - x)`.
+
+#### Part B: Time-Series Generator
+
+Write a function named `iterate_logistic_map` with the signature:
+
+```R
+iterate_logistic_map <- function(x0, r, n_steps)
+```
+
+1. Validate that `n_steps` is a single positive integer $\ge 1$.
+2. Pre-allocate a numeric vector `trajectory` of length `n_steps + 1`.
+3. Set `trajectory[1] <- x0`.
+4. Using a `for` loop, iteratively call `logistic_step()` to generate values for $t = 1, \dots, n\_steps$.
+5. Return the full `trajectory` vector.
+
+Test your function:
+```R
+traj <- iterate_logistic_map(x0 = 0.2, r = 2.8, n_steps = 50)
+length(traj)    # Should be 51
+tail(traj, 5)   # Should settle around ~0.6428
+```
+
+#### Part C: Testing for Asymptotic Convergence to a Fixed Point
+
+When r < 3.0, the logistic map converges to a single stable fixed
+point. Above r \approx 3.0, the value of x starts to oscillate.
+
+Write a function named `check_fixed_point_convergence` that tests whether a trajectory has converged:
+
+```R
+check_fixed_point_convergence <- function(x0, r, burn_in = 200, tolerance = 1e-4)
+```
+
+1. Run the map for `total_steps = burn_in + 2` steps using `iterate_logistic_map()`.
+2. Extract the last two elements of the evaluation window and compute
+   their absolute difference using the `abs()` function.
+3. If this differences is less than `tolerance`:
+    * Return `TRUE`.
+    * Otherwise, the system is oscillating or chaotic. Return `FALSE`.
+
+Test your convergence checker:
+```R
+check_fixed_point_convergence(x0 = 0.3, r = 2.6)  
+check_fixed_point_convergence(x0 = 0.3, r = 3.2)  
+check_fixed_point_convergence(x0 = 0.3, r = 3.8)  
+```
+
+---
+
+### Exercise 3: Wetland Microclimate & Thermal Buffering Model
+
+Wetland vegetation canopies buffer local microclimates against extreme atmospheric heat. An ecological biophysics model predicts water temperature in shaded reed beds based on ambient air temperature and water flow velocity.
+
+#### Problem Formulation
+
+At hourly time steps, the change in wetland water temperature ($T_{w}$) depends on thermal transfer from air ($T_a$) and convective cooling from inflow velocity ($v$, in $\text{m s}^{-1}$):
+
+$$\Delta T_w = k_{air} \times (T_a - T_w) - k_{flow} \times v \times (T_w - T_{inflow})$$
+
+where:
+* $k_{air} = 0.12$ (air-water heat transfer coefficient)
+* $k_{flow} = 0.25$ (flow convective coefficient)
+* $T_{inflow} = 12.0\,^\circ\text{C}$ (temperature of upstream groundwater spring)
+
+If the calculated water temperature exceeds a critical ecological threshold ($T_{crit} = 22.0\,^\circ\text{C}$), dissolved oxygen stress occurs.
+
+#### Tasks
+
+1. Write a function named `update_wetland_temp`:
+   ```R
+   update_wetland_temp <-
+       function(current_tw, air_temp, flow_velocity, k_air = 0.12, k_flow = 0.25, inflow_temp = 12.0){
+       # your code here
+    }
+   ```
+   It must
+    * Validate that all inputs are single numeric scalars.
+    * If `flow_velocity < 0`, halt execution with `stop("Flow velocity cannot be negative.")`.
+    * Calculate \Delta T_w and return the updated temperature $T_{w} + \Delta T_w$.
+
+2. Write an iterative simulation function named `simulate_heatwave_impact`:
+   ```R
+   simulate_heatwave_impact <- function(initial_tw, air_temp_profile, flow_velocity)
+   ```
+    * `air_temp_profile`: A numeric vector representing hourly air temperatures over a heatwave event.
+    * `initial_tw`: Water temperature at hour 0.
+    * `flow_velocity`: Inflow velocity throughout the event.
+
+   The function must:
+   
+   * Validate that `air_temp_profile` has length at least 1 and contains no `NA` values.
+   * Pre-allocate a numeric vector `water_temps` to store temperatures at each hour.
+   * Iterate through the hours using a `for` loop, updating the water temperature sequentially using `update_wetland_temp()`.
+   * Count the total number of hours where the water temperature was strictly above $22.0\,^\circ\text{C}$.
+   * Package and return a named list containing:
+   
+      * `hourly_temps`: The full vector of simulated water temperatures.
+      * `max_water_temp`: The maximum temperature reached.
+      * `stress_hours`: Total hours exceeding 22C.
+      * `buffered`: A logical scalar that is `TRUE` if `max_water_temp` remained below the maximum air temperature observed in `air_temp_profile`.
+
+3. Test your simulation using a 24-hour sinusoidal heatwave profile:
+   ```R
+   hours <- 1:24
+   heatwave_air <- 20.0 + 8.0 * sin((hours - 8) * pi / 12)
+   
+   # Run simulation under stagnant flow (v = 0.02 m/s):
+   low_flow_run <- simulate_heatwave_impact(initial_tw = 14.0, air_temp_profile = heatwave_air, flow_velocity = 0.02)
+   
+   # Run simulation under active flushing flow (v = 0.15 m/s):
+   high_flow_run <- simulate_heatwave_impact(initial_tw = 14.0, air_temp_profile = heatwave_air, flow_velocity = 0.15)
+   
+   cat("Low flow stress hours:", low_flow_run$stress_hours, "\n")
+   cat("High flow stress hours:", high_flow_run$stress_hours, "\n")
+   ```
+
+---
+
+### Exercise 4: Dynamic Harvest Quotas and Fisheries Escapement
+
+In fisheries conservation, sustainable yield policies often employ **biological escapement thresholds**. Instead of allowing a fixed annual catch, fisheries managers adjust the permitted quota based on the estimated adult biomass at the start of the season.
+
+Consider a coastal cod stock managed under a three-tier harvest control rule:
+
+1. **Moratorium Tier:** If adult biomass B is below the critical
+   threshold B\_crit = 1500 tonnes, no fishing is permitted (harvest H = 0).
+2. **Proportional Tier:** If biomass is between B\_crit and the target
+   threshold B\_targ = 5000 tonnes, harvest is set to:
+   ```
+   H = 0.20 x (B - B_crit)
+   ```
+3. **Maximum Sustainable Tier:** If biomass is at or above $B_{targ}$,
+   the harvest rate is capped at:
+   ```
+   H = 0.20 x (B_targ - B_crit) + 0.35 x (B - B_targ)
+   ```
+
+Furthermore, under adverse environmental conditions (e.g., poor marine heatwave years), harvest rates must be reduced by an additional conservation buffer.
+
+#### Part A: Single-Season Harvest Decision Function
+
+Write a function named `calc_harvest_quota` that accepts the following arguments:
+
+* `biomass`: Estimated adult biomass in tonnes.
+* `marine_heatwave`: Logical scalar indicating whether a severe heatwave occurred during the spawning season (defaults to `FALSE`).
+* `b_crit`: Critical threshold (defaults to `1500.0`).
+* `b_targ`: Target threshold (defaults to `5000.0`).
+
+The function must execute these steps:
+
+1. **Defensive Validation:**
+    * Verify that `biomass` is a single numeric scalar and is strictly non-negative ($\ge 0$). If violated, halt execution with `stop()`.
+    * Verify that `marine_heatwave` is a single logical scalar (`TRUE` or `FALSE`).
+    * Verify that `b_crit < b_targ`.
+2. **Harvest Determination:**
+    * Calculate the base harvest $H$ using the three-tier rule above.
+    * If `marine_heatwave == TRUE` and H > 0, apply a 25% reduction to the calculated harvest (H\_adj = 0.75 x H).
+    * Ensure the final harvest never exceeds the available biomass (H <= B).
+3. **Return Value:**
+    * Return the final permitted catch as a single numeric scalar.
+
+
+Test your function with the following calls and check the outputs:
+
+```R
+calc_harvest_quota(biomass = 1200)                         # Should return 0
+calc_harvest_quota(biomass = 3500)                         # 0.20 * (3500 - 1500) = 400
+calc_harvest_quota(biomass = 3500, marine_heatwave = TRUE) # 400 * 0.75 = 300
+calc_harvest_quota(biomass = 6000)                         # 0.20 * 3500 + 0.35 * 1000 = 1050
+```
+
+#### Part B: Multi-Year Stock Trajectory Simulation
+
+Write a second function named `simulate_fishery_trajectory` with the signature:
+
+```R
+simulate_fishery_trajectory <-
+    function(b_start, years, intrinsic_growth = 0.35, carrying_capacity = 8000){
+        ...
+    }
+```
+
+The function simulates population changes from year t to year t+1
+using a logistic growth model with harvest:
+```
+B_(t+1) = B_t + r B_t (1 - B_t/K ) - H_t
+```
+where r = intrinsic\_growth, K = carrying\_capacity, and H_t is determined by calling `calc_harvest_quota(biomass = B_t)`.
+
+Requirements:
+
+1. Validate that `years` is a single integer-like numeric value >= 1.
+2. Pre-allocate a numeric vector named `biomass_history` of length `years + 1`. Set `biomass_history[1] <- b_start`.
+3. Pre-allocate a numeric vector named `harvest_history` of length `years`.
+4. Using a `for` loop over years 1, ..., years:
+    * Determine H_t from the current stock level using `calc_harvest_quota()`. Store it in `harvest_history[t]`.
+    * Compute the post-harvest biomass at year t+1.
+    * **Extinction check:** If calculated biomass falls below 1.0 tonne, set the biomass to 0.0, record the remaining years as 0.0, and terminate the loop immediately using `break`.
+5. Package the results into a named list containing:
+    * `biomass`: The full trajectory vector.
+    * `harvest`: The vector of catches.
+    * `collapsed`: A logical flag indicating whether the stock collapsed to zero.
+6. Return the list.
+
+Verify your function by running a 20-year simulation starting at B_0 = 2000:
+
+```R
+sim_run <- simulate_fishery_trajectory(b_start = 2000, years = 20)
+sim_run$collapsed
+head(sim_run$biomass)
+```
+
