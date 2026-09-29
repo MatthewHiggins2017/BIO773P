@@ -277,75 +277,128 @@ legend("topright", legend = paste("Mean =", round(mean(waiting_times), 1)),
 
 ---
 
-### 2. Expectation vs. Mean: Discovering the Invisible Attractor of an Unknown System
+### 2. Expectation vs. Mean:  The Invisible Attraction of Expectation
 
-In introductory textbooks, probability and expectation are often presented using symmetrical objects like fair coins or fair dice. But this makes the concept of expectation deceptively trivial: if a die has faces 1 through 6, people simply calculate the arithmetic average `(1 + 2 + 3 + 4 + 5 + 6) / 6 = 3.5` and assume that is all there is to it.
+After having built intuition on the concept of "probability", let's
+develop intuition on another concept that is central to statistics:
+the "expectation value".  Conceptually, the expectation value of a
+random variable (such as the outcome of a measurement) is the average
+over a very large number of equivalent measurements. But what does
+this really mean?
 
-In real nature, however, **there are no symmetric dice**.
+#### Building a "Mystery Loaded Die"
 
-* Organisms do not have equal probabilities of surviving or dying.
-* Seeds do not have equal chances of dispersing to every location.
-* We **never** know the underlying probabilities in advance.
-
-Furthermore, defining probability and expectation in words quickly leads to circular reasoning: we define probability as the expected relative frequency over infinite trials, and we define expectation as the probability-weighted sum of outcomes. You cannot define either word without already relying on the other!
-
-The only way to break out of this circle and understand what an **expectation value** truly is—and how it fundamentally differs from a **sample mean**—is to experience it computationally on an unknown, loaded system.
-
-#### Building a "Mystery Loaded Die" using an R Closure
-
-In R, a **closure** is a function that carries its own private, enclosed environment. Variables stored inside a closure remain sealed away from your global workspace: you cannot see them in your RStudio Environment panel, and you cannot accidentally tamper with them.
-
-We can use a closure to create a unique "mystery die" for each student. Run the following code to define the generator factory:
-
-
+Copy the code below and into your RStudio script and evaluate it to
+define the function `create_mystery_die`.  
 
 ```R
-create_mystery_die <- function(student_id) {
-  # Save current random state so this setup does not alter global randomness:
-  old_seed <- if (exists(".Random.seed", envir = .GlobalEnv)) get(".Random.seed", envir = .GlobalEnv) else NULL
-  
-  # Initialize secret, non-uniform probabilities based on the student's ID:
-  set.seed(student_id)
-  weights <- runif(6, min = 0.5, max = 1.5)
+create_mystery_die <- function(n_faces = 6) {
+  ## This function outputs a mystery die with n_faces faces.
+  if(!is.numeric(n_faces) || is.na(n_faces[1]) || n_faces[1] < 2)
+    stop("Bad value for n_faces.")
+  n_faces <- as.integer(n_faces[1])
+  randomness  <- runif(1)
+  set.seed(Sys.time() * randomness)
+  weights <- runif(n_faces, min = 0.5, max = 1.5)
   secret_probs <- weights / sum(weights)
-  secret_expectation <- sum((1:6) * secret_probs)
-  
-  # Restore the prior global random state:
-  if (!is.null(old_seed)) assign(".Random.seed", old_seed, envir = .GlobalEnv)
-  
-  # Return the mystery die function:
+  secret_expectation <- sum((1:n_faces) * secret_probs)
+  set.seed(randomness * .Machine$integer.max)
   function(n = 1, reveal = NA) {
-      if (!is.na(reveal) &&
-          tools::md5sum(bytes = charToRaw(as.character(reveal))) ==
-          "a542e9b744bedcfd874129ab0f98c4ff") {
-          return(list(probabilities = round(secret_probs, 4), 
-                      expectation   = round(secret_expectation, 4)))
-      }
-      sample(1:6, size = n, replace = TRUE, prob = secret_probs)
+    if (!is.na(reveal) &&
+        tools::md5sum(bytes = charToRaw(as.character(reveal))) ==
+        "a542e9b744bedcfd874129ab0f98c4ff") {
+      return(list(probabilities = secret_probs, 
+                  expectation   = secret_expectation))
+    }
+    sample(1:n_faces, size = n, replace = TRUE, prob = secret_probs)
   }
 }
 ```
 [comment]: <> (password: "knowledge")
 
-Now, instantiate your personal die by supplying your student ID number (or any unique integer of your choice):
+The function uses some advanced R trickery and I won't explain _how_
+it works.  But _what_ it does is the following:
+
+Calling create_mystery_die() another function. This function simulates
+a loaded die, that is, a die that will give you one of the outcomes 1,
+2, 3, 4, 5, 6 each time you 'roll' it, but it won't give them with
+the exact same probability. _Nobody_, not even I, knows what the
+probability of each outcome is!
+
+> This is the situation that almost _every_ scientist doing empirical
+> research faces. You will face it as well when doing your MSc
+> project: when you collect data or do measurements, your are getting
+> random outcomes each time according to rules that _nobody_
+> knows. And yet you need to conclude something useful from this
+> randomness to submit your thesis!
+
+Now, instantiate your personal die:
 
 ```R
-# Replace 12345 with your actual student ID number:
-my_die <- create_mystery_die(student_id = 12345)
+my_die <- create_mystery_die()
 ```
 
-Look at your RStudio **Environment** panel. `my_die` is simply listed as a function. The underlying probabilities are locked inside. 
-
-Roll your mystery die a few times:
-
+Try out your die:
 ```R
 my_die(1)   # Roll once
+my_die(1)   # Roll again
+my_die(1)   # Roll another time
 my_die(10)  # Roll 10 times
 ```
+Can you see from the outputs that the die is loaded?
 
-#### The Noisy Sample Mean
+#### The Sample Mean
 
-What is the "average" outcome of your die? Because the die is loaded with secret weights, you cannot calculate `(1 + ... + 6) / 6`. 
+For a die that is not loaded, we can compute the "average" outcome of
+rolling it.  Because all dies of the die have the same probability,
+the "average" outcome is can be calculate by averaging over the
+outcomes: `(1 + ... + 6) / 6 = 3.5`. But, as you know, the outcome of
+each roll is random, so simply averaging over six rolls won't give
+3.5. We can use the `sample.int()` function to demonstrate this. Try
+it out several times:
+```R
+six_fair_rolls <- sample.int(n = 6, size = 6, replace = TRUE)
+six_fair_rolls
+mean(six_fair_rolls)
+```
+
+The outcome is hard to distinguish from that using a loaded 
+die. Compare with the result of running the following code several times:
+```R
+six_loaded_rolls <- my_die(6)
+six_loaded_rolls
+mean(six_loaded_rolls)
+```
+
+To get, for a fair die, an average close to the value 3.5 that we expect, we need to
+average over _many, many_ rolls. Try the following a few times:
+```R
+mean(sample.int(n = 6, size = 10^6, replace = TRUE))
+```
+> Here's the crucial observation: by averaging over many unpredictable
+> outcomes, we obtained a pretty well reproducible outcome. This
+> reproducible outcome from averaging over _many, many_ samples is called
+> the **expectation value**.
+
+We can use this method to show that our mystery die is loaded. Try the
+following a few time:
+```R
+mean(my_die(10^6))
+```
+> You can see that the **expectation value** of rolling `my_die` is
+> also reproducible and clearly
+> different from that of a fair die.  The difference is that for the
+> fair die we could compute the expectation value using some maths.  For
+> `my_die` we could not.  We _had_ to obtain it from averaging over many measurements. 
+> So, if you'd be studying `my_die`
+> for your MSc thesis, you could:
+>
+>   * Report the expectation value you find.
+>   * Observe that the expectation value is clearly different from
+>     that for a fair die.
+>   * Conclude that `my_die` is not fair, but rather tends to give
+>     lower/higher values.
+
 
 Let us compute the sample mean across a small sample of 15 rolls:
 
@@ -353,7 +406,8 @@ Let us compute the sample mean across a small sample of 15 rolls:
 mean(my_die(15))
 ```
 
-Run that line three or four times in your console. Notice how erratic the result is:
+Run that line three or four times in your console. Notice how erratic
+the result is:
 * In one run, you might get `4.2`.
 * In the next, you might get `2.8`.
 * In another, `3.5`.
