@@ -298,23 +298,16 @@ create_mystery_die <- function(n_faces = 6) {
     stop("Bad value for n_faces.")
   n_faces <- as.integer(n_faces[1])
   randomness  <- runif(1)
-  set.seed(Sys.time() * randomness)
+  set.seed(as.numeric(Sys.time()) * randomness)
   weights <- runif(n_faces, min = 0.5, max = 1.5)
   secret_probs <- weights / sum(weights)
   secret_expectation <- sum((1:n_faces) * secret_probs)
   set.seed(randomness * .Machine$integer.max)
-  function(n = 1, reveal = NA) {
-    if (!is.na(reveal) &&
-        tools::md5sum(bytes = charToRaw(as.character(reveal))) ==
-        "a542e9b744bedcfd874129ab0f98c4ff") {
-      return(list(probabilities = secret_probs, 
-                  expectation   = secret_expectation))
-    }
+  function(n = 1) {
     sample(1:n_faces, size = n, replace = TRUE, prob = secret_probs)
   }
 }
 ```
-[comment]: <> (password: "knowledge")
 
 The function uses some advanced R trickery and I won't explain _how_
 it works.  But _what_ it does is the following:
@@ -400,25 +393,18 @@ mean(my_die(10^6))
 >     lower/higher values.
 
 
-Let us compute the sample mean across a small sample of 15 rolls:
+#### Watching Means in Multiple Parallel Universes Converge
 
-```R
-mean(my_die(15))
-```
+Here's the problem: you usually can't make 10^6 = 1,000,000
+measurements for your MSc thesis!
 
-Run that line three or four times in your console. Notice how erratic
-the result is:
-* In one run, you might get `4.2`.
-* In the next, you might get `2.8`.
-* In another, `3.5`.
+So, how many measurements do we rally need to get hold of an
+expectation value?
 
-The **sample mean** (`mean(x)`) is an empirical calculation from real, collected data. It is noisy, erratic, and changes on every single survey. If you were a field ecologist with a small sample size (`n = 15`), you would have no idea what the true underlying property of this system actually is.
-
-#### Watching Multiple Parallel Universes Converge
-
-If the expectation value cannot be reliably observed in a single sample, how does it physically manifest?
-
-Let us simulate rolling your mystery die 2,000 times. But instead of watching just one sequence, let us simulate **5 independent parallel universes** running side by side, and plot their running sample means as data accumulates:
+Let us simulate rolling the mystery die 2,000 times. But instead of
+watching just one sequence, let us simulate [**5 independent parallel
+universes**](https://en.wikipedia.org/wiki/Everything_Everywhere_All_at_Once) running side by side, and plot the sample means we get as
+data accumulates:
 
 ```R
 n_rolls <- 2000
@@ -428,10 +414,10 @@ n_universes <- 5
 plot(NA, xlim = c(1, n_rolls), ylim = c(1.5, 5.5),
      xlab = "Number of Die Rolls (Sample Size n)",
      ylab = "Cumulative Running Mean",
-     main = "5 Independent Realizations of Your Mystery Die")
+     main = "5 Independent Realizations of My_Die")
 
 # Assign distinct colours to each parallel history:
-palette <- c("steelblue", "forestgreen", "darkorange", "purple", "firebrick")
+palette <- c("lightblue", "darkgreen", "darkorange", "purple", "brown")
 
 # Pre-allocate a vector to record the final asymptotic estimates:
 final_estimates <- numeric(n_universes)
@@ -439,56 +425,40 @@ final_estimates <- numeric(n_universes)
 # Simulate and overlay each running trajectory:
 for (k in seq_len(n_universes)) {
   rolls <- my_die(n = n_rolls)
+  # Here we use a trick to compute all n_roll means in one line:
   running_mean <- cumsum(rolls) / seq_len(n_rolls)
   lines(running_mean, col = palette[k], lwd = 1.4)
   final_estimates[k] <- running_mean[n_rolls]
 }
 ```
 
-Examine this plot carefully. It captures the physical essence of what statisticians call the **Law of Large Numbers**:
-
-1. **The Early Fan of Chaos (`n < 50`):**
-   Look at the left edge of the plot. Each universe lives in its own wild reality. In one universe, early high rolls push the running mean up; in another, early low rolls drag it down. If you stopped sampling here, you would conclude that the universes follow completely different laws of nature.
-2. **The Inevitable Collapse into the Center of Gravity (`n > 500`):**
-   Now follow the lines to the right as `n` crosses 500, 1,000, and 2,000 rolls. 
-   None of these five simulations have any awareness of each other. The random number generator does not "remember" past rolls to balance out bad luck. Yet, despite being completely independent and random, **all five lines are inexorably funneled into the exact same horizontal asymptote**.
-3. **Compare with Your Neighbour:**
-   Look at the screen of the student sitting next to you. Their five lines *also* converged into a razor-thin horizontal beam—but their beam converged at a **completely different number** from yours!
-
-#### Revealing the Secret Expectation
-
-Estimate where your five parallel histories converged by averaging their final endpoints:
-
+Write down what you observe:
 ```R
-cat("Empirical estimate of the attractor:", round(mean(final_estimates), 3), "\n")
+## Your notes here
 ```
 
-Now, unlock the closure and reveal the true mathematical properties baked into your die:
-
+How many samples do you recommend to take to get reliable estimates of expectation values?
 ```R
-truth <- my_die(reveal = TRUE)
-truth
+## How many samples:
 ```
-
-Overlay this true expectation onto your plot as a dashed black line:
-
-```R
-abline(h = truth$expectation, col = "black", lty = 2, lwd = 2.5)
-legend("topright", 
-       legend = c("Independent Sample Histories", paste("True Expectation =", truth$expectation)),
-       col = c("steelblue", "black"), lty = c(1, 2), lwd = c(1.4, 2.5))
-```
-
-Look at how the dashed line cuts directly through the convergence channel.
 
 Reflect deeply on what you have just witnessed:
-* The **sample mean** is an empirical measurement. It lives in the data. It is noisy and changes with every sample.
-* The **expectation value** is **not** an average of data. It was fixed the moment `create_mystery_die` was executed—*before a single die was ever rolled*.
-* The expectation value is the invisible **center of gravity** of the generating mechanism. The Law of Large Numbers is the physical guarantee that as individual random observations accumulate, their collective historical average is inexorably captured by this invisible attractor.
 
-#### Zooming In: The Small-Sample Trap
+* The **sample mean** is an empirical measurement. It is a random
+  number. It is noisy and changes with every sample.
+* The **expectation value** is **not** an average of data. It was
+  fixed the moment `my_die` was created by `create_mystery_die`,
+  *before a single die was ever rolled*.
+* The expectation value is like an **invisible attractor** towards
+  which sample means move for large sample sizes. The Law of Large
+  Numbers is the physical guarantee that, as individual random
+  observations accumulate, their collective historical average is
+  captured by this invisible attractor.
 
-To understand why field biology and conservation surveys are so difficult, zoom into the first 100 rolls of your experiment:
+#### Zooming In: Small-Sample Size Experiments
+
+To understand why field biology and conservation surveys are so
+difficult, lets do some experiments with only 100 rolls of our die:
 
 ```R
 # Re-plot focusing strictly on small sample sizes (n = 1 to 100):
@@ -496,7 +466,6 @@ plot(NA, xlim = c(1, 100), ylim = c(1.5, 5.5),
      xlab = "Number of Die Rolls (Sample Size n)",
      ylab = "Cumulative Running Mean",
      main = "The Small-Sample Trap: First 100 Rolls")
-abline(h = truth$expectation, col = "black", lty = 2, lwd = 2)
 
 for (k in seq_len(n_universes)) {
   rolls <- my_die(n = 100)
@@ -505,81 +474,174 @@ for (k in seq_len(n_universes)) {
 }
 ```
 
-Notice how wide the spread remains even at `n = 50`. When researchers report "the average body mass is 3.2 kg" from a field survey of 30 animals, they often assume their sample mean accurately reflects the underlying expectation. As your plot demonstrates, that intuition is frequently overconfident.
+Notice how wide the spread remains even at `n = 50`. When researchers
+report "the average body mass is 3.2 kg" from a field survey of 30
+animals, this may sounds as if the sample mean accurately reflects the
+underlying expectation value. As your plot demonstrates, that
+intuition can be overconfident.
 
-#### Q3. Testing the Attractor of a Continuous Uniform Distribution
-If a variable is drawn uniformly from continuous values between 10.0 and 20.0 (`runif(n, min = 10.0, max = 20.0)`), every real value in that interval is equally likely.
-1. What is the theoretical expectation (center of gravity) of this continuous distribution?
-2. Write a script that simulates 4 independent histories of 1,500 uniform draws between 10.0 and 20.0, and plots their running means simultaneously on a single graph.
-3. Overlay a horizontal dashed line at the theoretical expectation. At approximately what sample size `n` do all 4 independent histories consistently stay within `+/- 0.2` of the expectation?
+#### Q3. The Expectation Value of a Continuous Uniform Distribution
+If a variable is drawn uniformly from continuous values between 10.0
+and 20.0 (`runif(n, min = 10.0, max = 20.0)`), every real value in
+that interval is equally likely.
 
----
-
-### 3. Variance, Standard Deviation, and the 1 / sqrt(n) Convergence Rule
-
-While the sample mean converges to the true expectation, **individual observations do not become less variable**.
-
-Let us generate samples of varying sizes from a standard normal distribution (`mean = 0`, `sd = 1`):
-
-```R
-sample_small <- rnorm(20, mean = 0, sd = 1)
-sample_large <- rnorm(5000, mean = 0, sd = 1)
-
-sd(sample_small)  # Might be 0.82 or 1.18 (noisy estimate)
-sd(sample_large)  # Very close to 1.00
-```
-
-Notice the crucial difference:
-* **Standard Deviation (`s`):** Measures the spread of the underlying population. It remains approximately constant (`~1.0`) regardless of how many data points you collect.
-* **Standard Error of the Mean (`SE = s / sqrt(n)`):** Measures the uncertainty in the estimated mean. It shrinks proportionally to `1 / sqrt(n)`.
-
-To cut your estimation uncertainty in half, you must collect **four times** as much data (`2^2 = 4`).
+1. What is the expectation value of this continuous distribution?
+2. Write a script that simulates 4 independent histories of 1,500
+   uniform draws between 10.0 and 20.0, and plots their running means
+   (as above) simultaneously on a single graph.
+3. Overlay a horizontal line indicating the expectation value using
+   `abline(h = [your value here])`. At approximately what sample size
+   `n` do all 4 independent histories consistently stay within `+/-
+   0.2` of the expectation?
 
 ---
 
-### 4. Histograms vs. Empirical Cumulative Distribution Functions (ECDF)
+### 3. Histograms and Empirical Cumulative Distribution Functions
 
-When visualizing continuous random data, researchers typically reach for a **histogram**. However, histograms have a serious drawback: their visual shape is sensitive to arbitrary bin boundaries.
+The expectation value is not the only property of random variables
+(such as measured values) that is accessible only by taking many,
+many, samples - more than we can typically take in ecology!
 
-A complementary tool is the **Empirical Cumulative Distribution Function (ECDF)**. The ECDF at any point `x` shows the exact fraction of observations in the data that are less than or equal to `x`:
-
+The full information about at random variable is given by the
+distribution of it's values.  There are two ways to think about a
+distribution. Mathematicians are interested in the distribution function
 ```
-F_n(x) = (Number of observations <= x) / n
+F(x) = (probability that observation <= x).
 ```
+Practitioners usually ask: what is the probability for my observation
+to be in the range between x1 and x2.  We can obtain this from F(x) as
+```
+(probability that observation > x1 but <= x2) = F(x1) - F(x1).
+```
+From a limited number of samples, we can estimate the distribution
+using either a histogram or the empirical cumulative distribution
+(given by the proportion of observations <= x). 
 
-Let us compare both views on a sample of 200 normal variates:
+Since these representations convey the same information, we call them
+collectively the `distribution` of the observations or the underlying
+random variable.
 
+#### Q4. Experimenting with empirical distributions
+The code below generates both the empirical distribution and the
+histogram of some mock random data. 
+Experiment with increasing (e.g., by a factor 10 or 100) the values of
+`n_samples` and of the `breaks` parameter of `hist` to reveal the
+true distribution and compare it with the empirical small-samples
+estimates obtainable from 100 samples.
 ```R
-set.seed(101)
-sim_data <- rnorm(200, mean = 15.0, sd = 3.0)
+## Set up two-plot layout:
+par(mfrow = c(2, 1))
 
-# Set up side-by-side plot layout:
-par(mfrow = c(1, 2))
+## Generate some interesting mock data
+n_samples <- 100
+sim_data <- rnorm(n_samples, mean = c(5, 5, 15), sd = c(3, 2, 3))
 
-# 1. Frequency Histogram:
-hist(sim_data, breaks = 15, col = "lightgrey", 
-     main = "Histogram (Binned Density)", xlab = "Measured Value")
+## Get data min and max for plot alignment
+data_range <- range(sim_data)
 
-# 2. Empirical Cumulative Distribution Function:
-plot(ecdf(sim_data), verticals = TRUE, col = "navy",
+## 1. Empirical Cumulative Distribution Function:
+n <- length(sim_data)
+plot(x = sort(sim_data),         # Ordered data plotted on x axis!
+     y = seq_len(n_samples)/n_samples,
+     type = "S",                 # Plot data as a step-function
      main = "Empirical Cumulative Distribution",
-     xlab = "Measured Value", ylab = "Cumulative Proportion <= x")
-abline(h = 0.5, col = "red", lty = 3)  # Marks the 50th percentile (median)
-abline(v = 15.0, col = "red", lty = 3)
+     xlab = "Measured Value (x)", ylab = "Proportion <= x",
+     xlim=data_range) 
+abline(h = 0, lty = 2)  # Lowest possible proportion
+abline(h = 1, lty = 2)  # Highest possible proportion
 
-# Reset plotting layout to single panel:
+## 2. Frequency Histogram:
+hist(sim_data, col = "lightgrey", breaks = 10,
+     main = "Histogram (Binned Density)", xlab = "Measured Value",
+     xlim=data_range)
+
+## Reset plotting layout to single panel:
 par(mfrow = c(1, 1))
 ```
 
-Reading the ECDF:
-* Look at the y-axis: the curve rises smoothly from 0.0 (minimum value) to 1.0 (maximum value).
-* At the median (`x ~ 15.0`), exactly half of the cumulative probability (`y = 0.50`) has accumulated.
-* Steep sections in the ECDF indicate regions where data points are densely clustered; flat sections indicate sparse regions.
-
-#### Q4. Inspecting the ECDF
 Using `sim_data` from above:
 1. Use `mean(sim_data <= 12.0)` to calculate the exact proportion of data points that are `<= 12.0`.
 2. Verify where this point falls on the vertical axis of your ECDF plot.
+
+---
+
+### 4. The Central Limit Theorem
+
+Now, let's look at distributions of means.
+
+We compute means of many samples of the uniform distribution. We also
+compute means of random variables given by x^p, where x is uniformly
+distributed and p is some fixed number. As you will see, x^p is not
+uniformly distributed.
+
+To compute one such mean, we use `mean(runif(sample_size)^p`. In order
+to obtain the distribution of these means, we compute 10,000 them
+using `replicate(10000, mean(runif(sample_size)^p)`.
+
+#### Q5. Experimenting with The Central Limit Theorem
+
+Using the code below, experiment with changing the value of `p` (to
+change the distribution of the 'measurements' we are averaging over)
+and the `sample_size` of value x^p that enter out mean. (N.B.:
+a `sample_size` gives you the distribution of x^p itself.)
+```R
+## Set up two-plot layout:
+par(mfrow = c(2, 1))
+
+p <- 1 # try, e.g., 1, 3, 1/2, etc,
+sample_size <- 1 # try, 1, 2, 3, ... 10, 100, 1000
+
+## Generate and plot histogram
+random_means <- replicate(10000, mean(runif(sample_size)^p))
+histo <- hist(random_means, breaks = 50, plot = FALSE)
+plot(histo, xlab = "Mean over samples", main = "Zoom")  
+plot(histo, xlab = "Mean over samples", main = "Full Range", xlim = c(0,1))  
+
+## Reset plotting layout to single panel:
+par(mfrow = c(1, 1))
+```
+The shape of the distribution you find for large samples sizes is called
+the _normal distribution_ or _Gaussian distribution_ or _bell
+curve_. 
+
+#### Q5b. Convergence to Normal Distribution
+Going back to the last script, test at about what sample size the
+distribution of the mean visually becomes a normal
+distribution.  Compare with this with sample sizes we required above to find accurate
+estimates of the expectation value of `my_die`.
+
+> So, this is our saviour! While we need many thousands of samples to
+> reconstruct the distribution or expectation value of a measurement
+> (**making this practically impossible**), we know that the mean over
+> a reasonably small number of samples is approximately normally
+> distributed. **This observation is the starting point of the
+> mathematics underlying most statistical methods used in ecology.**
+
+It has only two parameters: the central value, called the _mean of the
+normal distribution_, and it's width, quantified by the _standard
+deviation_.
+
+We already know how to estimate the mean of a distribution. The
+function `sd` estimates the standard deviation:
+```R
+sample_small <- rnorm(10, mean = 0.3, sd = 1.5)
+sample_large <- rnorm(10000, mean = 0.3, sd = 1.5)
+
+sd(sample_small)  # Some noisy estiates
+sd(sample_large)  # Close to 1.5
+
+## Note the following:
+sd(sample_large)^2
+mean( (sample_large - mean(sample_large) )^2 )
+var(sample_large)
+
+## And so:
+sqrt(mean( (sample_large - mean(sample_large) )^2 ))
+sd(sample_large)
+```
+Because of the relation above, the standard deviation is also called
+the _root mean square_ (RMS) deviation from the mean.
+
 
 ---
 
