@@ -6,18 +6,20 @@ In Practicals 1 to 3, all your calculations were **deterministic**: given the sa
 
 In nature, however, ecological and environmental processes are inherently **stochastic**. Ecological surveys capture random samples from wider populations; individual organisms face probabilistic risks of mortality, predation, or disease; and environmental drivers fluctuate unpredictably.
 
-Textbooks often treat probability as a collection of abstract formulas. In computational data science, however, the computer is an experimental laboratory where you can observe, manipulate, and experience randomness firsthand. In this practical, you will learn to:
+Textbooks often treat probability as a collection of abstract formulas. In computational data science, however, the computer is an experimental laboratory where you can observe, manipulate, and experience randomness firsthand. In this practical, you will:
 
 1. **Generate pseudo-random variates** using continuous distributions (`runif`, `rnorm`) and discrete sampling (`sample`, `sample.int`).
 2. **Control simulation reproducibility** using random number seeds (`set.seed`).
 3. **Model probabilistic events** across entire vectors without loops (e.g., survival, detection, extirpation).
 4. **Build intuition for rare events and waiting times**: how many trials does it actually take for an event with probability 0.05 to occur?
-5. **Physically experience the difference between an expectation value and a sample mean**: watching independent, noisy histories converge under the Law of Large Numbers.
-6. **Compare visual representations of probability**: frequency histograms versus Empirical Cumulative Distribution Functions (`ecdf`).
+5. **Experiment with the difference between an expectation value and a sample mean**: watching independent, noisy histories converge under the Law of Large Numbers.
+6. **Apply representations of probability distribution**: frequency histograms versus Empirical Cumulative Distribution Functions.
+6. **See how the Central Limit Theorem in action**: the near-universal
+   distribution of means.
 
 ---
 
-## Generating Random Variates in R
+## 1. Generating Random Variates in R
 
 R includes built-in pseudo-random number generators for all standard probability distributions. By convention, random number generating functions begin with the letter `r` (for **r**andom).
 
@@ -34,7 +36,7 @@ runif(n, min = 0, max = 1)
 * `max`: Upper limit (defaults to 1).
 
 ```R
-# Simulate 5 random microclimate humidity fractions between 0.30 and 0.85:
+# Simulate 5 random microclimate humidity proportions between 0.30 and 0.85:
 runif(n = 5, min = 0.30, max = 0.85)
 ```
 
@@ -93,11 +95,13 @@ random_station
 
 ---
 
-### Reproducibility and the Random Seed: `set.seed()`
+## 2. Reproducibility and the Random Seed: `set.seed()`
 
 Computers cannot produce genuinely random numbers; they use deterministic mathematical algorithms (pseudo-random number generators) that start from an initial number called a **seed**.
 
-If you do not specify a seed, R initializes its generator from your computer's system clock, giving different numbers on every run. When writing reproducible reports, testing scripts, or preparing unit tests, you can fix the seed using `set.seed()`:
+If you do not specify a seed, R initializes its generator from your
+computer's system clock, giving different numbers on every run. When
+writing reproducible reports or testing scripts, you can fix the seed using `set.seed()`:
 
 ```R
 set.seed(42)
@@ -114,7 +118,7 @@ runif(3)
 # [1] 0.9148060 0.9370754 0.2861395
 ```
 
-> **Rule for Simulations:** Use `set.seed()` at the top of your final script when you need identical, reproducible output for an assessment or publication. During exploratory testing, run without a fixed seed to confirm your code behaves properly across different random realizations.
+> **Rule for Simulations:** Use `set.seed()` at the top of your final script when you need identical, reproducible output for a publication. During exploratory testing, run without a fixed seed to confirm your code behaves properly across different random realizations.
 
 #### Q1. Practice with Random Generators
 1. Write an expression to generate 15 random numbers drawn uniformly between 10.0 and 50.0.
@@ -123,7 +127,7 @@ runif(3)
 
 ---
 
-## Simulating Random Events with Vectorized Expressions
+## 3. Simulating Random Events with Vectorized Expressions
 
 In ecological models, we frequently need to decide whether a discrete event occurs for each member of a population (e.g., does an individual disperse? does a seed germinate? does a patch experience extirpation?).
 
@@ -148,8 +152,8 @@ p_extirpation <- 0.20
 random_draws <- runif(n_patches)
 
 # Vectorized event check:
-went_extinct <- random_draws < p_extirpation
-went_extinct
+got_extirpated <- random_draws < p_extirpation
+got_extirpated
 # [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
 ```
 
@@ -167,21 +171,23 @@ eaten
 ```
 
 #### Q2. Vectorized Survival
-A population of 100 seeds is planted in a restoration project. Each seed has an independent germination probability of 0.65.
+A population of 100 seeds is planted in a restoration project. Each
+seed has an independent germination probability of 0.65.
+
 1. Using a single vectorized expression (no loops), generate a logical vector of length 100 indicating which seeds germinated.
 2. How many seeds in your simulation germinated? (Hint: `sum()` counts `TRUE` entries).
 
 ---
 
-## Experiencing Randomness
+## 4. Experiencing Randomness
 
 Probabilistic intuition is notoriously deceiving. We tend to expect random processes to look neatly structured or evenly spread out, and we underestimate how much natural clumpiness, streaking, and fluctuation occurs purely by chance.
 
-Let us explore four fundamental phenomena through direct computational experimentation.
+Let us explore some fundamental phenomena through direct computational experimentation.
 
 ---
 
-### 1. The Waiting Game: How Long Until Something with p = 0.05 Happens?
+### The Waiting Game: How Long Until Something with p = 0.05 Happens?
 
 In experimental science and statistical hypothesis testing, an event with probability `p = 0.05` is often considered "rare" (occurring on average 1 in 20 times). 
 
@@ -213,10 +219,7 @@ cat("Event occurred on trial number:", trial_count, "\n")
 ```
 
 Run that code block in your console 5 to 10 times in
-succession. Notice the dramatic unpredictability:
-
-* In one run, the event might strike on trial 2 or 3.
-* In another run, you might wait 45, 60, or even more than 100 trials without seeing it occur.
+succession. Notice the dramatic unpredictability.
 
 #### Repeated Simulation: The Waiting-Time Distribution
 
@@ -224,11 +227,11 @@ To see the full pattern, let us automate this experiment across 1,000 independen
 
 ```R
 simulate_waiting_time <- function(p = 0.05) {
-  steps <- 0
+  trial_count <- 0
   while (TRUE) {
-    steps <- steps + 1
+    trial_count <- trial_count + 1
     if (runif(1) < p) {
-      return(steps)
+      return(trial_count)
     }
   }
 }
@@ -242,7 +245,7 @@ for (i in seq_len(n_reps)) {
 }
 
 # Plot waiting times across all 1000 successive runs:
-plot(waiting_times, pch = 16, col = "grey50",
+plot(waiting_times, pch = 16, col = "grey",
      xlab = "Simulation Run", ylab = "Trials Until First Event",
      main = "Waiting Times Across 1000 Independent Realizations")
 abline(h = 20, col = "red", lty = 2, lwd = 2)  # Theoretical average wait (1 / 0.05)
@@ -277,16 +280,16 @@ legend("topright", legend = paste("Mean =", round(mean(waiting_times), 1)),
 
 ---
 
-### 2. Expectation vs. Mean:  The Invisible Attraction of Expectation
+## 5. Expectation vs. Mean:  The Invisible Attraction of Expectation
 
-After having built intuition on the concept of "probability", let's
-develop intuition on another concept that is central to statistics:
+After having built intuition about the concept of "probability", let's
+develop intuition about another concept that is central to statistics:
 the "expectation value".  Conceptually, the expectation value of a
 random variable (such as the outcome of a measurement) is the average
 over a very large number of equivalent measurements. But what does
 this really mean?
 
-#### Building a "Mystery Loaded Die"
+### Building a "Mystery Loaded Die"
 
 Copy the code below and into your RStudio script and evaluate it to
 define the function `create_mystery_die`.  
@@ -312,11 +315,11 @@ create_mystery_die <- function(n_faces = 6) {
 The function uses some advanced R trickery and I won't explain _how_
 it works.  But _what_ it does is the following:
 
-Calling create_mystery_die() another function. This function simulates
-a loaded die, that is, a die that will give you one of the outcomes 1,
-2, 3, 4, 5, 6 each time you 'roll' it, but it won't give them with
-the exact same probability. _Nobody_, not even I, knows what the
-probability of each outcome is!
+Calling create_mystery_die() returns another function. This function
+simulates a loaded die, that is, a die that will give you one of the
+outcomes 1, 2, 3, 4, 5, 6 each time you 'roll' it, but it won't give
+them with the exact same probability. _Nobody_, not even I, knows what
+the probability of each outcome is!
 
 > This is the situation that almost _every_ scientist doing empirical
 > research faces. You will face it as well when doing your MSc
@@ -340,11 +343,11 @@ my_die(10)  # Roll 10 times
 ```
 Can you see from the outputs that the die is loaded?
 
-#### The Sample Mean
+### The Sample Mean
 
-For a die that is not loaded, we can compute the "average" outcome of
-rolling it.  Because all dies of the die have the same probability,
-the "average" outcome is can be calculate by averaging over the
+For **a die that is not loaded**, we can compute the "average" outcome of
+rolling it.  Because all faces of the die have the same probability,
+the "average" outcome can be calculate by averaging over the
 outcomes: `(1 + ... + 6) / 6 = 3.5`. But, as you know, the outcome of
 each roll is random, so simply averaging over six rolls won't give
 3.5. We can use the `sample.int()` function to demonstrate this. Try
@@ -390,10 +393,11 @@ mean(my_die(10^6))
 >   * Observe that the expectation value is clearly different from
 >     that for a fair die.
 >   * Conclude that `my_die` is not fair, but rather tends to give
->     lower/higher values.
+>     lower [or higher] values.
+>   * However, you'd have to roll the die 10^6 = 1,000,000 times!
 
 
-#### Watching Means in Multiple Parallel Universes Converge
+### Watching Means in Multiple Parallel Universes Converge
 
 Here's the problem: you usually can't make 10^6 = 1,000,000
 measurements for your MSc thesis!
@@ -442,7 +446,7 @@ How many samples do you recommend to take to get reliable estimates of expectati
 ## How many samples:
 ```
 
-Reflect deeply on what you have just witnessed:
+Reflect on what you have just witnessed:
 
 * The **sample mean** is an empirical measurement. It is a random
   number. It is noisy and changes with every sample.
@@ -455,10 +459,10 @@ Reflect deeply on what you have just witnessed:
   observations accumulate, their collective historical average is
   captured by this invisible attractor.
 
-#### Zooming In: Small-Sample Size Experiments
+### Zooming In: Small-Sample Size Experiments
 
 To understand why field biology and conservation surveys are so
-difficult, lets do some experiments with only 100 rolls of our die:
+difficult, let's do some experiments with only 100 rolls of our die:
 
 ```R
 # Re-plot focusing strictly on small sample sizes (n = 1 to 100):
@@ -496,17 +500,17 @@ that interval is equally likely.
 
 ---
 
-### 3. Histograms and Empirical Cumulative Distribution Functions
+## 6. Histograms and Empirical Cumulative Distribution Functions
 
 The expectation value is not the only property of random variables
-(such as measured values) that is accessible only by taking many,
-many, samples - more than we can typically take in ecology!
+(such as measured values) that is accessible _only_ by taking many,
+many, samples - more than we can typically take in ecology.
 
 The full information about at random variable is given by the
-distribution of it's values.  There are two ways to think about a
-distribution. Mathematicians are interested in the distribution function
+distribution of its values.  There are two ways to think about a
+distribution. Mathematicians are interested in what they call the _distribution function_:
 ```
-F(x) = (probability that observation <= x).
+F(x) = (probability that observation <= x)
 ```
 Practitioners usually ask: what is the probability for my observation
 to be in the range between x1 and x2.  We can obtain this from F(x) as
@@ -518,8 +522,8 @@ using either a histogram or the empirical cumulative distribution
 (given by the proportion of observations <= x). 
 
 Since these representations convey the same information, we call them
-collectively the `distribution` of the observations or the underlying
-random variable.
+collectively **the distribution** of the observable or random
+variable.
 
 #### Q4. Experimenting with empirical distributions
 The code below generates both the empirical distribution and the
@@ -560,30 +564,32 @@ par(mfrow = c(1, 1))
 ```
 
 Using `sim_data` from above:
+
 1. Use `mean(sim_data <= 12.0)` to calculate the exact proportion of data points that are `<= 12.0`.
-2. Verify where this point falls on the vertical axis of your ECDF plot.
+2. Verify where this point falls on the vertical axis of your
+   empirical distribution function.
 
 ---
 
-### 4. The Central Limit Theorem
+## 7. The Central Limit Theorem
 
-Now, let's look at distributions of means.
+Now, let's look at distributions not of single observations, but of means of observations.
 
-We compute means of many samples of the uniform distribution. We also
+Below, we will compute means of many samples of the uniform distribution. We also
 compute means of random variables given by x^p, where x is uniformly
 distributed and p is some fixed number. As you will see, x^p is not
 uniformly distributed.
 
-To compute one such mean, we use `mean(runif(sample_size)^p`. In order
-to obtain the distribution of these means, we compute 10,000 them
+To compute one such mean, we use `mean(runif(sample_size))^p`. In order
+to obtain the distribution of these means, we compute 10,000 of them
 using `replicate(10000, mean(runif(sample_size)^p)`.
 
 #### Q5. Experimenting with The Central Limit Theorem
 
 Using the code below, experiment with changing the value of `p` (to
 change the distribution of the 'measurements' we are averaging over)
-and the `sample_size` of value x^p that enter out mean. (N.B.:
-a `sample_size` gives you the distribution of x^p itself.)
+and changing the `sample_size` of value x^p that enter out mean. (N.B.:
+a `sample_size` of `1` gives you the distribution of x^p itself.)
 ```R
 ## Set up two-plot layout:
 par(mfrow = c(2, 1))
@@ -600,14 +606,15 @@ plot(histo, xlab = "Mean over samples", main = "Full Range", xlim = c(0,1))
 ## Reset plotting layout to single panel:
 par(mfrow = c(1, 1))
 ```
-The shape of the distribution you find for large samples sizes is called
-the _normal distribution_ or _Gaussian distribution_ or _bell
-curve_. 
+The shape of the distribution you find for large samples sizes is
+called the _normal distribution_ or _Gaussian distribution_ or _bell
+curve_. The function `rnorm` introduced above generates random numbers with precisely
+this distribution. 
 
-#### Q5b. Convergence to Normal Distribution
-Going back to the last script, test at about what sample size the
+#### Q5b. Convergence to the Normal Distribution
+Going back to the last script, find out at about what sample size the
 distribution of the mean visually becomes a normal
-distribution.  Compare with this with sample sizes we required above to find accurate
+distribution.  Compare this with this with sample sizes we required above to find accurate
 estimates of the expectation value of `my_die`.
 
 > So, this is our saviour! While we need many thousands of samples to
@@ -617,9 +624,9 @@ estimates of the expectation value of `my_die`.
 > distributed. **This observation is the starting point of the
 > mathematics underlying most statistical methods used in ecology.**
 
-It has only two parameters: the central value, called the _mean of the
-normal distribution_, and it's width, quantified by the _standard
-deviation_.
+The 'normal distribution' is actually a family of distributions with
+two parameters: the central value, called the _mean of the normal
+distribution_, and it's width, quantified by the _standard deviation_.
 
 We already know how to estimate the mean of a distribution. The
 function `sd` estimates the standard deviation:
@@ -632,24 +639,24 @@ sd(sample_large)  # Close to 1.5
 
 ## Note the following:
 sd(sample_large)^2
-mean( (sample_large - mean(sample_large) )^2 )
-var(sample_large)
+sample_mean <- mean(sample_large)
+mean( (sample_large - sample_mean)^2 )
+var(sample_large)  # Variance 'var()' is the square of the standard deviation
 
 ## And so:
-sqrt(mean( (sample_large - mean(sample_large) )^2 ))
+sqrt( mean( (sample_large - sample_mean)^2 ) )
 sd(sample_large)
 ```
 Because of the relation above, the standard deviation is also called
-the _root mean square_ (RMS) deviation from the mean.
+the _root mean square_ (RMS) _deviation from the mean_.   Make
+sure you can identify the 'root', the 'mean' and the 'square' in the last code
+block above.
 
 
 ---
 
 ## Practical Review Exercises
 
-Work through these multi-step exercises in your R script. Focus on combining your custom functions, loop structures, and vectorized operations with the stochastic tools introduced today.
-
----
 
 ### Exercise 1: The Mark-Release-Recapture Lincoln-Petersen Simulator
 
@@ -706,16 +713,17 @@ Run this line three or four times. Notice that even though the true population i
 
 Now, write an iterated simulation script to evaluate how well the Lincoln-Petersen estimator performs:
 
-1. Fix the parameters: `n_true = 1000`, `m_marked = 150`, and `c_captured = 100`.
-2. Pre-allocate a numeric vector named `pop_estimates` of length 500.
-3. Using a `for` loop, run `simulate_recapture_survey()` 500 times, storing each returned estimate in `pop_estimates`.
+1. Fix the parameters: `n_true = 1000`, `m_marked = 150`, `c_captured = 100`.
+2. Using a `for` loop or the `replicate` function, generate a vector
+   `pop_estimates` with 500 population estimates using `simulate_recapture_survey`.
 4. Calculate the proportion of surveys that failed due to zero recaptures (`mean(is.na(pop_estimates))`).
 5. Compute the average population estimate across all valid surveys (`mean(pop_estimates, na.rm = TRUE)`). How close is this to the true value of 1,000?
-6. Plot a histogram of the valid estimates and overlay a vertical red line marking the true population size (`1000`).
+6. Plot a histogram of the valid estimates and overlay a vertical red
+   line (e.g., using `abline`) marking the true population size (`1000`).
 
 ---
 
-### Exercise 2: Forest Gap Disturbance & Tree Recruitment Dynamics
+### Exercise 2 (if you can't get enough): Forest Gap Disturbance & Tree Recruitment Dynamics
 
 In temperate rainforests, canopy trees persist for centuries until catastrophic windthrow storms create light gaps, triggering new sapling recruitment.
 
@@ -765,57 +773,15 @@ We will simulate a stand of 100 canopy trees over annual time steps.
 
 3. Run a 150-year simulation starting from an even-aged mature stand:
    ```R
-   set.seed(456)
    initial_stand <- rep(50, 100) # 100 trees, all 50 years old
    
    sim_results <- run_forest_simulation(initial_ages = initial_stand, n_years = 150, p_storm = 0.08)
    
    # Plot mean stand age trajectory over time:
    plot(sim_results$mean_ages, type = "l", col = "forestgreen", lwd = 2,
-        xlab = "Year", ylab = "Mean Canopy Age (years)",
-        main = "Forest Stand Age Under Stochastic Storm Disturbance")
+        xlab = "Time (years)", ylab = "Mean Canopy Age (years)",
+        main = "Forest Stand Age")
    ```
 
-Examine the trajectory plot. Why does the mean age show gradual upward climbs punctuated by sudden sharp drops?
-
----
-
-### Exercise 3: Empirical Quantiles and the 5% Rare Event Risk
-
-In environmental management, the "1-in-20 year" flood or storm corresponds to an annual exceedance probability of `p = 0.05`. 
-
-When planning infrastructure or conservation reserves, stakeholders often mistakenly assume that a 1-in-20 year event will happen roughly once every 20 years. In reality, multiple rare events can strike in quick succession, or a site may experience decades of calm.
-
-#### Tasks
-
-1. Write a function named `sample_events_in_horizon` that simulates the total number of rare events observed over a 20-year operational planning horizon:
-   ```R
-   sample_events_in_horizon <- function(horizon_years = 20, p_annual = 0.05) {
-     # Draw horizon_years uniform numbers and count how many are < p_annual
-     event_count <- sum(runif(horizon_years) < p_annual)
-     return(event_count)
-   }
-   ```
-
-2. Run an iterated simulation:
-    * Execute `sample_events_in_horizon()` 2,000 times.
-    * Store the resulting counts in a numeric vector named `observed_counts`.
-
-3. Analyze the empirical risk profile across the 2,000 simulated 20-year horizons:
-    * What proportion of 20-year periods experienced **exactly zero** rare events? (`mean(observed_counts == 0)`)
-    * What proportion experienced **two or more** rare events? (`mean(observed_counts >= 2)`)
-    * What was the maximum number of rare events observed in a single 20-year window?
-
-4. Plot a bar plot or frequency histogram of `observed_counts`:
-   ```R
-   counts_table <- table(observed_counts) / length(observed_counts)
-   barplot(counts_table, col = "salmon",
-           xlab = "Number of Events Experienced in 20 Years",
-           ylab = "Empirical Probability",
-           main = "Realised Frequency of a '1-in-20 Year' (p = 0.05) Event")
-   ```
-
-Reflect on your findings: over a 20-year window, are you more likely
-to experience *zero* events, or *at least one* event? How does this
-computational experiment change your interpretation of a "1-in-20
-year" risk?
+Examine the trajectory plot.  What causes the pronounced structure in
+the variation of mean age over time?

@@ -14,12 +14,10 @@ and robust against unexpected inputs. You will learn to:
 2. **Implement defensive programming** by validating input types, checking dimensions, and halting execution with informative error messages (`stop()`).
 3. **Control execution flow** using scalar conditional branching (`if` / `else if` / `else`).
 4. **Automate repetitive computations** using pre-allocated loops (`for` / `while`), including iteration skips (`next`) and loop termination (`break`).
-5. **Chain functions together** to build multi-stage analytical pipelines.
+5. **Combine function definitions** to for more difficult tasks.
 
 We will focus on breaking down multi-step scientific problems into
-clear, verifiable programmatic statements. We will continue to work
-with deterministic data—stochastic simulations and pseudo-random
-numbers will be introduced in Practical 4.
+clear, verifiable programmatic statements. 
 
 ---
 
@@ -31,10 +29,10 @@ object.
 
 Functions provide four decisive advantages in scientific programming:
 
-* **Elimination of Duplication:** You write and debug a mathematical calculation once, rather than copying and pasting lines across your script.
+* **Elimination of Duplication:** You write and debug a calculation once, rather than copying and pasting lines across your script.
 * **Isolation (Scope):** Variables created inside a function exist only during its execution. They do not pollute or overwrite variables in your global workspace.
 * **Testability:** You can systematically test a function against edge
-  cases and boundary conditions to ensure its computational
+  cases to ensure its computational
   correctness.
 * **Encapsulation:** Once you (or somebody else) has written a working
   R function, you (or others) only need to understand intuitively _what_
@@ -113,6 +111,7 @@ estimate_heat_content <- function(temp_c, water_mass_kg, specific_heat = 4184) {
   return(joules)
 }
 ```
+
 1. What value is returned by `estimate_heat_content(20.0, 50.0)`?
 2. If you evaluate `joules` in your console after running this function, what happens? Why?
 
@@ -120,9 +119,14 @@ estimate_heat_content <- function(temp_c, water_mass_kg, specific_heat = 4184) {
 
 ## Defensive Programming and Input Validation
 
-When writing scripts for your own use, you might know what inputs are expected. However, in production pipelines, shared repositories, and automated assessment systems, functions frequently receive incorrect, incomplete, or corrupted inputs.
+When writing scripts for your own use, you might know what inputs are
+expected. However, in production pipelines, shared repositories, and
+testing during assessments, functions frequently receive incorrect, incomplete, or corrupted inputs.
 
-**Defensive programming** means designing your function to inspect its arguments before performing calculations, verifying that all preconditions hold, and immediately halting with an informative error if an inconsistency is detected.
+**Defensive programming** means designing your function to inspect its
+arguments before performing calculations, verifying that all
+preconditions hold, and immediately halting with an informative error
+message if an inconsistency is detected.
 
 ### Halting Execution with `stop()`
 
@@ -215,7 +219,9 @@ calc_dilution_factor <- function(stock_conc, target_conc) {
   return(stock_conc / target_conc)
 }
 ```
-What happens if someone evaluates `calc_dilution_factor(stock_conc = "100", target_conc = 10)`? What additional defensive check is required to prevent this silent failure?
+What happens if someone evaluates `calc_dilution_factor(stock_conc =
+"100", target_conc = 10)`? What additional defensive check is required
+to prevent this cryptic error message?
 
 ---
 
@@ -245,7 +251,8 @@ classify_water_layer <- function(depth_m) {
 }
 ```
 
-Execution runs sequentially:
+The execution runs sequentially:
+
 1. R evaluates the condition in the initial `if`. If `TRUE`, it executes that code block and skips the rest of the chain.
 2. If `FALSE`, it moves to the first `else if`. It tests each subsequent condition until one evaluates to `TRUE`.
 3. If none of the conditions evaluate to `TRUE`, the fallback `else` block executes.
@@ -305,7 +312,7 @@ for (d in station_depths) {
 }
 ```
 
-### Index-Based Loops and the Gold Standard: Pre-Allocation
+### Index-Based Loops and the Vector Pre-Allocation
 
 In scientific programming, you routinely use loops to populate a vector or table with calculated outputs.
 
@@ -343,8 +350,8 @@ simulated_profile
 
 ### Controlling Loop Execution: `next` and `break`
 
-* `next`: Immediately skips the remainder of the current loop iteration and advances to the next step.
-* `break`: Immediately terminates the entire loop, jumping out to the code following the loop block.
+* `next`: Immediately skips the remainder of _the current loop iteration_ and advances to the next step.
+* `break`: Immediately terminates _the entire loop_, jumping out to the code following the loop block.
 
 ```R
 measured_temperatures <- c(14.2, -999.0, 16.8, 15.5, -999.0, 18.2)
@@ -374,7 +381,9 @@ Using `next`, configure the loop so that it prints only the numbers that are **m
 
 ## Practical Review Exercises
 
-Work through these multi-step exercises in your R script. Focus on translating ecological descriptions into clear, defensive functions and structured iterative code.
+Work through these multi-step exercises in your R script. Focus on
+translating ecological descriptions into clear, defensive functions
+and structured, comprehensible code.
 
 ---
 
@@ -394,10 +403,14 @@ is_peatland     <- c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE)  # Peat soils have 
 
 #### Part A: Patch Vulnerability Index Function
 
-Write a function named `calculate_patch_vulnerability` that calculates a threat index (V) for a single site:
+Write a function named `calculate_patch_vulnerability` that calculates
+a threat index (V, defined below) for a single site:
 
 ```R
-calculate_patch_vulnerability <- function(canopy, visitors, road_dist, peatland)
+calculate_patch_vulnerability <- function(canopy, visitors, road_dist, peatland){
+    # your code here
+}
+
 ```
 
 The ecological scoring rules are:
@@ -426,11 +439,15 @@ The ecological scoring rules are:
 Write a function named `audit_reserve_network` that processes all candidate reserves:
 
 ```R
-audit_reserve_network <- function(names, canopy, visitors, road_dist, peatland, threat_threshold = 0.75)
+audit_reserve_network <-
+    function(names, canopy, visitors, road_dist, peatland, threat_threshold = 0.75){
+        # Your code here
+    }
 ```
 
 1. **Defensive Check:**
-    * Ensure that all five input vectors have the exact same length. If not, halt with `stop("All parallel input vectors must be of identical length.")`.
+    * Ensure that all five input vectors have the exact same
+      length. If not, halt with an appropriate error message.
 2. **Iterative Evaluation:**
     * Pre-allocate a numeric vector `vulnerability_scores` of length equal to `length(names)`.
     * Pre-allocate a character vector `action_plan` of the same length.
@@ -481,7 +498,9 @@ Here, x_t represents the population density scaled between 0.0 and 1.0 (as a fra
 Write a function named `logistic_step` that computes a single step:
 
 ```R
-logistic_step <- function(x, r)
+logistic_step <- function(x, r){
+   # Your code here
+}
 ```
 
 1. **Validation:**
@@ -495,13 +514,16 @@ logistic_step <- function(x, r)
 Write a function named `iterate_logistic_map` with the signature:
 
 ```R
-iterate_logistic_map <- function(x0, r, n_steps)
+iterate_logistic_map <- function(x0, r, n_steps){
+   # Your code here
+}
 ```
 
-1. Validate that `n_steps` is a single positive integer $\ge 1$.
+1. Validate that `n_steps` is a single positive integer >= 0.
 2. Pre-allocate a numeric vector `trajectory` of length `n_steps + 1`.
 3. Set `trajectory[1] <- x0`.
-4. Using a `for` loop, iteratively call `logistic_step()` to generate values for $t = 1, \dots, n\_steps$.
+4. Using a `for` loop, iteratively call `logistic_step()` to generate
+   values for t = 1, ...,  n\_steps.
 5. Return the full `trajectory` vector.
 
 Test your function:
@@ -509,17 +531,20 @@ Test your function:
 traj <- iterate_logistic_map(x0 = 0.2, r = 2.8, n_steps = 50)
 length(traj)    # Should be 51
 tail(traj, 5)   # Should settle around ~0.6428
+plot(traj)      # Gives you a visual impression
 ```
 
 #### Part C: Testing for Asymptotic Convergence to a Fixed Point
 
-When r < 3.0, the logistic map converges to a single stable fixed
-point. Above r \approx 3.0, the value of x starts to oscillate.
+When small values of r (e.g. r = 2.0), the logistic map converges to a single stable fixed
+point. For larger values of r, the value of x starts to oscillate.
 
-Write a function named `check_fixed_point_convergence` that tests whether a trajectory has converged:
+Write a function named `check_fixed_point_convergence` that tests whether a trajectory converges:
 
 ```R
-check_fixed_point_convergence <- function(x0, r, burn_in = 200, tolerance = 1e-4)
+check_fixed_point_convergence <- function(x0, r, burn_in = 200, tolerance = 1e-4){
+    # Your code here
+}
 ```
 
 1. Run the map for `total_steps = burn_in + 2` steps using `iterate_logistic_map()`.
@@ -538,76 +563,7 @@ check_fixed_point_convergence(x0 = 0.3, r = 3.8)
 
 ---
 
-### Exercise 3: Wetland Microclimate & Thermal Buffering Model
-
-Wetland vegetation canopies buffer local microclimates against extreme atmospheric heat. An ecological biophysics model predicts water temperature in shaded reed beds based on ambient air temperature and water flow velocity.
-
-#### Problem Formulation
-
-At hourly time steps, the change in wetland water temperature ($T_{w}$) depends on thermal transfer from air ($T_a$) and convective cooling from inflow velocity ($v$, in $\text{m s}^{-1}$):
-
-$$\Delta T_w = k_{air} \times (T_a - T_w) - k_{flow} \times v \times (T_w - T_{inflow})$$
-
-where:
-* $k_{air} = 0.12$ (air-water heat transfer coefficient)
-* $k_{flow} = 0.25$ (flow convective coefficient)
-* $T_{inflow} = 12.0\,^\circ\text{C}$ (temperature of upstream groundwater spring)
-
-If the calculated water temperature exceeds a critical ecological threshold ($T_{crit} = 22.0\,^\circ\text{C}$), dissolved oxygen stress occurs.
-
-#### Tasks
-
-1. Write a function named `update_wetland_temp`:
-   ```R
-   update_wetland_temp <-
-       function(current_tw, air_temp, flow_velocity, k_air = 0.12, k_flow = 0.25, inflow_temp = 12.0){
-       # your code here
-    }
-   ```
-   It must
-    * Validate that all inputs are single numeric scalars.
-    * If `flow_velocity < 0`, halt execution with `stop("Flow velocity cannot be negative.")`.
-    * Calculate \Delta T_w and return the updated temperature $T_{w} + \Delta T_w$.
-
-2. Write an iterative simulation function named `simulate_heatwave_impact`:
-   ```R
-   simulate_heatwave_impact <- function(initial_tw, air_temp_profile, flow_velocity)
-   ```
-    * `air_temp_profile`: A numeric vector representing hourly air temperatures over a heatwave event.
-    * `initial_tw`: Water temperature at hour 0.
-    * `flow_velocity`: Inflow velocity throughout the event.
-
-   The function must:
-   
-   * Validate that `air_temp_profile` has length at least 1 and contains no `NA` values.
-   * Pre-allocate a numeric vector `water_temps` to store temperatures at each hour.
-   * Iterate through the hours using a `for` loop, updating the water temperature sequentially using `update_wetland_temp()`.
-   * Count the total number of hours where the water temperature was strictly above $22.0\,^\circ\text{C}$.
-   * Package and return a named list containing:
-   
-      * `hourly_temps`: The full vector of simulated water temperatures.
-      * `max_water_temp`: The maximum temperature reached.
-      * `stress_hours`: Total hours exceeding 22C.
-      * `buffered`: A logical scalar that is `TRUE` if `max_water_temp` remained below the maximum air temperature observed in `air_temp_profile`.
-
-3. Test your simulation using a 24-hour sinusoidal heatwave profile:
-   ```R
-   hours <- 1:24
-   heatwave_air <- 20.0 + 8.0 * sin((hours - 8) * pi / 12)
-   
-   # Run simulation under stagnant flow (v = 0.02 m/s):
-   low_flow_run <- simulate_heatwave_impact(initial_tw = 14.0, air_temp_profile = heatwave_air, flow_velocity = 0.02)
-   
-   # Run simulation under active flushing flow (v = 0.15 m/s):
-   high_flow_run <- simulate_heatwave_impact(initial_tw = 14.0, air_temp_profile = heatwave_air, flow_velocity = 0.15)
-   
-   cat("Low flow stress hours:", low_flow_run$stress_hours, "\n")
-   cat("High flow stress hours:", high_flow_run$stress_hours, "\n")
-   ```
-
----
-
-### Exercise 4: Dynamic Harvest Quotas and Fisheries Escapement
+### Exercise 3 (if you have time): Dynamic Harvest Quotas and Fisheries Escapement
 
 In fisheries conservation, sustainable yield policies often employ **biological escapement thresholds**. Instead of allowing a fixed annual catch, fisheries managers adjust the permitted quota based on the estimated adult biomass at the start of the season.
 
@@ -620,7 +576,7 @@ Consider a coastal cod stock managed under a three-tier harvest control rule:
    ```
    H = 0.20 x (B - B_crit)
    ```
-3. **Maximum Sustainable Tier:** If biomass is at or above $B_{targ}$,
+3. **Maximum Sustainable Tier:** If biomass is at or above B\_targ,
    the harvest rate is capped at:
    ```
    H = 0.20 x (B_targ - B_crit) + 0.35 x (B - B_targ)
@@ -640,11 +596,11 @@ Write a function named `calc_harvest_quota` that accepts the following arguments
 The function must execute these steps:
 
 1. **Defensive Validation:**
-    * Verify that `biomass` is a single numeric scalar and is strictly non-negative ($\ge 0$). If violated, halt execution with `stop()`.
+    * Verify that `biomass` is a single numeric scalar and is strictly non-negative (>= 0). If violated, halt execution with `stop()`.
     * Verify that `marine_heatwave` is a single logical scalar (`TRUE` or `FALSE`).
     * Verify that `b_crit < b_targ`.
 2. **Harvest Determination:**
-    * Calculate the base harvest $H$ using the three-tier rule above.
+		* Calculate the base harvest H using the three-tier rule above.
     * If `marine_heatwave == TRUE` and H > 0, apply a 25% reduction to the calculated harvest (H\_adj = 0.75 x H).
     * Ensure the final harvest never exceeds the available biomass (H <= B).
 3. **Return Value:**
@@ -699,5 +655,12 @@ Verify your function by running a 20-year simulation starting at B_0 = 2000:
 sim_run <- simulate_fishery_trajectory(b_start = 2000, years = 20)
 sim_run$collapsed
 head(sim_run$biomass)
+## Visualise:
+plot(sim_run$biomass, xlab = "Year", ylab = "Biomass (tonnes)", 
+     ylim=c(0,max(sim_run$biomass)))
+points(sim_run$harvest, pch = '-', col = "red")
+legend(x = "bottomright", col="red", pch='-', legend = "Harvest")
 ```
 
+Can you find conditions under which the fishery would collapse based
+on the prescribed rules?

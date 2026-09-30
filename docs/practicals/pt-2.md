@@ -4,13 +4,17 @@
 
 ## Introduction
 
-In Practical 1, we worked with atomic vectors, which store one-dimensional sequences of elements of the same data type. However, real scientific datasets and complex computational models require **composite data structures** capable of organizing multi-dimensional, multi-variable, or heterogeneous information:
+In Practical 1, we worked with atomic vectors, which store one-dimensional sequences of elements of the same data type. However, scientific datasets, laboratory surveys, and computational models require **composite data structures** capable of organizing multi-dimensional, multi-variable, or heterogeneous information:
 
-1. **Matrices:** Two-dimensional grids of values of a single atomic type (e.g., spatial grids, transition tables).
-2. **Lists:** Ordered, flexible collections where each element can be an entirely different type, length, or structure (e.g., packaging diverse outputs or survey records).
-3. **Data Frames:** The standard tabular structure for statistical analysis in R, where rows represent observations and columns represent different variables (which can be of different types).
+1. **Matrices:** Two-dimensional grids of values of a single atomic class (e.g., spatial grids, time-series profiles).
+2. **Lists:** Flexible, ordered collections where each element can be an entirely different type, length, or structure (e.g., grouping diverse survey metadata, sample vectors, and station parameters).
+3. **Data Frames:** The standard tabular format for statistical analysis in R, where rows represent individual observations and columns represent distinct variables of varying types.
 
-In this practical, you will learn to construct, inspect, subset, modify, and aggregate each of these composite structures. Mastering these techniques is directly required for Challenge 1 (nested list processing) and Challenge 2 (data frame simulation and filtering).
+In this practical, you will learn to construct, inspect, slice,
+modify, and aggregate each of these composite structures. Mastering
+these techniques will enable you to assemble structured data
+pipelines, validate multi-column datasets, and execute multi-condition
+filtering.
 
 ---
 
@@ -20,11 +24,13 @@ A **matrix** is a two-dimensional rectangular array organized into rows and colu
 
 ### Creating Matrices
 
-Matrices can be constructed using `matrix()`, or by binding vectors together using `rbind()` (row bind) and `cbind()` (column bind):
+Matrices can be constructed using `matrix()` (please please copy and execute commands
+in boxes for later use of results; also make sure you understand each
+line of code; free free to play with the code to see what happens):
 
 ```R
-# Creating a matrix from a sequence:
-# By default, R fills matrices column-by-column:
+# Creating a matrix from a numeric sequence:
+# By default, R populates matrices column-by-column:
 mat1 <- matrix(data = 1:12, nrow = 4, ncol = 3)
 mat1
 #      [,1] [,2] [,3]
@@ -43,39 +49,40 @@ mat2
 # [4,]   10   11   12
 ```
 
-We can also bind vectors of equal length:
+We can also bind vectors of equal length together using `rbind()` (row bind) and `cbind()` (column bind):
 ```R
-site_a <- c(2.1, 4.5, 3.2)
-site_b <- c(1.8, 4.1, 3.9)
+transect_a <- c(14.2, 15.1, 13.9)
+transect_b <- c(16.0, 15.8, 16.4)
 
-# Bind as rows:
-row_bound <- rbind(site_a, site_b)  # 2 rows, 3 columns
+# Bind as rows (2 rows, 3 columns):
+row_bound <- rbind(transect_a, transect_b)
 
-# Bind as columns:
-col_bound <- cbind(site_a, site_b)  # 3 rows, 2 columns
+# Bind as columns (3 rows, 2 columns):
+col_bound <- cbind(transect_a, transect_b)
 ```
 
 ### Inspecting Matrix Dimensions and Naming
 
 To check the dimensions of a matrix:
+
 * `dim(m)`: Returns a vector `c(nrow, ncol)`.
-* `nrow(m)`: Number of rows.
-* `ncol(m)`: Number of columns.
+* `nrow(m)`: Total number of rows.
+* `ncol(m)`: Total number of columns.
 
 You can assign and query names for rows and columns:
 ```R
-colnames(col_bound) <- c("Transect_1", "Transect_2")
-rownames(col_bound) <- c("Depth_1m", "Depth_2m", "Depth_3m")
+colnames(col_bound) <- c("Station_A", "Station_B")
+rownames(col_bound) <- c("Depth_1m", "Depth_5m", "Depth_10m")
 col_bound
 ```
 
 ### Matrix Subsetting and Slicing
 
-Subsetting a matrix requires two indices inside square brackets: `[row, column]`. Remember the mnemonic: **R**ow first, **C**olumn second (**RC**).
+Subsetting a matrix requires two indices inside square brackets: `[row, column]`. Remember the mnemonic: **R**ow fi**r**st, **C**olumn se**c**ond (**RC**).
 
 * `mat[r, c]`: Element at row `r`, column `c`.
-* `mat[r, ]`: **Entire row `r`** (leaving column blank extracts all columns).
-* `mat[, c]`: **Entire column `c`** (leaving row blank extracts all rows).
+* `mat[r, ]`: **Entire row `r`** (leaving the column blank extracts all columns).
+* `mat[, c]`: **Entire column `c`** (leaving the row blank extracts all rows).
 * `mat[c(1, 3), c(2, 3)]`: Sub-grid spanning rows 1 & 3 and columns 2 & 3.
 
 ```R
@@ -85,7 +92,7 @@ mat1[1:2, ]       # First two rows across all columns
 mat1[, 2]         # Entire second column: 5 6 7 8
 ```
 
-> **Note on Dimension Dropping:** When you extract a single row or single column (e.g., `mat1[, 2]`), R automatically drops the matrix dimensions and returns a simple 1D vector. If you wish to preserve the matrix structure, add the argument `drop = FALSE`:
+> **Note on Dimension Dropping:** When you extract a single row or single column (e.g., `mat1[, 2]`), R automatically drops the matrix dimensions and returns a simple 1D vector. If you wish to preserve the 2D matrix structure, supply `drop = FALSE`:
 > ```R
 > mat1[, 2, drop = FALSE]  # Returns a 4x1 matrix
 > ```
@@ -94,13 +101,15 @@ mat1[, 2]         # Entire second column: 5 6 7 8
 
 Mathematical operations on matrices occur element-by-element:
 ```R
-mat1 * 10
+mat1 * 5
 mat1 + mat2
 ```
 
-To summarize rows or columns, use R's fast built-in margin functions:
+To summarize rows or columns efficiently, use R's built-in margin
+functions:
+
 * `rowSums(m)`, `colSums(m)`: Sum totals across rows or columns.
-* `rowMeans(m)`, `colMeans(m)`: Averages across rows or columns.
+* `rowMeans(m)`, `colMeans(m)`: Arithmetic averages across rows or columns.
 
 ```R
 colMeans(mat1)  # 2.5 6.5 10.5
@@ -108,139 +117,161 @@ colMeans(mat1)  # 2.5 6.5 10.5
 
 #### Q1. Consider the matrix:
 ```R
-grid <- matrix(data = seq(2, 36, by = 2), nrow = 6, ncol = 3)
+sample_grid <- matrix(data = seq(10, 180, by = 10), nrow = 6, ncol = 3)
 ```
-Without running the code first:
-1. How many total elements are in `grid`?
-2. What value is located at `grid[3, 2]`?
-3. Write an expression to replace all values in `grid` that are greater than 20 with `20`.
+Without executing the code first:
+
+1. How many total elements are in `sample_grid`?
+2. What value is located at `sample_grid[4, 2]`?
+3. Write an expression to replace all values in `sample_grid` strictly greater than `100` with `100`.
 
 ---
 
 ## Lists: Heterogeneous and Hierarchical Data
 
-An atomic vector and a matrix are restricted to holding elements of one class. A **list**, however, is a generic vector that can contain elements of **any class, any length, and any structure** — including vectors of different lengths, matrices, data frames, or even other nested lists.
+Atomic vectors and matrices are restricted to holding elements of one atomic class. A **list**, however, is a generic vector that can contain elements of **any class, length, or structure**—including vectors of different lengths, matrices, data frames, or other lists.
 
-Lists are widely used in R to bundle related parameters, package complex simulation results, or return grouped records.
+Lists are widely used in R to bundle related parameters, package complex experimental outputs, or return grouped records.
 
 ### Creating Lists
 
-Lists are constructed with the `list()` function. It is strongly recommended to give every element a descriptive name:
+Lists are constructed using `list()`. Giving each element a descriptive name makes downstream retrieval clear and robust:
 
 ```R
-survey_site <- list(
-  town_name       = "Norwich",
-  sample_date     = "2026-05-14",
-  quadrat_counts  = c(12, 18, 14, 22),
-  certified_clean = TRUE,
-  soil_ph_readings = c(5.2, 5.4, 5.1)
+expedition_record <- list(
+  vessel_name     = "R/V Discovery",
+  cruise_id       = 104L,
+  sensor_readings = c(12.4, 13.1, 12.8, 14.0),
+  gps_active      = TRUE,
+  salinity_psu    = c(34.1, 34.2, 34.0)
 )
 ```
 
-In the Environment tab of RStudio, click the blue expand arrow next to `survey_site` to inspect its hierarchical structure.
+In the Environment tab of RStudio, click the blue expand arrow next to
+`expedition_record` to inspect its hierarchical structure.
 
 ### Accessing List Elements: `[` vs `[[` vs `$`
 
-Understanding the distinction between single brackets `[` and double brackets `[[` is critical when working with lists:
+Understanding the distinction between single brackets `[` and double brackets `[[` is important when working with lists:
 
 * **Single Brackets `[ ]` (Sub-listing):**
-  Extracts a *slice* of the list. **It always returns a list**, even if you ask for only one element:
+  Extracts a *slice* of the list. **It always returns a list**, even if you request only a single element:
   ```R
-  sub <- survey_site["town_name"]
+  sub <- expedition_record["vessel_name"]
   class(sub)  # "list"
   ```
-  *Analogy:* Imagine a list as a train with cargo wagons. `survey_site[1]` uncouples the 1st wagon and hands you a shorter train consisting of that single wagon.
+  *Analogy:* Think of a list as a train with cargo wagons. `expedition_record[1]` uncouples the 1st wagon and hands you a shorter train consisting of that single wagon.
 
 * **Double Brackets `[[ ]]` (Element Extraction):**
   Extracts the *actual object stored inside* the designated position or name:
   ```R
-  name_val <- survey_site[["town_name"]]
+  name_val <- expedition_record[["vessel_name"]]
   class(name_val)  # "character"
   ```
-  *Analogy:* `survey_site[[1]]` opens up the 1st wagon, unpacks the cargo inside, and hands you the cargo directly.
+  *Analogy:* `expedition_record[[1]]` opens up the 1st wagon, unloads the cargo inside, and hands you the cargo directly.
 
 * **Dollar Sign `$` (Named Extraction):**
-  Shorthand for `[[ "name" ]]`:
+  Convenient shorthand for `[[ "name" ]]`:
   ```R
-  survey_site$quadrat_counts  # Returns the numeric vector c(12, 18, 14, 22)
+  expedition_record$sensor_readings  # Returns numeric vector: 12.4 13.1 12.8 14.0
   ```
 
 ```R
 # You can immediately apply vector operations to extracted elements:
-mean(survey_site$quadrat_counts)  # 16.5
+mean(expedition_record$sensor_readings)  # 13.075
+```
+
+### Accessing the Names of List Elements
+
+You can see and modify the names of list elements using the `names()`
+command:
+
+```R
+# List the names of all elements:
+record_names <- names(expedition_record)
+record_names
+
+# Modify a name:
+names(expedition_record)[which(record_names == "sensor_readings")] <-
+    "sensor_readings_mA"
 ```
 
 ### Modifying and Adding List Elements
 
-You can modify existing elements or add brand new elements by assigning directly to a new name:
+You can update existing elements, add new entries, or delete elements by assignment:
 
 ```R
 # Modify existing element:
-survey_site$certified_clean <- FALSE
+expedition_record$gps_active <- FALSE
 
 # Add a new element:
-survey_site$surveyor <- "Dr. Smith"
+expedition_record$chief_scientist <- "Dr. Vance"
 
 # Remove an element by assigning NULL:
-survey_site$sample_date <- NULL
+expedition_record$cruise_id <- NULL
 ```
+
+See how `expedition_record` changed in the Environment tab.
 
 ### Nested Lists
 
-Because list elements can be anything, you can nest lists inside lists. This is precisely how multi-town market reports or hierarchical biological models are represented:
+Because list elements can be any object, you can nest lists within lists. This hierarchical structure is standard for multi-site monitoring campaigns or complex parameter configurations:
 
 ```R
-market_report <- list(
-  Norwich = list(honey = 12.5, pumpkins = 45, organic = TRUE,  expenses = 120.5),
-  Diss    = list(honey = 4.0,  pumpkins = 18, organic = FALSE, expenses = 45.0),
-  Holt    = list(honey = 8.2,  pumpkins = 30, organic = TRUE,  expenses = 82.3)
+station_reports <- list(
+  Station_Alpha = list(temp = 14.2, turbidity = 2.1, certified = TRUE,  depth = 45.0),
+  Station_Beta  = list(temp = 11.5, turbidity = 5.8, certified = FALSE, depth = 85.0),
+  Station_Gamma = list(temp = 16.8, turbidity = 1.4, certified = TRUE,  depth = 32.5)
 )
 
-# Extract information for a specific town:
-market_report[["Norwich"]]$honey        # 12.5
-market_report$Holt$organic              # TRUE
+# Extract information for a specific station:
+station_reports[["Station_Alpha"]]$temp        # 14.2
+station_reports$Station_Gamma$certified        # TRUE
 ```
 
-#### Q2. Given `market_report` above:
-1. Write an expression to retrieve the number of pumpkins bought in `Diss`.
-2. Add a new town named `"Aylsham"` to `market_report` containing 10.0 kg of honey, 25 pumpkins, organic certification `TRUE`, and expenses of £70.0.
-3. Calculate the total honey purchased across all organic towns in `market_report` (Norwich, Holt, Aylsham).
+#### Q2. Given `station_reports` above:
+1. Write an expression to retrieve the turbidity at `Station_Beta`.
+2. Add a new station named `"Station_Delta"` to `station_reports` containing temperature 13.4, turbidity 3.0, certified status `TRUE`, and depth 60.0.
+3. Compute the sum of the depths across the two certified stations: `Station_Alpha` and `Station_Gamma`.
 
 ---
 
-## Data Frames: The Workhorse of Data Analysis
+## Data Frames: Tabular Scientific Datasets
 
-A **data frame** is a two-dimensional table designed specifically for data analysis. Formally, a data frame is a named list of vectors of **identical length**, where:
+A **data frame** is a two-dimensional table designed specifically for
+statistical data analysis. Formally, a data frame is a named list of
+vectors of **identical length**, where:
+
 * Each **column** represents a variable (and must be of a single atomic class).
 * Each **row** represents an observation (and can span multiple classes across columns).
 
-Unlike a matrix (which forces all cells into one type), a data frame can freely hold numeric columns, character columns, and logical columns side by side.
+Unlike a matrix (which forces all cells into one atomic type), a data frame holds numeric, character, and logical columns side by side.
 
 ### Creating Data Frames
 
 Construct data frames using `data.frame()`:
 
 ```R
-survey_df <- data.frame(
-  plot_id    = 1:6,
-  soil_ph    = c(4.8, 6.2, 5.1, 7.4, 4.9, 5.3),
-  tree_count = c(18,  10,  16,   7,  22,  15),
-  vegetation = c("Pine", "Oak", "Pine", "Oak", "Pine", "Pine"),
-  is_wetland = c(TRUE, FALSE, FALSE, FALSE, TRUE, FALSE),
+estuary_df <- data.frame(
+  station_id    = 101:106,
+  salinity_psu  = c(28.4, 32.1, 29.5, 34.8, 31.0, 33.2),
+  sampling_depth = c(2.5,  5.0,  3.0, 12.0,  8.5,  4.0),
+  sediment_type  = c("Sand", "Mud", "Sand", "Gravel", "Mud", "Sand"),
+  is_marine      = c(FALSE, TRUE, FALSE, TRUE, TRUE, TRUE),
   stringsAsFactors = FALSE
 )
 
-survey_df
+estuary_df
 ```
 
 Inspect the structure and dimensions of your data frame:
 ```R
-dim(survey_df)      # 6 rows, 5 columns
-nrow(survey_df)     # 6
-ncol(survey_df)     # 5
-names(survey_df)    # Column names
-str(survey_df)      # Structure overview
-head(survey_df, 3)  # First 3 rows
+dim(estuary_df)      # 6 rows, 5 columns
+nrow(estuary_df)     # 6
+ncol(estuary_df)     # 5
+names(estuary_df)    # Column names
+str(estuary_df)      # Structure overview
+head(estuary_df, 3)  # First 3 rows
 ```
 
 ### Accessing Columns and Cells
@@ -248,193 +279,204 @@ head(survey_df, 3)  # First 3 rows
 Columns can be extracted as vectors using `$`, `[[ ]]`, or `[, "column_name"]`:
 
 ```R
-# Extract a column as a vector:
-survey_df$soil_ph
-survey_df[["soil_ph"]]
-survey_df[, "soil_ph"]
+# Extract a column as an atomic vector:
+estuary_df$salinity_psu
+estuary_df[["salinity_psu"]]
+estuary_df[, "salinity_psu"]
 
-# Extract a specific cell: row 3, column 'soil_ph':
-survey_df[3, "soil_ph"]  # 5.1
+# Extract a specific cell: row 2, column 'salinity_psu':
+estuary_df[2, "salinity_psu"]  # 32.1
 ```
 
 ### Adding and Computing New Columns
 
-You can add new variables directly or compute them from existing columns. This is a foundational step in simulation modelling:
+You can add new variables directly or compute them from existing columns using vectorized expressions:
 
 ```R
-# In Challenge 2, biomass is calculated as:
-# tree_count * (2.0 + 0.5 * soil_ph)
+# Compute an estimated hydraulic pressure index:
+# pressure = sampling_depth * (1.0 + 0.02 * salinity_psu)
 
-survey_df$biomass <- survey_df$tree_count * (2.0 + 0.5 * survey_df$soil_ph)
+estuary_df$pressure_idx <- estuary_df$sampling_depth * (1.0 + 0.02 * estuary_df$salinity_psu)
 
-# View updated data frame with new biomass column:
-survey_df
+estuary_df
 ```
 
 ---
 
 ## Subsetting and Filtering Data Frames
 
-Data analysis routinely requires filtering data frames to isolate observations meeting precise environmental or experimental criteria.
+Data analysis routinely requires filtering data frames to isolate rows meeting environmental or experimental criteria.
 
 ### 1. Filtering with Row Logical Indexing
 
 The standard and most robust method to filter a data frame is passing a logical condition into the **row index position**: `df[condition, ]`.
 
 ```R
-# Find plots where soil pH is strictly less than 5.5:
-acidic_plots <- survey_df[survey_df$soil_ph < 5.5, ]
-acidic_plots
+# Find stations where salinity is strictly greater than 30.0:
+saline_stations <- estuary_df[estuary_df$salinity_psu > 30.0, ]
+saline_stations
 
 # Combine multiple conditions:
-# Soil pH < 5.5 AND tree count >= 15:
-specialist_df <- survey_df[survey_df$soil_ph < 5.5 & survey_df$tree_count >= 15, ]
-specialist_df
+# Salinity > 30.0 AND sampling depth >= 5.0:
+deep_saline_df <- estuary_df[estuary_df$salinity_psu > 30.0 & estuary_df$sampling_depth >= 5.0, ]
+deep_saline_df
 ```
 
 > **Crucial Syntax Reminder:** Do not forget the comma inside the brackets! 
-> * `survey_df[condition, ]` filters **rows** and keeps all columns.
-> * `survey_df[condition]` would attempt to subset columns by name or index and cause errors.
+> * `estuary_df[condition, ]` filters **rows** and keeps all columns.
+> * `estuary_df[condition]` would attempt to subset columns by name or index and cause errors.
 
 ### 2. Filtering with `subset()`
 
-R also provides the convenient helper function `subset()`, which evaluates column names without repeatedly typing `survey_df$`:
+R also provides the helper function `subset()`, which evaluates column names directly:
 
 ```R
-specialist_sub <- subset(survey_df, soil_ph < 5.5 & tree_count >= 15)
+deep_saline_sub <- subset(estuary_df, salinity_psu > 30.0 & sampling_depth >= 5.0)
 ```
 
-While `subset()` is clean for interactive exploration, standard bracket indexing `df[condition, ]` is preferred inside scripted functions and simulation packages because of predictable evaluation rules.
+While `subset()` is convenient for quick interactive exploration, bracket indexing `df[condition, ]` is preferred inside scripted functions and packages due to unambiguous variable evaluation rules.
 
 ---
 
-## Aggregation and Handling Boundary Cases
+## Aggregation and Boundary Cases
 
-Once a data frame is filtered, we often compute summary statistics on specific columns.
+Consider a situation where, once a data frame is filtered, summary
+statistics are calculated across specific columns, e.g.:
 
 ```R
-# Calculate the mean biomass of the specialist plots:
-mean_spec_biomass <- mean(specialist_df$biomass)
-mean_spec_biomass
+# Calculate the mean pressure index of the deep saline stations:
+mean_pressure <- mean(deep_saline_df$pressure_idx)
+mean_pressure
 ```
 
 ### Boundary Case: Zero Qualifying Rows
 
-In simulations with stochastic conditions, it is entirely possible that **no observations qualify** under the filtering criteria. Your code must handle this gracefully without crashing:
+In computational pipelines and simulations, it is common that **no observations satisfy** the filtering criterion. Your code must handle empty subsets predictably:
 
 ```R
-# Suppose we search for extreme plots that do not exist in our data:
-extreme_df <- survey_df[survey_df$soil_ph < 3.5 & survey_df$tree_count > 50, ]
+# Filter for extreme criteria that do not occur in our data:
+extreme_df <- estuary_df[estuary_df$salinity_psu > 45.0 & estuary_df$sampling_depth > 50.0, ]
 
 nrow(extreme_df)  # Returns 0
 ```
 
-If you attempt to compute the mean of an empty numeric vector:
+If you calculate the mean of an empty numeric vector:
 ```R
-mean(extreme_df$biomass)  # Returns NaN (Not a Number)
+mean(extreme_df$pressure_idx)  # Returns NaN (Not a Number)
 ```
 
-In Challenge 2, if no quadrats meet the specialist criteria, your function must return `NA` as a single scalar. You can verify whether a filtered data frame has observations by checking `nrow(df) > 0`:
+To handle such situations in complicated scripts, you can check
+whether `nrow(df) > 0`:
 
 ```R
-result <- if (nrow(extreme_df) > 0) mean(extreme_df$biomass) else NA
-result  # Returns NA
+# Checking if rows exist before computing summary:
+has_rows <- nrow(extreme_df) > 0
+has_rows  # FALSE
 ```
-*(We will formalize `if`-`else` syntax in Practical 3, but note how `nrow()` enables boundary detection).*
 
 ---
 
 ## Missing Data in Data Frames
 
-Tabular datasets often contain missing values (`NA`). 
+Tabular datasets frequently contain missing values (`NA`). 
 
 ```R
-messy_survey <- data.frame(
-  plot_id = 1:4,
-  ph      = c(5.1, NA, 6.4, 4.9),
-  trees   = c(12, 15, NA, 20)
+field_records <- data.frame(
+  plot_id     = 1:4,
+  temperature = c(15.2, NA, 18.1, 14.7),
+  dissolved_o2 = c(7.8, 8.1, NA, 6.9)
 )
 ```
 
-* `is.na(messy_survey)`: Returns a logical matrix indicating missing cells across the table.
-* `complete.cases(messy_survey)`: Returns a logical vector of length `nrow`, which is `TRUE` only for rows that have **no missing values in any column**.
-* `na.omit(messy_survey)`: Returns a clean data frame with all rows containing any `NA` stripped out.
+* `is.na(field_records)`: Returns a logical matrix indicating missing cells across the table.
+* `complete.cases(field_records)`: Returns a logical vector of length `nrow`, which is `TRUE` only for rows that have **no missing values in any column**.
+* `na.omit(field_records)`: Strips out all rows containing any `NA`.
 
 ```R
-complete.cases(messy_survey)  # TRUE FALSE FALSE  TRUE
+complete.cases(field_records)  # TRUE FALSE FALSE  TRUE
 
-clean_survey <- messy_survey[complete.cases(messy_survey), ]
-clean_survey
-#   plot_id  ph trees
-# 1       1 5.1    12
-# 4       4 4.9    20
+clean_records <- field_records[complete.cases(field_records), ]
+clean_records
+#   plot_id temperature dissolved_o2
+# 1       1        15.2          7.8
+# 4       4        14.7          6.9
 ```
 
-#### Q3. In `survey_df` from Section 4, write code to:
-1. Filter the data frame to select all plots where `vegetation == "Pine"` and `biomass > 60`.
-2. Extract the `soil_ph` values of these qualifying plots as a plain numeric vector.
-3. Compute the median pH of these qualifying plots.
+#### Q3. In `estuary_df` from above:
+1. Filter the data frame to select all rows where `sediment_type == "Sand"` and `pressure_idx > 5.0`.
+2. Extract the `salinity_psu` column of these qualifying stations as a plain numeric vector.
+3. Compute the arithmetic mean salinity of these qualifying stations.
 
 ---
 
-## Comprehensive Review Exercises
+## Practical Review Exercises
 
-These exercises combine matrices, lists, and data frames into workflows mirroring your upcoming challenges.
+Work through these multi-step exercises in your R script. Ensure your code is thoroughly documented, variables are clearly named, and outputs are verified in the console.
 
-### Exercise 1: Building a Structured Market Database (Challenge 1 Prep)
+### Exercise 1: Assembling and Disassembling Lists and Data Frames
 
-Imagine you receive five parallel vectors describing purchases from regional agricultural markets:
+Suppose you receive data though different channels informing your about oceanographic sampling buoys:
 ```R
-towns       <- c("Norwich", "Diss", "Aylsham", "Holt")
-honey_kg    <- c(25.0, 10.5, 18.0, 4.2)
-pumpkins    <- c(80, 35, 60, 15)
-all_organic <- c(TRUE, FALSE, TRUE, FALSE)
-expenses    <- c(240.0, 95.0, 175.5, 42.0)
+buoy_codes    <- c("Bay_North", "Shoal_East", "Harbour_Deep", "Cove_West")
+surface_temp  <- c(16.5, 14.2, 18.1, 15.0)
+ph_readings   <- c(8.1, 7.8, 8.3, 7.9)
+sensor_ok     <- c(TRUE, TRUE, FALSE, TRUE)
+depth_meters  <- c(42.0, 18.5, 88.0, 25.0)
 ```
 
-1. Convert these parallel vectors into a single data frame named `market_df` with appropriate column names.
-2. In Challenge 1, each honey-roasted pumpkin meal requires:
-   * $0.022\text{ kg}$ ($22\text{ g}$) of honey.
-   * Exactly $1$ pumpkin.
+1. Combine these vectors into a single data frame named `buoy_df` with
+   appropriate column names.
+2. In water quality monitoring, each station's acid-neutralizing
+   capacity index (ANC) is estimated as:
+   ```
+   ANC = depth_meters x (0.5 + 0.1 x ph_readings)
+   ```
+   Add this calculated column to `buoy_df`.
    
-   For each market in `market_df`, calculate how many complete meals could potentially be made from its honey alone (`floor(honey_kg / 0.022)`), and from its pumpkins alone. The meal capacity of that market is the smaller of these two numbers (hint: use `pmin()`, which computes parallel element-wise minimums across vectors). Add this as a column named `meal_capacity`.
-3. Construct a named list `market_list` containing 4 elements, where the names of the list elements are the town names (`Norwich`, `Diss`, etc.). Each element must itself be a list containing the purchase details (`honey`, `pumpkins`, `organic`, `expenses`, `meal_capacity`) for that town.
-4. Verify that typing `market_list[["Norwich"]]$meal_capacity` returns the correct number of meals.
+3. Construct a list from the third row of `buoy_df` by extrating the
+   row and applying `as.list()`.
+   
+4. Construct an empty list named `error_report`. Then add the list
+   generate in the previous output as an element to `error_report`,
+   and name that element according to the corresponding buoy code.
 
-### Exercise 2: Simulated Survey Biomass Pipeline (Challenge 2 Prep)
 
-Simulate a survey dataset of 15 forest quadrats using deterministic vectors:
+### Exercise 2: Tabular Water Quality Pipeline
+
+Create a simulated limnology survey table of 12 lake sampling stations using the following vectors:
 ```R
-# Pre-defined survey measurements:
-soil_ph_vals <- c(4.2, 5.8, 5.1, 7.2, 4.8, 6.9, 5.3, 4.5, 7.8, 5.4, 6.1, 4.9, 5.2, 6.7, 5.0)
-tree_counts  <- c(16,  12,  18,   8,  20,   5,  14,  22,   7,  19,  11,  15,  13,   9,  17)
+temp_data <- c(18.5, 21.2, 16.8, 22.5, 17.1, 23.0, 19.4, 15.9, 20.8, 24.1, 17.8, 18.2)
+do_data   <- c(7.2,  5.1,  8.4,  4.8,  7.9,  4.2,  6.5,  8.8,  5.6,  3.9,  7.5,  6.8)
 ```
 
-1. Construct a data frame named `survey_df` containing two columns: `"soil_ph"` and `"tree_count"`.
-2. Add a column named `"biomass"` using the formula:
-   $$\text{biomass} = \text{tree\_count} \times (2.0 + 0.5 \times \text{soil\_ph})$$
-3. Subset `survey_df` into a new data frame named `specialist_df` containing only quadrats that meet both specialist acid-tolerant thresholds simultaneously:
-   * `soil_ph < 5.5`
-   * `tree_count >= 15`
-4. Calculate the arithmetic mean of the `"biomass"` column across all specialist plots in `specialist_df` and store it in a single scalar variable named `specialist_mean_biomass`.
-5. Write an expression that checks if `nrow(specialist_df) > 0`, and prints the scalar `specialist_mean_biomass`.
+1. Construct a data frame named `lake_survey` containing columns `"temperature"` and `"dissolved_o2"`.
+2. Add a calculated column named `"oxygen_sat"` based on the
+   formulation:
+   ```
+   oxygen_sat = dissolved_o2 x (1.2 + 0.04 x temperature)
+   ```
+3. Subset `lake_survey` into a new data frame named `hypoxic_risk_df` containing only stations that meet both adverse environmental criteria simultaneously:
+   * `temperature > 20.0`
+   * `dissolved_o2 < 5.5`
+4. Calculate the mean of `"oxygen_sat"` across all qualifying stations in `hypoxic_risk_df` and store it in a single scalar variable named `mean_risk_sat`.
+5. Check whether `nrow(hypoxic_risk_df) > 0` and display the result.
 
-### Exercise 3: Disturbance Matrix Transformation (Challenge 3 Prep)
+### Exercise 3: Thermal Anomaly Matrix Transformation
 
-Consider an environmental impact matrix where rows represent 5 distinct ponds and columns represent 4 observation time points:
+Consider a temperature anomaly grid where rows represent 5 observation depths and columns represent 4 seasonal quarters:
 ```R
-impact_matrix <- matrix(
-  data = c(0.12, 0.45, 0.78, 0.22, 0.90,
-           0.15, 0.50, 0.82, 0.20, 0.95,
-           0.10, 0.40, 0.75, 0.25, 0.88,
-           0.30, 0.65, 0.92, 0.35, 0.99),
+thermal_grid <- matrix(
+  data = c(0.45, 0.82, 1.25, 0.35, 1.40,
+           0.50, 0.90, 1.30, 0.40, 1.55,
+           0.40, 0.78, 1.15, 0.30, 1.35,
+           0.60, 1.05, 1.45, 0.55, 1.70),
   nrow = 5, ncol = 4
 )
-rownames(impact_matrix) <- paste0("Pond_", 1:5)
-colnames(impact_matrix) <- paste0("Time_", 1:4)
+rownames(thermal_grid) <- paste0("Depth_", c(5, 10, 25, 50, 100), "m")
+colnames(thermal_grid) <- paste0("Quarter_", 1:4)
 ```
 
-1. Calculate the mean impact score for each pond across all 4 time points using `rowMeans()`.
-2. Identify which ponds have an overall mean impact score strictly greater than `0.60`.
-3. Create a copy of `impact_matrix` named `disturbed_matrix`. In this new matrix, set all individual impact values that exceed `0.80` to `NA` (representing localized population collapse).
-4. Count how many total missing values (`NA`) exist in `disturbed_matrix` using `is.na()` and `sum()`.
+1. Calculate the mean thermal anomaly for each depth across all 4 quarters using `rowMeans()`.
+2. Identify which depths have an overall mean thermal anomaly strictly greater than 1.00.
+3. Create a copy of `thermal_grid` named `censored_grid`. In this new matrix, set all individual anomaly values that exceed 1.20 to `NA` (representing sensor threshold exceedance).
+4. Count how many total missing values (`NA`) exist in `censored_grid` using `is.na()` and `sum()`.

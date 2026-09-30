@@ -1,559 +1,665 @@
+# **Practical 1 - Introduction to RStudio, Basic Data Types, and Vectors**
 
-# **Practical 1 - Introduction to RStudio and basic data structures**
-
-----------------
+---
 
 ## Introduction
 
-This practical series is aimed at teaching basic programming in R. We
-will not be covering stats in these practicals. However, do not
-relax too much, as these practicals will move fairly quickly, and you
-will need to stay focused in order to do well in the final exam. Make
-use of R’s help system, your neighbour, and if you're really stuck
-don't be afraid to ask a demonstrator.
+This practical series teaches core computational programming in R,
+focusing on the concepts required for computational modelling, data
+manipulation, and scientific workflows.
 
------------------------
+The practicals move quickly. You will need to engage actively with the
+concepts, experiment in your script editor, and complete the exercises
+to build the technical foundation required for the assessment
+challenges. Make full use of R's built-in help system, discuss
+problems with your neighbour, and call over a demonstrator if you need
+clarification.
 
-## The RStudio environment
+---
 
-Open RStudio following the instructions [here](../Cluster_Access.md).
+## The RStudio Environment
 
-RStudio is a _frontend_ to R. It allows you to easily use R, while R
-itself is the engine working in the background to do all the
-calculations.  Hence, we'll often say "R does this" or "R does that"
-while we are working with RStudio.
+Open RStudio on your computer.
 
-Now, please acquaint yourself with RStudio. 
+RStudio is an **integrated development environment** (IDE)—a front-end
+interface that makes working with R intuitive and productive. R itself
+is the underlying engine doing all the actual work in the background.
+
+Acquaint yourself with the four primary panels in RStudio:
+
+```
++------------------------------------+------------------------------------+
+|                                    |                                    |
+|         Source / Script Editor     |          Environment / History     |
+|          (Top Left)                |           (Top Right)              |
+|                                    |                                    |
++------------------------------------+------------------------------------+
+|                                    |                                    |
+|         Console / Terminal         |          Files / Plots / Help      |
+|          (Bottom Left)             |           (Bottom Right)           |
+|                                    |                                    |
++------------------------------------+------------------------------------+
+```
 
 ### The Console
 
-  * In the **bottom left** there's a tab called "Console". You can click
-there and do some simple maths.
-Try typing `1 + 2` in this window and pressing Enter (or Return).  As output you'll see
+* In the **bottom-left** panel, find the tab called **Console**. You can type commands here for immediate execution.
+  Type `1 + 2` and press `Enter` (or `Return`). As output, you will see:
+  ```R
+  [1] 3
+  ```
+  The `[1]` indicates that the display line begins with the *1st* element of the returned vector (which here contains a single value). The `3` is the computed result.
+
+* Continuing in the Console, type:
+  ```R
+  a <- 7 - 2
+  ```
+  and press `Enter`. The answer is not printed to the console. Look at the **Environment** tab in the **top-right** panel: it now lists `a` with its assigned value `5`.
+
+* You can inspect the value of `a` by typing `a` into the console and pressing `Enter`. R evaluates the symbol and prints `[1] 5`.
+
+* In the Console, you can cycle through previously entered commands using the `Up` and `Down` arrow keys on your keyboard.
+
+> **Important:** While the Console is useful for quick calculations, scientific programming must be **reproducible**. Never rely on commands typed directly into the Console for your permanent work. All code, data pipelines, and calculations should be written into script files.
+
+---
+
+### The R Script Editor
+
+We will write all permanent commands into an R script file and execute them from the editor.
+
+* In the menu bar, click **File -> New File -> R Script** (or use `Ctrl+Shift+N` on Windows/Linux, `Cmd+Shift+N` on macOS). A blank editor tab will appear in the top-left panel.
+
+* Type a mathematical expression:
+  ```R
+  2 * a + 8
+  ```
+  Press `Enter`. A new line opens, but nothing is calculated yet: we have not instructed R to evaluate the line.
+
+* Place your cursor anywhere on the line with `2 * a + 8` and press `Ctrl+Enter` (Windows/Linux) or `Cmd+Enter` (macOS). The line is automatically sent to the Console below and evaluated.
+
+* In your script, type:
+  ```R
+  a <- a + 1000
+  ```
+  Press `Ctrl+Enter` (`Cmd+Enter`). Observe how the value associated with `a` in the **Environment** tab updates immediately.
+
+* You can run multiple lines or an entire script at once. Select
+  several lines, or even just parts of lines, with your mouse (or press `Ctrl+A` / `Cmd+A` to highlight the entire script), then press `Ctrl+Enter` (`Cmd+Enter`).
+
+* To save your script, click **File -> Save** (`Ctrl+S` / `Cmd+S`). Choose an informative filename. RStudio will automatically append the `.R` file extension.
+
+---
+
+### The Help System
+
+The **Help** tab in the bottom-right panel is an essential resource.
+
+* In your script editor or console, type `sum` and place the text cursor within the word. Press `F1`. The documentation for `sum` will open in the Help tab. Alternatively, run:
+  ```R
+  ?sum
+  ```
+
+* Help pages follow a consistent structure. When learning a new function, read the sections in this recommended order:
+  1. **Description:** A concise summary of what the function accomplishes.
+  2. **Usage & Arguments:** The parameters the function expects, their
+     default values, and the expected input structure. Then skip down
+     to...
+  3. **Value:** What the function returns (a scalar number, a vector, a list, etc.).
+  4. **Examples:** Working code snippets at the bottom of the page that you can paste into your script and run.
+
+* If you do not know the exact name of a function, use a double question mark to search across all installed packages:
+  ```R
+  ??logarithm
+  ```
+
+#### Q1. Using the Help page for `sum`:
+Find out how to compute the sum of all integers from 1 to 100 using R's sequence operator `:`.
+
+---
+
+## Good Coding Practice
+
+Writing readable, well-structured code is just as vital as writing
+code that runs. In professional computational science, code is read
+far more often than it is written. Clean layouts reduce the likelyhood
+of errors and ensure that collaborators and assessors can follow your
+analytical logic.
+
+### White Space, Indentation, and Comments
+
+* **Comments:** Any text following a `#` character is ignored by R
+  until the end of the line. Try to use comments to summarise *to what end* a calculation is performed, rather than merely restating the code.
+* **White Space:** Spaces around operators (`+`, `-`, `*`, `<-`, `==`) and after commas make code legible. Compare `x<-3*y+2` with `x <- 3 * y + 2`.
+* **Descriptive Names:** Avoid single-letter variables except for temporary indexing counters. A variable named `canopy_cover` conveys intent; a variable named `cc` or `x` invites errors.
+* **Consistency:** Stick to snake case (`my_variable_name`) for variable and function names.
+
+Consider the contrast between these two scripts performing identical calculations:
+
+#### Bad Practice:
+```R
+boooom <-0.01
+blah2          =0.005
+    blah3<- 0.0036
+bigblah                           = boooom+ blah2        + blah3
+tadayeahmanfunky<-100*exp(bigblah*10)
+tadayeahmanfunky
 ```
-[1] 3
+
+#### Good Practice:
+```R
+#-------------------------------------------------------------------------------
+# Program:     bacterial_growth.R
+# Purpose:     Calculates projected population size under exponential growth.
+# Inputs:      Nutrient availability, temperature anomaly, relative humidity.
+#-------------------------------------------------------------------------------
+
+# Define environmental input parameters
+nutrients   <- 0.01    # Proportional nutrient supplementation
+temperature <- 0.005   # Degrees C deviation from 20 C baseline
+humidity    <- 0.0036  # Proportional humidity index
+
+# Define initial culture parameters
+starting_cells <- 100  # Initial cell count
+incubation_hrs <- 10   # Duration in hours
+
+# Calculate compound growth rate
+growth_rate <- nutrients + temperature + humidity
+
+# Project final population size: N(t) = N_0 * exp(r * t)
+final_cells <- starting_cells * exp(growth_rate * incubation_hrs)
+
+# Display final cell count
+final_cells
 ```
-The cryptic `1` in `[1]` indicates that the line starts with the *1st* element of
-vector of numbers (which here has only a single element). The `3` is
-the result of the calculation that you just asked R to do.
 
-  * Continuing on the console, type `a <- 7 - 2` and then Enter.  Now the
-answer is not printed out.  However, if you look in "Environment" tab
-in the **top right**, you'll see that it now displays a line with `a` and
-the assigned value (the result of `7 - 2`), that is, `5`.
+#### Q2. In your script editor, write a clean, well-commented script that calculates the volume and total surface area of a rectangular storage container:
+* Length = 6.5m
+* Width = 3.2m
+* Height = 2.4m
 
-  * You can recover the value of `a` by typing `a` in the console and
-    then Enter.  R evaluate this line just as the previous maths
-    problem `1 + 2`.  It knows that the value assigned to `a` is 5,
-    and so outputs this value.
-	
-  * In the console, you can recover lines that you have previously
-    entered by pressing the [UP] arrow on your keyboard. Give it a
-    try.
-	
-	
-If you do a bit more work in R, remembering and recovering what you
-did in the console becomes impossible. As scientists we want our work
-to be *reproducible*.  Hence, please *stop typing in the console*. Use
-it only for small calculations that you won't need again.
+Store each dimension in a descriptively named variable. Compute the
+volume (L x W x H) and total surface area (2 x [LW + LH + WH]), save
+them in separate variables, and print both results to the console.
 
-### The R Script Editor 
+---
 
-Instead, we will write all the commands we use into a file, an "R
-script", and execute them from there.
+## Variables and Assignment
 
-  * In the pull-down menu on the **top left**, click on File -> New File
-    -> R Script.  A new, blank window appears.
-	
-  * Type in a new maths problem, e.g., `2 * a + 8`. Press enter.
-    Nothing happens. We haven't told R, yet, to evaluate the problem. 
-	
-  * Now place your cursor back into the line with this maths problem
-    and press [Control]-Enter. You'll see that the line is sent to the
-    console below and evaluated.
-	
-  * In your R script, type a new command, e.g., `a <- a + 1000`, and
-    then [Control]-Enter (sometimes, it's [Shift] rather than
-    [Control], on a Mac it's different again).  Observe what
-    happens. Observed also how the value of `a` changed in the
-    top-right Environment tab.
-	
-  * You can also run entire scripts at once. For this, press
-    [Control]-A (to highlight the full script), then [Control]-Enter,
-    and observe what happens. This is very useful if you found an
-    error in one step of a complicated calculation and want to re-do
-    the entire calculation after correcting the error.
-    
-  * You can also run parts of your script repeatedly.  For example,
-    highlight `a <- a + 1000` with your mouse, and then press
-    [Control]-Enter repeatedly and see how the value of `a` change in
-    the Environment tab.
-	
-  * To save a script, go back to the pull-down menu on the top left
-    and click on File -> Save. Choose a meaningful name for your
-    script. The ending ".R" will automatically be appended to the
-    filename.
-	
-### The Help Tab
-
-The most important tab in the **bottom right** is the Help tab. For
-example:
-
-  * In your R Script, type `sum` and move the cursor so it is on top
-    of `sum`. Then press `F1` on your keyboard. An explanation of the
-    `sum` function appears in the Help tab in the bottom
-    right. (Alternatively, you can execute the line `?sum`.)
-	
-  * Help pages are very useful *if you read them carefully*.  To
-    start, I recommend reading first the "Description" and "Arguments"
-    section of a help page, and then skipping down to the "Value"
-    section and finally to "Examples". Give it a try.
-	
-  * Can you understand what `sum` does? When you run the commands in
-    the Example section of the help page, does the output make sense
-    to you?
-	
-  * Compute the sum of all integers from 1 to 100.
-  
-  * **Often, it's rather easy to guess what a function does from
-    seeing a use case. We will therefore occasionally introduce new
-    functions in practicals without much explanation. Please consult the help page
-    for details. If you remain confused, please ask a demonstrator.**
-	
-
--------------------
-
-## Variables
-A variable is a symbolic way of storing a particular set of values
-and/or characters. We have seen the use of the variable `a`
-before. Now, execute the lines
+A variable stores a value or an object in computer memory under a
+designated name. In R, assignment is performed using the arrow
+operator `<-`, typed as a less-than sign and a hyphen (please copy and
+execute commands in boxes for later use of results; also make sure you
+understand each line of code; free free to play with the code to see
+what happens):
 
 ```R
-x <- 5
-y <- 225
+dissolved_oxygen_mg_l <- 8.45
+sensor_depth_m        <- 12.0
 ```
 
-This assigns the number `5` to the symbol `x`. You can run operations
-on variables (e.g. `3*x^2`), create new variables using existing
-variables (e.g. `y <- 3*x^2`), and reassign existing variables to a
-new value (e.g.` x <- 3*x^2`; try running that a few times).  Please
-always use `<-` for assignment.
+Always use `<-` for assignment. Although R permits the equals sign `=`
+for assignment, `=` is reserved by convention for setting function arguments inside function calls (e.g., `seq(from = 1, to = 10)`).
 
-Variable names should start with a letter and can contain letters,
-numbers, "\_" and ".". However, using "." is discouraged.  Use "\_" to
-separate words.
+Rules for variable names in R:
 
-It is good practice to use using descriptive names (avoiding `x` and
-`y`).  Try to make your code easily understandable for other people,
-including your future self.  Descriptive variable names can work magic
-for this. An exception are variables that occur very frequently in a short
-passage of your script, where brevity can improve readability.
+* Names can contain letters, numbers, underscores (`_`), and periods (`.`). Using underscores (`snake_case`) is standard practice.
+* Names must start with a letter (or a period not immediately followed by a number).
+* Names cannot contain spaces or arithmetic operators (`-`, `+`, `*`, `/`).
+* R is strictly **case-sensitive**: `Water_Temp`, `water_temp`, and `WATER_TEMP` refer to three completely different variables.
 
-#### Q1. Create a new variable, `z`, out of the values in `x` and `y`. You can choose any formula you want for `z`, as long as it contains both `x` and `y`.
+---
 
+## Data Classes and Types
 
--------------------------
+Every piece of data stored in R belongs to an underlying class that dictates how R executes operations on it. The core atomic data types are:
 
-## Data classes
-There are several classes (or types) of data.  The class of your data tells you whether R interprets the data as numbers, letters, factors (i.e. categories), logical values or a number of alternatives. You can use the function `class()` to check the class of a variable.
+1. **Numeric (Double):** Real numbers with decimal precision (e.g., `3.1415`, `-0.5`, `42`).
+2. **Integer:** Whole numbers (e.g., `5L`, `12L`). In R, numbers entered without a decimal point are still stored as doubles by default unless explicitly followed by `L` or converted via `as.integer()`.
+3. **Character:** Text strings enclosed in matching single or double quotation marks (e.g., `'Salmo trutta'`, `"Transect_A"`).
+4. **Logical:** Boolean truth values: `TRUE` or `FALSE` (unquoted, uppercase).
 
-You may have seen numeric (`x <- 5`) and character variables (`x <-
-"hello"`).  Numeric values are internally represented as
-double-precision real values.  You can force representation as an
-*integer* and dropping of the fractional part using, e.g.,
-`as.integer(5.3)` or `as.integer(2)`.
-
-An important class of data that you might not be familiar with is
-**logical data**. Logical data can only take one of two possible
-values: `TRUE` or `FALSE` (abbreviated `T` and `F`). There are a
-number of different ways of arriving at a logical variable. The most
-obvious is to simply define a variable as true, for example:
+You can check the class of any variable using `class()`. Set
 
 ```R
-x <- TRUE
+station_id      <- "Station_North_4"
+water_salinity  <- 34.8
+replicate_count <- 4L
+sensor_active   <- TRUE
 ```
 
-or false, for example
+Now try
+
 
 ```R
-x <- FALSE
+class(station_id)       
+class(water_salinity)   
+class(replicate_count)  
+class(sensor_active)    
 ```
 
-Try creating a logical variable in this way and look at the class of the variable - if you have done it correctly it should read "logical" (keep in mind that R is case-sensitive, i.e. `x <- false` will throw an error).
+### Type Checking and Explicit Conversion
 
-However, this is not the way that logical variables tend to be used in programming. We often create logical variables through a particular type of calculation, called a **logical expression**. You can think of a logical expression as a statement (or a question) that we send to R, which may be a true statement, or it may be a lie! For example, try evaluating the code
+In computational pipelines and data ingestion scripts, code must often verify that inputs conform to expected types. R provides a family of `is.*()` functions to verify types, and `as.*()` functions to coerce between types:
+
+| Type Check | Conversion Function | Example Behaviour |
+| :--- | :--- | :--- |
+| `is.numeric(x)` | `as.numeric(x)` | `"14.75"` -> `14.75` |
+| `is.integer(x)` | `as.integer(x)` | `14.9` -> `14L` (truncates decimal) |
+| `is.character(x)` | `as.character(x)` | `250` -> `"250"` |
+| `is.logical(x)` | `as.logical(x)` | `1` -> `TRUE`, `0` -> `FALSE` |
 
 ```R
-5 > 4
+raw_reading <- "32.18"
+is.numeric(raw_reading)      # FALSE (stored as character string)
+
+clean_reading <- as.numeric(raw_reading)
+is.numeric(clean_reading)    # TRUE
 ```
 
-This statement is clearly true and accordingly R returns a value `TRUE`. The statement
+If you attempt to convert an incompatible character string to a number, R returns `NA` (Not Available) and issues a warning:
+```R
+as.numeric("invalid_sensor_signal")  # Returns NA with a warning
+```
+
+#### Q3. What is the value and class of `result` after evaluating each of the following expressions? Predict the output before running the code in R:
+* `result <- as.integer(15.82)`
+* `result <- as.logical(0)`
+* `result <- as.character(FALSE)`
+* `result <- as.numeric("18.4") <= 20`
+
+---
+
+## Logical Operators and Expressions
+
+A logical expression evaluates a condition and resolves to either
+`TRUE` or `FALSE`. Logical expressions are used, for example, for
+filtering data, testing for unusual conditions conditions ("edge
+cases"), and verifying input integrity.
+
+### Relational Comparison Operators
+
+* `>` : Greater than
+* `<` : Less than
+* `>=` : Greater than or equal to
+* `<=` : Less than or equal to
+* `==` : Exactly equal to (two equals signs; single `=` is assignment!)
+* `!=` : Not equal to
 
 ```R
-5 < 4
+turbidity_ntu <- 4.8
+
+turbidity_ntu < 5.0   # TRUE
+turbidity_ntu == 5.0  # FALSE
+turbidity_ntu != 0.0  # TRUE
 ```
-on the other hand, returns the value `FALSE`. We can assign this logical value to a variable by using the logical expression as input to the variable. This sounds complicated, but in practice it is very simple. Take the example
+
+### Boolean Combination Operators
+
+Individual logical tests can be combined using Boolean logic:
+
+* `&` : **AND** (evaluates to `TRUE` only if **both** conditions are `TRUE`).
+* `|` : **OR** (evaluates to `TRUE` if **at least one** condition is `TRUE`).
+* `!` : **NOT** (inverts `TRUE` to `FALSE`, and `FALSE` to `TRUE`).
 
 ```R
-x <- (5 > 4)
+## Example use of logical variables
+# Set paramters
+dissolved_o2 <- 6.2
+water_temp   <- 14.5
+
+# Both conditions must hold:
+hypoxia_risk <- (dissolved_o2 < 4.0) & (water_temp > 20.0)
+hypoxia_risk  # FALSE
+
+# At least one condition must hold:
+suboptimal <- (dissolved_o2 < 5.0) | (water_temp > 18.0)
+suboptimal    # FALSE
+
+# Negation:
+is_optimal <- !suboptimal
+is_optimal    # TRUE
 ```
 
-You can read the expression above as "the variable x is assigned the outcome of the logical expression 5 > 4". In this particular example the variable `x` will get the value `TRUE`. Notice that the logical expression itself is within parentheses. This is not strictly required, but is good coding practice as it avoids confusion between the assignment symbol and the logical expression.
+#### Truth Table Summary:
+* `TRUE & TRUE` -> `TRUE`
+* `TRUE & FALSE` -> `FALSE`
+* `FALSE & FALSE` -> `FALSE`
+* `TRUE | FALSE` -> `TRUE`
+* `FALSE | FALSE` -> `FALSE`
+* `!TRUE` -> `FALSE`
 
-The main logical operators that you should be familiar with are the following:
+#### Q4. Given `a <- 18` and `b <- 35`, write logical expressions in R that test:
+1. Whether `a` is strictly between 15 and 25 (exclusive of endpoints).
+2. Whether `a` is less than 10 **or** `b` is greater than or equal to 30.
+3. Whether `b` is divisible by 5 without a remainder (hint: use the modulo operator `%%`, where `b %% 5 == 0` evaluates divisibility).
 
-* `>` is greater than
-* `<` is less than
-* `>=` is greater than or equal to
-* `<=` is less than or equal to
-* `==` is equal to
-* `!=` is not equal to
+---
 
-Play around with some of these operators in your own made-up logical expressions. Make sure you are comfortable assigning a logical value to a variable.
+## Vectors: The Fundamental 1D Structure
 
-We can create more sophisticated logical expressions using the "and" command and the "or" command. The "and" command is written `&` and called ampersand (keyboard shortcut Shift+7), while the "or" command is written `|` and called a "pipe" or vertical bar (keyboard shortcut Shift+\ on a standard Windows keyboard). These "operators" can be placed between two or more logical expressions - exactly as you would do in a spoken sentence. For example, the expression
+A **vector** is an ordered collection of elements that **must all belong to the same atomic class**. If you attempt to combine items of different classes into a single vector, R silently converts them to the most flexible type (character is most flexible, followed by numeric, followed by logical).
+
+Oddly, in R, an individual scalar such as `x <- 5` is simply a vector of length 1.
+
+### Creating Vectors
+
+Construct vectors using `c()` (combine), sequence generators, or repeat functions:
 
 ```R
-(x > 5) & (x <= 10)
+# Direct combination:
+conductivity_vals <- c(450, 520, 480, 610, 590)
+site_labels       <- c("Estuary_1", "Estuary_2", "Estuary_3")
+equipment_passed  <- c(TRUE, TRUE, FALSE, TRUE)
+
+# Sequences:
+depth_profile <- seq(from = 0.0, to = 25.0, by = 5.0)  # 0, 5, 10, 15, 20, 25
+station_ids   <- 101:108                               # Whole numbers 101 to 108
+time_steps    <- seq(from = 0, to = 1, length.out = 5) # 5 evenly spaced values
+
+# Repetitions:
+baseline_zeros <- rep(0, times = 8)
+treatment_tags <- rep(c("Ambient", "Enriched"), times = 3)
+block_labels   <- rep(c("Zone_A", "Zone_B"), each = 4)
 ```
-can be read "x is greater than five, and x is less than or equal to ten". Similarly, the expression
+
+### Inspecting Vector Properties
+
+* `length(x)`: Total number of elements.
+* `class(x)`: The atomic class of the elements.
+* `head(x, n)`: First $n$ elements (defaults to 6).
+* `tail(x, n)`: Last $n$ elements.
 
 ```R
-(x < 6) | (x == 12)
+length(conductivity_vals)  # 5
+class(conductivity_vals)   # "numeric"
 ```
 
-can be read "x is less than six, or x is equal to twelve". By using a combination of these operators, while making good use of parentheses, it is possible to come up with some quite complex statements.
+#### Q5. Generate a vector named `temperature_steps` that starts at 12.0, ends at 24.0, and contains exactly 25 evenly spaced values. What is the value of its 9th element?
 
+---
 
-**A short note on classes:**
+## Vectorized Arithmetic and Recycling
 
-It's easy to get numeric and character data confused. For example, in `x <- "blue"`, `x` is of class "character", while in `x <- 4`, `x` is of class "numeric". The problem comes if you type:
+In R, mathematical operations applied to vectors execute **element-by-element** without requiring loops. This vectorization makes operations computationally efficient and concise.
+
+### Scalar-Vector Arithmetic
+
+When an operation combines a vector with a single scalar, the scalar operation is applied to each element individually:
 
 ```R
-x <- "4"
+nitrate_ppm <- c(1.2, 2.5, 3.1, 0.8)
+
+# Convert all measurements by adding a calibration offset of 0.3:
+nitrate_ppm + 0.3          # 1.5 2.8 3.4 1.1
+
+# Multiply each measurement by a conversion factor:
+nitrate_ppm * 1000         # 1200 2500 3100  800
+
+# Compute estimated ionic flux: flux = 1.5 * concentration + 0.2
+nitrate_ppm * 1.5 + 0.2    # 2.00 3.95 4.85 1.40
 ```
 
-In this case `x` is of class "character" because of the quotation marks. Try typing `class(x)` if you are confused. You can also type `is.numeric(x)` and `is.character(x)`.
+### Vector-Vector Arithmetic and the Recycling Rule
 
-
-
-#### Q2. Let us define the variable `x <- 10`. What will the outcome of the following expressions be?
-
-* `(x > 5)`
-* `(x <= 10)`
-* `(x != 10)`
-* `(x < 5) & (x < 105)`
-* `(x < 4) | (x > 14) | (x == 10)`
-
-#### Q3. Below are some of the rules that logical operators follow. Write in plain English what it means.
-
-* `TRUE & TRUE` is `TRUE`
-* `TRUE & FALSE` is `FALSE`
-* `FALSE & TRUE` is `FALSE`
-* `TRUE | FALSE` is `TRUE`
-* `FALSE | TRUE` is `TRUE`
-
-#### Q4. Given three variables (`x`, `y` and `z`), how would you write the following sentence in a logical expression?
-
-*The variable `x` is less than variable `y`, or greater than variable `z`?*
-
--------------------------------
-
-## Types of Objects
-### Scalars and vectors
-Objects can be of different types. So far, we have looked at **scalar
-objects**, which contain a single variable (e.g. `x <- 3`). Another
-very common type of object is the **vector**, which is an object
-containing several scalars of the same class. Please assign the
-following vectors to variables for later use:
+When combining two vectors of identical length, arithmetic occurs pairwise:
 
 ```R
-numeric_vec   <- c(1, 1, 2, 3, 5, 8)   # c is a function for combining values into a vector or list.
-seq_vec1      <- seq(from = 10, to = 5) 
-seq_vec2      <- seq(from = 0, to = 10, by = 0.25)
-rep_vec       <- rep(x = 2, times = 12)
-character_vec <- c("How", "Now", "Brown", "Cow")
-logical_vec   <- c(TRUE, TRUE, FALSE, TRUE, TRUE, FALSE)
+flow_rates <- c(2.0, 3.5, 1.8)
+widths     <- c(10.0, 12.0, 8.0)
+
+# Pairwise product:
+discharge <- flow_rates * widths
+discharge  # 20.0 42.0 14.4
 ```
-In the Environment tab you can see the vectors assigned to the variables.
 
-N.B.: Confusingly, R does technically not distinguish between scalars
-and vectors!  Scalars are simply length-one vectors.  If you query the
-class of a vector, e.g., `class(c(TRUE, FALSE, FALSE))`, this will
-simply return the class of its elements (here "logical") rather than
-something like "vector of logical". This strange convention allows R
-to operate very efficiently on vectors.
-
-Many operations that work for scalars you can also perform on entire
-vectors. In many cases, they are done element-by-element (e.g. `vec1 *
-3` or `vec1 * vec2` - *make sure you understand what R is doing
-here*).
-
-You can access individual elements of a vector by using a scalar object
-as an index (e.g. `x[3]`).  You can also use vectors to
-access a set of elements (e.g. `x[seq(from = 1, to = 5)]`) or specific
-elements (e.g. `x[c(2, 7, 9)]`) of a vector or variable. Remember
-that, for some calculations between different vectors, the vectors
-need to be compatible. This generally means they have lengths that are
-multiple of each other. Note that in R, the first position of a vector
-has the index 1, unlike in some other programming languages where the
-first position has the index 0.
-
-#### Q5. What number would you obtain if you evaluate `seq_vec2[3]`? (try working this out for yourself before typing it into R)
- 
-#### Q6. What happens when you evaluate `seq_vec2[seq(from = 1, to = 5)]`?
-
-#### Q7. How would you retrieve just the 8th, 13th and 21st elements of `seq_vec2`?
-
-Simple calculations can be performed on vectors, in which case the operation is applied to every element of the vector separately. For example, try evaluating
+If two vectors differ in length, R **recycles** (repeats) the elements of the shorter vector until it matches the length of the longer vector:
 
 ```R
-numeric_vec_squared <- numeric_vec ^ 2
+sample_depths <- c(10, 20, 30, 40, 50, 60)
+adjustments   <- c(1, 2)
+
+sample_depths + adjustments
+# adjustments is recycled to c(1, 2, 1, 2, 1, 2)
+# Result: 11 22 31 42 51 62
 ```
 
-You will find that `numeric_vec_squared` contains values taken from `numeric_vec`, where each element has been squared individually. Similarly, you can create logical expressions that apply to the whole matrix, such as `numeric_vec > 3`
+> **Warning:** If the length of the longer vector is not an exact integer multiple of the length of the shorter vector, R still executes the operation using partial recycling, but issues a warning message. In scientific scripts, this often indicates an accidental indexing or alignment mismatch.
 
-You can also perform operations involving several vectors, as long as the vectors have compatible lengths. For example, try typing
+#### Q6. What does the following expression return?
+```R
+c(2, 4, 6, 8, 10, 12) * c(1, -1)
+```
+Explain the recycling process that produced this output.
+
+---
+
+## Vector Subsetting and Indexing
+
+Extracting and modifying specific subsets of a vector is a very common
+operation in R. We use square brackets `[]` for indexing.
+
+There are four primary indexing mechanisms:
+
+### 1. Positive Integer Indexing (Extraction)
+
+Specify the 1-based index positions of the elements you wish to retrieve:
 
 ```R
-combined_vec1 <- numeric_vec * seq_vec1
+salinity <- c(31.2, 32.5, 34.1, 33.8, 30.9, 35.4)
+
+salinity[1]          # First element: 31.2
+salinity[4]          # Fourth element: 33.8
+salinity[c(1, 3, 5)] # First, third, and fifth: 31.2 34.1 30.9
+salinity[2:4]        # Elements 2 through 4: 32.5 34.1 33.8
 ```
 
-You will find that each of the elements of `combined_vec1` is equal to the product of the corresponding elements in `numeric_vec` and `seq_vec1`
+### 2. Negative Integer Indexing (Exclusion)
 
-#### Q8. Try evaluating `combined_vec2 <- numeric_vec * seq_vec2`. What happens? Why?
-
-#### Q9. Try using the `length` function to find the lengths of the two vectors we tried to multiply.
-
-#### Q10. In fact, compatible does not mean that vectors have to be exactly the same length. Try evaluating `combined_vec3 <- numeric_vec * rep_vec` and look at the result. What is the logic behind the values produced?
-
-### Matrices
-Another major type of object in R is the **matrix**. A matrix is
-simply a rectangular grid of values, with *rows* and *columns*.  One
-of the simplest ways of producing a matrix is by combining several
-vectors through the functions `rbind()` and `cbind()`. Try
-`rbind(numeric_vec, seq_vec2)`.
-
-#### Q11. What happens when you evaluate `rbind(numeric_vec, seq_vec2)`? What happens when you evaluate `cbind(numeric_vec, seq_vec2)`? Why?
-#### Q12. When you evaluate `rbind(numeric_vec, seq_vec2)` you get a warning message. Why?
-#### Q13. What happens when you evaluate `rbind(numeric_vec, rep_vec)`? Why?
-
-You can also create matrices directly in a number of different ways.
-For each of the matrices below, understand how the command and its
-arguments determine the matrix that is produced.
+Negative integers instruct R to omit the designated positions:
 
 ```R
-matrix1 <- matrix(data = seq_len(length.out = 24), nrow = 6, ncol = 4)
-matrix2 <- matrix(data = seq_len(length.out = 24), nrow = 6, ncol = 4, byrow = TRUE)
-matrix3 <- diag(x = 5, nrow = 3, ncol = 2)
-matrix5 <- matrix(data = "Hello World", nrow = 2, ncol = 5)
+salinity[-1]         # Drops the first element
+salinity[-c(2, 5)]   # Drops the 2nd and 5th elements
 ```
 
-As with vectors, you can access the elements of a matrix using square
-brackets.  But now you need two indices, the fi**R**st for the
-**R**ow, the s**C**ond for the **C**olumn. Try:
+### 3. Logical Indexing (Filtering by Condition)
 
- * `matrix1[4, 3]`
- * `matrix1[seq_len(length.out = 2), seq_len(length.out = 2)]`
- 
-As a general R convention, *a blank instead of indices means that the
-full range of indices*, for example the entire row or column.  Try
-this:
- 
- * `matrix1[seq_len(length.out = 2), ]`
-
-#### Q14. How do you retrieve the 2nd column of `matrix2`?
-
-You can perform simple calculations on matrices, in which case the calculation applies to each element separately:
+You can supply a logical vector of the same length inside the brackets. R retains only elements where the corresponding index entry is `TRUE`:
 
 ```R
-(matrix3 + 2) * 2
+measurements <- c(12.5, 8.1, 19.4, 6.2, 14.8)
+keep_mask    <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
+measurements[keep_mask]  # 12.5 19.4 14.8
 ```
-You can also combine the values in several matrices, as long as the dimensions of the matrices are compatible
+
+Because relational comparisons generate logical vectors, conditions can be placed directly inside the brackets:
 
 ```R
-(matrix1 * 100) + matrix2
+# Extract all salinity readings strictly greater than 33.0:
+high_salinity <- salinity[salinity > 33.0]
+high_salinity  # 34.1 33.8 35.4
+
+# Extract salinity readings between 31.5 and 34.0:
+mid_salinity <- salinity[salinity >= 31.5 & salinity <= 34.0]
+mid_salinity   # 32.5 33.8
 ```
 
-Finally, you can create logical expressions that apply to an entire matrix. For example, try evaluating:
+### 4. Named Indexing
+
+Elements of a vector can have names assigned to them. You can extract elements using character names:
 
 ```R
-(matrix1 > 10)
+station_depths <- c(Stn_A = 14.5, Stn_B = 28.2, Stn_C = 8.7)
+station_depths["Stn_B"]                # Returns 28.2
+station_depths[c("Stn_A", "Stn_C")]   # Returns 14.5 8.7
 ```
 
-There are a number of useful functions that can be applied to matrices. Have a look at each of the following functions, and try to make sense of the output:
+---
 
-* `length()`
-* `dim()`
-* `t()`
-* `colSums()`
-* `summary()`
+## Modifying Vectors and In-Place Replacement
 
-Keep in mind that if you ever need help in understanding a function, just bring up the help page for that function.
-
-#### Q15. The variable `matrix1` describes a matrix produced by the following code:
+Indexing allows you to update or correct specific entries in place using assignment:
 
 ```R
-matrix1 <- matrix(data = seq_len(length.out = 50), nrow = 10, ncol = 5)
+sensor_readings <- c(14.2, -999.0, 15.8, 16.1, -999.0, 14.9)
+
+# Correct a single entry at index 2:
+sensor_readings[2] <- 14.5
+
+# Replace all error codes (-999.0) with NA:
+sensor_readings[sensor_readings == -999.0] <- NA
+sensor_readings
 ```
 
-What number would we expect to see when we evaluate `matrix1[1, 2]`? Try to answer this without evaluating the code! Why not a different number?
+### Bounding and Clamping Values
 
-#### Q16. Which of these commands would output the 2nd and 4th columns of matrix1 only (again, try answering this without evaluating the code!)?
+Physical sensors or ecological rates often have theoretical operating boundaries. Values falling outside those boundaries can be clamped to valid limits using logical indexing:
 
 ```R
-matrix1[2, 4]
-matrix1(, (2, 4))
-matrix1[c(2, 4), ]
-matrix1[, c(2, 4)]
+photometer_absorbance <- c(-0.05, 0.42, 1.85, 2.15, 0.90, -0.01)
+
+# Clamp lower boundary at 0.0 (no negative absorbance):
+photometer_absorbance[photometer_absorbance < 0.0] <- 0.0
+
+# Clamp upper boundary at 2.0 (detector saturation limit):
+photometer_absorbance[photometer_absorbance > 2.0] <- 2.0
+
+photometer_absorbance  # 0.00 0.42 1.85 2.00 0.90 0.00
 ```
 
-#### Q17. Write your own script (or lines in your R script) for creating a matrix from three separate vectors. The first vector, `vec1`, should be 50 elements long, and should simply contain the numbers 1 to 50. The second vector, `vec2`, should contain the square of these numbers (i.e. `vec1` raised to the power 2). The third vector, `vec3`, should contain the cube of these numbers (i.e. `vec1` raised to the power 3). Finally, create a matrix, `my_matrix`, which has `vec1` as the first row, `vec2` as the second row, and `vec3` as the third row.
+#### Q7. Given the a vector of this structure:
+```R
+dissolved_co2 <- c(18.2, 24.5, 9.8, 31.0, 42.1, 14.3, 5.4, 28.7)
+```
+Write code to:
+1. Extract all concentrations that are strictly less than 12.0 or strictly greater than 30.0.
+2. Clamp the vector so that any value below 10.0 is set to 10.0, and any value exceeding 35.0 is set to 35.0.
 
-### Data frames
-A very common type of object is the **data frame**. On the face of it,
-these look very similar to matrices. However, there are some important
-differences between data frames and matrices. The most important is
-that, in a matrix, all the elements need to be of the same class,
-while in a data frame different columns can be from different
-classes. Several data frames are loaded into R by default (e.g.,
-`Puromycin`). Check the help to understand what this data includes:
-`?Puromycin`.
+---
 
-R allows you to get to specific columns using their name and the
-dollar sign: `Puromycin$rate`.  Alternatively, you provide the name of
-a column in quotation marks as if it were an index:
-`Puromycin[,"rate"]`. (It is also possible to use indices like in
-matrices, for example`Puromycin[1, 1]` or `Puromycin[, 2]`. But using
-indices can make code difficult to read and less robust to changes in
-data structure.)
+## Missing Data (`NA`) and Vector Summaries
 
-Note that, although the data frame is of class data frame, typing
-`Puromycin$rate` will return a vector of class numeric (try using the
-function `class()` to check this).
+In real-world field sampling and laboratory assays, measurements can be missing due to equipment downtime or uncollected samples. In R, missing entries are represented by the special constant `NA` (Not Available).
 
-The column `state` of `Puromycin` is of class `factor`.  Factors are
-used to represent different categories of things that are in no
-particular order.  Each category is called a `level`.  A `level` has
-both an integer and character value (the name of the `level`)
-associated with it.  Usually, levels are numbered in alphabetic
-order. You can convert back and forth between the representations.
-Try:
+### Behaviour of `NA`
+
+`NA` represents an unknown quantity. Standard arithmetic and relational comparisons involving `NA` yield `NA`:
 
 ```R
-Puromycin$state
-levels(Puromycin$state)
-as.integer(Puromycin$state)
-as.character(Puromycin$state)
-as.factor(as.character(Puromycin$state))
+10 + NA       # NA
+NA > 5        # NA
+NA == NA      # NA (you cannot test whether an unknown equals an unknown)
 ```
 
-### Lists
-The last data type that is commonly seen in R is the **list**. A list
-is a bit like a complicated vector, where the elements can be objects
-of any type, and shape. You can assign names to list element using
-`=`.  For example, we can make a list of vectors like this:
+To test whether entries are missing, **never use `x == NA`**. Always use the dedicated function `is.na()`:
 
 ```R
-my_list <- list(a = c(1, 2, 3), b = c(5, 6, 7, 8, 9, 10), d = c('G', 'H'))
+chlorophyll_a <- c(2.4, NA, 3.8, 1.9, NA, 4.5)
+
+is.na(chlorophyll_a)
+# FALSE  TRUE FALSE FALSE  TRUE FALSE
+
+# Count missing entries:
+sum(is.na(chlorophyll_a))  # 2
+
+# Extract only valid (non-missing) measurements:
+valid_chlorophyll <- chlorophyll_a[!is.na(chlorophyll_a)]
+valid_chlorophyll  # 2.4 3.8 1.9 4.5
 ```
 
-We can access elements from the list using their index, with brackets
-`my_list[[1]]`, *but you should NOT do this!*. Instead, use the names
-whenever possible, either using the bracket notation
-(`my_list[['a']]`) or the dollar sign (`my_list$a`). Lists can get
-very complex, since there is no limits on the data type of the
-elements. Therefore, you can get lists of vectors, lists of lists,
-lists of vectors and lists, etc…
+### Vector Summaries and `na.rm`
 
-Lists are often used in R to *package* different kinds of data that
-logically belong together. For example
+Common aggregation functions across vectors include:
+
+* `sum()`: Sum of elements.
+* `mean()`: Arithmetic mean.
+* `min()`, `max()`: Extremes.
+* `length()`: Total length (including any `NA` entries).
+
+If a vector contains missing data, summary functions return `NA` by default to warn you of incomplete data. To compute the summary over all available valid observations, supply the argument `na.rm = TRUE`:
 
 ```R
-david <- list(name = "David Attenborough", born = as.Date("1926/05/08"),
-              died = as.Date(NA),
-              sisters = character(0),
-              brothers = c("Richard", "John"),
-              parents = list(mother = "Mary", father = "Frederick")
-              )
+mean(chlorophyll_a)                # NA
+mean(chlorophyll_a, na.rm = TRUE)  # 3.15
 ```
 
+### Logical Reductions: `all()`, `any()`, and `which()`
 
-In the Environment tab, click on the little arrow to reveal the structure
-of `david`.
+When checking input validity or data criteria across vectors:
 
-#### Q18. Create a list that combines different kinds of data about a hypothetical ecosystem.
-
-There are other types of data in R, with many being specific to
-particular libraries.  Often these more complex data are constructed
-as lists with named elements.
-
-
---------------------------------------
-
-##  Accessing data frames
-We have already come across one way of subsetting through the use of square brackets. By typing, for example,
+* `any(condition)`: Returns `TRUE` if at least one element satisfies the condition.
+* `all(condition)`: Returns `TRUE` only if every element satisfies the condition.
+* `which(condition)`: Returns the *integer indices* where the condition evaluates to `TRUE`.
 
 ```R
-Puromycin
-Puromycin[c(1, 2, 3), ]  # this is acceptable
-Puromycin[, 2]           # not recommended: use the column's name instead
-```
-we can isolate certain rows of the data frame that we are interested
-in. Using numbers to access specific rows is ok, but we should not
-do this with columns. Instead, we can use the
-dollar sign `$` or to get a specific column, or replace a column index
-by a column name:
+pressures_kpa <- c(101.3, 102.5, 98.4, 104.1, 99.2)
 
+any(pressures_kpa < 100.0)    # TRUE
+all(pressures_kpa > 90.0)     # TRUE
+which(pressures_kpa > 102.0)  # 2 4 (2nd and 4th entries)
+```
+
+#### Q8. You are given the following record of stream water temperatures:
 ```R
-Puromycin$rate
-Puromycin[ , "rate"]
+stream_temps <- c(14.2, 16.5, NA, 15.1, 19.8, NA, 13.9, 17.0)
 ```
+Write R expressions to:
 
-We can isolate data easily by using the logical statements mentioned
-above. For example, we can check which rows have a rate that is less
-than 100:
+1. Check whether any recorded temperature exceeds 18.0C.
+2. Check whether all non-missing measurements are strictly above 12.0C.
+3. Compute the arithmetic mean of all non-missing temperatures.
+4. Replace all `NA` values in `stream_temps` with the baseline value 15.0C.
 
+---
+
+## Practical Review Exercises
+
+Work through these multi-step exercises in your R script. Ensure your code is formatted cleanly, variables are descriptively named, and outputs are verified in the console.
+
+### Exercise 1: Input Validation Logic
+
+Suppose an analytical function receives five parallel vectors containing sensor deployment data:
 ```R
-# returns TRUE or FALSE
-Puromycin$rate < 100
-# returns which elements are TRUE
-which(Puromycin$rate < 100)
+buoy_ids     <- c("Buoy_01", "Buoy_02", "Buoy_03", "Buoy_04", "Buoy_05")
+sensor_depth <- c(5.0, 10.0, 15.0, 20.0, 25.0)
+salinity_psu <- c(34.2, 35.1, 33.8, 34.9, 35.5)
+battery_pct  <- c(98.0, 85.5, 92.0, 78.0, 88.5)
+is_active    <- c(TRUE, TRUE, TRUE, FALSE, TRUE)
 ```
 
-We can use the subset function to select the rows for which the statement is TRUE:
+Write logical checking expressions that test (without using `if`
+statements or loops):
 
+1. Whether all five vectors have the exact same length.
+2. Whether all values in `sensor_depth`, `salinity_psu`, and
+   `battery_pct` are strictly positive (> 0).
+3. Whether `battery_pct` does not exceed 100.0 for any buoy.
+4. Combine these three tests into a single logical expression that evaluates to `TRUE` if and only if **all** validation criteria are met.
+
+### Exercise 2: Vectorized Environmental Flux Calculation
+
+A marine survey records water temperature and dissolved oxygen across 8 depth stations:
 ```R
-# returns all the columns, but only the rows for which
-# Puromycin$rate < 100 is TRUE
-puromycin_sub <- subset(Puromycin, rate < 100)
+temp_celsius    <- c(18.2, 17.5, 16.1, 14.8, 13.2, 12.0, 11.5, 10.8)
+oxygen_mg_l     <- c(8.9,  8.5,  7.8,  7.2,  6.4,  5.8,  5.2,  4.9)
 ```
 
-We could subset by the "state" column:
+1. The apparent metabolic oxygen consumption index (OCI) at each depth is estimated as:
+   OCI = oxygen_mg_l x (1.5 + 0.08 x temp\_celsius).
+   Compute this for all stations and store the result in a vector named `station_oci`.
+2. Construct a logical vector `hypoxic_risk` identifying depths where `temp_celsius < 15.0` **and** `oxygen_mg_l < 6.0`.
+3. Using `hypoxic_risk` as an index, extract the OCI values for the qualifying depths.
+4. Calculate the average OCI across these qualifying depths.
 
+### Exercise 3: Sensor Outlier Masking
+
+A coastal wave-monitoring buoy records wave height anomalies across 8 measurement cycles:
 ```R
-puromycin_treated <- subset(Puromycin, subset = state == "treated")
+wave_anomalies <- c(0.42, 1.85, NA, 0.78, 2.40, NA, 1.15, 0.95)
 ```
+During stormy conditions, sensors can experience severe wave spray. Any reading from an active sensor that strictly exceeds a critical wave anomaly of 1.50 is considered corrupted and must be flagged. Sensors that were offline (`NA`) must remain flagged as `FALSE` (not corrupted).
 
-This will return all fields for which the state is equal to
-"treated". 
-
-N.B.: Notice that, even though `state` is a factor, we can select a
-particular level by comparing with a corresponding character value
-without conversion. This works because R often automatically converts
-between different classes of data to make sense of it.  Here, this is
-convenient.  However, in other situations is can mask unintended use
-of inappropriate classes of data and lead to errors or unexpected
-results in the course of a longer calculation. It is good practice to
-check classes and convert to the most appropriate one using
-`as.numeric()`, `as.factor()`, `as.character()`, etc.
-
-#### Q19. How would you subset the variable `Puromycin` to return only those fields for which the concentration is greater than 0.1?
-#### Q20. What is the average (mean) concentration for these cells?
-#### Q21. How would you subset the variable `Puromycin` to return only the fields for which the cells were not treated?
-#### Q22. How would you subset the variable `Puromycin` to return only the fields for which the concentration is less than 0.5 and the rate is greater than 100 (remember the "and" command from logical expressions)?
-#### Q23. How would you subset the variable `Puromycin` to return only the fields for which the concentration is greater than 0.2 and the cells have been treated?
-#### Q24. How would you subset the variable `Puromycin` to return only the fields for which the concentration is less than 0.1 or greater than 0.2?
-#### Q25. How would you subset the variable `Puromycin` to return only the fields for which the concentration is less than 0.2 and the rate is less than 70 and the cells have been treated?
-
-
+1. Write a single vectorized expression that creates a logical vector `corrupted` of length 8, where an element is `TRUE` if and only if the reading is non-missing **and** strictly greater than 1.50. Ensure `corrupted` contains **only `TRUE` and `FALSE` values, with no `NA` entries**.
+2. Using `corrupted` as an index, replace the corrupted readings in `wave_anomalies` with `NA`.
+3. Verify that uncorrupted valid measurements and previously missing readings remained in their proper states.

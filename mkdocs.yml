@@ -25,7 +25,7 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
-      custom_checkbox: true 
+      custom_checkbox: true
 
 extra_css:
   - stylesheets/extra.css
