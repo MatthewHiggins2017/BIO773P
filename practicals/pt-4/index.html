@@ -13,8 +13,11 @@
       
       
       
+        
+      
+      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -22,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -49,7 +52,6 @@
 
     
     
-    
   </head>
   
   
@@ -62,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#practical-4-computing-in-r" class="md-skip">
+        <a href="#practical-4-randomness-sampling-and-stochastic-simulation" class="md-skip">
           Skip to content
         </a>
       
@@ -266,9 +268,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -277,7 +284,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            Home
+            
+  
+    Home
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -293,9 +304,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Programming in R
+  
+
     
   </span>
+  
   
 
       </a>
@@ -311,14 +327,19 @@
   
   
     <li class="md-nav__item">
-      <a href="../../RStudioCloud/" class="md-nav__link">
+      <a href="../../Cluster_Access/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
+    
+  
     Getting Started
+  
+
     
   </span>
+  
   
 
       </a>
@@ -365,9 +386,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practicals
+  
+
     
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -376,7 +402,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Practicals
+            
+  
+    Practicals
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -392,9 +422,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 1
+  
+
     
   </span>
+  
   
 
       </a>
@@ -415,9 +450,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 2
+  
+
     
   </span>
+  
   
 
       </a>
@@ -438,9 +478,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 3
+  
+
     
   </span>
+  
   
 
       </a>
@@ -470,9 +515,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 4
+  
+
     
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -483,9 +533,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 4
+  
+
     
   </span>
+  
   
 
       </a>
@@ -508,62 +563,54 @@
         <li class="md-nav__item">
   <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction
+      
+        Introduction
+      
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#recap-questions" class="md-nav__link">
+  <a href="#1-generating-random-variates-in-r" class="md-nav__link">
     <span class="md-ellipsis">
-      Recap questions
+      
+        1. Generating Random Variates in R
+      
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Recap questions">
+    <nav class="md-nav" aria-label="1. Generating Random Variates in R">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#q1-what-would-be-the-outcome-of-the-code-answer-repx-c42-24-times-42-and-what-would-then-be-the-outcome-of-the-code-meananswer" class="md-nav__link">
+  <a href="#continuous-uniform-distribution-runif" class="md-nav__link">
     <span class="md-ellipsis">
-      Q1. What would be the outcome of the code answer &lt;- rep(x = c(42, 24), times = 42)? And what would then be the outcome of the code mean(answer)?
+      
+        Continuous Uniform Distribution: runif()
+      
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#q2-use-the-preloaded-r-data-set-indometh-check-indometh-to-understand-more-about-the-dataset-subset-this-data-to-return-only-those-rows-for-which-the-concentration-is-strictly-between-1-and-2-what-is-the-average-mean-concentration-for-this-subset" class="md-nav__link">
+  <a href="#continuous-normal-distribution-rnorm" class="md-nav__link">
     <span class="md-ellipsis">
-      Q2. Use the preloaded R data set 'Indometh' (check ?Indometh to understand more about the dataset). Subset this data to return only those rows for which the concentration is strictly between 1 and 2. What is the average (mean) concentration for this subset?
+      
+        Continuous Normal Distribution: rnorm()
+      
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#q3-using-regular-expressions-how-would-you-extract-all-the-words-except-antelope-in-the-vector-ccameleopard-eop4a-kiloparsec-antelope-in-r-there-are-a-few-ways-of-getting-a-result-find-three-ways-to-answer-this-question" class="md-nav__link">
+  <a href="#discrete-sampling-and-random-permutations-sample-and-sampleint" class="md-nav__link">
     <span class="md-ellipsis">
-      Q3. Using regular expressions, how would you extract all the words except antelope in the vector c("cameleopard", "eop4a", "kiloparsec", "antelope")? In R, there are a few ways of getting a result. Find three ways to answer this question.
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q4-write-a-loop-that-iterates-over-the-numbers-16-to-49-and-prints-out-the-square-root-of-the-number-each-time-through-you-may-have-to-search-around-for-the-square-root-function-yes-for-this-exercise-we-absolutely-want-you-to-write-a-loop-to-do-this-even-though-there-are-other-ways-of-getting-r-to-provide-the-same-result" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q4. Write a loop that iterates over the numbers 16 to 49 and prints out the square root of the number each time through (you may have to search around for the square root function). Yes, for this exercise we absolutely want you to write a loop to do this, even though there are other ways of getting R to provide the same result.
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q5-make-the-loop-from-intro-q4-store-the-results-to-a-separate-vector-called-my_square_roots-instead-of-just-printing-the-results-whats-the-value-of-the-3rd-iteration-what-is-the-sum-of-the-square-roots-of-the-numbers-16-to-49" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q5. Make the loop from Intro Q4 store the results to a separate vector called my_square_roots instead of just printing the results. What's the value of the 3rd iteration? What is the sum of the square roots of the numbers 16 to 49?
+      
+        Discrete Sampling and Random Permutations: sample() and sample.int()
+      
     </span>
   </a>
   
@@ -575,19 +622,23 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#open-reading-frames" class="md-nav__link">
+  <a href="#2-reproducibility-and-the-random-seed-setseed" class="md-nav__link">
     <span class="md-ellipsis">
-      Open Reading Frames
+      
+        2. Reproducibility and the Random Seed: set.seed()
+      
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Open Reading Frames">
+    <nav class="md-nav" aria-label="2. Reproducibility and the Random Seed: set.seed()">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#q6-write-a-function-which-uses-regular-expressions-to-detect-if-a-given-sequence-contains-an-open-reading-frame-test-it-on-the-following-sequences" class="md-nav__link">
+  <a href="#q1-practice-with-random-generators" class="md-nav__link">
     <span class="md-ellipsis">
-      Q6. Write a function which uses regular expressions to detect if a given sequence contains an open reading frame. Test it on the following sequences:
+      
+        Q1. Practice with Random Generators
+      
     </span>
   </a>
   
@@ -599,19 +650,202 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#palindromic-sequences" class="md-nav__link">
+  <a href="#3-simulating-random-events-with-vectorized-expressions" class="md-nav__link">
     <span class="md-ellipsis">
-      Palindromic Sequences
+      
+        3. Simulating Random Events with Vectorized Expressions
+      
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Palindromic Sequences">
+    <nav class="md-nav" aria-label="3. Simulating Random Events with Vectorized Expressions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#q7-write-a-function-that-assesses-whether-a-given-word-or-phrase-is-a-palindrome" class="md-nav__link">
+  <a href="#the-uniform-threshold-technique" class="md-nav__link">
     <span class="md-ellipsis">
-      Q7. Write a function that assesses whether a given word or phrase is a palindrome.
+      
+        The Uniform Threshold Technique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heterogeneous-probabilities-across-individuals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heterogeneous Probabilities Across Individuals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Heterogeneous Probabilities Across Individuals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q2-vectorized-survival" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2. Vectorized Survival
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-experiencing-randomness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Experiencing Randomness
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Experiencing Randomness">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-waiting-game-how-long-until-something-with-p-005-happens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Waiting Game: How Long Until Something with p = 0.05 Happens?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Waiting Game: How Long Until Something with p = 0.05 Happens?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repeated-simulation-the-waiting-time-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeated Simulation: The Waiting-Time Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-expectation-vs-mean-the-invisible-attraction-of-expectation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Expectation vs. Mean: The Invisible Attraction of Expectation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Expectation vs. Mean: The Invisible Attraction of Expectation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-a-mystery-loaded-die" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building a "Mystery Loaded Die"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-sample-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Sample Mean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watching-means-in-multiple-parallel-universes-converge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Watching Means in Multiple Parallel Universes Converge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zooming-in-small-sample-size-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zooming In: Small-Sample Size Experiments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Zooming In: Small-Sample Size Experiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q3-the-expectation-value-of-a-continuous-uniform-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q3. The Expectation Value of a Continuous Uniform Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-histograms-and-empirical-cumulative-distribution-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Histograms and Empirical Cumulative Distribution Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Histograms and Empirical Cumulative Distribution Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q4-experimenting-with-empirical-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q4. Experimenting with empirical distributions
+      
     </span>
   </a>
   
@@ -623,39 +857,131 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#species-names" class="md-nav__link">
+  <a href="#7-the-central-limit-theorem" class="md-nav__link">
     <span class="md-ellipsis">
-      Species names
+      
+        7. The Central Limit Theorem
+      
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Species names">
+    <nav class="md-nav" aria-label="7. The Central Limit Theorem">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#q8-add-a-new-column-in-the-data-frame-that-contains-the-correct-latin-species-name-for-each-record-in-the-butterfly_sample" class="md-nav__link">
+  <a href="#q5-experimenting-with-the-central-limit-theorem" class="md-nav__link">
     <span class="md-ellipsis">
-      Q8 Add a new column in the data frame that contains the correct Latin species name for each record in the butterfly_sample.
+      
+        Q5. Experimenting with The Central Limit Theorem
+      
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#q9-from-the-data-above-which-location-has-the-greatest-number-of-different-species" class="md-nav__link">
+  <a href="#q5b-convergence-to-the-normal-distribution" class="md-nav__link">
     <span class="md-ellipsis">
-      Q9. From the data above, which location has the greatest number of different species?
+      
+        Q5b. Convergence to the Normal Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-review-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Review Exercises
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Review Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-1-the-mark-release-recapture-lincoln-petersen-simulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1: The Mark-Release-Recapture Lincoln-Petersen Simulator
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercise 1: The Mark-Release-Recapture Lincoln-Petersen Simulator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#part-a-simulating-a-single-recapture-survey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part A: Simulating a Single Recapture Survey
+      
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#q10-which-genus-has-been-caught-the-greatest-number-of-times" class="md-nav__link">
+  <a href="#part-b-evaluating-estimator-bias-and-variance" class="md-nav__link">
     <span class="md-ellipsis">
-      Q10. Which genus has been caught the greatest number of times?
+      
+        Part B: Evaluating Estimator Bias and Variance
+      
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-2-if-you-cant-get-enough-forest-gap-disturbance-tree-recruitment-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2 (if you can't get enough): Forest Gap Disturbance &amp; Tree Recruitment Dynamics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercise 2 (if you can&#39;t get enough): Forest Gap Disturbance &amp; Tree Recruitment Dynamics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem Formulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -690,58 +1016,679 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
 
-<h1 id="practical-4-computing-in-r"><strong>Practical 4 - Computing in R</strong></h1>
-<hr />
+<h1 id="practical-4-randomness-sampling-and-stochastic-simulation"><strong>Practical 4 - Randomness, Sampling, and Stochastic Simulation</strong></h1>
 <h2 id="introduction">Introduction</h2>
-<p>This session will be a recap of what we saw in practicals 1, 2 and 3. You can also use this session to revisit the parts of the last practicals that are still not entirely clear.
-<strong>REMEMBER</strong> The important thing is that you understand what you are doing. It is better to understand well a few exercises than finishing all exercises without entirely knowing what is going on.</p>
-<h2 id="recap-questions">Recap questions</h2>
-<p>To get back into gear in terms of thinking about programming, we’ll start with a quick recap exercise of the recent material:</p>
-<h4 id="q1-what-would-be-the-outcome-of-the-code-answer-repx-c42-24-times-42-and-what-would-then-be-the-outcome-of-the-code-meananswer">Q1. What would be the outcome of the code <code>answer &lt;- rep(x = c(42, 24), times = 42)</code>? And what would then be the outcome of the code <code>mean(answer)</code>?</h4>
-<h4 id="q2-use-the-preloaded-r-data-set-indometh-check-indometh-to-understand-more-about-the-dataset-subset-this-data-to-return-only-those-rows-for-which-the-concentration-is-strictly-between-1-and-2-what-is-the-average-mean-concentration-for-this-subset">Q2. Use the preloaded R data set 'Indometh' (check <code>?Indometh</code> to understand more about the dataset). Subset this data to return only those rows for which the concentration is strictly between 1 and 2. What is the average (mean) concentration for this subset?</h4>
-<h4 id="q3-using-regular-expressions-how-would-you-extract-all-the-words-except-antelope-in-the-vector-ccameleopard-eop4a-kiloparsec-antelope-in-r-there-are-a-few-ways-of-getting-a-result-find-three-ways-to-answer-this-question">Q3. Using regular expressions, how would you extract all the words except <code>antelope</code> in the vector <code>c("cameleopard", "eop4a", "kiloparsec", "antelope")</code>? In R, there are a few ways of getting a result. Find three ways to answer this question.</h4>
-<h4 id="q4-write-a-loop-that-iterates-over-the-numbers-16-to-49-and-prints-out-the-square-root-of-the-number-each-time-through-you-may-have-to-search-around-for-the-square-root-function-yes-for-this-exercise-we-absolutely-want-you-to-write-a-loop-to-do-this-even-though-there-are-other-ways-of-getting-r-to-provide-the-same-result">Q4. Write a loop that iterates over the numbers 16 to 49 and prints out the square root of the number each time through (you may have to search around for the square root function). Yes, for this exercise we <em>absolutely</em> want you to write a loop to do this, even though there are other ways of getting R to provide the same result.</h4>
-<h4 id="q5-make-the-loop-from-intro-q4-store-the-results-to-a-separate-vector-called-my_square_roots-instead-of-just-printing-the-results-whats-the-value-of-the-3rd-iteration-what-is-the-sum-of-the-square-roots-of-the-numbers-16-to-49">Q5. Make the loop from Intro Q4 store the results to a separate vector called <code>my_square_roots</code> instead of just printing the results. What's the value of the 3rd iteration? What is the sum of the square roots of the numbers 16 to 49?</h4>
-<h2 id="open-reading-frames">Open Reading Frames</h2>
-<p>Protein-coding regions in the genome can be predicted by detecting open reading frames. An open reading frame normally begins with the start codon ‘ATG’ and ends at one of three possible stop codons, ‘TGA’, ‘TAA’ and ‘TAG’. The sequence in between these two points is arranged in 3-base codons.</p>
-<h4 id="q6-write-a-function-which-uses-regular-expressions-to-detect-if-a-given-sequence-contains-an-open-reading-frame-test-it-on-the-following-sequences">Q6. Write a function which uses regular expressions to detect if a given sequence contains an open reading frame. Test it on the following sequences:</h4>
-<p><em>Hint - an open reading frame should always start with the start codon 'ATG' and end with one of the stop codons. Additionally, the length of the entire sequence should be a multiple of 3. If any of these features are not met, the sequence is not a functional open reading frame.</em></p>
-<div class="highlight"><pre><span></span><code>ATGGATTTTTAG
-ATGGATTTTCTAG
-CTAATGGATTTTTGAAT
-atgctaaactaa
-TCGATTAA
+<p>In Practicals 1 to 3, all your calculations were <strong>deterministic</strong>: given the same inputs, your code produced the exact same outputs every single time. </p>
+<p>In nature, however, ecological and environmental processes are inherently <strong>stochastic</strong>. Ecological surveys capture random samples from wider populations; individual organisms face probabilistic risks of mortality, predation, or disease; and environmental drivers fluctuate unpredictably.</p>
+<p>Textbooks often treat probability as a collection of abstract formulas. In computational data science, however, the computer is an experimental laboratory where you can observe, manipulate, and experience randomness firsthand. In this practical, you will:</p>
+<ol>
+<li><strong>Generate pseudo-random variates</strong> using continuous distributions (<code>runif</code>, <code>rnorm</code>) and discrete sampling (<code>sample</code>, <code>sample.int</code>).</li>
+<li><strong>Control simulation reproducibility</strong> using random number seeds (<code>set.seed</code>).</li>
+<li><strong>Model probabilistic events</strong> across entire vectors without loops (e.g., survival, detection, extirpation).</li>
+<li><strong>Build intuition for rare events and waiting times</strong>: how many trials does it actually take for an event with probability 0.05 to occur?</li>
+<li><strong>Experiment with the difference between an expectation value and a sample mean</strong>: watching independent, noisy histories converge under the Law of Large Numbers.</li>
+<li><strong>Apply representations of probability distribution</strong>: frequency histograms versus Empirical Cumulative Distribution Functions.</li>
+<li><strong>See how the Central Limit Theorem in action</strong>: the near-universal
+   distribution of means.</li>
+</ol>
+<hr />
+<h2 id="1-generating-random-variates-in-r">1. Generating Random Variates in R</h2>
+<p>R includes built-in pseudo-random number generators for all standard probability distributions. By convention, random number generating functions begin with the letter <code>r</code> (for <strong>r</strong>andom).</p>
+<h3 id="continuous-uniform-distribution-runif">Continuous Uniform Distribution: <code>runif()</code></h3>
+<p>The uniform distribution models situations where any real number within a given interval <code>[min, max]</code> is equally likely to be selected:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">runif</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="palindromic-sequences">Palindromic Sequences</h2>
-<p>Palindromes are arrangements of words or letters which read the same way whether you read them backwards or forwards, such as the phrase <em>never odd or even</em> (if you remove the spaces). In molecular biology, many restriction enzyme sites are palindromic,</p>
-<h4 id="q7-write-a-function-that-assesses-whether-a-given-word-or-phrase-is-a-palindrome">Q7. Write a function that assesses whether a given word or phrase is a palindrome.</h4>
-<p>Before starting to code, think about the steps that you would need to go through in order to judge if something is a mirror palindrome.
- * Write these steps as comments in an R script window (or a piece of paper) , then think about how you can tell the computer to execute those steps.
- * Only start writing the code when you have a plan of what you want to do.
- * Write your code as a one-off first - without considering that you'll do a function.
- * Only once you're happy with how things work, sandwich your code into a function format.
- * Use easy test cases where you know the answer in order to check that your function works.</p>
-<p>The bottom section of the R help sheets normally have examples of how a command can be used. Sometimes one of these examples will be a way to solve the problem that you are currently working on. The <code>strsplit</code> helpsheet is particularly interesting in relation to this question.</p>
-<h2 id="species-names">Species names</h2>
-<p>Run the following line of code to import the <code>butterfly_sample</code> and the <code>butterfly_reference</code> data frames:</p>
-<div class="highlight"><pre><span></span><code><span class="n">butterfly_sam_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_sample.csv&quot;</span>
-<span class="n">butterfly_sample</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_sam_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<ul>
+<li><code>n</code>: Number of random numbers to generate.</li>
+<li><code>min</code>: Lower limit (defaults to 0).</li>
+<li><code>max</code>: Upper limit (defaults to 1).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Simulate 5 random microclimate humidity proportions between 0.30 and 0.85:</span>
+<span class="nf">runif</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.30</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.85</span><span class="p">)</span>
+</code></pre></div>
+<p>If you omit <code>min</code> and <code>max</code>, R defaults to drawing numbers uniformly from the unit interval <code>[0, 1]</code>.</p>
+<hr />
+<h3 id="continuous-normal-distribution-rnorm">Continuous Normal Distribution: <code>rnorm()</code></h3>
+<p>The normal (Gaussian) distribution produces a bell-shaped curve centered around a specified mean, with spread controlled by its standard deviation:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>n</code>: Number of random observations.</li>
+<li><code>mean</code>: Central expectation (defaults to 0).</li>
+<li><code>sd</code>: Standard deviation, defining spread (defaults to 1; must be non-negative).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Simulate adult body lengths (cm) for 6 individual trout (mean = 28.5 cm, sd = 3.2 cm):</span>
+<span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">28.5</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.2</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h3 id="discrete-sampling-and-random-permutations-sample-and-sampleint">Discrete Sampling and Random Permutations: <code>sample()</code> and <code>sample.int()</code></h3>
+<p>To pick elements randomly from a discrete set or vector, use <code>sample()</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>x</code>: A vector of elements from which to choose.</li>
+<li><code>size</code>: Number of items to pick.</li>
+<li><code>replace</code>: A logical scalar. If <code>FALSE</code> (the default), elements are drawn <strong>without replacement</strong> (each item can be selected at most once). If <code>TRUE</code>, elements are drawn <strong>with replacement</strong> (the same item can be picked multiple times).</li>
+<li><code>prob</code>: Optional vector of probability weights if elements are not equally likely.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Simulate drawing 4 tree counts from discrete values between 5 and 20 WITH replacement:</span>
+<span class="nf">sample</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="o">:</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 
-<span class="n">butterfly_ref_url</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_reference.csv&quot;</span>
-<span class="n">butterfly_reference</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_ref_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="c1"># Randomly select 3 field plots from 10 candidate sites WITHOUT replacement:</span>
+<span class="n">site_ids</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">"Site_"</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
+<span class="nf">sample</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">site_ids</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 </code></pre></div>
-<p>The <code>butterfly_reference</code> data frame contains the species name and the common name of a number of butterflies.</p>
-<p>The <code>butterfly_sample</code> data frame contains information on butterflies caught in sweep netting surveys in two locations under different pesticide treatments (locations A and B). This data was collected by multiple people, who have recorded the common names of the species that they encountered (without using a standard letter case). In order to be able to compare the diversity between the two different sites, you will need to standardise the names.</p>
-<h4 id="q8-add-a-new-column-in-the-data-frame-that-contains-the-correct-latin-species-name-for-each-record-in-the-butterfly_sample">Q8 Add a new column in the data frame that contains the correct Latin species name for each record in the <code>butterfly_sample</code>.</h4>
-<p>TIP: There are several ways to do this. Remember that R is case sensitive, so you will need to account for case differences in your function. <code>grep</code> and <code>gsub</code> both allow you to set an <code>ignore.case = TRUE</code> option. Alternately, you could use the R commands <code>toupper()</code> and <code>tolower()</code>. Use the help pages to see how these work, which you can access by typing a question mark before the command - <code>?toupper</code>.</p>
-<h4 id="q9-from-the-data-above-which-location-has-the-greatest-number-of-different-species">Q9. From the data above, which location has the greatest number of different species?</h4>
-<h4 id="q10-which-genus-has-been-caught-the-greatest-number-of-times">Q10. Which genus has been caught the greatest number of times?</h4>
+<p>If you only need to sample integers from <code>1</code> to <code>n</code>, the optimized function <code>sample.int(n, size, ...)</code> is faster and concise:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pick a single random integer between 1 and 100:</span>
+<span class="n">random_station</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample.int</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="n">random_station</span>
+</code></pre></div>
+<hr />
+<h2 id="2-reproducibility-and-the-random-seed-setseed">2. Reproducibility and the Random Seed: <code>set.seed()</code></h2>
+<p>Computers cannot produce genuinely random numbers; they use deterministic mathematical algorithms (pseudo-random number generators) that start from an initial number called a <strong>seed</strong>.</p>
+<p>If you do not specify a seed, R initializes its generator from your
+computer's system clock, giving different numbers on every run. When
+writing reproducible reports or testing scripts, you can fix the seed using <code>set.seed()</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+<span class="nf">runif</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+<span class="c1"># [1] 0.9148060 0.9370754 0.2861395</span>
+
+<span class="c1"># Running it again produces different numbers:</span>
+<span class="nf">runif</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+<span class="c1"># [1] 0.8304476 0.6417455 0.5190959</span>
+
+<span class="c1"># Resetting the seed reproduces the exact sequence:</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+<span class="nf">runif</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+<span class="c1"># [1] 0.9148060 0.9370754 0.2861395</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Rule for Simulations:</strong> Use <code>set.seed()</code> at the top of your final script when you need identical, reproducible output for a publication. During exploratory testing, run without a fixed seed to confirm your code behaves properly across different random realizations.</p>
+</blockquote>
+<h4 id="q1-practice-with-random-generators">Q1. Practice with Random Generators</h4>
+<ol>
+<li>Write an expression to generate 15 random numbers drawn uniformly between 10.0 and 50.0.</li>
+<li>Write an expression that samples 5 whole numbers between 1 and 50 <strong>without replacement</strong>. What happens if you request <code>size = 60</code> with <code>replace = FALSE</code>?</li>
+<li>Generate 8 values from a normal distribution with <code>mean = 100</code> and <code>sd = 15</code>.</li>
+</ol>
+<hr />
+<h2 id="3-simulating-random-events-with-vectorized-expressions">3. Simulating Random Events with Vectorized Expressions</h2>
+<p>In ecological models, we frequently need to decide whether a discrete event occurs for each member of a population (e.g., does an individual disperse? does a seed germinate? does a patch experience extirpation?).</p>
+<h3 id="the-uniform-threshold-technique">The Uniform Threshold Technique</h3>
+<p>To simulate an event that occurs with probability <code>p</code> (where <code>0 &lt;= p &lt;= 1</code>), compare a uniform random number in <code>[0, 1]</code> against <code>p</code>:</p>
+<div class="highlight"><pre><span></span><code>Event occurs if: runif(1) &lt; p
+</code></pre></div>
+<p>Because <code>runif(1)</code> is distributed evenly between 0 and 1, the probability that it falls below <code>p</code> is exactly <code>p</code>.</p>
+<p>Crucially, because relational operators (<code>&lt;</code>, <code>&lt;=</code>) are fully vectorized in R, you can simulate thousands of independent events simultaneously <strong>without writing a single loop</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Suppose we have 8 habitat patches, each with an annual extirpation risk of 0.20:</span>
+<span class="n">n_patches</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">8</span>
+<span class="n">p_extirpation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.20</span>
+
+<span class="c1"># Draw 8 random values:</span>
+<span class="n">random_draws</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_patches</span><span class="p">)</span>
+
+<span class="c1"># Vectorized event check:</span>
+<span class="n">got_extirpated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">random_draws</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p_extirpation</span>
+<span class="n">got_extirpated</span>
+<span class="c1"># [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</span>
+</code></pre></div>
+<h3 id="heterogeneous-probabilities-across-individuals">Heterogeneous Probabilities Across Individuals</h3>
+<p>This vectorized pattern works equally well when each individual or patch has its own unique risk probability:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 5 individual fish, each with a different predation risk based on body size:</span>
+<span class="n">predation_risk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.10</span><span class="p">,</span><span class="w"> </span><span class="m">0.45</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.80</span><span class="p">,</span><span class="w"> </span><span class="m">0.30</span><span class="p">)</span>
+
+<span class="c1"># Simulate predation events in a single vectorized step:</span>
+<span class="n">eaten</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">predation_risk</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">predation_risk</span>
+<span class="n">eaten</span>
+</code></pre></div>
+<h4 id="q2-vectorized-survival">Q2. Vectorized Survival</h4>
+<p>A population of 100 seeds is planted in a restoration project. Each
+seed has an independent germination probability of 0.65.</p>
+<ol>
+<li>Using a single vectorized expression (no loops), generate a logical vector of length 100 indicating which seeds germinated.</li>
+<li>How many seeds in your simulation germinated? (Hint: <code>sum()</code> counts <code>TRUE</code> entries).</li>
+</ol>
+<hr />
+<h2 id="4-experiencing-randomness">4. Experiencing Randomness</h2>
+<p>Probabilistic intuition is notoriously deceiving. We tend to expect random processes to look neatly structured or evenly spread out, and we underestimate how much natural clumpiness, streaking, and fluctuation occurs purely by chance.</p>
+<p>Let us explore some fundamental phenomena through direct computational experimentation.</p>
+<hr />
+<h3 id="the-waiting-game-how-long-until-something-with-p-005-happens">The Waiting Game: How Long Until Something with p = 0.05 Happens?</h3>
+<p>In experimental science and statistical hypothesis testing, an event with probability <code>p = 0.05</code> is often considered "rare" (occurring on average 1 in 20 times). </p>
+<p>But what does this mean in practice?  Let's find out.</p>
+<p>First execute the code below a few times. It outputs TRUE in 5% of cases.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span>
+</code></pre></div>
+<p>Now, let's automate this.  Let's write a <code>while</code> loop that counts how
+many independent trials it takes until a 'rare' event (p = 0.05)
+occurs for the first time:</p>
+<div class="highlight"><pre><span></span><code><span class="n">trial_count</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="n">event_occurred</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">FALSE</span>
+
+<span class="kr">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">event_occurred</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">trial_count</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">trial_count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="c1"># Test if event occurs on this trial:</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">event_occurred</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">TRUE</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Event occurred on trial number:"</span><span class="p">,</span><span class="w"> </span><span class="n">trial_count</span><span class="p">,</span><span class="w"> </span><span class="s">"\n"</span><span class="p">)</span>
+</code></pre></div>
+<p>Run that code block in your console 5 to 10 times in
+succession. Notice the dramatic unpredictability.</p>
+<h4 id="repeated-simulation-the-waiting-time-distribution">Repeated Simulation: The Waiting-Time Distribution</h4>
+<p>To see the full pattern, let us automate this experiment across 1,000 independent simulated runs:</p>
+<div class="highlight"><pre><span></span><code><span class="n">simulate_waiting_time</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">trial_count</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">  </span><span class="kr">while</span><span class="w"> </span><span class="p">(</span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">trial_count</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">trial_count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">return</span><span class="p">(</span><span class="n">trial_count</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Run 1000 independent replications:</span>
+<span class="n">n_reps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1000</span>
+<span class="n">waiting_times</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">n_reps</span><span class="p">)</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n_reps</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">waiting_times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">simulate_waiting_time</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Plot waiting times across all 1000 successive runs:</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">waiting_times</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"grey"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Simulation Run"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Trials Until First Event"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Waiting Times Across 1000 Independent Realizations"</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># Theoretical average wait (1 / 0.05)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">"topright"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Expected Mean (20 trials)"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<p>Look at the plot:</p>
+<ul>
+<li>Each point represents one complete simulation run. Notice the dense
+  cloud of points hugging the bottom axis: in a large proportion of
+  runs, the event occurred within the first 5 to 15 trials.  </li>
+<li>More than half of the runs finish <strong>below</strong> the theoretical average wait of 20 trials (the red dashed line).</li>
+<li>At the same time, look at the erratic spikes shooting high above the
+  average: occasionally, you wait 60, 80, or even more than 100 trials!</li>
+</ul>
+<p>Now, let us group these 1,000 individual runs into a frequency histogram to view the aggregated distribution:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Visualise the distribution of waiting times:</span>
+<span class="nf">hist</span><span class="p">(</span><span class="n">waiting_times</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"blue"</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Number of trials until first event"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Waiting Times for p = 0.05 Event"</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">waiting_times</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">"topright"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">"Mean ="</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">waiting_times</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">)),</span><span class="w"> </span>
+<span class="w">       </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Takeaway:</strong> Randomness exhibits so-called <strong>geometric waiting
+times</strong>. Even when the expected average wait is 20 trials, waiting
+times are heavily skewed.  Something that happens at random with 5%
+probability easily happens quite soon or after quite a long time.</p>
+</blockquote>
+<hr />
+<h2 id="5-expectation-vs-mean-the-invisible-attraction-of-expectation">5. Expectation vs. Mean:  The Invisible Attraction of Expectation</h2>
+<p>After having built intuition about the concept of "probability", let's
+develop intuition about another concept that is central to statistics:
+the "expectation value".  Conceptually, the expectation value of a
+random variable (such as the outcome of a measurement) is the average
+over a very large number of equivalent measurements. But what does
+this really mean?</p>
+<h3 id="building-a-mystery-loaded-die">Building a "Mystery Loaded Die"</h3>
+<p>Copy the code below and into your RStudio script and evaluate it to
+define the function <code>create_mystery_die</code>.  </p>
+<div class="highlight"><pre><span></span><code><span class="n">create_mystery_die</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n_faces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">## This function outputs a mystery die with n_faces faces.</span>
+<span class="w">  </span><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">n_faces</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">n_faces</span><span class="p">[</span><span class="m">1</span><span class="p">])</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">n_faces</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Bad value for n_faces."</span><span class="p">)</span>
+<span class="w">  </span><span class="n">n_faces</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.integer</span><span class="p">(</span><span class="n">n_faces</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
+<span class="w">  </span><span class="n">randomness</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">set.seed</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">Sys.time</span><span class="p">())</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">randomness</span><span class="p">)</span>
+<span class="w">  </span><span class="n">weights</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_faces</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span>
+<span class="w">  </span><span class="n">secret_probs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">weights</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<span class="w">  </span><span class="n">secret_expectation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">((</span><span class="m">1</span><span class="o">:</span><span class="n">n_faces</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">secret_probs</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">set.seed</span><span class="p">(</span><span class="n">randomness</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">.Machine</span><span class="o">$</span><span class="n">integer.max</span><span class="p">)</span>
+<span class="w">  </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_faces</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">secret_probs</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The function uses some advanced R trickery and I won't explain <em>how</em>
+it works.  But <em>what</em> it does is the following:</p>
+<p>Calling create_mystery_die() returns another function. This function
+simulates a loaded die, that is, a die that will give you one of the
+outcomes 1, 2, 3, 4, 5, 6 each time you 'roll' it, but it won't give
+them with the exact same probability. <em>Nobody</em>, not even I, knows what
+the probability of each outcome is!</p>
+<blockquote>
+<p>This is the situation that almost <em>every</em> scientist doing empirical
+research faces. You will face it as well when doing your MSc
+project: when you collect data or do measurements, your are getting
+random outcomes each time according to rules that <em>nobody</em>
+knows. And yet you need to conclude something useful from this
+randomness to submit your thesis!</p>
+</blockquote>
+<p>Now, instantiate your personal die:</p>
+<div class="highlight"><pre><span></span><code><span class="n">my_die</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">create_mystery_die</span><span class="p">()</span>
+</code></pre></div>
+<p>Try out your die:
+<div class="highlight"><pre><span></span><code><span class="nf">my_die</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w">   </span><span class="c1"># Roll once</span>
+<span class="nf">my_die</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w">   </span><span class="c1"># Roll again</span>
+<span class="nf">my_die</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w">   </span><span class="c1"># Roll another time</span>
+<span class="nf">my_die</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="w">  </span><span class="c1"># Roll 10 times</span>
+</code></pre></div>
+Can you see from the outputs that the die is loaded?</p>
+<h3 id="the-sample-mean">The Sample Mean</h3>
+<p>For <strong>a die that is not loaded</strong>, we can compute the "average" outcome of
+rolling it.  Because all faces of the die have the same probability,
+the "average" outcome can be calculate by averaging over the
+outcomes: <code>(1 + ... + 6) / 6 = 3.5</code>. But, as you know, the outcome of
+each roll is random, so simply averaging over six rolls won't give
+3.5. We can use the <code>sample.int()</code> function to demonstrate this. Try
+it out several times:
+<div class="highlight"><pre><span></span><code><span class="n">six_fair_rolls</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample.int</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">six_fair_rolls</span>
+<span class="nf">mean</span><span class="p">(</span><span class="n">six_fair_rolls</span><span class="p">)</span>
+</code></pre></div></p>
+<p>The outcome is hard to distinguish from that using a loaded 
+die. Compare with the result of running the following code several times:
+<div class="highlight"><pre><span></span><code><span class="n">six_loaded_rolls</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">my_die</span><span class="p">(</span><span class="m">6</span><span class="p">)</span>
+<span class="n">six_loaded_rolls</span>
+<span class="nf">mean</span><span class="p">(</span><span class="n">six_loaded_rolls</span><span class="p">)</span>
+</code></pre></div></p>
+<p>To get, for a fair die, an average close to the value 3.5 that we expect, we need to
+average over <em>many, many</em> rolls. Try the following a few times:
+<div class="highlight"><pre><span></span><code><span class="nf">mean</span><span class="p">(</span><span class="nf">sample.int</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="o">^</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
+</code></pre></div></p>
+<blockquote>
+<p>Here's the crucial observation: by averaging over many unpredictable
+outcomes, we obtained a pretty well reproducible outcome. This
+reproducible outcome from averaging over <em>many, many</em> samples is called
+the <strong>expectation value</strong>.</p>
+</blockquote>
+<p>We can use this method to show that our mystery die is loaded. Try the
+following a few time:
+<div class="highlight"><pre><span></span><code><span class="nf">mean</span><span class="p">(</span><span class="nf">my_die</span><span class="p">(</span><span class="m">10</span><span class="o">^</span><span class="m">6</span><span class="p">))</span>
+</code></pre></div></p>
+<blockquote>
+<p>You can see that the <strong>expectation value</strong> of rolling <code>my_die</code> is
+also reproducible and clearly
+different from that of a fair die.  The difference is that for the
+fair die we could compute the expectation value using some maths.  For
+<code>my_die</code> we could not.  We <em>had</em> to obtain it from averaging over many measurements. 
+So, if you'd be studying <code>my_die</code>
+for your MSc thesis, you could:</p>
+<ul>
+<li>Report the expectation value you find.</li>
+<li>Observe that the expectation value is clearly different from
+    that for a fair die.</li>
+<li>Conclude that <code>my_die</code> is not fair, but rather tends to give
+    lower [or higher] values.</li>
+<li>However, you'd have to roll the die 10^6 = 1,000,000 times!</li>
+</ul>
+</blockquote>
+<h3 id="watching-means-in-multiple-parallel-universes-converge">Watching Means in Multiple Parallel Universes Converge</h3>
+<p>Here's the problem: you usually can't make 10^6 = 1,000,000
+measurements for your MSc thesis!</p>
+<p>So, how many measurements do we rally need to get hold of an
+expectation value?</p>
+<p>Let us simulate rolling the mystery die 2,000 times. But instead of
+watching just one sequence, let us simulate <a href="https://en.wikipedia.org/wiki/Everything_Everywhere_All_at_Once"><strong>5 independent parallel
+universes</strong></a> running side by side, and plot the sample means we get as
+data accumulates:</p>
+<div class="highlight"><pre><span></span><code><span class="n">n_rolls</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2000</span>
+<span class="n">n_universes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
+
+<span class="c1"># Set up an empty coordinate space:</span>
+<span class="nf">plot</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">n_rolls</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">5.5</span><span class="p">),</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Number of Die Rolls (Sample Size n)"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Cumulative Running Mean"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"5 Independent Realizations of My_Die"</span><span class="p">)</span>
+
+<span class="c1"># Assign distinct colours to each parallel history:</span>
+<span class="n">palette</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"lightblue"</span><span class="p">,</span><span class="w"> </span><span class="s">"darkgreen"</span><span class="p">,</span><span class="w"> </span><span class="s">"darkorange"</span><span class="p">,</span><span class="w"> </span><span class="s">"purple"</span><span class="p">,</span><span class="w"> </span><span class="s">"brown"</span><span class="p">)</span>
+
+<span class="c1"># Pre-allocate a vector to record the final asymptotic estimates:</span>
+<span class="n">final_estimates</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_universes</span><span class="p">)</span>
+
+<span class="c1"># Simulate and overlay each running trajectory:</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n_universes</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">rolls</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">my_die</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_rolls</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># Here we use a trick to compute all n_roll means in one line:</span>
+<span class="w">  </span><span class="n">running_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cumsum</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n_rolls</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">lines</span><span class="p">(</span><span class="n">running_mean</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">palette</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.4</span><span class="p">)</span>
+<span class="w">  </span><span class="n">final_estimates</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">running_mean</span><span class="p">[</span><span class="n">n_rolls</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Write down what you observe:
+<div class="highlight"><pre><span></span><code><span class="c1">## Your notes here</span>
+</code></pre></div></p>
+<p>How many samples do you recommend to take to get reliable estimates of expectation values?
+<div class="highlight"><pre><span></span><code><span class="c1">## How many samples:</span>
+</code></pre></div></p>
+<p>Reflect on what you have just witnessed:</p>
+<ul>
+<li>The <strong>sample mean</strong> is an empirical measurement. It is a random
+  number. It is noisy and changes with every sample.</li>
+<li>The <strong>expectation value</strong> is <strong>not</strong> an average of data. It was
+  fixed the moment <code>my_die</code> was created by <code>create_mystery_die</code>,
+  <em>before a single die was ever rolled</em>.</li>
+<li>The expectation value is like an <strong>invisible attractor</strong> towards
+  which sample means move for large sample sizes. The Law of Large
+  Numbers is the physical guarantee that, as individual random
+  observations accumulate, their collective historical average is
+  captured by this invisible attractor.</li>
+</ul>
+<h3 id="zooming-in-small-sample-size-experiments">Zooming In: Small-Sample Size Experiments</h3>
+<p>To understand why field biology and conservation surveys are so
+difficult, let's do some experiments with only 100 rolls of our die:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Re-plot focusing strictly on small sample sizes (n = 1 to 100):</span>
+<span class="nf">plot</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">5.5</span><span class="p">),</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Number of Die Rolls (Sample Size n)"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Cumulative Running Mean"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"The Small-Sample Trap: First 100 Rolls"</span><span class="p">)</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n_universes</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">rolls</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">my_die</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span>
+<span class="w">  </span><span class="n">running_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cumsum</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">lines</span><span class="p">(</span><span class="n">running_mean</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">palette</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.4</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Notice how wide the spread remains even at <code>n = 50</code>. When researchers
+report "the average body mass is 3.2 kg" from a field survey of 30
+animals, this may sounds as if the sample mean accurately reflects the
+underlying expectation value. As your plot demonstrates, that
+intuition can be overconfident.</p>
+<h4 id="q3-the-expectation-value-of-a-continuous-uniform-distribution">Q3. The Expectation Value of a Continuous Uniform Distribution</h4>
+<p>If a variable is drawn uniformly from continuous values between 10.0
+and 20.0 (<code>runif(n, min = 10.0, max = 20.0)</code>), every real value in
+that interval is equally likely.</p>
+<ol>
+<li>What is the expectation value of this continuous distribution?</li>
+<li>Write a script that simulates 4 independent histories of 1,500
+   uniform draws between 10.0 and 20.0, and plots their running means
+   (as above) simultaneously on a single graph.</li>
+<li>Overlay a horizontal line indicating the expectation value using
+   <code>abline(h = [your value here])</code>. At approximately what sample size
+   <code>n</code> do all 4 independent histories consistently stay within <code>+/-
+   0.2</code> of the expectation?</li>
+</ol>
+<hr />
+<h2 id="6-histograms-and-empirical-cumulative-distribution-functions">6. Histograms and Empirical Cumulative Distribution Functions</h2>
+<p>The expectation value is not the only property of random variables
+(such as measured values) that is accessible <em>only</em> by taking many,
+many, samples - more than we can typically take in ecology.</p>
+<p>The full information about at random variable is given by the
+distribution of its values.  There are two ways to think about a
+distribution. Mathematicians are interested in what they call the <em>distribution function</em>:
+<div class="highlight"><pre><span></span><code>F(x) = (probability that observation &lt;= x)
+</code></pre></div>
+Practitioners usually ask: what is the probability for my observation
+to be in the range between x1 and x2.  We can obtain this from F(x) as
+<div class="highlight"><pre><span></span><code>(probability that observation &gt; x1 but &lt;= x2) = F(x1) - F(x1).
+</code></pre></div>
+From a limited number of samples, we can estimate the distribution
+using either a histogram or the empirical cumulative distribution
+(given by the proportion of observations &lt;= x). </p>
+<p>Since these representations convey the same information, we call them
+collectively <strong>the distribution</strong> of the observable or random
+variable.</p>
+<h4 id="q4-experimenting-with-empirical-distributions">Q4. Experimenting with empirical distributions</h4>
+<p>The code below generates both the empirical distribution and the
+histogram of some mock random data. 
+Experiment with increasing (e.g., by a factor 10 or 100) the values of
+<code>n_samples</code> and of the <code>breaks</code> parameter of <code>hist</code> to reveal the
+true distribution and compare it with the empirical small-samples
+estimates obtainable from 100 samples.
+<div class="highlight"><pre><span></span><code><span class="c1">## Set up two-plot layout:</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+
+<span class="c1">## Generate some interesting mock data</span>
+<span class="n">n_samples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span>
+<span class="n">sim_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">),</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">))</span>
+
+<span class="c1">## Get data min and max for plot alignment</span>
+<span class="n">data_range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">sim_data</span><span class="p">)</span>
+
+<span class="c1">## 1. Empirical Cumulative Distribution Function:</span>
+<span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">sim_data</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="n">sim_data</span><span class="p">),</span><span class="w">         </span><span class="c1"># Ordered data plotted on x axis!</span>
+<span class="w">     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span><span class="o">/</span><span class="n">n_samples</span><span class="p">,</span>
+<span class="w">     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"S"</span><span class="p">,</span><span class="w">                 </span><span class="c1"># Plot data as a step-function</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Empirical Cumulative Distribution"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Measured Value (x)"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Proportion &lt;= x"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlim</span><span class="o">=</span><span class="n">data_range</span><span class="p">)</span><span class="w"> </span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># Lowest possible proportion</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># Highest possible proportion</span>
+
+<span class="c1">## 2. Frequency Histogram:</span>
+<span class="nf">hist</span><span class="p">(</span><span class="n">sim_data</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lightgrey"</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Histogram (Binned Density)"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Measured Value"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlim</span><span class="o">=</span><span class="n">data_range</span><span class="p">)</span>
+
+<span class="c1">## Reset plotting layout to single panel:</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+</code></pre></div></p>
+<p>Using <code>sim_data</code> from above:</p>
+<ol>
+<li>Use <code>mean(sim_data &lt;= 12.0)</code> to calculate the exact proportion of data points that are <code>&lt;= 12.0</code>.</li>
+<li>Verify where this point falls on the vertical axis of your
+   empirical distribution function.</li>
+</ol>
+<hr />
+<h2 id="7-the-central-limit-theorem">7. The Central Limit Theorem</h2>
+<p>Now, let's look at distributions not of single observations, but of means of observations.</p>
+<p>Below, we will compute means of many samples of the uniform distribution. We also
+compute means of random variables given by x^p, where x is uniformly
+distributed and p is some fixed number. As you will see, x^p is not
+uniformly distributed.</p>
+<p>To compute one such mean, we use <code>mean(runif(sample_size))^p</code>. In order
+to obtain the distribution of these means, we compute 10,000 of them
+using <code>replicate(10000, mean(runif(sample_size)^p)</code>.</p>
+<h4 id="q5-experimenting-with-the-central-limit-theorem">Q5. Experimenting with The Central Limit Theorem</h4>
+<p>Using the code below, experiment with changing the value of <code>p</code> (to
+change the distribution of the 'measurements' we are averaging over)
+and changing the <code>sample_size</code> of value x^p that enter out mean. (N.B.:
+a <code>sample_size</code> of <code>1</code> gives you the distribution of x^p itself.)
+<div class="highlight"><pre><span></span><code><span class="c1">## Set up two-plot layout:</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+
+<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="c1"># try, e.g., 1, 3, 1/2, etc,</span>
+<span class="n">sample_size</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="c1"># try, 1, 2, 3, ... 10, 100, 1000</span>
+
+<span class="c1">## Generate and plot histogram</span>
+<span class="n">random_means</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">replicate</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span><span class="o">^</span><span class="n">p</span><span class="p">))</span>
+<span class="n">histo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">hist</span><span class="p">(</span><span class="n">random_means</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">histo</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Mean over samples"</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Zoom"</span><span class="p">)</span><span class="w">  </span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">histo</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Mean over samples"</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Full Range"</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w">  </span>
+
+<span class="c1">## Reset plotting layout to single panel:</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+</code></pre></div>
+The shape of the distribution you find for large samples sizes is
+called the <em>normal distribution</em> or <em>Gaussian distribution</em> or <em>bell
+curve</em>. The function <code>rnorm</code> introduced above generates random numbers with precisely
+this distribution. </p>
+<h4 id="q5b-convergence-to-the-normal-distribution">Q5b. Convergence to the Normal Distribution</h4>
+<p>Going back to the last script, find out at about what sample size the
+distribution of the mean visually becomes a normal
+distribution.  Compare this with this with sample sizes we required above to find accurate
+estimates of the expectation value of <code>my_die</code>.</p>
+<blockquote>
+<p>So, this is our saviour! While we need many thousands of samples to
+reconstruct the distribution or expectation value of a measurement
+(<strong>making this practically impossible</strong>), we know that the mean over
+a reasonably small number of samples is approximately normally
+distributed. <strong>This observation is the starting point of the
+mathematics underlying most statistical methods used in ecology.</strong></p>
+</blockquote>
+<p>The 'normal distribution' is actually a family of distributions with
+two parameters: the central value, called the <em>mean of the normal
+distribution</em>, and it's width, quantified by the <em>standard deviation</em>.</p>
+<p>We already know how to estimate the mean of a distribution. The
+function <code>sd</code> estimates the standard deviation:
+<div class="highlight"><pre><span></span><code><span class="n">sample_small</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span>
+<span class="n">sample_large</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span>
+
+<span class="nf">sd</span><span class="p">(</span><span class="n">sample_small</span><span class="p">)</span><span class="w">  </span><span class="c1"># Some noisy estiates</span>
+<span class="nf">sd</span><span class="p">(</span><span class="n">sample_large</span><span class="p">)</span><span class="w">  </span><span class="c1"># Close to 1.5</span>
+
+<span class="c1">## Note the following:</span>
+<span class="nf">sd</span><span class="p">(</span><span class="n">sample_large</span><span class="p">)</span><span class="o">^</span><span class="m">2</span>
+<span class="n">sample_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">sample_large</span><span class="p">)</span>
+<span class="nf">mean</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">sample_large</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sample_mean</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="p">)</span>
+<span class="nf">var</span><span class="p">(</span><span class="n">sample_large</span><span class="p">)</span><span class="w">  </span><span class="c1"># Variance 'var()' is the square of the standard deviation</span>
+
+<span class="c1">## And so:</span>
+<span class="nf">sqrt</span><span class="p">(</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">sample_large</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sample_mean</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="nf">sd</span><span class="p">(</span><span class="n">sample_large</span><span class="p">)</span>
+</code></pre></div>
+Because of the relation above, the standard deviation is also called
+the <em>root mean square</em> (RMS) <em>deviation from the mean</em>.   Make
+sure you can identify the 'root', the 'mean' and the 'square' in the last code
+block above.</p>
+<hr />
+<h2 id="practical-review-exercises">Practical Review Exercises</h2>
+<h3 id="exercise-1-the-mark-release-recapture-lincoln-petersen-simulator">Exercise 1: The Mark-Release-Recapture Lincoln-Petersen Simulator</h3>
+<p>In wildlife biology, ecologists estimate the size of an elusive animal population (<code>N_true</code>) using the <strong>Lincoln-Petersen mark-recapture method</strong>:</p>
+<ol>
+<li>In the first sampling session, <code>M</code> animals are captured, marked, and released back into the wild.</li>
+<li>After allowing time for marked animals to mix into the population, a second sample of <code>C</code> animals is captured.</li>
+<li>The number of marked individuals recaptured in the second sample is recorded as <code>R</code>.</li>
+<li>The estimated total population size (<code>N_hat</code>) is calculated as:
+   <div class="highlight"><pre><span></span><code>N_hat = (M * C) / R
+</code></pre></div></li>
+</ol>
+<p>Because recapture is a stochastic process, <code>R</code> fluctuates randomly across surveys, causing <code>N_hat</code> to vary.</p>
+<h4 id="part-a-simulating-a-single-recapture-survey">Part A: Simulating a Single Recapture Survey</h4>
+<p>Write a function named <code>simulate_recapture_survey</code> with the signature:</p>
+<div class="highlight"><pre><span></span><code><span class="n">simulate_recapture_survey</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n_true</span><span class="p">,</span><span class="w"> </span><span class="n">m_marked</span><span class="p">,</span><span class="w"> </span><span class="n">c_captured</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Your code here</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The function must execute these steps:</p>
+<ol>
+<li><strong>Defensive Validation:</strong><ul>
+<li>Verify that <code>n_true</code>, <code>m_marked</code>, and <code>c_captured</code> are single numeric integers &gt;= 1.</li>
+<li>Verify that <code>m_marked &lt;= n_true</code> and <code>c_captured &lt;= n_true</code>. If violated, halt with <code>stop()</code>.</li>
+</ul>
+</li>
+<li><strong>Population Representation:</strong><ul>
+<li>Represent the population of size <code>n_true</code> as an integer vector: marked individuals are represented by <code>1</code>, and unmarked individuals by <code>0</code>.</li>
+<li>Construct this vector using <code>rep()</code>:
+  <div class="highlight"><pre><span></span><code><span class="n">population</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">m_marked</span><span class="p">),</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">n_true</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m_marked</span><span class="p">))</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Simulating Capture:</strong><ul>
+<li>Draw a sample of size <code>c_captured</code> from <code>population</code> <strong>without replacement</strong> using <code>sample()</code>.</li>
+<li>Count how many marked individuals were recaptured by summing the sample (<code>R</code>).</li>
+</ul>
+</li>
+<li><strong>Estimation:</strong><ul>
+<li>If <code>R &gt; 0</code>, compute <code>N_hat = (M * C) / R</code>.</li>
+<li>If <code>R == 0</code> (no marked animals were recaptured), the formula divides by zero; return <code>NA</code>.</li>
+</ul>
+</li>
+<li>Return <code>N_hat</code> as a single numeric scalar.</li>
+</ol>
+<p>Test your function with a known population:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">simulate_recapture_survey</span><span class="p">(</span><span class="n">n_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="n">m_marked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span><span class="p">,</span><span class="w"> </span><span class="n">c_captured</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60</span><span class="p">)</span>
+</code></pre></div>
+<p>Run this line three or four times. Notice that even though the true population is fixed at 500, the estimate fluctuates.</p>
+<h4 id="part-b-evaluating-estimator-bias-and-variance">Part B: Evaluating Estimator Bias and Variance</h4>
+<p>Now, write an iterated simulation script to evaluate how well the Lincoln-Petersen estimator performs:</p>
+<ol>
+<li>Fix the parameters: <code>n_true = 1000</code>, <code>m_marked = 150</code>, <code>c_captured = 100</code>.</li>
+<li>Using a <code>for</code> loop or the <code>replicate</code> function, generate a vector
+   <code>pop_estimates</code> with 500 population estimates using <code>simulate_recapture_survey</code>.</li>
+<li>Calculate the proportion of surveys that failed due to zero recaptures (<code>mean(is.na(pop_estimates))</code>).</li>
+<li>Compute the average population estimate across all valid surveys (<code>mean(pop_estimates, na.rm = TRUE)</code>). How close is this to the true value of 1,000?</li>
+<li>Plot a histogram of the valid estimates and overlay a vertical red
+   line (e.g., using <code>abline</code>) marking the true population size (<code>1000</code>).</li>
+</ol>
+<hr />
+<h3 id="exercise-2-if-you-cant-get-enough-forest-gap-disturbance-tree-recruitment-dynamics">Exercise 2 (if you can't get enough): Forest Gap Disturbance &amp; Tree Recruitment Dynamics</h3>
+<p>In temperate rainforests, canopy trees persist for centuries until catastrophic windthrow storms create light gaps, triggering new sapling recruitment.</p>
+<p>We will simulate a stand of 100 canopy trees over annual time steps.</p>
+<h4 id="problem-formulation">Problem Formulation</h4>
+<ul>
+<li><strong>Stand State:</strong> The stand is represented by a numeric vector <code>tree_ages</code> of length 100, where each element is the age of the tree occupying that canopy position.</li>
+<li><strong>Annual Disturbance Risk:</strong> In any given year, an extreme windstorm occurs with probability <code>p_storm = 0.08</code>.</li>
+<li><strong>Tree Mortality:</strong><ul>
+<li>If a windstorm occurs in year <code>t</code>, older trees are vulnerable to windthrow: any tree with <code>age &gt; 60 years</code> suffers an 80% mortality rate (each older tree dies independently with probability 0.80).</li>
+<li>Younger trees (<code>age &lt;= 60</code>) have flexible trunks and survive the storm.</li>
+<li>In years without a storm, trees simply age by 1 year.</li>
+</ul>
+</li>
+<li><strong>Gap Regeneration:</strong> When a tree dies, its position is immediately colonized by a new seedling of <code>age = 1 year</code>.</li>
+</ul>
+<h4 id="tasks">Tasks</h4>
+<ol>
+<li>
+<p>Write a function named <code>simulate_forest_year</code> that updates the stand across a single annual time step:
+   <div class="highlight"><pre><span></span><code><span class="n">simulate_forest_year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">tree_ages</span><span class="p">,</span><span class="w"> </span><span class="n">p_storm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.08</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Your code here</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<ul>
+<li>Validate that <code>tree_ages</code> is a numeric vector with length &gt;= 1 and contains no negative values.</li>
+<li>Check if a storm occurs this year by testing <code>runif(1) &lt; p_storm</code>.</li>
+<li>If a storm occurs:<ul>
+<li>Identify indices of vulnerable trees where <code>tree_ages &gt; 60</code>.</li>
+<li>For each vulnerable tree, determine if it dies using vectorized random uniform numbers: <code>runif(n_vulnerable) &lt; 0.80</code>.</li>
+<li>Reset the age of trees that died to <code>1</code>.</li>
+<li>For all trees that survived, increase their age by <code>1</code>.</li>
+</ul>
+</li>
+<li>If no storm occurs:<ul>
+<li>Increment the age of all trees by <code>1</code>.</li>
+</ul>
+</li>
+<li>Return the updated <code>tree_ages</code> vector.</li>
+</ul>
+</li>
+<li>
+<p>Write a multi-year simulation function named <code>run_forest_simulation</code>:
+   <div class="highlight"><pre><span></span><code><span class="n">run_forest_simulation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">initial_ages</span><span class="p">,</span><span class="w"> </span><span class="n">n_years</span><span class="p">,</span><span class="w"> </span><span class="n">p_storm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.08</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Your code here</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<ul>
+<li>Pre-allocate a numeric vector named <code>mean_age_trajectory</code> of length <code>n_years + 1</code>.</li>
+<li>Record the initial mean stand age in <code>mean_age_trajectory[1]</code>.</li>
+<li>Using a <code>for</code> loop over <code>1:n_years</code>, iteratively update the forest stand and record the mean tree age at each step.</li>
+<li>Return a named list containing:<ul>
+<li><code>final_stand</code>: The vector of tree ages at the end of the simulation.</li>
+<li><code>mean_ages</code>: The annual trajectory of mean stand age.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Run a 150-year simulation starting from an even-aged mature stand:
+   <div class="highlight"><pre><span></span><code><span class="n">initial_stand</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="c1"># 100 trees, all 50 years old</span>
+
+<span class="n">sim_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">run_forest_simulation</span><span class="p">(</span><span class="n">initial_ages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initial_stand</span><span class="p">,</span><span class="w"> </span><span class="n">n_years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">150</span><span class="p">,</span><span class="w"> </span><span class="n">p_storm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.08</span><span class="p">)</span>
+
+<span class="c1"># Plot mean stand age trajectory over time:</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">sim_results</span><span class="o">$</span><span class="n">mean_ages</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"forestgreen"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Time (years)"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Mean Canopy Age (years)"</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Forest Stand Age"</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
+</ol>
+<p>Examine the trajectory plot.  What causes the pronounced structure in
+the variation of mean age over time?</p>
 
 
 
@@ -792,10 +1739,11 @@ TCGATTAA
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["content.tooltips", "navigation.instant", "navigation.tabs", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips", "navigation.instant", "navigation.tabs", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

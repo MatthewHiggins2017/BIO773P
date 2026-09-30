@@ -1,0 +1,1201 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Practical 3 - Functions, Flow Control, and Defensive Programming - BIO773P</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#practical-3-functions-flow-control-and-defensive-programming" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BIO773P" class="md-header__button md-logo" aria-label="BIO773P" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BIO773P
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Practical 3 - Functions, Flow Control, and Defensive Programming
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../pt-1/" class="md-tabs__link">
+          
+  
+  
+  Practicals
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BIO773P" class="md-nav__button md-logo" aria-label="BIO773P" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BIO773P
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programming in R
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cluster_Access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practicals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Practicals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practical 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practical 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practical 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pt-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practical 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="practical-3-functions-flow-control-and-defensive-programming"><strong>Practical 3 - Functions, Flow Control, and Defensive Programming</strong></h1>
+<h2 id="introduction">Introduction</h2>
+<p>In Practicals 1 and 2, you learned how to manipulate atomic vectors and composite data structures (matrices, lists, and data frames) using vectorized expressions. In this practical, we shift from executing one-off interactive commands to constructing <strong>modular, reusable computational software</strong>.</p>
+<p>In modern ecological research and environmental data science, scripts must be transparent, testable, and robust against unexpected inputs. You will learn to:</p>
+<ol>
+<li><strong>Encapsulate scientific logic into custom functions</strong> with formal arguments, sensible defaults, and controlled return values.</li>
+<li><strong>Implement defensive programming</strong> by validating input types, checking bounds, and halting execution with informative error messages (<code>stop()</code>).</li>
+<li><strong>Control execution flow</strong> using scalar conditional branching (<code>if</code> / <code>else if</code> / <code>else</code>).</li>
+<li><strong>Automate repetitive computations</strong> using pre-allocated loops (<code>for</code> / <code>while</code>), including iteration skips (<code>next</code>) and early loop termination (<code>break</code>).</li>
+<li><strong>Translate multi-step ecological problem descriptions</strong> into modular pipelines of functions.</li>
+</ol>
+<p>We will focus on deterministic algorithms—stochastic simulations and pseudo-random numbers will be introduced in Practical 4.</p>
+<hr />
+<h2 id="the-anatomy-of-an-r-function">The Anatomy of an R Function</h2>
+<p>A function is an encapsulated, named block of code that accepts inputs (arguments), executes a set of instructions, and returns an output object.</p>
+<p>Functions provide three decisive advantages in scientific programming:</p>
+<ul>
+<li><strong>Elimination of Duplication:</strong> You write and debug a mathematical calculation once, rather than copying and pasting lines across your script.</li>
+<li><strong>Isolation (Scope):</strong> Variables created inside a function exist only during its execution. They do not overwrite variables in your global workspace.</li>
+<li><strong>Testability:</strong> You can systematically test a function against edge cases and boundary conditions to ensure its computational correctness.</li>
+</ul>
+<h3 id="basic-syntax-and-return-values">Basic Syntax and Return Values</h3>
+<p>Functions are created using the <code>function</code> keyword and assigned to a variable name using <code>&lt;-</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define a function to calculate acoustic sound velocity in seawater (Mackenzie, 1981):</span>
+<span class="n">calc_sound_speed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">temp_c</span><span class="p">,</span><span class="w"> </span><span class="n">salinity_psu</span><span class="p">,</span><span class="w"> </span><span class="n">depth_m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">speed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1448.96</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4.591</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">temp_c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.05304</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">temp_c</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">           </span><span class="m">1.340</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">35.0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.0163</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">depth_m</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>To execute (call) the function, pass the arguments by position or by name:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># By position:</span>
+<span class="nf">calc_sound_speed</span><span class="p">(</span><span class="m">12.5</span><span class="p">,</span><span class="w"> </span><span class="m">34.2</span><span class="p">,</span><span class="w"> </span><span class="m">250.0</span><span class="p">)</span>
+
+<span class="c1"># By name (preferred for clarity and order independence):</span>
+<span class="nf">calc_sound_speed</span><span class="p">(</span><span class="n">depth_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">250.0</span><span class="p">,</span><span class="w"> </span><span class="n">temp_c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12.5</span><span class="p">,</span><span class="w"> </span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">34.2</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Rules of Return:</strong></p>
+<ol>
+<li>In R, <code>return(value)</code> explicitly terminates the function and passes <code>value</code> back to the caller.</li>
+<li>If <code>return()</code> is omitted, R automatically returns the <strong>last evaluated expression</strong> in the function body. However, in scientific programming, writing explicit <code>return()</code> statements makes your exit points unambiguous.</li>
+<li>A function can return only <strong>one single object</strong>. If you need to return multiple pieces of information (e.g., a numeric summary, a filtered data frame, and a status flag), package them into a named <code>list</code>.</li>
+</ol>
+</blockquote>
+<h3 id="default-arguments">Default Arguments</h3>
+<p>You can provide fallback default values for arguments in the function header:</p>
+<div class="highlight"><pre><span></span><code><span class="n">calc_hydrostatic_pressure</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">depth_m</span><span class="p">,</span><span class="w"> </span><span class="n">gravity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">9.80665</span><span class="p">,</span><span class="w"> </span><span class="n">water_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1025.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># pressure in kiloPascals (kPa)</span>
+<span class="w">  </span><span class="n">pressure_kpa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">water_density</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gravity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">depth_m</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1000.0</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">pressure_kpa</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Uses defaults for gravity and water density:</span>
+<span class="nf">calc_hydrostatic_pressure</span><span class="p">(</span><span class="n">depth_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100.0</span><span class="p">)</span>
+
+<span class="c1"># Overrides water density for a freshwater lake:</span>
+<span class="nf">calc_hydrostatic_pressure</span><span class="p">(</span><span class="n">depth_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100.0</span><span class="p">,</span><span class="w"> </span><span class="n">water_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000.0</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="variable-scoping-local-vs-global">Variable Scoping: Local vs Global</h3>
+<p>Consider this scenario:</p>
+<div class="highlight"><pre><span></span><code><span class="n">calibration_offset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.5</span>
+
+<span class="n">adjust_reading</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">reading</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">adjusted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">calibration_offset</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">adjusted</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">adjust_reading</span><span class="p">(</span><span class="m">10.0</span><span class="p">)</span><span class="w">  </span><span class="c1"># Returns 11.5</span>
+</code></pre></div>
+<p>The function was able to find <code>calibration_offset</code> in the global environment even though it was not passed as an argument. <strong>This is dangerous practice.</strong> If <code>calibration_offset</code> is renamed, modified, or cleared from memory later in your session, your function will break or return incorrect numbers without warning.</p>
+<p><strong>Golden Rule of Modularity:</strong> A function should be a self-contained "black box". It should rely <strong>only</strong> on arguments explicitly passed into it and variables defined locally within its body.</p>
+<h4 id="q1-consider-the-function">Q1. Consider the function:</h4>
+<div class="highlight"><pre><span></span><code><span class="n">estimate_heat_content</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">temp_c</span><span class="p">,</span><span class="w"> </span><span class="n">water_mass_kg</span><span class="p">,</span><span class="w"> </span><span class="n">specific_heat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4184</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">joules</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">water_mass_kg</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">specific_heat</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">temp_c</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">joules</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>What value is returned by <code>estimate_heat_content(20.0, 50.0)</code>?</li>
+<li>If you evaluate <code>joules</code> in your console after running this function, what happens? Why?</li>
+</ol>
+<hr />
+<h2 id="defensive-programming-and-input-validation">Defensive Programming and Input Validation</h2>
+<p>When writing scripts for your own use, you might know what inputs are expected. However, in larger models, shared repositories, and automated pipelines, functions frequently receive incorrect, incomplete, or corrupted inputs.</p>
+<p><strong>Defensive programming</strong> means designing your function to inspect its arguments before performing calculations, verifying that all preconditions hold, and immediately halting with an informative error if an inconsistency is detected.</p>
+<h3 id="halting-execution-with-stop">Halting Execution with <code>stop()</code></h3>
+<p>The <code>stop()</code> function interrupts execution immediately, aborts any ongoing calculations, and prints an error message to the console:</p>
+<div class="highlight"><pre><span></span><code><span class="n">validate_temperature</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">temp_c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">-273.15</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Input temperature cannot be below absolute zero (-273.15 C)."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">temp_c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">273.15</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">validate_temperature</span><span class="p">(</span><span class="m">-300.0</span><span class="p">)</span>
+<span class="c1"># Error in validate_temperature(-300): Input temperature cannot be below absolute zero (-273.15 C).</span>
+</code></pre></div>
+<h3 id="essential-validation-checks">Essential Validation Checks</h3>
+<p>Every robust scientific function should validate its inputs against four structural criteria:</p>
+<ol>
+<li><strong>Dimensionality / Length:</strong> Is the input a single scalar, or a vector of expected length?
+   <div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Argument 'x' must be a scalar (vector of length 1)."</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><strong>Data Type / Class:</strong> Does the input conform to the required atomic class?
+   <div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Argument 'x' must be numeric."</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><strong>Missingness:</strong> Does the input contain forbidden <code>NA</code> or <code>NaN</code> values?
+   <div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Argument 'x' cannot be NA."</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><strong>Physical / Logical Bounds:</strong> Do the values fall within valid operational limits?
+   <div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Argument 'x' must be strictly positive."</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<h3 id="combining-validation-checks">Combining Validation Checks</h3>
+<p>Let us build a validated function that computes dissolved oxygen saturation concentration:</p>
+<div class="highlight"><pre><span></span><code><span class="n">calc_do_saturation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">temp_c</span><span class="p">,</span><span class="w"> </span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">35.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># 1. Check types</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"All arguments must be numeric."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># 2. Check scalar lengths</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Inputs must be single scalar values."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># 3. Check for NA</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Inputs cannot be NA."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># 4. Check domain bounds</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">temp_c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">-2.0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">temp_c</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">45.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Temperature out of realistic environmental range (-2.0 C to 45.0 C)."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">50.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Salinity must be between 0.0 and 50.0 PSU."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># Calculation proceeds safely:</span>
+<span class="w">  </span><span class="n">sat_conc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">14.6</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">temp_c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.008</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">temp_c</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.05</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">salinity_psu</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">sat_conc</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Note on <code>||</code> vs <code>|</code> in Conditions:</strong> When testing conditions inside a scalar <code>if</code> statement, R provides the double operators <code>&amp;&amp;</code> (short-circuit AND) and <code>||</code> (short-circuit OR). Unlike <code>&amp;</code> and <code>|</code> (which evaluate element-by-element across vectors), <code>&amp;&amp;</code> and <code>||</code> evaluate <strong>only single logical expressions from left to right</strong> and halt evaluation as soon as the truth value is determined. Always use <code>&amp;&amp;</code> and <code>||</code> inside <code>if</code> statements.</p>
+</blockquote>
+<h4 id="q2-inspect-the-following-function">Q2. Inspect the following function:</h4>
+<div class="highlight"><pre><span></span><code><span class="n">calc_dilution_factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">stock_conc</span><span class="p">,</span><span class="w"> </span><span class="n">target_conc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">target_conc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">stock_conc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Target concentration must be strictly less than stock concentration."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">stock_conc</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">target_conc</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>What happens if someone evaluates <code>calc_dilution_factor(stock_conc = "100", target_conc = 10)</code>? What additional defensive check is required to prevent an unexpected failure?</p>
+<hr />
+<h2 id="flow-control-conditional-branching">Flow Control: Conditional Branching</h2>
+<p>Conditional branching allows your code to make decisions, executing different blocks of instructions depending on whether a given condition evaluates to <code>TRUE</code> or <code>FALSE</code>.</p>
+<h3 id="syntax-of-if-else-if-and-else">Syntax of <code>if</code>, <code>else if</code>, and <code>else</code></h3>
+<div class="highlight"><pre><span></span><code><span class="n">classify_water_layer</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">depth_m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">depth_m</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Depth cannot be negative."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">depth_m</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">200.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">zone</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"Epipelagic"</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">depth_m</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1000.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">zone</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"Mesopelagic"</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">depth_m</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">4000.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">zone</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"Bathypelagic"</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">zone</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"Abyssopelagic"</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Execution runs sequentially:</p>
+<ol>
+<li>R evaluates the condition in the initial <code>if</code>. If <code>TRUE</code>, it executes that code block and skips the rest of the chain.</li>
+<li>If <code>FALSE</code>, it moves to the first <code>else if</code>. It tests each subsequent condition until one evaluates to <code>TRUE</code>.</li>
+<li>If none of the conditions evaluate to <code>TRUE</code>, the fallback <code>else</code> block executes.</li>
+</ol>
+<h3 id="resolving-missing-states-in-comparisons">Resolving Missing States in Comparisons</h3>
+<p>Because comparing an unknown value to a number yields <code>NA</code> (for instance, <code>NA &gt; 5</code> evaluates to <code>NA</code>), passing <code>NA</code> into a standard <code>if</code> statement will trigger an error: <code>Error in if (x &gt; 5) : missing value where TRUE/FALSE needed</code>.</p>
+<p>You must explicitly test for missingness using <code>is.na()</code> <strong>before</strong> performing numeric comparisons:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Model the establishment of a colonising species arriving at a survey site:</span>
+<span class="n">resolve_site_occupancy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">colonist_density</span><span class="p">,</span><span class="w"> </span><span class="n">resident_density</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Scenario A: The habitat patch is completely unoccupied</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">resident_density</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">final_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colonist_density</span>
+<span class="w">  </span><span class="c1"># Scenario B: The habitat patch is already occupied</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">colonist_density</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">resident_density</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">final_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colonist_density</span><span class="w">  </span><span class="c1"># Colonist outcompetes resident</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">final_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">resident_density</span><span class="w">  </span><span class="c1"># Resident resists invasion</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">final_density</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15.2</span><span class="p">,</span><span class="w"> </span><span class="n">resident_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">    </span><span class="c1"># 15.2</span>
+<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12.0</span><span class="p">,</span><span class="w"> </span><span class="n">resident_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18.5</span><span class="p">)</span><span class="w"> </span><span class="c1"># 18.5</span>
+<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">22.4</span><span class="p">,</span><span class="w"> </span><span class="n">resident_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18.5</span><span class="p">)</span><span class="w"> </span><span class="c1"># 22.4</span>
+</code></pre></div>
+<h4 id="q3-write-a-function-named-clamp_reading-that-takes-three-arguments-val-lower-and-upper">Q3. Write a function named <code>clamp_reading</code> that takes three arguments: <code>val</code>, <code>lower</code>, and <code>upper</code>.</h4>
+<ol>
+<li>The function should verify that <code>lower &lt; upper</code>. If not, halt with <code>stop()</code>.</li>
+<li>If <code>val</code> is strictly below <code>lower</code>, return <code>lower</code>.</li>
+<li>If <code>val</code> is strictly above <code>upper</code>, return <code>upper</code>.</li>
+<li>Otherwise, return <code>val</code>.</li>
+</ol>
+<hr />
+<h2 id="flow-control-iteration-with-loops">Flow Control: Iteration with Loops</h2>
+<p>While R favors vectorized operations for simple array transformations, <strong>iterative algorithms</strong>, <strong>step-by-step dynamical models</strong>, and <strong>multi-stage simulations</strong> require explicit control loops.</p>
+<h3 id="the-for-loop">The <code>for</code> Loop</h3>
+<p>A <code>for</code> loop executes a block of code once for each element in an index sequence:</p>
+<div class="highlight"><pre><span></span><code><span class="n">station_depths</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">15.0</span><span class="p">,</span><span class="w"> </span><span class="m">45.0</span><span class="p">,</span><span class="w"> </span><span class="m">120.0</span><span class="p">,</span><span class="w"> </span><span class="m">310.0</span><span class="p">)</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">station_depths</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">"Processing station at depth:"</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="s">"meters\n"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="index-based-loops-and-vector-pre-allocation">Index-Based Loops and Vector Pre-Allocation</h3>
+<p>In scientific programming, you routinely use loops to populate a vector or table with calculated outputs.</p>
+<h4 id="the-anti-pattern-dynamic-growth-avoid">The Anti-Pattern: Dynamic Growth (Avoid)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># INEFFICIENT:</span>
+<span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">()</span><span class="w">  </span><span class="c1"># Empty vector</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">1000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># Re-allocates memory on every iteration!</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Every time you call <code>c(results, ...)</code>, R has to allocate a completely new chunk of memory in RAM, copy the entire existing vector into it, append the new value, and delete the old chunk. For large loops, this causes severe slowdowns.</p>
+<h4 id="the-correct-pattern-vector-pre-allocation">The Correct Pattern: Vector Pre-Allocation</h4>
+<p>Always allocate the destination vector with its known final length <strong>before</strong> entering the loop, and populate values directly by index:</p>
+<div class="highlight"><pre><span></span><code><span class="n">n_steps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
+<span class="c1"># Pre-allocate numeric vector of length 5 filled with NA:</span>
+<span class="n">simulated_profile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vector</span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"numeric"</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_steps</span><span class="p">)</span>
+<span class="c1"># Alternatively: rep(NA_real_, n_steps)</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n_steps</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">simulated_profile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">^</span><span class="m">1.5</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">simulated_profile</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Safe Indexing with <code>seq_len()</code> and <code>seq_along()</code>:</strong> Avoid writing <code>for (i in 1:length(vec))</code>. If <code>vec</code> happens to be empty (length 0), R evaluates <code>1:0</code>, creating a sequence <code>c(1, 0)</code> that runs two buggy iterations.
+Instead, use:</p>
+<ul>
+<li><code>seq_len(n)</code>: Generates <code>1:n</code>, or an empty sequence if <code>n == 0</code>.</li>
+<li><code>seq_along(vec)</code>: Generates indices matching the exact elements of <code>vec</code>, handling empty vectors safely.</li>
+</ul>
+</blockquote>
+<h3 id="the-while-loop">The <code>while</code> Loop</h3>
+<p>A <code>while</code> loop continues executing as long as its condition evaluates to <code>TRUE</code>. It is ideal when you do not know in advance how many iterations are required—such as iterating until a population converges to equilibrium or a numerical tolerance is satisfied:</p>
+<div class="highlight"><pre><span></span><code><span class="n">current_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100.0</span>
+<span class="n">decay_rate</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.85</span>
+<span class="n">step_count</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+
+<span class="c1"># Iterate until the substance decays below 10.0:</span>
+<span class="kr">while</span><span class="w"> </span><span class="p">(</span><span class="n">current_val</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">10.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">current_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">current_val</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">decay_rate</span>
+<span class="w">  </span><span class="n">step_count</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">step_count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<span class="p">}</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Decayed below threshold in"</span><span class="p">,</span><span class="w"> </span><span class="n">step_count</span><span class="p">,</span><span class="w"> </span><span class="s">"steps. Final value:"</span><span class="p">,</span><span class="w"> </span><span class="n">current_val</span><span class="p">,</span><span class="w"> </span><span class="s">"\n"</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Guard Against Infinite Loops:</strong> If the condition of a <code>while</code> loop never becomes <code>FALSE</code>, your script will hang indefinitely. Always ensure the loop variable is modified inside the body, or include a maximum iteration counter with a <code>break</code> statement.</p>
+</blockquote>
+<h3 id="controlling-loop-execution-next-and-break">Controlling Loop Execution: <code>next</code> and <code>break</code></h3>
+<ul>
+<li><code>next</code>: Immediately skips the remainder of the current loop iteration and advances to the next step.</li>
+<li><code>break</code>: Immediately terminates the loop, jumping out to the code following the loop block.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">measured_temperatures</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">14.2</span><span class="p">,</span><span class="w"> </span><span class="m">-999.0</span><span class="p">,</span><span class="w"> </span><span class="m">16.8</span><span class="p">,</span><span class="w"> </span><span class="m">15.5</span><span class="p">,</span><span class="w"> </span><span class="m">-999.0</span><span class="p">,</span><span class="w"> </span><span class="m">18.2</span><span class="p">)</span>
+<span class="n">calibrated_temps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vector</span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"numeric"</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">measured_temperatures</span><span class="p">))</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_along</span><span class="p">(</span><span class="n">measured_temperatures</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">current_reading</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">measured_temperatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="w">  </span><span class="c1"># Skip corrupted sensor codes (-999.0):</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">current_reading</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">-999.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">calibrated_temps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NA</span>
+<span class="w">    </span><span class="kr">next</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># Process valid readings:</span>
+<span class="w">  </span><span class="n">calibrated_temps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">current_reading</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.02</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.1</span>
+<span class="p">}</span>
+
+<span class="n">calibrated_temps</span>
+<span class="c1"># 14.584     NA 17.236 15.910     NA 18.664</span>
+</code></pre></div>
+<h4 id="q4-write-a-for-loop-that-iterates-over-the-integers-from-1-to-20">Q4. Write a <code>for</code> loop that iterates over the integers from 1 to 20.</h4>
+<p>Using <code>next</code>, configure the loop so that it prints only the numbers that are <strong>multiples of 3</strong> (hint: use the modulo operator <code>%%</code>, where <code>i %% 3 == 0</code> identifies multiples of 3).</p>
+<hr />
+<h2 id="practical-review-exercises">Practical Review Exercises</h2>
+<p>Work through these multi-step exercises in your R script. Focus on translating ecological descriptions into clear, defensive functions and structured iterative code.</p>
+<hr />
+<h3 id="exercise-1-dynamic-harvest-quotas-and-fisheries-escapement">Exercise 1: Dynamic Harvest Quotas and Fisheries Escapement</h3>
+<p>In fisheries conservation, sustainable yield policies often employ <strong>biological escapement thresholds</strong>. Instead of allowing a fixed annual catch, fisheries managers adjust the permitted quota based on the estimated adult biomass at the start of the season.</p>
+<p>Consider a coastal cod stock managed under a three-tier harvest control rule:</p>
+<ol>
+<li><strong>Moratorium Tier:</strong> If adult biomass $B$ is below the critical threshold $B_{crit} = 1500\text{ tonnes}$, no fishing is permitted (harvest $H = 0$).</li>
+<li><strong>Proportional Tier:</strong> If biomass is between $B_{crit}$ and the target threshold $B_{targ} = 5000\text{ tonnes}$, harvest is set to:
+   $$H = 0.20 \times (B - B_{crit})$$</li>
+<li><strong>Maximum Sustainable Tier:</strong> If biomass is at or above $B_{targ}$, the harvest rate is capped at:
+   $$H = 0.20 \times (B_{targ} - B_{crit}) + 0.35 \times (B - B_{targ})$$</li>
+</ol>
+<p>Furthermore, under adverse environmental conditions (e.g., poor marine heatwave years), harvest rates must be reduced by an additional conservation buffer.</p>
+<h4 id="part-a-single-season-harvest-decision-function">Part A: Single-Season Harvest Decision Function</h4>
+<p>Write a function named <code>calc_harvest_quota</code> that accepts the following arguments:</p>
+<ul>
+<li><code>biomass</code>: Estimated adult biomass in tonnes.</li>
+<li><code>marine_heatwave</code>: Logical scalar indicating whether a severe heatwave occurred during the spawning season (defaults to <code>FALSE</code>).</li>
+<li><code>b_crit</code>: Critical threshold (defaults to <code>1500.0</code>).</li>
+<li><code>b_targ</code>: Target threshold (defaults to <code>5000.0</code>).</li>
+</ul>
+<p>The function must execute these steps:</p>
+<ol>
+<li><strong>Defensive Validation:</strong><ul>
+<li>Verify that <code>biomass</code> is a single numeric scalar and is strictly non-negative ($\ge 0$). If violated, halt execution with <code>stop()</code>.</li>
+<li>Verify that <code>marine_heatwave</code> is a single logical scalar (<code>TRUE</code> or <code>FALSE</code>).</li>
+<li>Verify that <code>b_crit &lt; b_targ</code>.</li>
+</ul>
+</li>
+<li><strong>Harvest Determination:</strong><ul>
+<li>Calculate the base harvest $H$ using the three-tier rule above.</li>
+<li>If <code>marine_heatwave == TRUE</code> and $H &gt; 0$, apply a $25\%$ reduction to the calculated harvest ($H_{adj} = 0.75 \times H$).</li>
+<li>Ensure the final harvest never exceeds the available biomass ($H \le B$).</li>
+</ul>
+</li>
+<li><strong>Return Value:</strong><ul>
+<li>Return the final permitted catch as a single numeric scalar.</li>
+</ul>
+</li>
+</ol>
+<p>Test your function with the following calls and check the outputs:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">calc_harvest_quota</span><span class="p">(</span><span class="n">biomass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1200</span><span class="p">)</span><span class="w">                         </span><span class="c1"># Should return 0</span>
+<span class="nf">calc_harvest_quota</span><span class="p">(</span><span class="n">biomass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3500</span><span class="p">)</span><span class="w">                         </span><span class="c1"># 0.20 * (3500 - 1500) = 400</span>
+<span class="nf">calc_harvest_quota</span><span class="p">(</span><span class="n">biomass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3500</span><span class="p">,</span><span class="w"> </span><span class="n">marine_heatwave</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># 400 * 0.75 = 300</span>
+<span class="nf">calc_harvest_quota</span><span class="p">(</span><span class="n">biomass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6000</span><span class="p">)</span><span class="w">                         </span><span class="c1"># 0.20 * 3500 + 0.35 * 1000 = 1050</span>
+</code></pre></div>
+<h4 id="part-b-multi-year-stock-trajectory-simulation">Part B: Multi-Year Stock Trajectory Simulation</h4>
+<p>Write a second function named <code>simulate_fishery_trajectory</code> with the signature:</p>
+<div class="highlight"><pre><span></span><code><span class="n">simulate_fishery_trajectory</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">b_start</span><span class="p">,</span><span class="w"> </span><span class="n">years</span><span class="p">,</span><span class="w"> </span><span class="n">intrinsic_growth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.35</span><span class="p">,</span><span class="w"> </span><span class="n">carrying_capacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8000</span><span class="p">)</span>
+</code></pre></div>
+<p>The function simulates population changes from year $t$ to year $t+1$ using a logistic growth model with harvest:
+$$B_{t+1} = B_t + r B_t \left(1 - \frac{B_t}{K}\right) - H_t$$
+where $r = \text{intrinsic_growth}$, $K = \text{carrying_capacity}$, and $H_t$ is determined by calling <code>calc_harvest_quota(biomass = B_t)</code>.</p>
+<p>Requirements:</p>
+<ol>
+<li>Validate that <code>years</code> is a single integer-like numeric value $\ge 1$.</li>
+<li>Pre-allocate a numeric vector named <code>biomass_history</code> of length <code>years + 1</code>. Set <code>biomass_history[1] &lt;- b_start</code>.</li>
+<li>Pre-allocate a numeric vector named <code>harvest_history</code> of length <code>years</code>.</li>
+<li>Using a <code>for</code> loop over years $1, \dots, \text{years}$:<ul>
+<li>Determine $H_t$ from the current stock level using <code>calc_harvest_quota()</code>. Store it in <code>harvest_history[t]</code>.</li>
+<li>Compute the post-harvest biomass at year $t+1$.</li>
+<li><strong>Extinction check:</strong> If calculated biomass falls below $1.0\text{ tonne}$, set the biomass to $0.0$, record the remaining years as $0.0$, and terminate the loop immediately using <code>break</code>.</li>
+</ul>
+</li>
+<li>Package the results into a named list containing:<ul>
+<li><code>biomass</code>: The full trajectory vector.</li>
+<li><code>harvest</code>: The vector of catches.</li>
+<li><code>collapsed</code>: A logical flag indicating whether the stock collapsed to zero.</li>
+</ul>
+</li>
+<li>Return the list.</li>
+</ol>
+<p>Verify your function by running a 20-year simulation starting at $B_0 = 2000$:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sim_run</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">simulate_fishery_trajectory</span><span class="p">(</span><span class="n">b_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span><span class="p">,</span><span class="w"> </span><span class="n">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<span class="n">sim_run</span><span class="o">$</span><span class="n">collapsed</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">sim_run</span><span class="o">$</span><span class="n">biomass</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h3 id="exercise-2-the-discrete-time-logistic-map-non-linear-population-regimes">Exercise 2: The Discrete-Time Logistic Map &amp; Non-Linear Population Regimes</h3>
+<p>A classic foundation of theoretical population biology is Robert May's (1976) analysis of the discrete-time logistic difference equation:</p>
+<p>$$x_{t+1} = r \, x_t \, (1 - x_t)$$</p>
+<p>Here, $x_t$ represents the population density scaled between $0.0$ and $1.0$ (as a fraction of carrying capacity), and $r$ is the intrinsic reproductive rate ($0 &lt; r \le 4.0$). Despite its mathematical simplicity, this equation exhibits diverse dynamical regimes—from stable equilibrium, to periodic cycle doubling, to deterministic chaos.</p>
+<h4 id="part-a-the-logistic-step-function">Part A: The Logistic Step Function</h4>
+<p>Write a function named <code>logistic_step</code> that computes a single step:</p>
+<div class="highlight"><pre><span></span><code><span class="n">logistic_step</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">)</span>
+</code></pre></div>
+<ol>
+<li><strong>Validation:</strong><ul>
+<li>Verify that both <code>x</code> and <code>r</code> are single numeric scalars.</li>
+<li>Verify that $0.0 \le x \le 1.0$. If violated, halt with <code>stop("x must be in [0, 1].")</code>.</li>
+<li>Verify that $r &gt; 0.0$ and $r \le 4.0$. If violated, halt with <code>stop("r must be in (0, 4].")</code>.</li>
+</ul>
+</li>
+<li>Compute and return the value of $x_{t+1} = r x (1 - x)$.</li>
+</ol>
+<h4 id="part-b-time-series-generator">Part B: Time-Series Generator</h4>
+<p>Write a function named <code>iterate_logistic_map</code> with the signature:</p>
+<div class="highlight"><pre><span></span><code><span class="n">iterate_logistic_map</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">n_steps</span><span class="p">)</span>
+</code></pre></div>
+<ol>
+<li>Validate that <code>n_steps</code> is a single positive integer $\ge 1$.</li>
+<li>Pre-allocate a numeric vector <code>trajectory</code> of length <code>n_steps + 1</code>.</li>
+<li>Set <code>trajectory[1] &lt;- x0</code>.</li>
+<li>Using a <code>for</code> loop, iteratively call <code>logistic_step()</code> to generate values for $t = 1, \dots, n_steps$.</li>
+<li>Return the full <code>trajectory</code> vector.</li>
+</ol>
+<p>Test your function:
+<div class="highlight"><pre><span></span><code><span class="n">traj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">iterate_logistic_map</span><span class="p">(</span><span class="n">x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.8</span><span class="p">,</span><span class="w"> </span><span class="n">n_steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span>
+<span class="nf">length</span><span class="p">(</span><span class="n">traj</span><span class="p">)</span><span class="w">    </span><span class="c1"># Should be 51</span>
+<span class="nf">tail</span><span class="p">(</span><span class="n">traj</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">   </span><span class="c1"># Should settle around ~0.6428</span>
+</code></pre></div></p>
+<h4 id="part-c-testing-for-asymptotic-convergence-to-a-fixed-point">Part C: Testing for Asymptotic Convergence to a Fixed Point</h4>
+<p>When $r \le 3.0$, the logistic map converges to a single stable fixed point. Above $r \approx 3.0$, the dynamics bifurcate into oscillations.</p>
+<p>Write a function named <code>check_fixed_point_convergence</code> that tests whether a trajectory has converged:</p>
+<div class="highlight"><pre><span></span><code><span class="n">check_fixed_point_convergence</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">burn_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="n">eval_window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">tolerance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1e-4</span><span class="p">)</span>
+</code></pre></div>
+<ol>
+<li>Run the map for <code>total_steps = burn_in + eval_window</code> steps using <code>iterate_logistic_map()</code>.</li>
+<li>Extract the tail of the simulation corresponding to the evaluation window (the last <code>eval_window</code> elements).</li>
+<li>Compute the absolute differences between consecutive values in this window:
+   $$\Delta_t = |x_t - x_{t-1}|$$</li>
+<li>Check if the maximum absolute difference across the window is strictly less than <code>tolerance</code>:<ul>
+<li>If $\max(\Delta) &lt; \text{tolerance}$, the system has converged to a single fixed point. Return <code>TRUE</code>.</li>
+<li>Otherwise, the system is oscillating or chaotic. Return <code>FALSE</code>.</li>
+</ul>
+</li>
+</ol>
+<p>Test your convergence checker:
+<div class="highlight"><pre><span></span><code><span class="nf">check_fixed_point_convergence</span><span class="p">(</span><span class="n">x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.6</span><span class="p">)</span><span class="w">  </span><span class="c1"># Should return TRUE (stable point)</span>
+<span class="nf">check_fixed_point_convergence</span><span class="p">(</span><span class="n">x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.2</span><span class="p">)</span><span class="w">  </span><span class="c1"># Should return FALSE (2-point cycle)</span>
+<span class="nf">check_fixed_point_convergence</span><span class="p">(</span><span class="n">x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.8</span><span class="p">)</span><span class="w">  </span><span class="c1"># Should return FALSE (chaos)</span>
+</code></pre></div></p>
+<h4 id="part-d-parameter-scan-across-reproductive-rates">Part D: Parameter Scan Across Reproductive Rates</h4>
+<p>Now, write a script to evaluate how the long-term dynamical regime shifts across reproductive rates:</p>
+<ol>
+<li>Create a sequence of 60 evenly spaced $r$ values between $2.5$ and $3.7$:
+   <div class="highlight"><pre><span></span><code><span class="n">r_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.7</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Pre-allocate a logical vector <code>is_stable</code> of length 60, filled with <code>NA</code>.</li>
+<li>Pre-allocate a numeric vector <code>asymptotic_mean</code> of length 60, filled with <code>NA</code>.</li>
+<li>Using a <code>for</code> loop over <code>seq_along(r_values)</code>:<ul>
+<li>Evaluate <code>check_fixed_point_convergence(x0 = 0.2, r = r_values[i])</code> and store the result in <code>is_stable[i]</code>.</li>
+<li>Generate a 300-step trajectory with that $r$. Compute the arithmetic mean of the last 30 steps and store it in <code>asymptotic_mean[i]</code>.</li>
+</ul>
+</li>
+<li>Display the proportion of scanned $r$ values that yield stable fixed-point dynamics using <code>mean(is_stable)</code>.</li>
+<li>Identify the largest value of $r$ in your sequence for which the system remained stable:
+   <div class="highlight"><pre><span></span><code><span class="nf">max</span><span class="p">(</span><span class="n">r_values</span><span class="p">[</span><span class="n">is_stable</span><span class="p">])</span>
+</code></pre></div></li>
+</ol>
+<hr />
+<h3 id="exercise-3-wetland-microclimate-thermal-buffering-model">Exercise 3: Wetland Microclimate &amp; Thermal Buffering Model</h3>
+<p>Wetland vegetation canopies buffer local microclimates against extreme atmospheric heat. An ecological biophysics model predicts water temperature in shaded reed beds based on ambient air temperature and water flow velocity.</p>
+<h4 id="problem-formulation">Problem Formulation</h4>
+<p>At hourly time steps, the change in wetland water temperature ($T_{w}$) depends on thermal transfer from air ($T_a$) and convective cooling from inflow velocity ($v$, in $\text{m s}^{-1}$):</p>
+<p>$$\Delta T_w = k_{air} \times (T_a - T_w) - k_{flow} \times v \times (T_w - T_{inflow})$$</p>
+<p>where:
+* $k_{air} = 0.12$ (air-water heat transfer coefficient)
+* $k_{flow} = 0.25$ (flow convective coefficient)
+* $T_{inflow} = 12.0\,^\circ\text{C}$ (temperature of upstream groundwater spring)</p>
+<p>If the calculated water temperature exceeds a critical ecological threshold ($T_{crit} = 22.0\,^\circ\text{C}$), dissolved oxygen stress occurs.</p>
+<h4 id="tasks">Tasks</h4>
+<ol>
+<li>
+<p>Write a function named <code>update_wetland_temp</code>:
+   <div class="highlight"><pre><span></span><code><span class="n">update_wetland_temp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">current_tw</span><span class="p">,</span><span class="w"> </span><span class="n">air_temp</span><span class="p">,</span><span class="w"> </span><span class="n">flow_velocity</span><span class="p">,</span><span class="w"> </span><span class="n">k_air</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.12</span><span class="p">,</span><span class="w"> </span><span class="n">k_flow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">inflow_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12.0</span><span class="p">)</span>
+</code></pre></div></p>
+<ul>
+<li>Validate that all inputs are single numeric scalars.</li>
+<li>If <code>flow_velocity &lt; 0</code>, halt execution with <code>stop("Flow velocity cannot be negative.")</code>.</li>
+<li>Calculate $\Delta T_w$ and return the updated temperature $T_{w} + \Delta T_w$.</li>
+</ul>
+</li>
+<li>
+<p>Write an iterative simulation function named <code>simulate_heatwave_impact</code>:
+   <div class="highlight"><pre><span></span><code><span class="n">simulate_heatwave_impact</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">initial_tw</span><span class="p">,</span><span class="w"> </span><span class="n">air_temp_profile</span><span class="p">,</span><span class="w"> </span><span class="n">flow_velocity</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li><code>air_temp_profile</code>: A numeric vector representing hourly air temperatures over a heatwave event.</li>
+<li><code>initial_tw</code>: Water temperature at hour 0.</li>
+<li><code>flow_velocity</code>: Inflow velocity throughout the event.</li>
+</ol>
+<p>The function must:
+    * Validate that <code>air_temp_profile</code> has length at least 1 and contains no <code>NA</code> values.
+    * Pre-allocate a numeric vector <code>water_temps</code> to store temperatures at each hour.
+    * Iterate through the hours using a <code>for</code> loop, updating the water temperature sequentially using <code>update_wetland_temp()</code>.
+    * Count the total number of hours where the water temperature was strictly above $22.0\,^\circ\text{C}$.
+    * Package and return a named list containing:
+        * <code>hourly_temps</code>: The full vector of simulated water temperatures.
+        * <code>max_water_temp</code>: The maximum temperature reached.
+        * <code>stress_hours</code>: Total hours exceeding $22.0\,^\circ\text{C}$.
+        * <code>buffered</code>: A logical scalar that is <code>TRUE</code> if <code>max_water_temp</code> remained below the maximum air temperature observed in <code>air_temp_profile</code>.</p>
+<ol>
+<li>Test your simulation using a 24-hour sinusoidal heatwave profile:
+   <div class="highlight"><pre><span></span><code><span class="n">hours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">24</span>
+<span class="n">heatwave_air</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">20.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">8.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">((</span><span class="n">hours</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kc">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">12</span><span class="p">)</span>
+
+<span class="c1"># Run simulation under stagnant flow (v = 0.02 m/s):</span>
+<span class="n">low_flow_run</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">simulate_heatwave_impact</span><span class="p">(</span><span class="n">initial_tw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14.0</span><span class="p">,</span><span class="w"> </span><span class="n">air_temp_profile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heatwave_air</span><span class="p">,</span><span class="w"> </span><span class="n">flow_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.02</span><span class="p">)</span>
+
+<span class="c1"># Run simulation under active flushing flow (v = 0.15 m/s):</span>
+<span class="n">high_flow_run</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">simulate_heatwave_impact</span><span class="p">(</span><span class="n">initial_tw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14.0</span><span class="p">,</span><span class="w"> </span><span class="n">air_temp_profile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heatwave_air</span><span class="p">,</span><span class="w"> </span><span class="n">flow_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.15</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Low flow stress hours:"</span><span class="p">,</span><span class="w"> </span><span class="n">low_flow_run</span><span class="o">$</span><span class="n">stress_hours</span><span class="p">,</span><span class="w"> </span><span class="s">"\n"</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"High flow stress hours:"</span><span class="p">,</span><span class="w"> </span><span class="n">high_flow_run</span><span class="o">$</span><span class="n">stress_hours</span><span class="p">,</span><span class="w"> </span><span class="s">"\n"</span><span class="p">)</span>
+</code></pre></div></li>
+</ol>
+<hr />
+<h3 id="exercise-4-multi-site-invasiveness-reserve-threat-scoring-pipeline">Exercise 4: Multi-Site Invasiveness &amp; Reserve Threat Scoring Pipeline</h3>
+<p>Conservation managers evaluate habitat patches for invasive weed colonization risk. The vulnerability of a patch depends on canopy openness, visitor footfall, and distance to the nearest road corridor.</p>
+<p>You are provided with records from 6 protected nature reserves:</p>
+<div class="highlight"><pre><span></span><code><span class="n">reserve_names</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"Glen_Caladh"</span><span class="p">,</span><span class="w"> </span><span class="s">"Coed_Cariad"</span><span class="p">,</span><span class="w"> </span><span class="s">"Cairn_Moss"</span><span class="p">,</span><span class="w"> </span><span class="s">"Firth_Fen"</span><span class="p">,</span><span class="w"> </span><span class="s">"Dune_Reach"</span><span class="p">,</span><span class="w"> </span><span class="s">"Alder_Meadow"</span><span class="p">)</span>
+<span class="n">canopy_cover</span><span class="w">    </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.85</span><span class="p">,</span><span class="w"> </span><span class="m">0.40</span><span class="p">,</span><span class="w"> </span><span class="m">0.15</span><span class="p">,</span><span class="w"> </span><span class="m">0.90</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="m">0.60</span><span class="p">)</span><span class="w">     </span><span class="c1"># Fractional canopy cover (0 to 1)</span>
+<span class="n">visitor_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">12.5</span><span class="p">,</span><span class="w"> </span><span class="m">45.0</span><span class="p">,</span><span class="w"> </span><span class="m">8.0</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">62.0</span><span class="p">,</span><span class="w"> </span><span class="m">28.0</span><span class="p">)</span><span class="w">       </span><span class="c1"># Visitors per hectare per day</span>
+<span class="n">road_dist_km</span><span class="w">    </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4.2</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">12.0</span><span class="p">,</span><span class="w"> </span><span class="m">6.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">1.9</span><span class="p">)</span><span class="w">          </span><span class="c1"># Distance to nearest road</span>
+<span class="n">is_peatland</span><span class="w">     </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">  </span><span class="c1"># Peat soils have unique acidity</span>
+</code></pre></div>
+<h4 id="part-a-patch-vulnerability-index-function">Part A: Patch Vulnerability Index Function</h4>
+<p>Write a function named <code>calculate_patch_vulnerability</code> that calculates a threat index ($V$) for a single site:</p>
+<div class="highlight"><pre><span></span><code><span class="n">calculate_patch_vulnerability</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">canopy</span><span class="p">,</span><span class="w"> </span><span class="n">visitors</span><span class="p">,</span><span class="w"> </span><span class="n">road_dist</span><span class="p">,</span><span class="w"> </span><span class="n">peatland</span><span class="p">)</span>
+</code></pre></div>
+<p>The ecological scoring rules are:</p>
+<ol>
+<li><strong>Precondition Checks:</strong><ul>
+<li>Verify all inputs are single values of the correct class (numeric for the first three, logical for <code>peatland</code>).</li>
+<li>Verify that $0 \le \text{canopy} \le 1$.</li>
+<li>Verify that <code>visitors &gt;= 0</code> and <code>road_dist &gt;= 0</code>.</li>
+</ul>
+</li>
+<li><strong>Base Risk Calculation:</strong><ul>
+<li>Open canopies receive more light, accelerating invasive plant germination:
+  $$\text{light_score} = 1.0 - \text{canopy}$$</li>
+<li>Roads act as seed dispersal corridors; closer roads increase vulnerability:
+  $$\text{corridor_risk} = \frac{1.0}{1.0 + \text{road_dist}}$$</li>
+<li>Base vulnerability combines light and road proximity weighted by human traffic:
+  $$V = (0.6 \times \text{light_score} + 0.4 \times \text{corridor_risk}) \times (1.0 + 0.05 \times \text{visitors})$$</li>
+</ul>
+</li>
+<li><strong>Soil Modifier:</strong><ul>
+<li>If <code>peatland == TRUE</code>, the acidic soil suppresses most generalist plant invaders. Apply a $40\%$ reduction ($V_{final} = 0.60 \times V$).</li>
+<li>Otherwise, $V_{final} = V$.</li>
+</ul>
+</li>
+<li>Return $V_{final}$ rounded to 3 decimal places.</li>
+</ol>
+<h4 id="part-b-reserve-registry-and-batch-threat-evaluation">Part B: Reserve Registry and Batch Threat Evaluation</h4>
+<p>Write a function named <code>audit_reserve_network</code> that processes all candidate reserves:</p>
+<div class="highlight"><pre><span></span><code><span class="n">audit_reserve_network</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">canopy</span><span class="p">,</span><span class="w"> </span><span class="n">visitors</span><span class="p">,</span><span class="w"> </span><span class="n">road_dist</span><span class="p">,</span><span class="w"> </span><span class="n">peatland</span><span class="p">,</span><span class="w"> </span><span class="n">threat_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span>
+</code></pre></div>
+<ol>
+<li><strong>Defensive Check:</strong><ul>
+<li>Ensure that all five input vectors have the exact same length. If not, halt with <code>stop("All parallel input vectors must be of identical length.")</code>.</li>
+</ul>
+</li>
+<li><strong>Iterative Evaluation:</strong><ul>
+<li>Pre-allocate a numeric vector <code>vulnerability_scores</code> of length equal to <code>length(names)</code>.</li>
+<li>Pre-allocate a character vector <code>action_plan</code> of the same length.</li>
+<li>Using a <code>for</code> loop over <code>seq_along(names)</code>:<ul>
+<li>Call <code>calculate_patch_vulnerability()</code> for the $i$-th site.</li>
+<li>Store the result in <code>vulnerability_scores[i]</code>.</li>
+<li>Using conditional branching (<code>if</code> / <code>else</code>):<ul>
+<li>If <code>vulnerability_scores[i] &gt;= threat_threshold</code>, assign <code>"Urgent Weed Eradication"</code> to <code>action_plan[i]</code>.</li>
+<li>If <code>vulnerability_scores[i] &gt;= 0.40</code>, assign <code>"Routine Monitoring"</code> to <code>action_plan[i]</code>.</li>
+<li>Otherwise, assign <code>"Low Priority"</code> to <code>action_plan[i]</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Assemble Summary Data Frame:</strong><ul>
+<li>Construct and return a data frame with columns:<ul>
+<li><code>"reserve"</code></li>
+<li><code>"vulnerability"</code></li>
+<li><code>"action"</code></li>
+<li><code>"high_risk"</code> (a logical column where <code>vulnerability &gt;= threat_threshold</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Run the audit on the 6 protected reserves:</p>
+<div class="highlight"><pre><span></span><code><span class="n">reserve_audit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">audit_reserve_network</span><span class="p">(</span>
+<span class="w">  </span><span class="n">names</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="n">reserve_names</span><span class="p">,</span>
+<span class="w">  </span><span class="n">canopy</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="n">canopy_cover</span><span class="p">,</span>
+<span class="w">  </span><span class="n">visitors</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">visitor_density</span><span class="p">,</span>
+<span class="w">  </span><span class="n">road_dist</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">road_dist_km</span><span class="p">,</span>
+<span class="w">  </span><span class="n">peatland</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">is_peatland</span><span class="p">,</span>
+<span class="w">  </span><span class="n">threat_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span>
+<span class="p">)</span>
+
+<span class="n">reserve_audit</span>
+</code></pre></div>
+<p>Examine the output data frame. How did the peatland soil modifier affect the vulnerability score of <code>Cairn_Moss</code> relative to <code>Dune_Reach</code>?</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips", "navigation.instant", "navigation.tabs", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

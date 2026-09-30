@@ -11,8 +11,11 @@
       
       
       
+        
+      
+      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -20,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -45,7 +48,6 @@
     
       
 
-    
     
     
   </head>
@@ -262,9 +264,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -273,7 +280,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            Home
+            
+  
+    Home
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -289,9 +300,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Programming in R
+  
+
     
   </span>
+  
   
 
       </a>
@@ -307,14 +323,19 @@
   
   
     <li class="md-nav__item">
-      <a href="../../RStudioCloud/" class="md-nav__link">
+      <a href="../../Cluster_Access/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
+    
+  
     Getting Started
+  
+
     
   </span>
+  
   
 
       </a>
@@ -356,9 +377,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practicals
+  
+
     
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -367,7 +393,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Practicals
+            
+  
+    Practicals
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -383,9 +413,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 1
+  
+
     
   </span>
+  
   
 
       </a>
@@ -406,9 +441,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 2
+  
+
     
   </span>
+  
   
 
       </a>
@@ -429,9 +469,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 3
+  
+
     
   </span>
+  
   
 
       </a>
@@ -452,9 +497,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Practical 4
+  
+
     
   </span>
+  
   
 
       </a>
@@ -480,6 +530,7 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
@@ -521,26 +572,26 @@
 <h2 id="q3-regular-expressions-extracting-words">Q3: Regular Expressions - Extracting Words</h2>
 <p><strong>Question:</strong> Using regular expressions, how would you extract all the words except "antelope" in the vector <code>c("cameleopard", "eop4a", "kiloparsec", "antelope")</code>? Find three ways to answer this question.</p>
 <p><strong>Answer:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">words</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;cameleopard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;eop4a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;kiloparsec&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;antelope&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">words</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"cameleopard"</span><span class="p">,</span><span class="w"> </span><span class="s">"eop4a"</span><span class="p">,</span><span class="w"> </span><span class="s">"kiloparsec"</span><span class="p">,</span><span class="w"> </span><span class="s">"antelope"</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="method-1-using-grep-with-value-true-and-invert-true">Method 1: Using <code>grep()</code> with <code>value = TRUE</code> and <code>invert = TRUE</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Extract all words that don&#39;t match &quot;antelope&quot;</span>
-<span class="n">result1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;^antelope$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">invert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Extract all words that don't match "antelope"</span>
+<span class="n">result1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grep</span><span class="p">(</span><span class="s">"^antelope$"</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">invert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 <span class="n">result1</span>
-<span class="c1"># Result: &quot;cameleopard&quot; &quot;eop4a&quot; &quot;kiloparsec&quot;</span>
+<span class="c1"># Result: "cameleopard" "eop4a" "kiloparsec"</span>
 </code></pre></div>
 <h3 id="method-2-using-grepl-with-logical-negation">Method 2: Using <code>grepl()</code> with logical negation</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a logical vector and subset</span>
-<span class="n">result2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">words</span><span class="p">[</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^antelope$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">)]</span>
+<span class="n">result2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">words</span><span class="p">[</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">"^antelope$"</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">)]</span>
 <span class="n">result2</span>
-<span class="c1"># Result: &quot;cameleopard&quot; &quot;eop4a&quot; &quot;kiloparsec&quot;</span>
+<span class="c1"># Result: "cameleopard" "eop4a" "kiloparsec"</span>
 </code></pre></div>
 <h3 id="method-3-using-grep-to-get-indices-and-negative-indexing">Method 3: Using <code>grep()</code> to get indices and negative indexing</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Find the index of &quot;antelope&quot; and exclude it</span>
-<span class="n">antelope_index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;^antelope$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Find the index of "antelope" and exclude it</span>
+<span class="n">antelope_index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grep</span><span class="p">(</span><span class="s">"^antelope$"</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">)</span>
 <span class="n">result3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">words</span><span class="p">[</span><span class="o">-</span><span class="n">antelope_index</span><span class="p">]</span>
 <span class="n">result3</span>
-<span class="c1"># Result: &quot;cameleopard&quot; &quot;eop4a&quot; &quot;kiloparsec&quot;</span>
+<span class="c1"># Result: "cameleopard" "eop4a" "kiloparsec"</span>
 </code></pre></div>
 <hr />
 <h2 id="q4-loop-to-print-square-roots">Q4: Loop to Print Square Roots</h2>
@@ -642,7 +693,7 @@ The 3rd iteration corresponds to the square root of 18, which is approximately <
 <span class="w">  </span><span class="c1">#          (.{3})* - followed by zero or more triplets of any characters</span>
 <span class="w">  </span><span class="c1">#          (TGA|TAA|TAG)$ - ends with one of the stop codons</span>
 
-<span class="w">  </span><span class="n">pattern</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;^ATG(.{3})*(TGA|TAA|TAG)$&quot;</span>
+<span class="w">  </span><span class="n">pattern</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"^ATG(.{3})*(TGA|TAA|TAG)$"</span>
 
 <span class="w">  </span><span class="c1"># Test the pattern</span>
 <span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grepl</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="w"> </span><span class="n">sequence</span><span class="p">)</span>
@@ -652,18 +703,18 @@ The 3rd iteration corresponds to the square root of 18, which is approximately <
 
 <span class="c1"># Test on the provided sequences</span>
 <span class="n">test_sequences</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
-<span class="w">  </span><span class="s">&quot;ATGGATTTTTAG&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;ATGGATTTTCTAG&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;CTAATGGATTTTTGAAT&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;atgctaaactaa&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;TCGATTAA&quot;</span>
+<span class="w">  </span><span class="s">"ATGGATTTTTAG"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"ATGGATTTTCTAG"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"CTAATGGATTTTTGAAT"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"atgctaaactaa"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"TCGATTAA"</span>
 <span class="p">)</span>
 
 <span class="c1"># Test each sequence</span>
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">seq</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">test_sequences</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">is_open_reading_frame</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
-<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Valid ORF&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NOT a valid ORF&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">))</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="s">"Valid ORF"</span><span class="p">,</span><span class="w"> </span><span class="s">"NOT a valid ORF"</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="w"> </span><span class="s">"-&gt;"</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Output:</strong>
@@ -689,41 +740,41 @@ TCGATTAA             -&gt; NOT a valid ORF
 </code></pre></div>
 <h3 id="step-2-one-off-code-testing-the-logic">Step 2: One-off code (testing the logic)</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Test with a simple case</span>
-<span class="n">test_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;GAATTC&quot;</span><span class="w">  </span><span class="c1"># EcoRI restriction site - palindromic</span>
+<span class="n">test_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"GAATTC"</span><span class="w">  </span><span class="c1"># EcoRI restriction site - palindromic</span>
 
 <span class="c1"># Convert to uppercase</span>
 <span class="n">test_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">test_word</span><span class="p">)</span>
 
 <span class="c1"># Remove spaces (not needed for this case, but good practice)</span>
-<span class="n">test_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">test_word</span><span class="p">)</span>
+<span class="n">test_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">,</span><span class="w"> </span><span class="n">test_word</span><span class="p">)</span>
 
 <span class="c1"># Split into individual characters</span>
-<span class="n">chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">test_word</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="n">chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">test_word</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
 <span class="n">chars</span>
-<span class="c1"># Result: &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;C&quot;</span>
+<span class="c1"># Result: "G" "A" "A" "T" "T" "C"</span>
 
 <span class="c1"># Reverse the characters</span>
 <span class="n">reversed_chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rev</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
 <span class="n">reversed_chars</span>
-<span class="c1"># Result: &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;G&quot;</span>
+<span class="c1"># Result: "C" "T" "T" "A" "A" "G"</span>
 
 <span class="c1"># Join back into a string</span>
-<span class="n">reversed_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">reversed_chars</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="n">reversed_word</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">reversed_chars</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">)</span>
 <span class="n">reversed_word</span>
-<span class="c1"># Result: &quot;CTTAAG&quot;</span>
+<span class="c1"># Result: "CTTAAG"</span>
 
 <span class="c1"># Compare</span>
 <span class="n">test_word</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reversed_word</span>
 <span class="c1"># Result: FALSE (GAATTC is not the same as CTTAAG)</span>
 
-<span class="c1"># Let&#39;s test with a true palindrome</span>
-<span class="n">test_word2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;GAATTC&quot;</span>
+<span class="c1"># Let's test with a true palindrome</span>
+<span class="n">test_word2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"GAATTC"</span>
 <span class="c1"># Actually, for DNA palindrome, we need reverse complement!</span>
-<span class="c1"># But for simple text palindrome, let&#39;s use:</span>
-<span class="n">test_word2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;racecar&quot;</span>
+<span class="c1"># But for simple text palindrome, let's use:</span>
+<span class="n">test_word2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"racecar"</span>
 <span class="n">test_word2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">test_word2</span><span class="p">)</span>
-<span class="n">chars2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">test_word2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
-<span class="n">reversed2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">rev</span><span class="p">(</span><span class="n">chars2</span><span class="p">),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="n">chars2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">test_word2</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="n">reversed2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">rev</span><span class="p">(</span><span class="n">chars2</span><span class="p">),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">)</span>
 <span class="n">test_word2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reversed2</span>
 <span class="c1"># Result: TRUE</span>
 </code></pre></div>
@@ -734,16 +785,16 @@ TCGATTAA             -&gt; NOT a valid ORF
 <span class="w">  </span><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
 <span class="w">  </span><span class="c1"># Remove spaces and non-alphanumeric characters</span>
-<span class="w">  </span><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;[^A-Z0-9]&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+<span class="w">  </span><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">"[^A-Z0-9]"</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
 
 <span class="w">  </span><span class="c1"># Split into individual characters</span>
-<span class="w">  </span><span class="n">chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="w">  </span><span class="n">chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
 
 <span class="w">  </span><span class="c1"># Reverse the characters</span>
 <span class="w">  </span><span class="n">reversed_chars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rev</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
 
 <span class="w">  </span><span class="c1"># Join back into a string</span>
-<span class="w">  </span><span class="n">reversed_text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">reversed_chars</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">reversed_text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">reversed_chars</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">)</span>
 
 <span class="w">  </span><span class="c1"># Compare original with reversed</span>
 <span class="w">  </span><span class="n">is_same</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reversed_text</span><span class="p">)</span>
@@ -753,59 +804,59 @@ TCGATTAA             -&gt; NOT a valid ORF
 
 <span class="c1"># Test the function</span>
 <span class="n">test_cases</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
-<span class="w">  </span><span class="s">&quot;racecar&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;hello&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;A man a plan a canal Panama&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;never odd or even&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;GAATTC&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;palindrome&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;madam&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s">&quot;step on no pets&quot;</span>
+<span class="w">  </span><span class="s">"racecar"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"hello"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"A man a plan a canal Panama"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"never odd or even"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"GAATTC"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"palindrome"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"madam"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"step on no pets"</span>
 <span class="p">)</span>
 
 <span class="c1"># Test each case</span>
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">test_cases</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">is_palindrome</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
-<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IS a palindrome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NOT a palindrome&quot;</span><span class="p">)))</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="w"> </span><span class="s">"-&gt;"</span><span class="p">,</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="s">"IS a palindrome"</span><span class="p">,</span><span class="w"> </span><span class="s">"NOT a palindrome"</span><span class="p">)))</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Output:</strong>
-<div class="highlight"><pre><span></span><code>[1] &quot;racecar -&gt; IS a palindrome&quot;
-[1] &quot;hello -&gt; NOT a palindrome&quot;
-[1] &quot;A man a plan a canal Panama -&gt; IS a palindrome&quot;
-[1] &quot;never odd or even -&gt; IS a palindrome&quot;
-[1] &quot;GAATTC -&gt; NOT a palindrome&quot;
-[1] &quot;palindrome -&gt; NOT a palindrome&quot;
-[1] &quot;madam -&gt; IS a palindrome&quot;
-[1] &quot;step on no pets -&gt; IS a palindrome&quot;
+<div class="highlight"><pre><span></span><code>[1] "racecar -&gt; IS a palindrome"
+[1] "hello -&gt; NOT a palindrome"
+[1] "A man a plan a canal Panama -&gt; IS a palindrome"
+[1] "never odd or even -&gt; IS a palindrome"
+[1] "GAATTC -&gt; NOT a palindrome"
+[1] "palindrome -&gt; NOT a palindrome"
+[1] "madam -&gt; IS a palindrome"
+[1] "step on no pets -&gt; IS a palindrome"
 </code></pre></div></p>
 <h2 id="q8-species-names">Q8: Species names</h2>
-<div class="highlight"><pre><span></span><code><span class="n">butterfly_sam_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_sample.csv&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">butterfly_sam_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_sample.csv"</span>
 <span class="n">butterfly_sample</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_sam_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 
-<span class="n">butterfly_ref_url</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_reference.csv&quot;</span>
+<span class="n">butterfly_ref_url</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"https://raw.githubusercontent.com/MatthewHiggins2017/BIO773P/main/docs/data/butterfly_reference.csv"</span>
 <span class="n">butterfly_reference</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">butterfly_ref_url</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 
 <span class="c1"># Update both names to uppercase() and replace any space with hyphen </span>
 <span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="p">)</span>
-<span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="p">)</span>
+<span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span><span class="w"> </span><span class="s">"-"</span><span class="p">,</span><span class="w"> </span><span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Species</span><span class="p">)</span>
 
 
 <span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">toupper</span><span class="p">(</span><span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="p">)</span>
-<span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="p">)</span>
+<span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span><span class="w"> </span><span class="s">"-"</span><span class="p">,</span><span class="w"> </span><span class="n">butterfly_reference</span><span class="o">$</span><span class="n">Common.name</span><span class="p">)</span>
 
 <span class="c1"># Perform a dataframe merge to add the latin name to the sample column </span>
 <span class="n">butterfly_sample</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span>
 <span class="w">  </span><span class="n">butterfly_sample</span><span class="p">,</span>
-<span class="w">  </span><span class="n">butterfly_reference</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Common.name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Latin.name&quot;</span><span class="p">)],</span>
-<span class="w">  </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Species&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Common.name&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">butterfly_reference</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"Common.name"</span><span class="p">,</span><span class="w"> </span><span class="s">"Latin.name"</span><span class="p">)],</span>
+<span class="w">  </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Species"</span><span class="p">,</span>
+<span class="w">  </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Common.name"</span><span class="p">,</span>
 <span class="w">  </span><span class="n">all.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="q9-location-with-greatest-number-of-species">Q9: Location with greatest number of species</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Loop over each location</span>
-<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">location_code</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="s">&quot;B&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">location_code</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">  </span><span class="c1"># Subset the dataframe </span>
 <span class="w">  </span><span class="n">sub</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">butterfly_sample</span><span class="p">,</span><span class="w"> </span><span class="n">butterfly_sample</span><span class="o">$</span><span class="n">Location</span><span class="o">==</span><span class="n">location_code</span><span class="p">)</span>
@@ -813,7 +864,7 @@ TCGATTAA             -&gt; NOT a valid ORF
 <span class="w">  </span><span class="c1"># Determine the number of unique species per location</span>
 <span class="w">  </span><span class="n">number_of_unique</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">sub</span><span class="o">$</span><span class="n">Latin.name</span><span class="p">))</span>
 
-<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Location:&quot;</span><span class="p">,</span><span class="n">location_code</span><span class="p">,</span><span class="s">&quot;Unique Species:&quot;</span><span class="p">,</span><span class="n">number_of_unique</span><span class="p">))</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">"Location:"</span><span class="p">,</span><span class="n">location_code</span><span class="p">,</span><span class="s">"Unique Species:"</span><span class="p">,</span><span class="n">number_of_unique</span><span class="p">))</span>
 
 <span class="p">}</span>
 </code></pre></div>
@@ -867,10 +918,11 @@ TCGATTAA             -&gt; NOT a valid ORF
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["content.tooltips", "navigation.instant", "navigation.tabs", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips", "navigation.instant", "navigation.tabs", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
