@@ -1178,22 +1178,22 @@ message if an inconsistency is detected.</p>
 <h3 id="combining-validation-checks">Combining Validation Checks</h3>
 <p>Let us build a validated function that computes dissolved oxygen saturation concentration:</p>
 <div class="highlight"><pre><span></span><code><span class="n">calc_do_saturation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">temp_c</span><span class="p">,</span><span class="w"> </span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">35.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1"># 1. Check types</span>
+<span class="w">  </span><span class="c1"># Check types</span>
 <span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"All arguments must be numeric."</span><span class="p">)</span>
 <span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="c1"># 2. Check scalar lengths</span>
+<span class="w">  </span><span class="c1"># Check scalar lengths</span>
 <span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Inputs must be single scalar values."</span><span class="p">)</span>
 <span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="c1"># 3. Check for NA</span>
+<span class="w">  </span><span class="c1"># Check for NA</span>
 <span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Inputs cannot be NA."</span><span class="p">)</span>
 <span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="c1"># 4. Check domain bounds</span>
+<span class="w">  </span><span class="c1"># Check domain bounds</span>
 <span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">temp_c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">-2.0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">temp_c</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">45.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Temperature out of realistic environmental range (-2.0 C to 45.0 C)."</span><span class="p">)</span>
 <span class="w">  </span><span class="p">}</span>
@@ -1206,6 +1206,35 @@ message if an inconsistency is detected.</p>
 <span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">sat_conc</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>Alternatively, this also works:
+<div class="highlight"><pre><span></span><code><span class="n">calc_do_saturation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">temp_c</span><span class="p">,</span><span class="w"> </span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">35.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Check temp_c</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">      </span><span class="nf">length</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span>
+<span class="w">      </span><span class="nf">is.na</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span><span class="w"> </span><span class="p">){</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Argument temp_c must be single numeric value."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># Check salinity_psu</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">      </span><span class="nf">length</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span>
+<span class="w">      </span><span class="nf">is.na</span><span class="p">(</span><span class="n">salinity_psu</span><span class="p">)</span><span class="w"> </span><span class="p">){</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Argument salinity_psu must be single numeric value."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># Check domain bounds</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">temp_c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">-2.0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">temp_c</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">45.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Temperature out of realistic environmental range (-2.0 C to 45.0 C)."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">salinity_psu</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">50.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Salinity must be between 0.0 and 50.0 PSU."</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># Calculation proceeds safely:</span>
+<span class="w">  </span><span class="n">sat_conc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">14.6</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">temp_c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.008</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">temp_c</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.05</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">salinity_psu</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">sat_conc</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <blockquote>
 <p><strong>Note on <code>||</code> vs <code>|</code> in Conditions:</strong> When testing conditions inside an <code>if</code> statement, R provides double operators <code>&amp;&amp;</code> (short-circuit AND) and <code>||</code> (short-circuit OR). Unlike <code>&amp;</code> and <code>|</code> (which evaluate across entire vectors element-by-element), <code>&amp;&amp;</code> and <code>||</code> evaluate <strong>only the first element</strong> and stop evaluating further tests as soon as the outcome is decided. Use <code>&amp;&amp;</code> and <code>||</code> inside scalar <code>if</code> statements.</p>
 </blockquote>
