@@ -369,7 +369,6 @@ Always allocate the complete destination vector with its known final length **be
 n_steps <- 5
 # Pre-allocate numeric vector of length 5 filled with NA:
 simulated_profile <- rep(NA, n_steps)
-# Alternatively: vector(mode = "numeric", length = n_steps)
 
 for (i in seq_len(n_steps)) {
   simulated_profile[i] <- 10.0 + 2.5 * (i^1.5)
@@ -452,9 +451,6 @@ calculate_patch_vulnerability <- function(canopy, visitors, road_dist, peatland)
 The ecological scoring rules are:
 
 1. **Precondition Checks:**
-    * Verify all inputs are single values of the correct class
-      (numeric for the first three, logical for `peatland`). Halt with
-      an error message if not.
     * Verify that `0 <= canopy <= 1`. Halt with
       an error message if not.
     * Verify that `visitors >= 0` and `road_dist >= 0`. Halt with an
