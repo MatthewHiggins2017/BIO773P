@@ -1339,7 +1339,6 @@ Every time you call <code>c(results, ...)</code>, R has to allocate a completely
 <div class="highlight"><pre><span></span><code><span class="n">n_steps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
 <span class="c1"># Pre-allocate numeric vector of length 5 filled with NA:</span>
 <span class="n">simulated_profile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">n_steps</span><span class="p">)</span>
-<span class="c1"># Alternatively: vector(mode = "numeric", length = n_steps)</span>
 
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n_steps</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">simulated_profile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">^</span><span class="m">1.5</span><span class="p">)</span>
@@ -1406,9 +1405,6 @@ a threat index (V, defined below) for a single site:</p>
 <p>The ecological scoring rules are:</p>
 <ol>
 <li><strong>Precondition Checks:</strong><ul>
-<li>Verify all inputs are single values of the correct class
-  (numeric for the first three, logical for <code>peatland</code>). Halt with
-  an error message if not.</li>
 <li>Verify that <code>0 &lt;= canopy &lt;= 1</code>. Halt with
   an error message if not.</li>
 <li>Verify that <code>visitors &gt;= 0</code> and <code>road_dist &gt;= 0</code>. Halt with an
