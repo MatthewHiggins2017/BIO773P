@@ -298,24 +298,28 @@ Because comparing an unknown value to a number yields `NA` (e.g., `NA > 5` evalu
 You must explicitly test for missingness using `is.na()` **before** performing numeric comparisons:
 
 ```R
-# Model the establishment of a colonising species arriving at a survey site:
-resolve_site_occupancy <- function(colonist_density, resident_density) {
+# Model the establishment of a colonising species arriving at a survey
+# site.  The function assumes that species with higher carrying
+# capacity K are competitively superior to species with lower carrying
+# capacity. Hence, colonisation success depends on a species' carrying
+# capacity K compared to the that of the resident species.
+resolve_site_occupancy <- function(colonist_K, resident_K) {
   # Scenario A: The habitat patch is completely unoccupied
-  if (is.na(resident_density)) {
-    final_density <- colonist_density
+  if (is.na(resident_K)) {
+    final_K <- colonist_K
   # Scenario B: The habitat patch is already occupied
-  } else if (colonist_density > resident_density) {
-    final_density <- colonist_density  # Colonist outcompetes resident
+  } else if (colonist_K > resident_K) {
+    final_K <- colonist_K  # Colonist outcompetes resident
   } else {
-    final_density <- resident_density  # Resident resists invasion
+    final_K <- resident_K  # Resident resists invasion
   }
   
-  return(final_density)
+  return(final_K)
 }
 
-resolve_site_occupancy(colonist_density = 15.2, resident_density = NA)    # 15.2
-resolve_site_occupancy(colonist_density = 12.0, resident_density = 18.5) # 18.5
-resolve_site_occupancy(colonist_density = 22.4, resident_density = 18.5) # 22.4
+resolve_site_occupancy(colonist_K = 15.2, resident_K = NA)   # 15.2
+resolve_site_occupancy(colonist_K = 12.0, resident_K = 18.5) # 18.5
+resolve_site_occupancy(colonist_K = 22.4, resident_K = 18.5) # 22.4
 ```
 
 #### Q3. Write a function named `clamp_reading` that takes three arguments: `val`, `lower`, and `upper`.
@@ -448,9 +452,13 @@ calculate_patch_vulnerability <- function(canopy, visitors, road_dist, peatland)
 The ecological scoring rules are:
 
 1. **Precondition Checks:**
-    * Verify all inputs are single values of the correct class (numeric for the first three, logical for `peatland`).
-    * Verify that `0 <= canopy <= 1`.
-    * Verify that `visitors >= 0` and `road_dist >= 0`.
+    * Verify all inputs are single values of the correct class
+      (numeric for the first three, logical for `peatland`). Halt with
+      an error message if not.
+    * Verify that `0 <= canopy <= 1`. Halt with
+      an error message if not.
+    * Verify that `visitors >= 0` and `road_dist >= 0`. Halt with an
+      error message if not.
 2. **Base Risk Calculation:**
     * Open canopies receive more light, accelerating invasive plant germination:
       `light_score = 1.0 - canopy`
@@ -535,11 +543,9 @@ logistic_step <- function(x, r){
 }
 ```
 
-1. **Validation:**
-    * Verify that both `x` and `r` are single numeric scalars.
-    * Verify that 0.0 <= x <= 1.0. If violated, halt with `stop("x must be in [0, 1].")`.
-    * Verify that r > 0.0 and r <= 4.0. If violated, halt with `stop("r must be in (0, 4].")`.
-2. Compute and return the value of x_(t+1), that is, `r*x*(1 - x)`.
+1. *Minimal Validation:*
+    * Verify that x >= 0. If violated, halt with `stop("x must be non-negative.")`.
+2. *Compute and return* the value of x_(t+1), that is, `r*x*(1 - x)`.
 
 #### Part B: Time-Series Generator
 
@@ -551,7 +557,8 @@ iterate_logistic_map <- function(x0, r, n_steps){
 }
 ```
 
-1. Validate that `n_steps` is a single positive integer >= 0.
+1. Validate that `n_steps` is a single positive integer >= 0. (Tip: A
+   robust way to check for integer values is `n_steps == as.integer(n_steps)`)
 2. Pre-allocate a numeric vector `trajectory` of length `n_steps + 1`.
 3. Set `trajectory[1] <- x0`.
 4. Using a `for` loop, iteratively call `logistic_step()` to generate
@@ -595,9 +602,12 @@ check_fixed_point_convergence(x0 = 0.3, r = 3.8)
 
 ---
 
-### Exercise 3 (if you have time): Dynamic Harvest Quotas and Fisheries Escapement
+### Exercise 3 (only if you have time): Dynamic Harvest Quotas and Fisheries Escapement
 
-In fisheries conservation, sustainable yield policies often employ **biological escapement thresholds**. Instead of allowing a fixed annual catch, fisheries managers adjust the permitted quota based on the estimated adult biomass at the start of the season.
+In fisheries conservation, sustainable yield policies often employ
+**biological escapement thresholds**. Instead of allowing a fixed
+annual catch, fisheries managers adjust the permitted quota based on
+the estimated adult biomass at the start of the season.
 
 Consider a coastal cod stock managed under a three-tier harvest control rule:
 
@@ -627,15 +637,11 @@ Write a function named `calc_harvest_quota` that accepts the following arguments
 
 The function must execute these steps:
 
-1. **Defensive Validation:**
-    * Verify that `biomass` is a single numeric scalar and is strictly non-negative (>= 0). If violated, halt execution with `stop()`.
-    * Verify that `marine_heatwave` is a single logical scalar (`TRUE` or `FALSE`).
-    * Verify that `b_crit < b_targ`.
-2. **Harvest Determination:**
-		* Calculate the base harvest H using the three-tier rule above.
+1. **Harvest Determination:**
+	* Calculate the base harvest H using the three-tier rule above.
     * If `marine_heatwave == TRUE` and H > 0, apply a 25% reduction to the calculated harvest (H\_adj = 0.75 x H).
     * Ensure the final harvest never exceeds the available biomass (H <= B).
-3. **Return Value:**
+2. **Return Value:**
     * Return the final permitted catch as a single numeric scalar.
 
 
@@ -668,7 +674,8 @@ where r = intrinsic\_growth, K = carrying\_capacity, and H_t is determined by ca
 
 Requirements:
 
-1. Validate that `years` is a single integer-like numeric value >= 1.
+1. Validate that `years` is a single integer numeric value >= 1. (Tip: A
+   robust way to check for integer values is `years == as.integer(years)`)
 2. Pre-allocate a numeric vector named `biomass_history` of length `years + 1`. Set `biomass_history[1] <- b_start`.
 3. Pre-allocate a numeric vector named `harvest_history` of length `years`.
 4. Using a `for` loop over years 1, ..., years:
