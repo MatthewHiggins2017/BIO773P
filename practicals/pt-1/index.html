@@ -1659,9 +1659,11 @@ operation in R. We use square brackets <code>[]</code> for indexing.</p>
 <h4 id="q7-given-the-a-vector-of-this-structure">Q7. Given the a vector of this structure:</h4>
 <p><div class="highlight"><pre><span></span><code><span class="n">dissolved_co2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">18.2</span><span class="p">,</span><span class="w"> </span><span class="m">24.5</span><span class="p">,</span><span class="w"> </span><span class="m">9.8</span><span class="p">,</span><span class="w"> </span><span class="m">31.0</span><span class="p">,</span><span class="w"> </span><span class="m">42.1</span><span class="p">,</span><span class="w"> </span><span class="m">14.3</span><span class="p">,</span><span class="w"> </span><span class="m">5.4</span><span class="p">,</span><span class="w"> </span><span class="m">28.7</span><span class="p">)</span>
 </code></pre></div>
-Write code to:
-1. Extract all concentrations that are strictly less than 12.0 or strictly greater than 30.0.
-2. Clamp the vector so that any value below 10.0 is set to 10.0, and any value exceeding 35.0 is set to 35.0.</p>
+Write code to:</p>
+<ol>
+<li>Extract all concentrations that are strictly less than 12.0 or strictly greater than 30.0.</li>
+<li>Clamp the vector so that any value below 10.0 is set to 10.0, and any value exceeding 35.0 is set to 35.0.</li>
+</ol>
 <hr />
 <h2 id="missing-data-na-and-vector-summaries">Missing Data (<code>NA</code>) and Vector Summaries</h2>
 <p>In real-world field sampling and laboratory assays, measurements can be missing due to equipment downtime or uncollected samples. In R, missing entries are represented by the special constant <code>NA</code> (Not Available).</p>
@@ -1733,7 +1735,9 @@ Write R expressions to:</p>
 <p>Write logical checking expressions that test (without using <code>if</code>
 statements or loops):</p>
 <ol>
-<li>Whether all five vectors have the exact same length.</li>
+<li>Whether all five vectors have the exact same length. (Tip: all
+vectors have the same length if each has the same length as
+<code>buoy_ids</code>.)</li>
 <li>Whether all values in <code>sensor_depth</code>, <code>salinity_psu</code>, and
    <code>battery_pct</code> are strictly positive (&gt; 0).</li>
 <li>Whether <code>battery_pct</code> does not exceed 100.0 for any buoy.</li>

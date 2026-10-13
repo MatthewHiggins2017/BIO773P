@@ -1154,7 +1154,9 @@ command:</p>
 <ol>
 <li>Write an expression to retrieve the turbidity at <code>Station_Beta</code>.</li>
 <li>Add a new station named <code>"Station_Delta"</code> to <code>station_reports</code> containing temperature 13.4, turbidity 3.0, certified status <code>TRUE</code>, and depth 60.0.</li>
-<li>Compute the sum of the depths across the two certified stations: <code>Station_Alpha</code> and <code>Station_Gamma</code>.</li>
+<li>Assuming that value of <code>station_name</code> is a character expression
+   (e.g., <code>station_name &lt;- "Station_Gamma"</code>), giving the name of a
+   station, extract the report of the station with that name.</li>
 </ol>
 <hr />
 <h2 id="data-frames-tabular-scientific-datasets">Data Frames: Tabular Scientific Datasets</h2>
@@ -1278,7 +1280,7 @@ whether <code>nrow(df) &gt; 0</code>:</p>
 </code></pre></div>
 <h4 id="q3-in-estuary_df-from-above">Q3. In <code>estuary_df</code> from above:</h4>
 <ol>
-<li>Filter the data frame to select all rows where <code>sediment_type == "Sand"</code> and <code>pressure_idx &gt; 5.0</code>.</li>
+<li>Filter the data frame to select all rows where <code>sediment_type == "Sand"</code> and <code>pressure_idx &gt; 4.0</code>.</li>
 <li>Extract the <code>salinity_psu</code> column of these qualifying stations as a plain numeric vector.</li>
 <li>Compute the arithmetic mean salinity of these qualifying stations.</li>
 </ol>
@@ -1328,7 +1330,7 @@ whether <code>nrow(df) &gt; 0</code>:</p>
 <li><code>temperature &gt; 20.0</code></li>
 <li><code>dissolved_o2 &lt; 5.5</code></li>
 <li>Calculate the mean of <code>"oxygen_sat"</code> across all qualifying stations in <code>hypoxic_risk_df</code> and store it in a single scalar variable named <code>mean_risk_sat</code>.</li>
-<li>Check whether <code>nrow(hypoxic_risk_df) &gt; 0</code> and display the result.</li>
+<li>Check whether <code>nrow(hypoxic_risk_df) &gt; 0</code> and display this data frame.</li>
 </ol>
 <h3 id="exercise-3-thermal-anomaly-matrix-transformation">Exercise 3: Thermal Anomaly Matrix Transformation</h3>
 <p>Consider a temperature anomaly grid where rows represent 5 observation depths and columns represent 4 seasonal quarters:
