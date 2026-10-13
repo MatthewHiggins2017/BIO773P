@@ -647,7 +647,7 @@ var(sample_large)  # Variance 'var()' is the square of the standard deviation
 sqrt( mean( (sample_large - sample_mean)^2 ) )
 sd(sample_large)
 ```
-Because of the relation above, the standard deviation is also called
+Because of the approximate relation above, the standard deviation is also called
 the _root mean square_ (RMS) _deviation from the mean_.   Make
 sure you can identify the 'root', the 'mean' and the 'square' in the last code
 block above.

@@ -190,7 +190,7 @@ A variable stores a value or an object in computer memory under a
 designated name. In R, assignment is performed using the arrow
 operator `<-`, typed as a less-than sign and a hyphen (please copy and
 execute commands in boxes for later use of results; also make sure you
-understand each line of code; free free to play with the code to see
+understand each line of code; feel free to play with the code to see
 what happens):
 
 ```R
@@ -533,6 +533,7 @@ photometer_absorbance  # 0.00 0.42 1.85 2.00 0.90 0.00
 dissolved_co2 <- c(18.2, 24.5, 9.8, 31.0, 42.1, 14.3, 5.4, 28.7)
 ```
 Write code to:
+
 1. Extract all concentrations that are strictly less than 12.0 or strictly greater than 30.0.
 2. Clamp the vector so that any value below 10.0 is set to 10.0, and any value exceeding 35.0 is set to 35.0.
 
@@ -631,7 +632,9 @@ is_active    <- c(TRUE, TRUE, TRUE, FALSE, TRUE)
 Write logical checking expressions that test (without using `if`
 statements or loops):
 
-1. Whether all five vectors have the exact same length.
+1. Whether all five vectors have the exact same length. (Tip: all
+vectors have the same length if each has the same length as
+`buoy_ids`.)
 2. Whether all values in `sensor_depth`, `salinity_psu`, and
    `battery_pct` are strictly positive (> 0).
 3. Whether `battery_pct` does not exceed 100.0 for any buoy.

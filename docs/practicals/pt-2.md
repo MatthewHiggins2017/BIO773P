@@ -232,7 +232,9 @@ station_reports$Station_Gamma$certified        # TRUE
 #### Q2. Given `station_reports` above:
 1. Write an expression to retrieve the turbidity at `Station_Beta`.
 2. Add a new station named `"Station_Delta"` to `station_reports` containing temperature 13.4, turbidity 3.0, certified status `TRUE`, and depth 60.0.
-3. Compute the sum of the depths across the two certified stations: `Station_Alpha` and `Station_Gamma`.
+3. Assuming that value of `station_name` is a character expression
+   (e.g., `station_name <- "Station_Gamma"`), giving the name of a
+   station, extract the report of the station with that name.
 
 ---
 
@@ -403,7 +405,7 @@ clean_records
 ```
 
 #### Q3. In `estuary_df` from above:
-1. Filter the data frame to select all rows where `sediment_type == "Sand"` and `pressure_idx > 5.0`.
+1. Filter the data frame to select all rows where `sediment_type == "Sand"` and `pressure_idx > 4.0`.
 2. Extract the `salinity_psu` column of these qualifying stations as a plain numeric vector.
 3. Compute the arithmetic mean salinity of these qualifying stations.
 
@@ -459,7 +461,7 @@ do_data   <- c(7.2,  5.1,  8.4,  4.8,  7.9,  4.2,  6.5,  8.8,  5.6,  3.9,  7.5, 
    * `temperature > 20.0`
    * `dissolved_o2 < 5.5`
 4. Calculate the mean of `"oxygen_sat"` across all qualifying stations in `hypoxic_risk_df` and store it in a single scalar variable named `mean_risk_sat`.
-5. Check whether `nrow(hypoxic_risk_df) > 0` and display the result.
+5. Check whether `nrow(hypoxic_risk_df) > 0` and display this data frame.
 
 ### Exercise 3: Thermal Anomaly Matrix Transformation
 
@@ -476,7 +478,7 @@ rownames(thermal_grid) <- paste0("Depth_", c(5, 10, 25, 50, 100), "m")
 colnames(thermal_grid) <- paste0("Quarter_", 1:4)
 ```
 
-1. Calculate the mean thermal anomaly for each depth across all 4 quarters using `rowMeans()`.
+1. Calculate the mean thermal anomaly across all 4 quarters for each depth using `rowMeans()`.
 2. Identify which depths have an overall mean thermal anomaly strictly greater than 1.00.
 3. Create a copy of `thermal_grid` named `censored_grid`. In this new matrix, set all individual anomaly values that exceed 1.20 to `NA` (representing sensor threshold exceedance).
 4. Count how many total missing values (`NA`) exist in `censored_grid` using `is.na()` and `sum()`.

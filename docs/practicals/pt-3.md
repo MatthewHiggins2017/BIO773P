@@ -179,22 +179,22 @@ Let us build a validated function that computes dissolved oxygen saturation conc
 
 ```R
 calc_do_saturation <- function(temp_c, salinity_psu = 35.0) {
-  # 1. Check types
+  # Check types
   if (!is.numeric(temp_c) || !is.numeric(salinity_psu)) {
     stop("All arguments must be numeric.")
   }
   
-  # 2. Check scalar lengths
+  # Check scalar lengths
   if (length(temp_c) != 1 || length(salinity_psu) != 1) {
     stop("Inputs must be single scalar values.")
   }
   
-  # 3. Check for NA
+  # Check for NA
   if (is.na(temp_c) || is.na(salinity_psu)) {
     stop("Inputs cannot be NA.")
   }
   
-  # 4. Check domain bounds
+  # Check domain bounds
   if (temp_c < -2.0 || temp_c > 45.0) {
     stop("Temperature out of realistic environmental range (-2.0 C to 45.0 C).")
   }
@@ -207,6 +207,38 @@ calc_do_saturation <- function(temp_c, salinity_psu = 35.0) {
   return(sat_conc)
 }
 ```
+
+Alternatively, this also works:
+```R
+calc_do_saturation <- function(temp_c, salinity_psu = 35.0) {
+  # Check temp_c
+  if (!is.numeric(temp_c) ||
+      length(temp_c) != 1 ||
+      is.na(temp_c) ){
+    stop("Argument temp_c must be single numeric value.")
+  }
+  
+  # Check salinity_psu
+  if (!is.numeric(salinity_psu) ||
+      length(salinity_psu) != 1 ||
+      is.na(salinity_psu) ){
+    stop("Argument salinity_psu must be single numeric value.")
+  }
+  
+  # Check domain bounds
+  if (temp_c < -2.0 || temp_c > 45.0) {
+    stop("Temperature out of realistic environmental range (-2.0 C to 45.0 C).")
+  }
+  if (salinity_psu < 0.0 || salinity_psu > 50.0) {
+    stop("Salinity must be between 0.0 and 50.0 PSU.")
+  }
+  
+  # Calculation proceeds safely:
+  sat_conc <- 14.6 - 0.4 * temp_c + 0.008 * (temp_c^2) - 0.05 * salinity_psu
+  return(sat_conc)
+}
+```
+
 
 > **Note on `||` vs `|` in Conditions:** When testing conditions inside an `if` statement, R provides double operators `&&` (short-circuit AND) and `||` (short-circuit OR). Unlike `&` and `|` (which evaluate across entire vectors element-by-element), `&&` and `||` evaluate **only the first element** and stop evaluating further tests as soon as the outcome is decided. Use `&&` and `||` inside scalar `if` statements.
 
