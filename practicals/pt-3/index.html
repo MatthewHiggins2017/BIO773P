@@ -932,15 +932,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exercise-3-if-you-have-time-dynamic-harvest-quotas-and-fisheries-escapement" class="md-nav__link">
+  <a href="#exercise-3-only-if-you-have-time-dynamic-harvest-quotas-and-fisheries-escapement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exercise 3 (if you have time): Dynamic Harvest Quotas and Fisheries Escapement
+        Exercise 3 (only if you have time): Dynamic Harvest Quotas and Fisheries Escapement
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Exercise 3 (if you have time): Dynamic Harvest Quotas and Fisheries Escapement">
+    <nav class="md-nav" aria-label="Exercise 3 (only if you have time): Dynamic Harvest Quotas and Fisheries Escapement">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1281,24 +1281,28 @@ to prevent this cryptic error message?</p>
 <p>A frequent challenge in environmental modeling occurs when an observation might be an established numeric value <strong>or</strong> missing (<code>NA</code>).</p>
 <p>Because comparing an unknown value to a number yields <code>NA</code> (e.g., <code>NA &gt; 5</code> evaluates to <code>NA</code>), passing <code>NA</code> into a standard <code>if</code> statement will trigger an error: <code>Error in if (x &gt; 5) : missing value where TRUE/FALSE needed</code>.</p>
 <p>You must explicitly test for missingness using <code>is.na()</code> <strong>before</strong> performing numeric comparisons:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Model the establishment of a colonising species arriving at a survey site:</span>
-<span class="n">resolve_site_occupancy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">colonist_density</span><span class="p">,</span><span class="w"> </span><span class="n">resident_density</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Model the establishment of a colonising species arriving at a survey</span>
+<span class="c1"># site.  The function assumes that species with higher carrying</span>
+<span class="c1"># capacity K are competitively superior to species with lower carrying</span>
+<span class="c1"># capacity. Hence, colonisation success depends on a species' carrying</span>
+<span class="c1"># capacity K compared to the that of the resident species.</span>
+<span class="n">resolve_site_occupancy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">colonist_K</span><span class="p">,</span><span class="w"> </span><span class="n">resident_K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1"># Scenario A: The habitat patch is completely unoccupied</span>
-<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">resident_density</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">final_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colonist_density</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">resident_K</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">final_K</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colonist_K</span>
 <span class="w">  </span><span class="c1"># Scenario B: The habitat patch is already occupied</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">colonist_density</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">resident_density</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">final_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colonist_density</span><span class="w">  </span><span class="c1"># Colonist outcompetes resident</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">colonist_K</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">resident_K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">final_K</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colonist_K</span><span class="w">  </span><span class="c1"># Colonist outcompetes resident</span>
 <span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">final_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">resident_density</span><span class="w">  </span><span class="c1"># Resident resists invasion</span>
+<span class="w">    </span><span class="n">final_K</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">resident_K</span><span class="w">  </span><span class="c1"># Resident resists invasion</span>
 <span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">final_density</span><span class="p">)</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">final_K</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15.2</span><span class="p">,</span><span class="w"> </span><span class="n">resident_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">    </span><span class="c1"># 15.2</span>
-<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12.0</span><span class="p">,</span><span class="w"> </span><span class="n">resident_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18.5</span><span class="p">)</span><span class="w"> </span><span class="c1"># 18.5</span>
-<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">22.4</span><span class="p">,</span><span class="w"> </span><span class="n">resident_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18.5</span><span class="p">)</span><span class="w"> </span><span class="c1"># 22.4</span>
+<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15.2</span><span class="p">,</span><span class="w"> </span><span class="n">resident_K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">   </span><span class="c1"># 15.2</span>
+<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12.0</span><span class="p">,</span><span class="w"> </span><span class="n">resident_K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18.5</span><span class="p">)</span><span class="w"> </span><span class="c1"># 18.5</span>
+<span class="nf">resolve_site_occupancy</span><span class="p">(</span><span class="n">colonist_K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">22.4</span><span class="p">,</span><span class="w"> </span><span class="n">resident_K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18.5</span><span class="p">)</span><span class="w"> </span><span class="c1"># 22.4</span>
 </code></pre></div>
 <h4 id="q3-write-a-function-named-clamp_reading-that-takes-three-arguments-val-lower-and-upper">Q3. Write a function named <code>clamp_reading</code> that takes three arguments: <code>val</code>, <code>lower</code>, and <code>upper</code>.</h4>
 <ol>
@@ -1402,9 +1406,13 @@ a threat index (V, defined below) for a single site:</p>
 <p>The ecological scoring rules are:</p>
 <ol>
 <li><strong>Precondition Checks:</strong><ul>
-<li>Verify all inputs are single values of the correct class (numeric for the first three, logical for <code>peatland</code>).</li>
-<li>Verify that <code>0 &lt;= canopy &lt;= 1</code>.</li>
-<li>Verify that <code>visitors &gt;= 0</code> and <code>road_dist &gt;= 0</code>.</li>
+<li>Verify all inputs are single values of the correct class
+  (numeric for the first three, logical for <code>peatland</code>). Halt with
+  an error message if not.</li>
+<li>Verify that <code>0 &lt;= canopy &lt;= 1</code>. Halt with
+  an error message if not.</li>
+<li>Verify that <code>visitors &gt;= 0</code> and <code>road_dist &gt;= 0</code>. Halt with an
+  error message if not.</li>
 </ul>
 </li>
 <li><strong>Base Risk Calculation:</strong><ul>
@@ -1491,13 +1499,11 @@ a threat index (V, defined below) for a single site:</p>
 <span class="p">}</span>
 </code></pre></div>
 <ol>
-<li><strong>Validation:</strong><ul>
-<li>Verify that both <code>x</code> and <code>r</code> are single numeric scalars.</li>
-<li>Verify that 0.0 &lt;= x &lt;= 1.0. If violated, halt with <code>stop("x must be in [0, 1].")</code>.</li>
-<li>Verify that r &gt; 0.0 and r &lt;= 4.0. If violated, halt with <code>stop("r must be in (0, 4].")</code>.</li>
+<li><em>Minimal Validation:</em><ul>
+<li>Verify that x &gt;= 0. If violated, halt with <code>stop("x must be non-negative.")</code>.</li>
 </ul>
 </li>
-<li>Compute and return the value of x_(t+1), that is, <code>r*x*(1 - x)</code>.</li>
+<li><em>Compute and return</em> the value of x_(t+1), that is, <code>r*x*(1 - x)</code>.</li>
 </ol>
 <h4 id="part-b-time-series-generator">Part B: Time-Series Generator</h4>
 <p>Write a function named <code>iterate_logistic_map</code> with the signature:</p>
@@ -1506,7 +1512,8 @@ a threat index (V, defined below) for a single site:</p>
 <span class="p">}</span>
 </code></pre></div>
 <ol>
-<li>Validate that <code>n_steps</code> is a single positive integer &gt;= 0.</li>
+<li>Validate that <code>n_steps</code> is a single positive integer &gt;= 0. (Tip: A
+   robust way to check for integer values is <code>n_steps == as.integer(n_steps)</code>)</li>
 <li>Pre-allocate a numeric vector <code>trajectory</code> of length <code>n_steps + 1</code>.</li>
 <li>Set <code>trajectory[1] &lt;- x0</code>.</li>
 <li>Using a <code>for</code> loop, iteratively call <code>logistic_step()</code> to generate
@@ -1543,8 +1550,11 @@ point. For larger values of r, the value of x starts to oscillate.</p>
 <span class="nf">check_fixed_point_convergence</span><span class="p">(</span><span class="n">x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.8</span><span class="p">)</span><span class="w">  </span>
 </code></pre></div></p>
 <hr />
-<h3 id="exercise-3-if-you-have-time-dynamic-harvest-quotas-and-fisheries-escapement">Exercise 3 (if you have time): Dynamic Harvest Quotas and Fisheries Escapement</h3>
-<p>In fisheries conservation, sustainable yield policies often employ <strong>biological escapement thresholds</strong>. Instead of allowing a fixed annual catch, fisheries managers adjust the permitted quota based on the estimated adult biomass at the start of the season.</p>
+<h3 id="exercise-3-only-if-you-have-time-dynamic-harvest-quotas-and-fisheries-escapement">Exercise 3 (only if you have time): Dynamic Harvest Quotas and Fisheries Escapement</h3>
+<p>In fisheries conservation, sustainable yield policies often employ
+<strong>biological escapement thresholds</strong>. Instead of allowing a fixed
+annual catch, fisheries managers adjust the permitted quota based on
+the estimated adult biomass at the start of the season.</p>
 <p>Consider a coastal cod stock managed under a three-tier harvest control rule:</p>
 <ol>
 <li><strong>Moratorium Tier:</strong> If adult biomass B is below the critical
@@ -1569,14 +1579,8 @@ point. For larger values of r, the value of x starts to oscillate.</p>
 </ul>
 <p>The function must execute these steps:</p>
 <ol>
-<li><strong>Defensive Validation:</strong><ul>
-<li>Verify that <code>biomass</code> is a single numeric scalar and is strictly non-negative (&gt;= 0). If violated, halt execution with <code>stop()</code>.</li>
-<li>Verify that <code>marine_heatwave</code> is a single logical scalar (<code>TRUE</code> or <code>FALSE</code>).</li>
-<li>Verify that <code>b_crit &lt; b_targ</code>.</li>
-</ul>
-</li>
-<li><strong>Harvest Determination:</strong>
-        * Calculate the base harvest H using the three-tier rule above.<ul>
+<li><strong>Harvest Determination:</strong><ul>
+<li>Calculate the base harvest H using the three-tier rule above.</li>
 <li>If <code>marine_heatwave == TRUE</code> and H &gt; 0, apply a 25% reduction to the calculated harvest (H_adj = 0.75 x H).</li>
 <li>Ensure the final harvest never exceeds the available biomass (H &lt;= B).</li>
 </ul>
@@ -1606,7 +1610,8 @@ using a logistic growth model with harvest:
 where r = intrinsic_growth, K = carrying_capacity, and H_t is determined by calling <code>calc_harvest_quota(biomass = B_t)</code>.</p>
 <p>Requirements:</p>
 <ol>
-<li>Validate that <code>years</code> is a single integer-like numeric value &gt;= 1.</li>
+<li>Validate that <code>years</code> is a single integer numeric value &gt;= 1. (Tip: A
+   robust way to check for integer values is <code>years == as.integer(years)</code>)</li>
 <li>Pre-allocate a numeric vector named <code>biomass_history</code> of length <code>years + 1</code>. Set <code>biomass_history[1] &lt;- b_start</code>.</li>
 <li>Pre-allocate a numeric vector named <code>harvest_history</code> of length <code>years</code>.</li>
 <li>Using a <code>for</code> loop over years 1, ..., years:<ul>
