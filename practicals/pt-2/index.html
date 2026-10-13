@@ -1345,7 +1345,7 @@ whether <code>nrow(df) &gt; 0</code>:</p>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">thermal_grid</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">"Quarter_"</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span>
 </code></pre></div></p>
 <ol>
-<li>Calculate the mean thermal anomaly for each depth across all 4 quarters using <code>rowMeans()</code>.</li>
+<li>Calculate the mean thermal anomaly across all 4 quarters for each depth using <code>rowMeans()</code>.</li>
 <li>Identify which depths have an overall mean thermal anomaly strictly greater than 1.00.</li>
 <li>Create a copy of <code>thermal_grid</code> named <code>censored_grid</code>. In this new matrix, set all individual anomaly values that exceed 1.20 to <code>NA</code> (representing sensor threshold exceedance).</li>
 <li>Count how many total missing values (<code>NA</code>) exist in <code>censored_grid</code> using <code>is.na()</code> and <code>sum()</code>.</li>
