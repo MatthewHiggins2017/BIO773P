@@ -1413,7 +1413,9 @@ intuition can be overconfident.</p>
 and 20.0 (<code>runif(n, min = 10.0, max = 20.0)</code>), every real value in
 that interval is equally likely.</p>
 <ol>
-<li>What is the expectation value of this continuous distribution?</li>
+<li>Calculating in your head, what is the expectation value of this
+   continuous distribution? Alternatively, can you obtain using a
+   simulation of many random samples?</li>
 <li>Write a script that simulates 4 independent histories of 1,500
    uniform draws between 10.0 and 20.0, and plots their running means
    (as above) simultaneously on a single graph.</li>
@@ -1434,7 +1436,7 @@ distribution. Mathematicians are interested in what they call the <em>distributi
 </code></pre></div>
 Practitioners usually ask: what is the probability for my observation
 to be in the range between x1 and x2.  We can obtain this from F(x) as
-<div class="highlight"><pre><span></span><code>(probability that observation &gt; x1 but &lt;= x2) = F(x1) - F(x1).
+<div class="highlight"><pre><span></span><code>(probability that observation &gt; x1 but &lt;= x2) = F(x2) - F(x1).
 </code></pre></div>
 From a limited number of samples, we can estimate the distribution
 using either a histogram or the empirical cumulative distribution
